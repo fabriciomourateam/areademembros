@@ -2,102 +2,326 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Design System Moderno - Cores Amarelo e Branco */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 45 7% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 45 7% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 45 7% 11%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 48 100% 96%;
+    --secondary-foreground: 45 7% 11%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 48 100% 96%;
+    --muted-foreground: 45 7% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 48 100% 88%;
+    --accent-foreground: 45 7% 11%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 48 100% 92%;
+    --input: 48 100% 94%;
+    --ring: 45 93% 47%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 45 7% 11%;
+    --sidebar-primary: 45 93% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 100% 96%;
+    --sidebar-accent-foreground: 45 7% 11%;
+    --sidebar-border: 48 100% 92%;
+    --sidebar-ring: 45 93% 47%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Gradientes personalizados */
+    --gradient-primary: linear-gradient(135deg, #fef3c7 0%, #f59e0b 50%, #d97706 100%);
+    --gradient-secondary: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    --gradient-hero: linear-gradient(135deg, #ffffff 0%, #fef9c3 50%, #fef3c7 100%);
+    --gradient-card: linear-gradient(145deg, #ffffff 0%, #fefce8 100%);
+    
+    /* Sombras modernas */
+    --shadow-soft: 0 2px 8px -2px rgba(245, 158, 11, 0.1);
+    --shadow-medium: 0 8px 25px -5px rgba(245, 158, 11, 0.15);
+    --shadow-strong: 0 20px 40px -12px rgba(245, 158, 11, 0.25);
+    --shadow-glow: 0 0 30px rgba(245, 158, 11, 0.3);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 45 7% 8%;
+    --foreground: 48 100% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 45 7% 10%;
+    --card-foreground: 48 100% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 45 7% 10%;
+    --popover-foreground: 48 100% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 45 7% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 45 7% 15%;
+    --secondary-foreground: 48 100% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 45 7% 15%;
+    --muted-foreground: 48 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 7% 15%;
+    --accent-foreground: 48 100% 96%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 48 100% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 45 7% 15%;
+    --input: 45 7% 15%;
+    --ring: 45 93% 47%;
+
+    --sidebar-background: 45 7% 8%;
+    --sidebar-foreground: 48 100% 96%;
+    --sidebar-primary: 45 93% 47%;
+    --sidebar-primary-foreground: 45 7% 8%;
+    --sidebar-accent: 45 7% 15%;
+    --sidebar-accent-foreground: 48 100% 96%;
+    --sidebar-border: 45 7% 15%;
+    --sidebar-ring: 45 93% 47%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: linear-gradient(135deg, #ffffff 0%, #fefce8 100%);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Scrollbar personalizada */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fef3c7;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
+  }
+}
+
+@layer components {
+  /* Componentes customizados */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .gradient-card {
+    @apply border border-amber-100/50;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-primary-modern {
+    @apply bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-white font-semibold
+           hover:from-amber-500 hover:via-amber-600 hover:to-amber-700
+           shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300
+           border-0 rounded-xl text-sm sm:text-base px-4 py-2.5 sm:px-6 sm:py-3;
+  }
+
+  .btn-secondary-modern {
+    @apply bg-white/90 text-amber-700 border-2 border-amber-200 font-semibold
+           hover:bg-amber-50 hover:border-amber-300
+           shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300
+           rounded-xl text-sm sm:text-base px-4 py-2.5 sm:px-6 sm:py-3;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent;
+  }
+
+  .modern-input {
+    @apply bg-white/90 border-2 border-amber-100 rounded-xl
+           focus:border-amber-300 focus:ring-2 focus:ring-amber-200 focus:ring-opacity-50
+           transition-all duration-300 text-sm sm:text-base;
+  }
+
+  .floating-card {
+    @apply transform transition-all duration-300;
+    box-shadow: var(--shadow-medium);
+  }
+
+  .floating-card:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-strong);
+  }
+
+  /* Mobile-first responsive utilities */
+  .mobile-hidden {
+    @apply hidden sm:block;
+  }
+
+  .mobile-only {
+    @apply block sm:hidden;
+  }
+
+  .mobile-text-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .mobile-text-lg {
+    @apply text-lg sm:text-xl;
+  }
+
+  .mobile-text-xl {
+    @apply text-xl sm:text-2xl;
+  }
+
+  .mobile-text-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  .mobile-p-4 {
+    @apply p-3 sm:p-4 md:p-6;
+  }
+
+  .mobile-gap-4 {
+    @apply gap-2 sm:gap-4;
+  }
+
+  /* Animações */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+}
+
+/* Media Queries - Organizadas separadamente para melhor manutenibilidade */
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .floating-card:hover,
+  .btn-primary-modern,
+  .btn-secondary-modern {
+    @apply hover:scale-100;
+  }
+
+  button, .btn {
+    min-height: 44px;
+  }
+
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* Remove hover effects on touch devices */
+@media (hover: none) {
+  .floating-card,
+  .btn-primary-modern,
+  .btn-secondary-modern {
+    @apply hover:scale-100;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
+  }
+}
+
+/* Browser-specific optimizations */
+
+/* iOS/Safari specific styles */
+@supports (-webkit-touch-callout: none) {
+  .btn-primary-modern,
+  .btn-secondary-modern {
+    -webkit-appearance: none;
+    border-radius: 12px;
+  }
+  
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"] {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Android/Chrome specific styles */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .floating-card {
+    will-change: transform;
+  }
+}
+
+/* Safe area support for iOS notch */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }

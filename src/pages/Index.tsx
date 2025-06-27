@@ -1,12 +1,17 @@
-
 import { useState } from 'react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AppSidebar } from '@/components/AppSidebar';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import HomeSection from '@/components/sections/HomeSection';
 import AppsSection from '@/components/sections/AppsSection';
+import NutritionSection from '@/components/sections/NutritionSection';
+import WorkoutsSection from '@/components/sections/WorkoutsSection';
+import CheckinSection from '@/components/sections/CheckinSection';
+import SupplementsSection from '@/components/sections/SupplementsSection';
+import EbooksSection from '@/components/sections/EbooksSection';
+import ReferralSection from '@/components/sections/ReferralSection';
+import MentorshipSection from '@/components/sections/MentorshipSection';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -18,21 +23,19 @@ const Index = () => {
       case 'apps':
         return <AppsSection />;
       case 'nutrition':
-        return <div className="p-6">Seção de Plano Nutricional - Em desenvolvimento</div>;
+        return <NutritionSection />;
       case 'workouts':
-        return <div className="p-6">Seção de Treinos - Em desenvolvimento</div>;
+        return <WorkoutsSection />;
       case 'checkin':
-        return <div className="p-6">Seção de Check-in - Em desenvolvimento</div>;
+        return <CheckinSection />;
       case 'supplements':
-        return <div className="p-6">Seção de Suplementos - Em desenvolvimento</div>;
+        return <SupplementsSection />;
       case 'ebooks':
-        return <div className="p-6">Seção de E-books - Em desenvolvimento</div>;
+        return <EbooksSection />;
       case 'referral':
-        return <div className="p-6">Programa de Incentivo - Em desenvolvimento</div>;
-      case 'reports':
-        return <div className="p-6">Relatórios - Em desenvolvimento</div>;
+        return <ReferralSection />;
       case 'mentoring':
-        return <div className="p-6">Mentorias - Em desenvolvimento</div>;
+        return <MentorshipSection />;
       default:
         return <HomeSection />;
     }
@@ -41,17 +44,18 @@ const Index = () => {
   return (
     <ProtectedRoute>
       <SidebarProvider>
-        <div className="min-h-screen w-full flex">
+        <div className="min-h-screen w-full flex bg-gradient-to-br from-amber-50/20 to-white">
           <AppSidebar 
             activeSection={activeSection} 
             onSectionChange={setActiveSection} 
           />
-          <SidebarInset className="flex-1">
+          <SidebarInset className="flex-1 flex flex-col">
             <Header />
-            <main className="flex-1 p-6">
-              {renderSection()}
+            <main className="flex-1 p-3 sm:p-6 lg:p-8 overflow-auto">
+              <div className="fade-in-up">
+                {renderSection()}
+              </div>
             </main>
-            <Footer />
           </SidebarInset>
         </div>
       </SidebarProvider>

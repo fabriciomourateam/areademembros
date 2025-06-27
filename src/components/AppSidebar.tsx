@@ -1,5 +1,4 @@
-
-import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, BarChart3, Users } from 'lucide-react';
+import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, Users, Star } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -17,62 +16,47 @@ const menuItems = [
   {
     title: "Página Inicial",
     icon: Home,
-    id: "home",
-    description: "Boas-vindas e Informações Gerais"
+    id: "home"
   },
   {
     title: "Acesso aos Aplicativos",
     icon: Smartphone,
-    id: "apps",
-    description: "WebDiet e MFit Personal"
+    id: "apps"
   },
   {
     title: "Plano Nutricional",
     icon: Utensils,
-    id: "nutrition",
-    description: "Orientações sobre alimentação"
+    id: "nutrition"
   },
   {
     title: "Orientações sobre Treinos",
     icon: Dumbbell,
-    id: "workouts",
-    description: "Metodologia e exercícios"
+    id: "workouts"
   },
   {
     title: "Importância do Check-in",
     icon: CheckCircle,
-    id: "checkin",
-    description: "Check-in quinzenal"
+    id: "checkin"
   },
   {
     title: "Suplementos",
     icon: Pill,
-    id: "supplements",
-    description: "Lista com bom custo-benefício"
+    id: "supplements"
   },
   {
     title: "E-books Bônus",
     icon: BookOpen,
-    id: "ebooks",
-    description: "Downloads gratuitos"
+    id: "ebooks"
   },
   {
     title: "Programa de Incentivo",
     icon: Gift,
-    id: "referral",
-    description: "Indique e ganhe"
-  },
-  {
-    title: "Relatório de Evolução",
-    icon: BarChart3,
-    id: "reports",
-    description: "Acompanhe seu progresso"
+    id: "referral"
   },
   {
     title: "Mentorias em Grupo",
     icon: Users,
-    id: "mentoring",
-    description: "Com nossa psicóloga"
+    id: "mentoring"
   }
 ];
 
@@ -85,39 +69,62 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
   const { state } = useSidebar();
   
   return (
-    <Sidebar className="border-r border-primary-200/30">
-      <SidebarHeader className="border-b border-primary-200/30 p-4">
-        <div className="flex items-center gap-2">
-          <div className="bg-gradient-primary p-2 rounded-lg">
-            <span className="text-white font-bold text-sm">FM</span>
+    <Sidebar className="glass-card border-r border-amber-200/50">
+      <SidebarHeader className="border-b border-amber-200/50 p-6 bg-gradient-to-br from-amber-50 to-white">
+        <div className="flex items-center gap-3">
+          <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 p-3 rounded-xl shadow-lg glow-effect">
+            <span className="text-white font-bold text-lg">FM</span>
           </div>
           {state === "expanded" && (
-            <div>
-              <h2 className="font-semibold text-gray-900">FMTEAM</h2>
-              <p className="text-xs text-gray-600">Área de Membros</p>
+            <div className="fade-in-up">
+              <h2 className="font-bold text-xl text-gradient">FMTEAM</h2>
+              <div className="flex items-center gap-1">
+                <Star className="h-3 w-3 text-amber-500" />
+                <p className="text-sm text-amber-600/80 font-medium">Área de Membros VIP</p>
+              </div>
             </div>
           )}
         </div>
       </SidebarHeader>
       
-      <SidebarContent>
+      <SidebarContent className="bg-gradient-to-b from-white to-amber-50/30">
         <SidebarGroup>
-          <SidebarGroupLabel>Menu Principal</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.id}>
+          <SidebarGroupLabel className="text-amber-700 font-semibold text-sm uppercase tracking-wider px-4 py-3">
+            Menu Principal
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="px-2">
+            <SidebarMenu className="space-y-1">
+              {menuItems.map((item, index) => (
+                <SidebarMenuItem key={item.id} className="slide-in-right" style={{ animationDelay: `${index * 0.05}s` }}>
                   <SidebarMenuButton 
                     onClick={() => onSectionChange(item.id)}
                     isActive={activeSection === item.id}
                     tooltip={state === "collapsed" ? item.title : undefined}
+                    className={`
+                      relative rounded-lg sm:rounded-xl transition-all duration-300 group
+                      ${activeSection === item.id 
+                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-white shadow-lg glow-effect' 
+                        : 'hover:bg-amber-50 text-amber-700 hover:text-amber-800'
+                      }
+                      ${state === "expanded" ? 'p-2.5 sm:p-3' : 'p-2.5 sm:p-3'}
+                    `}
                   >
-                    <item.icon className="h-4 w-4" />
+                    <item.icon 
+                      className={`
+                        h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:scale-110
+                        ${activeSection === item.id ? 'text-white' : 'text-amber-600'}
+                      `} 
+                    />
                     {state === "expanded" && (
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium">{item.title}</span>
-                        <span className="text-xs text-gray-500">{item.description}</span>
-                      </div>
+                      <span className={`
+                        text-xs sm:text-sm font-semibold
+                        ${activeSection === item.id ? 'text-white' : 'text-amber-800'}
+                      `}>
+                        {item.title}
+                      </span>
+                    )}
+                    {activeSection === item.id && (
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400/20 to-amber-500/20 animate-pulse" />
                     )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -125,6 +132,20 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        
+        {state === "expanded" && (
+          <div className="mt-auto p-4 border-t border-amber-200/50">
+            <div className="gradient-card p-4 rounded-xl text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Star className="h-4 w-4 text-amber-500" />
+                <span className="text-sm font-semibold text-amber-800">Status VIP</span>
+              </div>
+              <p className="text-xs text-amber-600/80">
+                Aproveite todos os benefícios exclusivos
+              </p>
+            </div>
+          </div>
+        )}
       </SidebarContent>
     </Sidebar>
   );
