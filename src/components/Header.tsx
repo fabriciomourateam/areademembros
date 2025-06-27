@@ -14,6 +14,7 @@ import {
 import { Bell, Settings, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const Header = () => {
   const [notifications] = useState(3);
@@ -46,10 +47,11 @@ const Header = () => {
     <header className="bg-white/80 backdrop-blur-sm border-b border-primary-200/30 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
+          {/* Logo e Trigger da Sidebar */}
+          <div className="flex items-center gap-4">
+            {user && <SidebarTrigger />}
             <div className="bg-gradient-primary p-2 rounded-lg">
-              <span className="text-white font-bold text-xl">VitaPath</span>
+              <span className="text-white font-bold text-xl">FMTEAM</span>
             </div>
           </div>
 

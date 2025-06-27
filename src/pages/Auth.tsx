@@ -82,7 +82,7 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto bg-gradient-primary p-3 rounded-lg w-fit mb-4">
-            <span className="text-white font-bold text-2xl">VitaPath</span>
+            <span className="text-white font-bold text-2xl">FMTEAM</span>
           </div>
           <CardTitle className="text-2xl font-bold">
             {isSignUp ? 'Criar Conta' : 'Entrar'}
