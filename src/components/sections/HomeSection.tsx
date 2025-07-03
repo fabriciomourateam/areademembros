@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, Users, MessageCircle, Phone, Clock, Crown, Star, Sparkles, ExternalLink, CheckCircle, AlertCircle, DollarSign, FileText } from 'lucide-react';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const HomeSection = () => {
   const teamMembers = [
@@ -72,13 +73,10 @@ const HomeSection = () => {
             <CardContent>
               <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl flex items-center justify-center mb-4 border border-red-200/50 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-red-500/10 animate-pulse" />
-                <Button 
-                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform transition-all duration-300 border-0 rounded-xl mobile-text-lg px-4 py-3 sm:px-8 sm:py-4 relative z-10 w-full sm:w-auto hover:scale-105"
-                  onClick={() => window.open('https://www.youtube.com/watch?v=ZebZRgAckcQ&ab_channel=FabricioMoura', '_blank')}
-                >
-                  <Play className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
-                  Assistir Vídeo no YouTube
-                </Button>
+                <YouTubeEmbed
+                  videoId="ZebZRgAckcQ"
+                  title="Vídeo de Boas-vindas - FM Team"
+                />
               </div>
             </CardContent>
           </Card>

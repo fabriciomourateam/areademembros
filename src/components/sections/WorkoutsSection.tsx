@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, Dumbbell, Target, Brain, CheckCircle, Clock, TrendingUp, Zap, Instagram } from 'lucide-react';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const WorkoutsSection = () => {
   const keyPoints = [
@@ -104,13 +105,12 @@ const WorkoutsSection = () => {
             {/* Vídeo Explicativo */}
             <div className="text-center">
               <h4 className="font-bold text-orange-800 mb-4">🎥 Vídeo explicativo sobre intensidade nos treinos</h4>
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-                onClick={() => window.open('https://youtu.be/gUTwDr7_wpA', '_blank')}
-              >
-                <Play className="h-5 w-5 mr-3" />
-                Assistir no YouTube
-              </Button>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed 
+                  videoId="gUTwDr7_wpA"
+                  title="Vídeo sobre intensidade nos treinos - FM Team"
+                />
+              </div>
             </div>
           </div>
         </CardContent>
