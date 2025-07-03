@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
-import ProtectedRoute from '@/components/ProtectedRoute';
 import { AppSidebar } from '@/components/AppSidebar';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import HomeSection from '@/components/sections/HomeSection';
@@ -42,24 +41,22 @@ const Index = () => {
   };
 
   return (
-    <ProtectedRoute>
-      <SidebarProvider>
-        <div className="min-h-screen w-full flex bg-gradient-to-br from-amber-50/20 to-white">
-          <AppSidebar 
-            activeSection={activeSection} 
-            onSectionChange={setActiveSection} 
-          />
-          <SidebarInset className="flex-1 flex flex-col">
-            <Header />
-            <main className="flex-1 p-3 sm:p-6 lg:p-8 overflow-auto">
-              <div className="fade-in-up">
-                {renderSection()}
-              </div>
-            </main>
-          </SidebarInset>
-        </div>
-      </SidebarProvider>
-    </ProtectedRoute>
+    <SidebarProvider>
+      <div className="min-h-screen w-full flex bg-gradient-to-br from-amber-50/20 to-white">
+        <AppSidebar 
+          activeSection={activeSection} 
+          onSectionChange={setActiveSection} 
+        />
+        <SidebarInset className="flex-1 flex flex-col">
+          <Header />
+          <main className="flex-1 p-3 sm:p-6 lg:p-8 overflow-auto">
+            <div className="fade-in-up">
+              {renderSection()}
+            </div>
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 };
 
