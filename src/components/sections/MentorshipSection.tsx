@@ -37,14 +37,11 @@ const MentorshipSection = () => {
         <div className="fade-in-up">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl shadow-lg">
-              <Users className="h-8 w-8 text-white" />
+              <Brain className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               ENCONTROS COM A JOSIE
             </h1>
-            <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl shadow-lg">
-              <Brain className="h-8 w-8 text-white" />
-            </div>
           </div>
         </div>
       </div>
@@ -54,11 +51,11 @@ const MentorshipSection = () => {
         <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50">
           <CardTitle className="flex items-center gap-3 text-purple-800">
             <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-lg">
-              <Heart className="h-6 w-6 text-white" />
+              <Brain className="h-6 w-6 text-white" />
             </div>
             <div>
               <div className="text-2xl font-bold">PSICÓLOGA JOSIE PEÇANHA</div>
-              <div className="text-sm text-purple-600/70 font-normal">Especialista em Transtornos Alimentares</div>
+              <div className="text-sm text-purple-600/70 font-normal">Especialista em Comportamento Alimentar e Mentalidade</div>
             </div>
             <div className="ml-auto">
               <div className="flex items-center gap-1 px-3 py-1 bg-purple-500 rounded-full">

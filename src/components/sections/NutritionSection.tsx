@@ -1,18 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, AlertTriangle, CheckCircle, Clock, Utensils, Droplets, Coffee, Salad, Scale, FileText, Heart, Brain, X, RefreshCw } from 'lucide-react';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const NutritionSection = () => {
   const recommendations = [
     {
       title: "Hidratação",
-      description: "Beba no mínimo 40ml de água por kg corporal. Ex: 80kg → 3,2L por dia. Pode consumir Coca Zero, H2O, refrigerantes e sucos zero com moderação. Evite sucos comuns.",
+      description: "Beba no mínimo <strong>40ml de água por kg corporal</strong>. \nEx: 80kg → 3,2L por dia. <strong>Pode consumir Coca Zero, H2O, refrigerantes e sucos zero com moderação.</strong> \nEvite sucos de caixinha e sucos naturais, se não estiverem na dieta.",
       icon: Droplets,
       color: "blue"
     },
     {
       title: "Sono", 
-      description: "Durma de 6 a 7 horas por noite, no mínimo. Essencial para recuperação e metabolismo.",
+      description: "Durma no mínimo **6 a 7 horas por noite**.\nO sono é essencial para recuperação muscular e melhora metabólica.",
       icon: Clock,
       color: "purple"
     },
@@ -24,13 +25,13 @@ const NutritionSection = () => {
     },
     {
       title: "Açúcar",
-      description: "Evite. Prefira adoçantes como sucralose ou stevia.",
+      description: "Evite o consumo de açúcar, prefira fazer uso de adoçantes, pois não contém calorias. Pode usar Sucralose ou Stevia.",
       icon: X,
       color: "red"
     },
     {
       title: "Salada",
-      description: "Liberada: folhas verdes à vontade. Tempere com vinagre, sal, limão, orégano e ervas naturais. Não use azeite, a menos que esteja especificado na dieta.",
+      description: "Pode consumir folhas verdes à vontade em qualquer momento do dia. Tempere apenas com vinagre, sal, limão, orégano e ervas naturais. **Não use azeite, a menos que esteja especificado na dieta.**",
       icon: Salad,
       color: "green"
     },
@@ -62,12 +63,11 @@ const NutritionSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-green-50 via-white to-green-100/50 border border-green-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Utensils className="h-8 w-8 text-green-500" />
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <span className="text-4xl">🥗</span>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 via-green-500 to-emerald-500 bg-clip-text text-transparent">
               ORIENTAÇÕES SOBRE O PLANO ALIMENTAR
             </h1>
-            <Utensils className="h-8 w-8 text-green-500" />
           </div>
         </div>
       </div>
@@ -122,7 +122,7 @@ const NutritionSection = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    Substituir ovos por: queijo, requeijão, atum ou frango desfiado
+                    Usar as subtituições contidas em cada alimento
                   </li>
                 </ul>
               </div>
@@ -176,21 +176,21 @@ const NutritionSection = () => {
             <div className="gradient-card p-6 rounded-xl border border-orange-200/50">
               <h4 className="font-bold text-orange-800 mb-3">Finais de semana</h4>
               <p className="text-orange-700/80 text-sm leading-relaxed">
-                2 dias representam quase 40% da semana. Não jogue fora 5 dias de esforço.
+                Esses 2 dias representam praticamente <strong>30% da sua semana.</strong> Não jogue fora 5 dias de esforço exagendo no final de semana.
               </p>
             </div>
             
             <div className="gradient-card p-6 rounded-xl border border-orange-200/50">
-              <h4 className="font-bold text-orange-800 mb-3">Refeições da manhã/tarde</h4>
+              <h4 className="font-bold text-orange-800 mb-3">Café da manhã e Lanche da tarde</h4>
               <p className="text-orange-700/80 text-sm leading-relaxed">
-                Planeje com antecedência para não esquecê-las.
+                São refeições de extrema importância, então procure <strong>se planejar</strong> com antecedência para não deixar de fazê-las.
               </p>
             </div>
             
             <div className="gradient-card p-6 rounded-xl border border-orange-200/50">
               <h4 className="font-bold text-orange-800 mb-3">Esquecer de comer</h4>
               <p className="text-orange-700/80 text-sm leading-relaxed">
-                Organização é essencial para não comer nem mais, nem menos.
+                Esse ponto requer planejamento em ter tudo <strong>pronto e organizado</strong> para não pular refeições, é importante <strong>não comer a mais e também não comer a menos</strong> do que o previsto
               </p>
             </div>
           </div>
@@ -266,9 +266,17 @@ const NutritionSection = () => {
                   </div>
                   <h4 className={`font-bold text-${rec.color}-800`}>{rec.title}</h4>
                 </div>
-                <p className={`text-sm text-${rec.color}-700/80 leading-relaxed`}>
-                  {rec.description}
-                </p>
+                <div className={`text-sm text-${rec.color}-700/80 leading-relaxed`}>
+                  {rec.description.includes('**') || rec.description.includes('<strong>') ? (
+                    <div dangerouslySetInnerHTML={{ 
+                      __html: rec.description
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\n/g, '<br/>') 
+                    }} />
+                  ) : (
+                    <p>{rec.description}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -283,7 +291,7 @@ const NutritionSection = () => {
               <Play className="h-6 w-6 text-white" />
             </div>
             <div>
-              <div className="text-2xl font-bold">🎥 Vídeos Complementares</div>
+              <div className="text-2xl font-bold">🥗 Hábitos Saudáveis</div>
               <div className="text-sm text-red-600/70 font-normal">Conhecimento essencial</div>
             </div>
           </CardTitle>
@@ -292,24 +300,22 @@ const NutritionSection = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="text-center">
               <h4 className="font-bold text-red-800 mb-4">Hábitos saudáveis, rotina, sono e álcool</h4>
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl w-full"
-                onClick={() => window.open('https://youtu.be/GnaPPoal7OQ', '_blank')}
-              >
-                <Play className="h-4 w-4 mr-2" />
-                Assistir no YouTube
-              </Button>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed
+                  videoId="GnaPPoal7OQ"
+                  title="Hábitos saudáveis, rotina, sono e álcool - FM Team"
+                />
+              </div>
             </div>
             
             <div className="text-center">
               <h4 className="font-bold text-red-800 mb-4">Alimentos saudáveis e não saudáveis</h4>
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl w-full"
-                onClick={() => window.open('https://youtu.be/41IXoXJRc1E', '_blank')}
-              >
-                <Play className="h-4 w-4 mr-2" />
-                Assistir no YouTube
-              </Button>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed
+                  videoId="41IXoXJRc1E"
+                  title="Alimentos saudáveis e não saudáveis - FM Team"
+                />
+              </div>
             </div>
           </div>
         </CardContent>
@@ -329,22 +335,37 @@ const NutritionSection = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <p className="text-yellow-700/80 leading-relaxed">
-            Refeição livre é opcional e deve ser usada com moderação:
-          </p>
+          <div className="space-y-4">
+            <p className="text-yellow-700/80 leading-relaxed">
+              A refeição livre é facultativa, é só por caráter psicológico mesmo, para caso sinta necessidade e possa aproveitar momentos sociais com a família e com amigos, então guarde para momentos como estes.
+            </p>
+            <p className="text-yellow-700/80 leading-relaxed">
+              Faça apenas <strong>UMA</strong> refeição livre na semana e sempre de forma moderada (coma até ficar satisfeito, <strong>PARE QUANDO SENTIR QUE ESTÁ 80% CHEIO</strong>), assim continuará progredindo e tendo excelentes resultados.
+            </p>
+          </div>
           
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="gradient-card p-4 rounded-xl border border-yellow-200/50 text-center">
-              <div className="text-2xl font-bold text-yellow-800 mb-2">1</div>
-              <p className="text-sm text-yellow-700">refeição por semana</p>
-            </div>
-            <div className="gradient-card p-4 rounded-xl border border-yellow-200/50 text-center">
-              <div className="text-2xl font-bold text-yellow-800 mb-2">1-2</div>
-              <p className="text-sm text-yellow-700">refeições da dieta nesse dia</p>
-            </div>
-            <div className="gradient-card p-4 rounded-xl border border-yellow-200/50 text-center">
-              <div className="text-2xl font-bold text-yellow-800 mb-2">15</div>
-              <p className="text-sm text-yellow-700">evite nos primeiros dias</p>
+          <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-200/50 p-6 rounded-2xl">
+            <h4 className="font-bold text-yellow-800 mb-4 flex items-center gap-2">
+              <span>➡️</span>
+              Quando fizer a refeição livre:
+            </h4>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-yellow-600 font-bold">▪️</span>
+                <span className="text-yellow-700/80">Retire <strong>01 a 02 refeições</strong> da dieta nesse dia.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-yellow-600 font-bold">▪️</span>
+                <span className="text-yellow-700/80">Procure não exagerar, coma com moderação!</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-yellow-600 font-bold">▪️</span>
+                <span className="text-yellow-700/80">Tente não fazer refeição livre nos primeiros <strong>15 dias</strong>, até se adaptar ao planejamento.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-yellow-600 font-bold">▪️</span>
+                <span className="text-yellow-700/80">Você pode consumir qualquer alimento que tenha vontade, sem exageros e com moderação.</span>
+              </div>
             </div>
           </div>
 
@@ -362,13 +383,25 @@ const NutritionSection = () => {
             
             <div className="text-center">
               <h4 className="font-bold text-yellow-800 mb-4">🎥 Vídeo sobre Refeição Livre</h4>
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl w-full"
-                onClick={() => window.open('https://youtu.be/M0VtCP6Bfu0', '_blank')}
-              >
-                <Play className="h-4 w-4 mr-2" />
-                Assistir no YouTube
-              </Button>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed
+                  videoId="M0VtCP6Bfu0"
+                  title="Vídeo sobre Refeição Livre - FM Team"
+                />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Dica Final sobre Refeição Livre */}
+      <Card className="floating-card gradient-card border-emerald-200/50">
+        <CardContent className="py-8">
+          <div className="text-center">
+            <div className="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-200/50 p-6 rounded-2xl">
+              <p className="text-emerald-700 font-semibold text-lg">
+                ✨ Deixe a refeição livre para quando realmente quiser comer algo diferente — e aproveite com consciência!
+              </p>
             </div>
           </div>
         </CardContent>
@@ -421,11 +454,15 @@ const NutritionSection = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-6 rounded-2xl text-center">
-            <p className="text-purple-700 font-semibold text-lg">
-              ✨ Deixe a refeição livre para quando realmente quiser comer algo diferente — e aproveite com consciência!
-            </p>
+          <div className="bg-gradient-to-r from-pink-50 to-purple-50 border-2 border-pink-200/50 p-6 rounded-2xl">
+            <div className="flex items-start gap-3">
+              <span className="text-pink-600 font-bold text-lg">➡️</span>
+              <p className="text-pink-700/80 leading-relaxed font-semibold">
+                Procure deixar os doces ou beliscadas para quando for fazer sua refeição livre, e sempre coma devagar, aproveitando o paladar do alimento, pois se comer rápido ou comer com os olhos, acabará exagerando na quantidade.
+              </p>
+            </div>
           </div>
+
         </CardContent>
       </Card>
     </div>

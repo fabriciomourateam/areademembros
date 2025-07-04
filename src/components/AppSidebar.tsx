@@ -1,4 +1,4 @@
-import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, Users, Star } from 'lucide-react';
+import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, Users, Star, Lock, RefreshCw, Activity } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
+  SidebarFooter,
   useSidebar,
 } from '@/components/ui/sidebar';
 
@@ -39,6 +40,16 @@ const menuItems = [
     id: "checkin"
   },
   {
+    title: "Substituição de Alimentos",
+    icon: RefreshCw,
+    id: "food-substitution"
+  },
+  {
+    title: "Relatório de Evolução",
+    icon: BookOpen,
+    id: "evolution-report"
+  },
+  {
     title: "Suplementos",
     icon: Pill,
     id: "supplements"
@@ -57,7 +68,12 @@ const menuItems = [
     title: "Mentorias em Grupo",
     icon: Users,
     id: "mentoring"
-  }
+  },
+  {
+    title: "Bioimpedância Online",
+    icon: Activity,
+    id: "bioimpedance"
+  },
 ];
 
 interface AppSidebarProps {
@@ -69,18 +85,18 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
   const { state } = useSidebar();
   
   return (
-    <Sidebar className="glass-card border-r border-amber-200/50">
-      <SidebarHeader className="border-b border-amber-200/50 p-6 bg-gradient-to-br from-amber-50 to-white">
+    <Sidebar className="h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white border-r border-yellow-700/40 shadow-xl">
+      <SidebarHeader className="border-b border-yellow-600/30 p-6 bg-gradient-to-br from-black via-zinc-900 to-zinc-800">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 p-3 rounded-xl shadow-lg glow-effect">
-            <span className="text-white font-bold text-lg">FM</span>
+          <div className="rounded-xl shadow-lg glow-effect flex items-center justify-center w-16 h-16">
+            <img src="/logo.png" alt="Logo FMTEAM" className="w-16 h-16 object-cover rounded-xl" />
           </div>
           {state === "expanded" && (
             <div className="fade-in-up">
-              <h2 className="font-bold text-xl text-gradient">FMTEAM</h2>
-              <div className="flex items-center gap-1">
-                <Star className="h-3 w-3 text-amber-500" />
-                <p className="text-sm text-amber-600/80 font-medium">Área de Membros VIP</p>
+              <h2 className="font-bold text-xl text-gradient">🏆 FM Team</h2>
+              <div className="flex items-center gap-2">
+                <Star className="h-3 w-3 text-amber-400" />
+                <p className="text-xs font-medium bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">Área de Membros</p>
               </div>
             </div>
           )}
@@ -100,28 +116,43 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
                     onClick={() => onSectionChange(item.id)}
                     isActive={activeSection === item.id}
                     tooltip={state === "collapsed" ? item.title : undefined}
-                    className={`
+                    className={
+                      `
                       relative rounded-lg sm:rounded-xl transition-all duration-300 group
                       ${activeSection === item.id 
                         ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-white shadow-lg glow-effect' 
                         : 'hover:bg-amber-50 text-amber-700 hover:text-amber-800'
                       }
                       ${state === "expanded" ? 'p-2.5 sm:p-3' : 'p-2.5 sm:p-3'}
-                    `}
+                      flex items-center justify-between'
+                      `
+                    }
                   >
-                    <item.icon 
-                      className={`
-                        h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:scale-110
-                        ${activeSection === item.id ? 'text-white' : 'text-amber-600'}
-                      `} 
-                    />
-                    {state === "expanded" && (
-                      <span className={`
-                        text-xs sm:text-sm font-semibold
-                        ${activeSection === item.id ? 'text-white' : 'text-amber-800'}
-                      `}>
-                        {item.title}
-                      </span>
+                    <div className="flex items-center gap-2">
+                      <item.icon 
+                        className={
+                          `
+                          h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:scale-110
+                          ${activeSection === item.id ? 'text-white' : 'text-amber-600'}
+                          `
+                        } 
+                      />
+                      {state === "expanded" && (
+                        <span className={
+                          `
+                          text-[0.70rem] sm:text-[0.80rem] font-semibold
+                          ${activeSection === item.id ? 'text-white' : 'text-amber-800'}
+                          `
+                        }>
+                          {item.title}
+                        </span>
+                      )}
+                    </div>
+                    {item.id === 'mentoring' && state === "expanded" && (
+                      <Lock className="ml-2 h-4 w-4 text-amber-500" />
+                    )}
+                    {item.id === 'bioimpedance' && state === "expanded" && (
+                      <Lock className="ml-2 h-4 w-4 text-amber-500" />
                     )}
                     {activeSection === item.id && (
                       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400/20 to-amber-500/20 animate-pulse" />

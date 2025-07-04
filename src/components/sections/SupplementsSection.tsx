@@ -10,12 +10,12 @@ const SupplementsSection = () => {
   const supplements = [
     {
       id: 'whey-concentrado',
-      name: 'Whey Concentrado',
+      name: 'Whey Protein Concentrado',
       icon: Dumbbell,
       color: 'blue',
       description: 'Proteína de alta qualidade para construção muscular',
-      benefits: ['Rico em aminoácidos essenciais', 'Absorção rápida', 'Ideal pós-treino', 'Custo-benefício excelente'],
-      usage: 'Tomar 1-2 doses por dia, preferencialmente após o treino ou entre refeições'
+              benefits: ['Rico em aminoácidos essenciais', 'Absorção rápida', 'Ótima fonte proteica', 'Custo-benefício excelente'],
+              usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'whey-soja',
@@ -24,7 +24,7 @@ const SupplementsSection = () => {
       color: 'green',
       description: 'Alternativa vegetal rica em proteínas',
       benefits: ['100% vegetal', 'Rico em isoflavonas', 'Livre de lactose', 'Sustentável'],
-      usage: 'Tomar 1-2 doses por dia, ideal para veganos e intolerantes à lactose'
+              usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'multivitaminico',
@@ -33,7 +33,7 @@ const SupplementsSection = () => {
       color: 'purple',
       description: 'Complexo completo de vitaminas e minerais',
       benefits: ['Supre deficiências nutricionais', 'Melhora imunidade', 'Aumenta energia', 'Apoio ao metabolismo'],
-      usage: 'Tomar 1 cápsula por dia, preferencialmente pela manhã com alimentos'
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'creatina',
@@ -42,7 +42,7 @@ const SupplementsSection = () => {
       color: 'orange',
       description: 'Melhora performance e força muscular',
       benefits: ['Aumenta força e potência', 'Melhora recuperação', 'Ganho de massa muscular', 'Comprovação científica'],
-      usage: 'Tomar 3-5g por dia, pode ser antes ou após o treino'
+              usage: 'Tomar 3-5g por dia, conforme seu Planejamento Alimentar'
     },
     {
       id: 'cafeina',
@@ -50,8 +50,8 @@ const SupplementsSection = () => {
       icon: Zap,
       color: 'red',
       description: 'Estimulante natural para energia e foco',
-      benefits: ['Aumenta energia e foco', 'Melhora performance', 'Acelera metabolismo', 'Queima de gordura'],
-      usage: 'Tomar 100-200mg antes do treino ou pela manhã'
+              benefits: ['Aumenta energia e foco', 'Melhora performance', 'Acelera metabolismo', 'Potencializa a queima de gordura'],
+      usage: 'Tomar 200 a 400mg no dia, conforme seu Planejamento Alimentar'
     },
     {
       id: 'termogenico',
@@ -59,8 +59,8 @@ const SupplementsSection = () => {
       icon: Zap,
       color: 'red',
       description: 'Acelera metabolismo e queima de gordura',
-      benefits: ['Acelera metabolismo', 'Queima gordura', 'Aumenta energia', 'Controla apetite'],
-      usage: 'Tomar conforme orientação, geralmente pela manhã em jejum'
+      benefits: ['Acelera metabolismo', 'Potencializa a queima de gordura', 'Aumenta energia', 'Controla apetite'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'pre-treino',
@@ -78,7 +78,7 @@ const SupplementsSection = () => {
       color: 'yellow',
       description: 'Essencial para ossos e imunidade',
       benefits: ['Fortalece ossos', 'Melhora imunidade', 'Regula humor', 'Absorção de cálcio'],
-      usage: 'Tomar conforme dosagem recomendada, preferencialmente com gorduras'
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'vitamina-b12',
@@ -87,7 +87,7 @@ const SupplementsSection = () => {
       color: 'pink',
       description: 'Vital para sistema nervoso e energia',
       benefits: ['Combate fadiga', 'Saúde neurológica', 'Formação de células', 'Metabolismo energético'],
-      usage: 'Tomar conforme orientação médica, especialmente veganos'
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
       id: 'omega-3',
@@ -96,7 +96,7 @@ const SupplementsSection = () => {
       color: 'cyan',
       description: 'Gorduras essenciais para saúde cardiovascular',
       benefits: ['Saúde cardiovascular', 'Anti-inflamatório', 'Função cerebral', 'Recuperação muscular'],
-      usage: 'Tomar 1-2 cápsulas por dia com refeições'
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
     }
   ];
 
@@ -105,12 +105,11 @@ const SupplementsSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-pink-100/50 border border-purple-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Pill className="h-8 w-8 text-purple-500" />
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="text-5xl md:text-6xl">💊</span>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-              SUPLEMENTOS COM BOM CUSTO x BENEFÍCIO
+              SUPLEMENTOS COM BOM CUSTO-BENEFÍCIO
             </h1>
-            <Pill className="h-8 w-8 text-purple-500" />
           </div>
         </div>
       </div>
@@ -123,8 +122,8 @@ const SupplementsSection = () => {
               <Pill className="h-6 w-6 text-white" />
             </div>
             <div>
-              <div className="text-2xl font-bold">📌 Sugestões com melhor custo-benefício</div>
-              <div className="text-sm text-purple-600/70 font-normal">Clique na setinha ▶️ para ver cada um</div>
+              <div className="text-2xl font-bold">Explicação sobre os Suplementos</div>
+              <div className="text-sm text-purple-600/70 font-normal">Clique em cada um para entender suas funções</div>
             </div>
           </CardTitle>
         </CardHeader>
@@ -312,16 +311,15 @@ const SupplementsSection = () => {
         <CardContent>
           <div className="text-center space-y-4">
             <p className="text-blue-700/80 leading-relaxed text-lg">
-              Acesse nosso catálogo completo com todos os suplementos recomendados, 
-              incluindo análises detalhadas, comparações e dicas de uso.
+              Acesse o catálogo com os suplementos que selecionei com melhor custo-benefício.
             </p>
             
             <Button 
               className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://drive.google.com/drive/folders/1ATTgW3WrFXFiObq_RctSo5jrap4KteDc', '_blank')}
+              onClick={() => window.open('https://www.notion.so/fabriciomouratreinador/SUPLEMENTOS-COM-BOM-CUSTO-x-BENEF-CIO-10b12c259b7280ba8380db73b7d13c89?pvs=4', '_blank')}
             >
               <FileText className="h-5 w-5 mr-3" />
-              Acessar Catálogo no Google Drive
+              Acessar Catálogo
             </Button>
           </div>
         </CardContent>
@@ -336,19 +334,15 @@ const SupplementsSection = () => {
             </div>
             <div>
               <div className="text-2xl font-bold">🛒 Quer pedir algum suplemento?</div>
-              <div className="text-sm text-green-600/70 font-normal">Distribuidora oficial</div>
+              <div className="text-sm text-green-600/70 font-normal">Distribuidora Oficial</div>
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-6">
-            <p className="text-green-700/80 leading-relaxed text-lg">
-              Faça seu pedido diretamente com nossa distribuidora parceira. 
-              Produtos originais, preços especiais e entrega garantida.
-            </p>
             
             <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
-              <h4 className="font-bold text-green-800 mb-3">🏆 Vantagens da Distribuidora Parceira:</h4>
+              <h4 className="font-bold text-green-800 mb-3">🏆 Distribuidora com Condição Especial pro FM Team:</h4>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full" />
@@ -396,8 +390,7 @@ const SupplementsSection = () => {
         <CardContent>
           <div className="text-center space-y-6">
             <p className="text-orange-700/80 leading-relaxed text-lg">
-              Para suplementos manipulados com qualidade farmacêutica e preços acessíveis, 
-              nossa farmácia parceira oferece fórmulas personalizadas.
+              Acesse o link abaixo para pedir manipulados com qualidade farmacêutica e preços acessíveis.
             </p>
             
             <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200/50 p-6 rounded-2xl">
@@ -438,10 +431,10 @@ const SupplementsSection = () => {
         <CardContent className="py-8">
           <div className="text-center">
             <div className="mb-6">
-              <Pill className="h-16 w-16 text-red-600 mx-auto mb-4" />
+              <span className="text-6xl mb-4 block">💊</span>
               <h3 className="text-2xl font-bold text-red-800 mb-2">⚠️ Importante!</h3>
               <p className="text-red-700/80 text-lg max-w-2xl mx-auto">
-                Estas são sugestões baseadas em custo-benefício. Sempre fale comigo antes de iniciar qualquer suplementação.
+                Estas são sugestões baseadas em custo-benefício. Sempre fale comigo antes de iniciar qualquer suplementação que não esteja prescrita no seu Planejamento.
               </p>
             </div>
             

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, CheckCircle, MessageCircle, Clock, AlertTriangle, Heart, Target, Calendar, Zap } from 'lucide-react';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const CheckinSection = () => {
   const benefits = [
@@ -31,12 +32,11 @@ const CheckinSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-green-50 via-white to-emerald-100/50 border border-green-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <CheckCircle className="h-8 w-8 text-green-500" />
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="text-5xl md:text-6xl">✅</span>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 via-emerald-500 to-green-600 bg-clip-text text-transparent">
               A IMPORTÂNCIA DO CHECK-IN
             </h1>
-            <CheckCircle className="h-8 w-8 text-green-500" />
           </div>
         </div>
       </div>
@@ -152,15 +152,11 @@ const CheckinSection = () => {
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-6">
-            <div className="aspect-video bg-gradient-to-br from-red-100 to-pink-200/50 rounded-2xl flex items-center justify-center border border-red-200/50 relative overflow-hidden max-w-2xl mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-500/10 animate-pulse" />
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4 relative z-10"
-                onClick={() => window.open('https://youtu.be/hwUYrE6cfww', '_blank')}
-              >
-                <Play className="h-6 w-6 mr-3" />
-                Assistir Vídeo no YouTube
-              </Button>
+            <div className="aspect-video bg-gradient-to-br from-red-100 to-pink-200/50 rounded-2xl border border-red-200/50 overflow-hidden max-w-2xl mx-auto">
+              <YouTubeEmbed
+                videoId="hwUYrE6cfww"
+                title="Vídeo explicativo sobre check-in - FM Team"
+              />
             </div>
             
             <div className="max-w-2xl mx-auto">
@@ -249,7 +245,7 @@ const CheckinSection = () => {
               <h3 className="text-2xl font-bold text-green-800 mb-2">Comprometimento é a Chave!</h3>
               <p className="text-green-700/80 text-lg max-w-2xl mx-auto">
                 O check-in regular é seu passaporte para resultados consistentes e duradouros. 
-                Cada resposta sua me ajuda a te ajudar melhor!
+                Cada resposta sua me trás clareza de como te ajudar da melhor maneira!
               </p>
             </div>
             

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Smartphone, Play, MessageCircle, ExternalLink, Star, Crown, Zap, Users, AlertTriangle, Mail, Phone, Award, Gift } from 'lucide-react';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const AppsSection = () => {
   return (
@@ -8,7 +9,7 @@ const AppsSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-100/50 border border-blue-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-6 mb-4">
             <Smartphone className="h-8 w-8 text-blue-500" />
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
               ACESSO AOS APLICATIVOS
@@ -18,12 +19,11 @@ const AppsSection = () => {
           
           {/* Alerta Importante */}
           <div className="bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-200/50 p-6 rounded-2xl max-w-4xl mx-auto mb-6">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="h-6 w-6 text-orange-600 mt-1 flex-shrink-0" />
+            <div className="flex flex-col items-center text-center gap-0">
               <div>
                 <h3 className="font-bold text-orange-800 mb-2 text-lg">⚠️ Importante:</h3>
                 <p className="text-orange-700/80 leading-relaxed">
-                  Antes de iniciar o planejamento, assista a todos os vídeos e leia o conteúdo completo!
+                  Antes de iniciar o planejamento, assista a todos os vídeos e leia o conteúdo completo! <br/>
                   Muitas dúvidas já estão respondidas nos módulos!
                 </p>
               </div>
@@ -34,7 +34,10 @@ const AppsSection = () => {
 
       {/* Apps de Dieta e Treino */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gradient mb-4">🎯 APLICATIVOS DE DIETA E TREINO</h2>
+        <h2 className="text-3xl font-bold flex items-center justify-center gap-3 mb-4" style={{ color: '#23272f' }}>
+          <Smartphone className="h-7 w-7 text-[#f59e0b]" />
+          APLICATIVOS DE DIETA E TREINO
+        </h2>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8">
@@ -92,13 +95,13 @@ const AppsSection = () => {
 
             {/* Vídeo Tutorial */}
             <div className="text-center">
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl"
-                onClick={() => window.open('https://youtu.be/pLsH4ugj_ZI?si=4p8gDf7P0vRX0vdU', '_blank')}
-              >
-                <Play className="h-4 w-4 mr-2" />
-                ▶️ Veja como usar o WebDiet
-              </Button>
+              <h4 className="font-bold text-green-800 mb-4">🎥 Como usar o WebDiet</h4>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed
+                  videoId="pLsH4ugj_ZI"
+                  title="Como usar o WebDiet - FM Team"
+                />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -157,13 +160,13 @@ const AppsSection = () => {
 
             {/* Vídeo Tutorial */}
             <div className="text-center">
-              <Button 
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl"
-                onClick={() => window.open('https://youtu.be/zihbRqLrEHU?si=NA9EwaZCN42s0k7N', '_blank')}
-              >
-                <Play className="h-4 w-4 mr-2" />
-                ▶️ Veja como usar o MFit
-              </Button>
+              <h4 className="font-bold text-blue-800 mb-4">🎥 Como usar o MFit</h4>
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
+                <YouTubeEmbed
+                  videoId="zihbRqLrEHU"
+                  title="Como usar o MFit - FM Team"
+                />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -233,7 +236,7 @@ const AppsSection = () => {
               </Button>
               
               <p className="text-xs text-purple-600/70 mt-3">
-                Link direto para o grupo WhatsApp exclusivo
+                Link direto para o grupo do WhatsApp exclusivo.
               </p>
             </div>
           </div>

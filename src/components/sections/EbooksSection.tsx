@@ -121,12 +121,11 @@ const EbooksSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-indigo-50 via-white to-purple-100/50 border border-indigo-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <BookOpen className="h-8 w-8 text-indigo-500" />
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="text-5xl md:text-6xl">📚</span>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
               E-BOOKS EXCLUSIVOS
             </h1>
-            <BookOpen className="h-8 w-8 text-indigo-500" />
           </div>
           <p className="text-indigo-700/80 text-xl font-medium">
             Materiais completos para potencializar seus resultados

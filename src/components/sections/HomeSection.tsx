@@ -8,37 +8,43 @@ const HomeSection = () => {
     {
       name: "Fabricio Moura",
       role: "Fundador da Consultoria FMTeam",
-      description: "Nutricionista e Treinador Esportivo. Especialista em Emagrecimento, Hipertrofia e Bodybuilding Coach.",
+      description: (<>
+        Nutricionista e Treinador Esportivo.<br/>
+        Especialista em Emagrecimento, Hipertrofia e Bodybuilding Coach.
+      </>),
       image: "/fabricio.png"
     },
     {
       name: "Jean França", 
       role: "Nutricionista e Treinador Esportivo",
-      description: "Atendimento no suporte das 08h às 12h.",
+      description: "Atendimento no Suporte, de segunda à sexta, das 08h00 às 12h00.",
       image: "/jean.png"
     },
     {
       name: "Andreia",
-      role: "Farmacêutica e Bioquímica – Sucesso do Cliente", 
-      description: "Atendimento no suporte das 14h às 18h.",
+      role: (<>
+        Farmacêutica e Bioquímica<br/>
+        Sucesso do Cliente
+      </>),
+      description: "Atendimento no Suporte, de segunda à sexta, das 14h00 às 18h00.",
       image: "/andreia.png"
     },
     {
       name: "Guido Bustos",
       role: "Nutricionista",
-      description: "Responsável por análises e acompanhamento dos check-ins de avaliação.",
+      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação, além de diversas demandas e processos internos do Time.",
       image: "/guido.png"
     },
     {
       name: "Thais Parra",
       role: "Nutricionista", 
-      description: "Auxilia na análise de dados e check-ins.",
+      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
       image: "/thais.png"
     },
     {
       name: "Pedro",
       role: "Nutricionista",
-      description: "Auxilia na análise de dados e check-ins.",
+      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
       image: "/pedro.png"
     }
   ];
@@ -55,10 +61,12 @@ const HomeSection = () => {
             </h1>
             <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
           </div>
-          <p className="mobile-text-lg text-green-700/80 max-w-4xl mx-auto leading-relaxed mb-6 sm:mb-8">
-            É ESSENCIAL QUE VOCÊ VEJA TODOS OS MÓDULOS ANTES DE INICIAR O PLANEJAMENTO!
-            Assistir a todos os vídeos e ler todas as orientações vai te garantir um resultado muito maior, sem dúvidas sobre o que fazer em cada etapa do processo!
-          </p>
+          <div className="text-center mb-8">
+            <p className="mobile-text-lg text-green-700/80 max-w-4xl mx-auto leading-relaxed mb-6 sm:mb-8">
+              <span className="font-bold block">É ESSENCIAL QUE VOCÊ VEJA TODOS OS MÓDULOS ANTES DE INICIAR O PLANEJAMENTO!</span>
+              Assistir a todos os vídeos e ler todas as orientações vai te garantir um resultado muito maior, sem dúvidas sobre o que fazer em cada etapa do processo!
+            </p>
+          </div>
           
           {/* Vídeo de Boas-vindas */}
           <Card className="floating-card gradient-card border-green-200/50 max-w-2xl mx-auto">
@@ -71,8 +79,7 @@ const HomeSection = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl flex items-center justify-center mb-4 border border-red-200/50 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-red-500/10 animate-pulse" />
+              <div className="aspect-video bg-gradient-to-br from-red-100 to-red-200/50 rounded-2xl border border-red-200/50 overflow-hidden">
                 <YouTubeEmbed
                   videoId="ZebZRgAckcQ"
                   title="Vídeo de Boas-vindas - FM Team"
@@ -100,7 +107,7 @@ const HomeSection = () => {
           <div className="space-y-6">
             <p className="text-amber-700/80 leading-relaxed text-lg">
               Nossa principal ferramenta é a comunicação direta e constante.
-              Meu trabalho depende da coleta de dados, e essa coleta depende de você.
+              Meu trabalho depende da coleta de dados, e essa coleta depende de você sempre me relatar todas as dificuldades que tiver.
             </p>
             
             <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-200/50 p-6 rounded-2xl">
@@ -109,8 +116,8 @@ const HomeSection = () => {
                 <div>
                   <h4 className="font-bold text-amber-800 mb-2">Importante:</h4>
                   <p className="text-amber-700/80">
-                    Se a semana foi boa ou ruim, me avise mesmo assim! 
-                    Não precisa esperar eu te chamar. Me mande mensagem sempre que precisar, pelo WhatsApp oficial da consultoria.
+                    Se a semana foi boa ou ruim, me avise mesmo assim! <br/>
+                    Não precisa esperar eu te chamar. Me mande mensagem sempre que precisar pelo WhatsApp Oficial da consultoria.
                   </p>
                 </div>
               </div>
@@ -135,12 +142,12 @@ const HomeSection = () => {
         <CardContent>
           <div className="space-y-6">
             <p className="text-green-700/80 leading-relaxed">
-              Canal oficial para tirar dúvidas sobre dieta, treino e acompanhamento.
+              Esse é o canal oficial onde você pode tirar <strong>todas as suas dúvidas</strong> sobre a dieta, treino e tudo que esteja relacionado ao seu acompanhamento.
             </p>
             
             <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
               <p className="text-green-700 mb-4">
-                Nesse número você será atendido por mim e por minha equipe especializada no meu método, garantindo um <strong>Suporte 5 Estrelas:</strong>
+                Nesse número estaremos eu e minha equipe, treinados e especializados com meu método, para garantir que você tenha a <strong>MELHOR EXPERIÊNCIA POSSÍVEL</strong> com o meu acompanhamento, te proporcionando um <strong>SUPORTE 5 ESTRELAS!</strong>
               </p>
               <div className="flex justify-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
@@ -160,19 +167,26 @@ const HomeSection = () => {
                 <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
                 <span className="text-sm sm:text-base">Falar com a Equipe FMTeam no WhatsApp</span>
               </Button>
-              
-              <div className="flex items-center justify-center gap-2 text-green-600">
-                <Clock className="h-4 w-4" />
-                <span className="text-sm font-medium">
-                  Horário de atendimento: Segunda a sexta, das 08h00 às 18h00
-                </span>
-              </div>
-              <p className="text-xs text-green-600/70">
-                (Mensagens fora desse horário serão respondidas no próximo dia útil.)
-              </p>
             </div>
           </div>
         </CardContent>
+      </Card>
+
+      {/* Horário de Atendimento */}
+      <Card className="floating-card gradient-card border-zinc-200/50">
+        <CardHeader className="pb-4 bg-gradient-to-r from-zinc-50 to-zinc-200/70">
+          <div className="flex flex-col items-center text-center gap-3">
+            <div className="flex items-center justify-center mb-1">
+              <Clock className="h-10 w-10 text-amber-500 drop-shadow-lg" />
+            </div>
+            <span className="font-extrabold text-2xl text-zinc-800 tracking-wide">Horário de Atendimento</span>
+            <div className="bg-gradient-to-r from-amber-50 to-zinc-100 border border-amber-100 rounded-xl px-8 py-2 mt-2 shadow-sm w-full max-w-xl mx-auto flex flex-col items-center">
+              <span className="font-semibold text-lg text-amber-700">Segunda à sexta</span>
+              <span className="block text-zinc-700 text-base">das 08h00 às 18h00</span>
+            </div>
+            <p className="text-zinc-600 italic text-center mt-2">(Mensagens fora desse horário serão respondidas no próximo dia útil)</p>
+          </div>
+        </CardHeader>
       </Card>
 
       {/* Equipe FMTeam */}

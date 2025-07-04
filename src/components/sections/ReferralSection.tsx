@@ -8,12 +8,11 @@ const ReferralSection = () => {
       {/* Header */}
       <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-green-100/50 border border-emerald-200/50 shadow-lg">
         <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Gift className="h-8 w-8 text-emerald-500" />
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <span className="text-5xl">🎁</span>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-green-500 to-emerald-600 bg-clip-text text-transparent">
               PROGRAMA DE INCENTIVO
             </h1>
-            <Gift className="h-8 w-8 text-emerald-500" />
           </div>
           <p className="text-emerald-700/80 text-xl font-medium">
             Compartilhe saúde e ganhe benefícios exclusivos
@@ -30,7 +29,6 @@ const ReferralSection = () => {
             </div>
             <div>
               <div className="text-2xl font-bold">🤝🏼 Como Funciona</div>
-              <div className="text-sm text-emerald-600/70 font-normal">Ajude outros e seja recompensado</div>
             </div>
           </CardTitle>
         </CardHeader>
@@ -70,37 +68,13 @@ const ReferralSection = () => {
             {/* Benefício Principal */}
             <div className="gradient-card p-8 rounded-2xl border-2 border-blue-200/50 text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Calendar className="h-8 w-8 text-blue-600" />
-                <h3 className="text-2xl font-bold text-blue-800">✅ Para cada pessoa indicada:</h3>
+                <h3 className="text-2xl font-bold text-blue-800">🎉 Para cada pessoa indicada:</h3>
               </div>
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-xl shadow-lg mb-6">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-xl shadow-lg mb-2">
                 <p className="text-2xl font-bold">30 DIAS DE ACOMPANHAMENTO</p>
                 <p className="text-blue-100 text-lg mt-2">Totalmente GRÁTIS para você!</p>
               </div>
-              
-              <div className="grid md:grid-cols-2 gap-6 mt-6">
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Crown className="h-6 w-6 text-blue-600" />
-                    <h4 className="font-bold text-blue-800">Opção 1:</h4>
-                  </div>
-                  <p className="text-blue-700">
-                    <strong>Estender seu plano</strong><br/>
-                    Ganhe 1 mês a mais no seu acompanhamento
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Star className="h-6 w-6 text-blue-600" />
-                    <h4 className="font-bold text-blue-800">Opção 2:</h4>
-                  </div>
-                  <p className="text-blue-700">
-                    <strong>Desconto na mensalidade</strong><br/>
-                    Abata a cobrança de 1 mês
-                  </p>
-                </div>
-              </div>
+              <p className="text-blue-700 text-lg font-semibold text-center mt-4 mb-6">Ganhe 1 mês a mais no seu acompanhamento</p>
             </div>
 
             {/* Benefício Cumulativo */}
@@ -110,7 +84,6 @@ const ReferralSection = () => {
                 <p className="text-purple-700 text-lg mb-6">
                   Quanto mais você indica, mais você ganha!
                 </p>
-                
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-xl shadow-lg border border-purple-200/50">
                     <div className="text-3xl font-bold text-purple-600 mb-2">1</div>
@@ -148,8 +121,7 @@ const ReferralSection = () => {
           <div className="text-center space-y-6">
             <div className="gradient-card p-8 rounded-2xl border-2 border-pink-200/50">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Gift className="h-8 w-8 text-pink-600" />
-                <h3 className="text-2xl font-bold text-pink-800">✅ A pessoa indicada ganha:</h3>
+                <h3 className="text-2xl font-bold text-pink-800">🎁 A pessoa indicada ganha:</h3>
               </div>
               
               <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white p-6 rounded-xl shadow-lg">
@@ -205,7 +177,7 @@ const ReferralSection = () => {
                   <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
                   <div>
                     <h4 className="font-semibold text-orange-800">Pessoa contrata o serviço</h4>
-                    <p className="text-orange-700/80">Quando a pessoa fechar a consultoria</p>
+                    <p className="text-orange-700/80">Quando a pessoa iniciar a consultoria</p>
                   </div>
                 </div>
                 
@@ -237,14 +209,13 @@ const ReferralSection = () => {
             
             <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-8 rounded-2xl">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Target className="h-8 w-8 text-green-600" />
                 <h4 className="text-2xl font-bold text-green-800">💪🏼 CONTE COMIGO DURANTE TODO PROCESSO</h4>
               </div>
               <p className="text-3xl font-bold text-green-700 mb-2">BOOOORA PRA CIMA!</p>
               <div className="flex items-center justify-center gap-2">
-                <Target className="h-6 w-6 text-green-600" />
-                <Target className="h-6 w-6 text-green-600" />
-                <Target className="h-6 w-6 text-green-600" />
+                <span className="text-2xl">🎯</span>
+                <span className="text-2xl">🎯</span>
+                <span className="text-2xl">🎯</span>
               </div>
             </div>
           </div>
