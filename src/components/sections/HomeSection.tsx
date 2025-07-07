@@ -268,11 +268,11 @@ const HomeSection = () => {
           </CardHeader>
           <CardContent>
             <p className="text-blue-700/70 mb-6">
-              Canal para tratar de pagamentos, boletos e faturas.
+              Para tratar de pagamentos, boletos e faturas:
             </p>
             <Button 
               className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl w-full"
-              onClick={() => window.open('https://api.whatsapp.com/send/?phone=%2B5511914846760&text=Ol%C3%A1%2C+gostaria+de+falar+com+a+Equipe+Financeira&type=phone_number&app_absent=0', '_blank')}
+              onClick={() => window.open('https://api.whatsapp.com/send/?phone=%2B5511914880872&text=Ol%C3%A1%2C+gostaria+de+falar+com+a+Equipe+Financeira&type=phone_number&app_absent=0', '_blank')}
             >
               <MessageCircle className="h-4 w-4 mr-2" />
               Falar com a Equipe Financeira

@@ -27,6 +27,10 @@ const MentorshipSection = () => {
     {
       title: "Como vencer a pressão externa e seguir firme no processo de autocuidado",
       url: "https://youtu.be/eMzySMjOAho"
+    },
+    {
+      title: "Quando emagrecer vira luta: O que está te sabotando sem você perceber",
+      url: "https://www.youtube.com/watch?v=0bLCmn4DRbo"
     }
   ];
 
@@ -83,6 +87,33 @@ const MentorshipSection = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Próxima Mentoria */}
+      <Card className="floating-card gradient-card border-purple-200/50">
+        <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50">
+          <CardTitle className="flex items-center gap-3 text-purple-800">
+            <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-lg">
+              <Calendar className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold">📅 PRÓXIMA MENTORIA</div>
+              <div className="text-sm text-purple-600/70 font-normal">Coloque na sua agenda</div>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-6 rounded-2xl text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Calendar className="h-8 w-8 text-purple-600" />
+              <span className="text-2xl font-bold text-purple-800">Toda última segunda-feira do mês às 20h00</span>
+            </div>
+            <p className="text-purple-700/80 leading-relaxed">
+              Não perca os encontros mensais com a psicóloga Josie Peçanha. 
+              Uma oportunidade única para trabalhar sua mentalidade e comportamento alimentar.
+            </p>
           </div>
         </CardContent>
       </Card>
