@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Users, MessageCircle, Phone, Clock, Crown, Star, Sparkles, ExternalLink, CheckCircle, AlertCircle, DollarSign, FileText } from 'lucide-react';
+import { Play, Users, MessageCircle, Phone, Clock, Crown, Star, Sparkles, ExternalLink, CheckCircle, AlertCircle, DollarSign, FileText, PanelLeft } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const HomeSection = () => {
@@ -32,19 +32,19 @@ const HomeSection = () => {
     {
       name: "Guido Bustos",
       role: "Nutricionista",
-      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação, além de diversas demandas e processos internos do Time.",
+      description: "Responsável pela análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação, além de diversas demandas e processos internos do Time.",
       image: "/guido.png"
     },
     {
       name: "Thais Parra",
       role: "Nutricionista", 
-      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
+      description: "Pós Graduada em Nutrição Esportiva, responsável pela análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
       image: "/thais.png"
     },
     {
       name: "Pedro",
       role: "Nutricionista",
-      description: "Análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
+      description: "Responsável pela análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
       image: "/pedro.png"
     }
   ];
@@ -84,6 +84,13 @@ const HomeSection = () => {
                   videoId="ZebZRgAckcQ"
                   title="Vídeo de Boas-vindas - FM Team"
                 />
+              </div>
+              {/* Frase orientativa para o menu */}
+              <div className="mt-6 flex justify-center animate-fade-in">
+                <span className="inline-flex items-center justify-center text-amber-700 font-semibold text-base sm:text-base text-sm bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 shadow-sm max-w-full text-center">
+                  Para acessar todos os conteúdos, clique no ícone no canto superior esquerdo.
+                  <PanelLeft className="inline-block text-2xl align-middle animate-bounce ml-2 text-amber-600" />
+                </span>
               </div>
             </CardContent>
           </Card>
