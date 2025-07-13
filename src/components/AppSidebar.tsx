@@ -82,7 +82,7 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) {
-  const { state } = useSidebar();
+  const { state, isMobile, setOpenMobile } = useSidebar();
   
   return (
     <Sidebar className="h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white border-r border-yellow-700/40 shadow-xl">
@@ -113,7 +113,10 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
               {menuItems.map((item, index) => (
                 <SidebarMenuItem key={item.id} className="slide-in-right" style={{ animationDelay: `${index * 0.05}s` }}>
                   <SidebarMenuButton 
-                    onClick={() => onSectionChange(item.id)}
+                    onClick={() => {
+                      onSectionChange(item.id);
+                      if (isMobile) setOpenMobile(false);
+                    }}
                     isActive={activeSection === item.id}
                     tooltip={state === "collapsed" ? item.title : undefined}
                     className={
