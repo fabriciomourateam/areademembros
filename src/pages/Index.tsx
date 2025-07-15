@@ -149,7 +149,10 @@ const Index = () => {
                   <div className="flex flex-col items-center gap-2">
                     <Lock className="h-10 w-10 text-amber-400 mb-2" />
                     <DialogTitle className="text-center">Área Premium</DialogTitle>
-                    <p className="text-sm text-muted-foreground text-center mb-2">Caso você possua o Plano PREMIUM solicite a senha ao Fabricio Moura e acesse essa área exclusiva</p>
+                    <p className="text-sm text-muted-foreground text-center mb-2">
+                      Caso você possua o Plano com Bioimpedância, solicite a senha ao Fabricio Moura e acesse essa área exclusiva!<br/><br/>
+                      Caso queira, pode assinar o plano de bioimpedância mensal, no valor de R$29,90 por mês.
+                    </p>
                   </div>
                 </DialogHeader>
                 <form onSubmit={handleBioPasswordSubmit} className="flex flex-col gap-3 items-center">
@@ -162,12 +165,21 @@ const Index = () => {
                     autoFocus
                   />
                   {bioPasswordError && <span className="text-red-600 text-sm">{bioPasswordError}</span>}
-                  <button
-                    type="submit"
-                    className="bg-amber-400 border border-amber-400 text-black font-semibold px-6 py-2 rounded transition-all shadow-lg hover:bg-black hover:text-amber-400"
-                  >
-                    Entrar
-                  </button>
+                  <div className="flex gap-2 w-full justify-center">
+                    <button
+                      type="submit"
+                      className="bg-amber-400 border border-amber-400 text-black font-semibold px-6 py-2 rounded transition-all shadow-lg hover:bg-black hover:text-amber-400"
+                    >
+                      Entrar
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-blue-600 border border-blue-600 text-white font-semibold px-6 py-2 rounded transition-all shadow-lg hover:bg-white hover:text-blue-600"
+                      onClick={() => window.open('https://wa.me/+5511914880872?text=Oi%20Fabricio%2C%20gostaria%20de%20fazer%20o%20plano%20de%20bioimped%C3%A2ncia.', '_blank')}
+                    >
+                      Assinar
+                    </button>
+                  </div>
                 </form>
               </DialogContent>
             </Dialog>
