@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Lock } from 'lucide-react';
 import Header from '@/components/Header';
@@ -21,8 +22,40 @@ import WeeklyContentSection from '@/components/sections/WeeklyContentSection';
 const MENTORING_PASSWORD = 'fmteammentoria'; // Você pode alterar a senha aqui
 const BIOIMPEDANCE_PASSWORD = 'fmteambio'; // Senha exclusiva para bioimpedância
 
-const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
+interface IndexProps {
+  defaultSection?: string;
+}
+
+const Index = ({ defaultSection }: IndexProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determinar seção inicial baseada na URL ou prop
+  const getInitialSection = () => {
+    if (defaultSection) return defaultSection;
+    
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      const sectionMap: { [key: string]: string } = {
+        '/apps': 'apps',
+        '/nutrition': 'nutrition',
+        '/workouts': 'workouts',
+        '/checkin': 'checkin',
+        '/food-substitution': 'food-substitution',
+        '/weekly-content': 'weekly-content',
+        '/evolution-report': 'evolution-report',
+        '/supplements': 'supplements',
+        '/ebooks': 'ebooks',
+        '/referral': 'referral',
+        '/mentoring': 'mentoring',
+        '/bioimpedance': 'bioimpedance'
+      };
+      return sectionMap[hash] || 'home';
+    }
+    return 'home';
+  };
+
+  const [activeSection, setActiveSection] = useState(getInitialSection());
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [mentoringUnlocked, setMentoringUnlocked] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -43,7 +76,32 @@ const Index = () => {
       setShowBioimpedanceDialog(true);
       return;
     }
+    
     setActiveSection(sectionId);
+    
+    // Atualizar URL baseada na seção
+    const sectionToPath: { [key: string]: string } = {
+      'home': '/',
+      'apps': '/apps',
+      'nutrition': '/nutrition',
+      'workouts': '/workouts',
+      'checkin': '/checkin',
+      'food-substitution': '/food-substitution',
+      'weekly-content': '/weekly-content',
+      'evolution-report': '/evolution-report',
+      'supplements': '/supplements',
+      'ebooks': '/ebooks',
+      'referral': '/referral',
+      'mentoring': '/mentoring',
+      'bioimpedance': '/bioimpedance'
+    };
+    
+    const path = sectionToPath[sectionId];
+    if (path && path !== '/') {
+      navigate(path);
+    } else {
+      navigate('/');
+    }
   };
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
@@ -52,6 +110,7 @@ const Index = () => {
       setMentoringUnlocked(true);
       setShowPasswordDialog(false);
       setActiveSection('mentoring');
+      navigate('/mentoring');
       setPasswordInput('');
       setPasswordError('');
     } else {
@@ -65,6 +124,7 @@ const Index = () => {
       setBioimpedanceUnlocked(true);
       setShowBioimpedanceDialog(false);
       setActiveSection('bioimpedance');
+      navigate('/bioimpedance');
       setBioPasswordInput('');
       setBioPasswordError('');
     } else {

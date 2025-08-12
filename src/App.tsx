@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -13,14 +13,24 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* <Route path="/auth" element={<Auth />} /> */}
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/apps" element={<Index defaultSection="apps" />} />
+          <Route path="/nutrition" element={<Index defaultSection="nutrition" />} />
+          <Route path="/workouts" element={<Index defaultSection="workouts" />} />
+          <Route path="/checkin" element={<Index defaultSection="checkin" />} />
+          <Route path="/food-substitution" element={<Index defaultSection="food-substitution" />} />
+          <Route path="/weekly-content" element={<Index defaultSection="weekly-content" />} />
+          <Route path="/evolution-report" element={<Index defaultSection="evolution-report" />} />
+          <Route path="/supplements" element={<Index defaultSection="supplements" />} />
+          <Route path="/ebooks" element={<Index defaultSection="ebooks" />} />
+          <Route path="/referral" element={<Index defaultSection="referral" />} />
+          <Route path="/mentoring" element={<Index defaultSection="mentoring" />} />
+          <Route path="/bioimpedance" element={<Index defaultSection="bioimpedance" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
