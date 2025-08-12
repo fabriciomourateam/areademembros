@@ -1,4 +1,4 @@
-import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, Users, Star, Lock, RefreshCw, Activity } from 'lucide-react';
+import { Home, Smartphone, Utensils, Dumbbell, CheckCircle, Pill, BookOpen, Gift, Users, Star, Lock, RefreshCw, Activity, Video } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -43,6 +43,11 @@ const menuItems = [
     title: "Substituição de Alimentos",
     icon: RefreshCw,
     id: "food-substitution"
+  },
+  {
+    title: "Conteúdos Semanais",
+    icon: Video,
+    id: "weekly-content"
   },
   {
     title: "Relatório de Evolução",

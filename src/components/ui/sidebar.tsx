@@ -262,6 +262,25 @@ const SidebarTrigger = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar()
+  const [showPulse, setShowPulse] = React.useState(false)
+
+  React.useEffect(() => {
+    // Exibe animação só nas primeiras visitas
+    const alreadySeen = localStorage.getItem('sidebarMenuPulse')
+    if (!alreadySeen) {
+      setShowPulse(true)
+      // Remove animação após 5s ou ao clicar
+      const timeout = setTimeout(() => setShowPulse(false), 5000)
+      return () => clearTimeout(timeout)
+    }
+  }, [])
+
+  const handleClick = (event: any) => {
+    localStorage.setItem('sidebarMenuPulse', '1')
+    setShowPulse(false)
+    onClick?.(event)
+    toggleSidebar()
+  }
 
   return (
     <Button
@@ -269,11 +288,12 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
-      onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
-      }}
+      className={cn(
+        "h-7 w-7 relative",
+        showPulse && "ring-2 ring-amber-400 ring-offset-2 animate-pulse",
+        className
+      )}
+      onClick={handleClick}
       {...props}
     >
       <PanelLeft />

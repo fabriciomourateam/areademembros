@@ -16,6 +16,7 @@ import MentorshipSection from '@/components/sections/MentorshipSection';
 import FoodSubstitutionSection from '@/components/sections/FoodSubstitutionSection';
 import BioimpedanceSection from '@/components/sections/BioimpedanceSection';
 import EvolutionReportSection from '@/components/sections/EvolutionReportSection';
+import WeeklyContentSection from '@/components/sections/WeeklyContentSection';
 
 const MENTORING_PASSWORD = 'fmteammentoria'; // Você pode alterar a senha aqui
 const BIOIMPEDANCE_PASSWORD = 'fmteambio'; // Senha exclusiva para bioimpedância
@@ -93,6 +94,8 @@ const Index = () => {
         return <ReferralSection />;
       case 'food-substitution':
         return <FoodSubstitutionSection />;
+      case 'weekly-content':
+        return <WeeklyContentSection />;
       case 'bioimpedance':
         return <BioimpedanceSection />;
       case 'mentoring':
