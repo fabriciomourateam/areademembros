@@ -295,84 +295,57 @@ const SupplementsSection = () => {
         </CardContent>
       </Card>
 
-      {/* Catálogo Completo */}
-      <Card className="floating-card gradient-card border-blue-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
-          <CardTitle className="flex items-center gap-3 text-blue-800">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
-              <FileText className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">📁 Catálogo Completo</div>
-              <div className="text-sm text-blue-600/70 font-normal">Todos os suplementos recomendados</div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-4">
-            <p className="text-blue-700/80 leading-relaxed text-lg">
-              Acesse o catálogo com os suplementos que selecionei com melhor custo-benefício.
-            </p>
-            
-            <Button 
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://www.notion.so/fabriciomouratreinador/SUPLEMENTOS-COM-BOM-CUSTO-x-BENEF-CIO-10b12c259b7280ba8380db73b7d13c89?pvs=4', '_blank')}
-            >
-              <FileText className="h-5 w-5 mr-3" />
-              Acessar Catálogo
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Fazer Pedido */}
-      <Card className="floating-card gradient-card border-green-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-green-50 to-emerald-50">
-          <CardTitle className="flex items-center gap-3 text-green-800">
-            <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
-              <ShoppingCart className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">🛒 Quer pedir algum suplemento?</div>
-              <div className="text-sm text-green-600/70 font-normal">Distribuidora Oficial</div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-6">
-            
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
-              <h4 className="font-bold text-green-800 mb-3">🏆 Distribuidora com Condição Especial pro FM Team:</h4>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Produtos 100% originais</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Preços especiais para membros</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Entrega rápida e segura</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Atendimento especializado</span>
-                </div>
-              </div>
-            </div>
-            
-            <Button 
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://kub.sh/9787b0', '_blank')}
-            >
-              <ShoppingCart className="h-5 w-5 mr-3" />
-              Fazer Pedido na Distribuidora
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+             {/* Catálogo Completo */}
+       <Card className="floating-card gradient-card border-blue-200/50">
+         <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
+           <CardTitle className="flex items-center gap-3 text-blue-800">
+             <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+               <FileText className="h-6 w-6 text-white" />
+             </div>
+             <div>
+               <div className="text-2xl font-bold">📁 Catálogo Completo</div>
+               <div className="text-sm text-blue-600/70 font-normal">Todos os suplementos recomendados</div>
+             </div>
+           </CardTitle>
+         </CardHeader>
+         <CardContent>
+           <div className="text-center space-y-6">
+             <p className="text-blue-700/80 leading-relaxed text-lg">
+               Acesse o catálogo com os suplementos que selecionei com melhor custo-benefício.
+             </p>
+             
+             <Button 
+               className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+               onClick={() => window.open('https://glcdistribuidora.meucatalogodigital.com/', '_blank')}
+             >
+               <FileText className="h-5 w-5 mr-3" />
+               Acessar Catálogo
+             </Button>
+             
+             <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
+                               <h4 className="font-bold text-green-800 mb-3">🏆 Distribuidora com Excelente Custo-Benefício:</h4>
+               <div className="grid md:grid-cols-2 gap-3">
+                 <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 bg-green-500 rounded-full" />
+                   <span className="text-green-700 text-sm">Produtos 100% originais</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 bg-green-500 rounded-full" />
+                   <span className="text-green-700 text-sm">Preços especiais para membros</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 bg-green-500 rounded-full" />
+                   <span className="text-green-700 text-sm">Entrega rápida e segura</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 bg-green-500 rounded-full" />
+                   <span className="text-green-700 text-sm">Atendimento especializado</span>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </CardContent>
+       </Card>
 
       {/* Manipulados */}
       <Card className="floating-card gradient-card border-orange-200/50">
