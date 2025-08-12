@@ -314,13 +314,17 @@ const SupplementsSection = () => {
                Acesse o catálogo com os suplementos que selecionei com melhor custo-benefício.
              </p>
              
-             <Button 
-               className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-               onClick={() => window.open('https://glcdistribuidora.meucatalogodigital.com/', '_blank')}
-             >
-               <FileText className="h-5 w-5 mr-3" />
-               Acessar Catálogo
-             </Button>
+                           <Button 
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+                onClick={() => window.open('https://glcdistribuidora.meucatalogodigital.com/', '_blank')}
+              >
+                <FileText className="h-5 w-5 mr-3" />
+                Acessar Catálogo
+              </Button>
+              
+              <p className="text-blue-700/80 text-sm leading-relaxed">
+                <strong>Mencione que é indicação do Fabricio Moura</strong> ao efetuar o pedido, para conseguir condições especiais.
+              </p>
              
              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
                                <h4 className="font-bold text-green-800 mb-3">🏆 Distribuidora com Excelente Custo-Benefício:</h4>
