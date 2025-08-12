@@ -7,15 +7,15 @@ const WeeklyContentSection = () => {
   const weeklyTopics = [
     {
       week: "Semana 1",
-      title: "Introdução à Nutrição Esportiva",
-      description: "Fundamentos básicos para iniciar sua jornada de transformação",
-      videoId: "VIDEO_ID_1", // Substitua pelos IDs reais dos vídeos
-      duration: "15 min",
+      title: "Principais Causas da Retenção de Líquidos",
+      description: "Aprenda sobre as principais causas da retenção de líquidos e como reduzi-la de forma eficaz. Descubra como o excesso de sódio, problemas circulatórios, hormônios, sedentarismo e medicamentos podem afetar seu corpo. Inclui dicas práticas para diminuir o sal, aumentar a hidratação, consumir alimentos diuréticos e praticar exercícios regularmente.",
+      videoId: "RRA2miqHPi4", // Vídeo do YouTube fornecido
+      duration: "2 min",
       category: "Nutrição"
     },
     {
       week: "Semana 2", 
-      title: "Planejamento de Treinos",
+      title: "Em breve",
       description: "Como estruturar seus treinos para máximo resultado",
       videoId: "VIDEO_ID_2",
       duration: "20 min",
@@ -23,7 +23,7 @@ const WeeklyContentSection = () => {
     },
     {
       week: "Semana 3",
-      title: "Suplementação Básica",
+      title: "Em breve",
       description: "Guia completo sobre suplementos essenciais",
       videoId: "VIDEO_ID_3", 
       duration: "18 min",
@@ -31,7 +31,7 @@ const WeeklyContentSection = () => {
     },
     {
       week: "Semana 4",
-      title: "Mindset e Motivação",
+      title: "Em breve",
       description: "Desenvolva a mentalidade para resultados duradouros",
       videoId: "VIDEO_ID_4",
       duration: "12 min",
@@ -42,9 +42,7 @@ const WeeklyContentSection = () => {
   const benefits = [
     "Conteúdo atualizado semanalmente",
     "Vídeos exclusivos da equipe FM Team",
-    "Dicas práticas e aplicáveis",
-    "Suporte direto nos comentários",
-    "Material complementar disponível"
+    "Dicas práticas e aplicáveis"
   ];
 
   return (
@@ -122,6 +120,7 @@ const WeeklyContentSection = () => {
                 <Button
                   size="sm"
                   className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                  onClick={() => window.open(`https://www.youtube.com/watch?v=${topic.videoId}`, '_blank')}
                 >
                   <Play className="h-4 w-4 mr-1" />
                   Assistir
