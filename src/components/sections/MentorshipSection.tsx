@@ -1,8 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Heart, Brain, Users, ExternalLink, Sparkles, Calendar } from 'lucide-react';
+import { Play, Heart, Brain, Users, ExternalLink, Sparkles, Calendar, X } from 'lucide-react';
+import { useState } from 'react';
 
 const MentorshipSection = () => {
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+
+  // Função para extrair o ID do vídeo do YouTube
+  const getYouTubeVideoId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
   const previousMentorships = [
     {
       title: "Ansiedade no prato: Como a comida se torna uma válvula de escape",
@@ -110,10 +119,19 @@ const MentorshipSection = () => {
               <Calendar className="h-8 w-8 text-purple-600" />
               <span className="text-2xl font-bold text-purple-800">Toda última segunda-feira do mês às 20h00</span>
             </div>
-            <p className="text-purple-700/80 leading-relaxed">
+            <p className="text-purple-700/80 leading-relaxed mb-6">
               Não perca os encontros mensais com a psicóloga Josie Peçanha. 
               Uma oportunidade única para trabalhar sua mentalidade e comportamento alimentar.
             </p>
+            
+            <Button 
+              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+              onClick={() => window.open('https://meet.google.com/yqm-qnhg-yba?authuser=0', '_blank')}
+            >
+              <Calendar className="h-5 w-5 mr-3" />
+              Entrar na Mentoria de Hoje
+              <ExternalLink className="h-5 w-5 ml-3" />
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -132,29 +150,28 @@ const MentorshipSection = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 grid-cols-1">
             {previousMentorships.map((mentorship, index) => (
               <div 
                 key={index}
                 className="gradient-card p-5 rounded-xl border border-purple-200/50 hover:scale-105 transition-all duration-300 group"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Play className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-purple-800 mb-3 leading-snug">
+                    <h4 className="font-semibold text-purple-800 leading-snug">
                       {mentorship.title}
                     </h4>
-                    <Button 
-                      className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-sm px-4 py-2 w-full"
-                      onClick={() => window.open(mentorship.url, '_blank')}
-                    >
-                      <Play className="h-4 w-4 mr-2" />
-                      Assistir no YouTube
-                      <ExternalLink className="h-4 w-4 ml-2" />
-                    </Button>
                   </div>
+                  <Button 
+                    className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-sm px-4 py-2 flex-shrink-0"
+                    onClick={() => setPlayingVideo(mentorship.url)}
+                  >
+                    <Play className="h-4 w-4 mr-2" />
+                    Assistir
+                  </Button>
                 </div>
               </div>
             ))}
@@ -177,6 +194,34 @@ const MentorshipSection = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Modal do Player de Vídeo */}
+      {playingVideo && (
+        <div 
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+          onClick={() => setPlayingVideo(null)}
+        >
+          <div className="relative w-full max-w-4xl bg-white rounded-2xl p-4 shadow-2xl">
+            <button
+              onClick={() => setPlayingVideo(null)}
+              className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition-colors duration-200 z-10"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                src={`https://www.youtube.com/embed/${getYouTubeVideoId(playingVideo)}?autoplay=1`}
+                title="Mentoria"
+                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
