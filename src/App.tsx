@@ -28,6 +28,7 @@ const App = () => (
           <Route path="/referral" element={<Index defaultSection="referral" />} />
           <Route path="/mentoring" element={<Index defaultSection="mentoring" />} />
           <Route path="/bioimpedance" element={<Index defaultSection="bioimpedance" />} />
+          <Route path="/recipes" element={<Index defaultSection="recipes" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
