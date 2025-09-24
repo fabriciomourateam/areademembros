@@ -21,7 +21,7 @@ const App = () => (
           <Route path="/workouts" element={<Index defaultSection="workouts" />} />
           <Route path="/checkin" element={<Index defaultSection="checkin" />} />
           <Route path="/food-substitution" element={<Index defaultSection="food-substitution" />} />
-          <Route path="/weekly-content" element={<Index defaultSection="weekly-content" />} />
+
           <Route path="/evolution-report" element={<Index defaultSection="evolution-report" />} />
           <Route path="/supplements" element={<Index defaultSection="supplements" />} />
           <Route path="/ebooks" element={<Index defaultSection="ebooks" />} />

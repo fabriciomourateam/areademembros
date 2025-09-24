@@ -42,10 +42,10 @@ const HomeSection = () => {
       image: "/thais.png"
     },
     {
-      name: "Pedro",
+      name: "Dayana",
       role: "Nutricionista",
       description: "Responsável pela análise de informações e auxílio na compilação de dados para os Check-ins de Avaliação.",
-      image: "/pedro.png"
+      image: "/Day.png"
     }
   ];
 

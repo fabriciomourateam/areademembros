@@ -49,11 +49,7 @@ const menuItems = [
     icon: ChefHat,
     id: "recipes"
   },
-  {
-    title: "Conteúdos Semanais",
-    icon: Video,
-    id: "weekly-content"
-  },
+
   {
     title: "Relatório de Evolução",
     icon: BookOpen,
@@ -106,7 +102,7 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
               <h2 className="font-bold text-xl text-gradient">🏆 FM Team</h2>
               <div className="flex items-center gap-2">
                 <Star className="h-3 w-3 text-amber-400" />
-                <p className="text-xs font-medium bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">Área de Membros</p>
+                <p className="text-sm font-medium bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">Área de Membros</p>
               </div>
             </div>
           )}
@@ -153,7 +149,7 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
                       {state === "expanded" && (
                         <span className={
                           `
-                          text-[0.70rem] sm:text-[0.80rem] font-semibold
+                          text-xs sm:text-sm font-semibold
                           ${activeSection === item.id ? 'text-white' : 'text-amber-800'}
                           `
                         }>

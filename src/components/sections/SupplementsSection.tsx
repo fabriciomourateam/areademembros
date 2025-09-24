@@ -765,7 +765,7 @@ const SupplementsSection = () => {
             </p>
 
             <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200/50 p-6 rounded-2xl">
-              <h4 className="font-bold text-orange-800 mb-3">💊 Farmácia Beleza e Saúde:</h4>
+              <h4 className="font-bold text-orange-800 mb-3">💊 Farmácia de Manipulação:</h4>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-orange-500 rounded-full" />
@@ -788,7 +788,7 @@ const SupplementsSection = () => {
 
             <Button
               className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://wa.link/j3jxh7', '_blank')}
+              onClick={() => window.open('https://api.whatsapp.com/send?phone=5511984955667&text=Oi%2C%20o%20Fabricio%20me%20passou%20seu%20contato%20para%20fazer%20um%20or%C3%A7amento%20com%20desconto.', '_blank')}
             >
               <ExternalLink className="h-5 w-5 mr-3" />
               Contatar Farmácia via WhatsApp

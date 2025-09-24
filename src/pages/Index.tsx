@@ -43,7 +43,7 @@ const Index = ({ defaultSection }: IndexProps) => {
         '/workouts': 'workouts',
         '/checkin': 'checkin',
         '/food-substitution': 'food-substitution',
-        '/weekly-content': 'weekly-content',
+
         '/evolution-report': 'evolution-report',
         '/supplements': 'supplements',
         '/ebooks': 'ebooks',
@@ -89,7 +89,7 @@ const Index = ({ defaultSection }: IndexProps) => {
       'workouts': '/workouts',
       'checkin': '/checkin',
       'food-substitution': '/food-substitution',
-      'weekly-content': '/weekly-content',
+
       'evolution-report': '/evolution-report',
       'supplements': '/supplements',
       'ebooks': '/ebooks',
@@ -157,8 +157,7 @@ const Index = ({ defaultSection }: IndexProps) => {
         return <ReferralSection />;
       case 'food-substitution':
         return <FoodSubstitutionSection />;
-      case 'weekly-content':
-        return <WeeklyContentSection />;
+
       case 'bioimpedance':
         return <BioimpedanceSection />;
       case 'mentoring':

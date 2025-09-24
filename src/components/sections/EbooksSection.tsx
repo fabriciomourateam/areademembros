@@ -1,8 +1,19 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Download, ExternalLink, Calendar, Heart, Moon, Dumbbell, Apple, Baby, Zap, Utensils, Shield } from 'lucide-react';
+import { BookOpen, Download, ExternalLink, Calendar, Heart, Moon, Dumbbell, Apple, Baby, Zap, Utensils, Shield, ChevronDown, ChevronUp } from 'lucide-react';
 
 const EbooksSection = () => {
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(categoryId) 
+        ? prev.filter(id => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
   const ebooks = [
     {
       id: 'flexibilidade',
@@ -151,22 +162,39 @@ const EbooksSection = () => {
       </Card>
 
       {/* Categorias de E-books */}
-      {ebooks.map((category) => (
-        <Card key={category.id} className={`floating-card gradient-card border-${category.color}-200/50`}>
-          <CardHeader className={`pb-6 bg-gradient-to-r from-${category.color}-50 to-${category.color}-100/50`}>
-            <CardTitle className={`flex items-center gap-3 text-${category.color}-800`}>
-              <div className={`p-3 bg-gradient-to-r from-${category.color}-500 to-${category.color}-600 rounded-xl shadow-lg`}>
-                <category.icon className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{category.category}</div>
-                <div className={`text-sm text-${category.color}-600/70 font-normal`}>
-                  {category.books.length} e-book{category.books.length > 1 ? 's' : ''} disponível{category.books.length > 1 ? 'is' : ''}
+      {ebooks.map((category) => {
+        const isExpanded = expandedCategories.includes(category.id);
+        
+        return (
+          <Card key={category.id} className={`floating-card gradient-card border-${category.color}-200/50`}>
+            <CardHeader 
+              className={`pb-6 bg-gradient-to-r from-${category.color}-50 to-${category.color}-100/50 cursor-pointer hover:from-${category.color}-100 hover:to-${category.color}-200/50 transition-all duration-300`}
+              onClick={() => toggleCategory(category.id)}
+            >
+              <CardTitle className={`flex items-center justify-between text-${category.color}-800`}>
+                <div className="flex items-center gap-3">
+                  <div className={`p-3 bg-gradient-to-r from-${category.color}-500 to-${category.color}-600 rounded-xl shadow-lg`}>
+                    <category.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">{category.category}</div>
+                    <div className={`text-sm text-${category.color}-600/70 font-normal`}>
+                      {category.books.length} e-book{category.books.length > 1 ? 's' : ''} disponível{category.books.length > 1 ? 'is' : ''}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
+                <div className={`p-2 rounded-lg bg-${category.color}-100 hover:bg-${category.color}-200 transition-colors duration-200`}>
+                  {isExpanded ? (
+                    <ChevronUp className={`h-5 w-5 text-${category.color}-600`} />
+                  ) : (
+                    <ChevronDown className={`h-5 w-5 text-${category.color}-600`} />
+                  )}
+                </div>
+              </CardTitle>
+            </CardHeader>
+            
+            {isExpanded && (
+              <CardContent className="animate-in slide-in-from-top-2 duration-300">
             <div className="grid md:grid-cols-2 gap-6">
               {category.books.map((book, index) => (
                 <div
@@ -200,9 +228,11 @@ const EbooksSection = () => {
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      ))}
+              </CardContent>
+            )}
+          </Card>
+        );
+      })}
 
       {/* Dica Importante */}
       <Card className="floating-card gradient-card border-amber-200/50">
