@@ -20,7 +20,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo e Trigger da Sidebar */}
           <div className="flex items-center gap-2 sm:gap-4">
-            <SidebarTrigger className="text-amber-400 hover:text-amber-500 hover:bg-amber-900/10 transition-colors p-1.5 sm:p-2" />
+            <SidebarTrigger className="text-amber-400 hover:text-amber-500 hover:bg-amber-900/20 transition-all duration-300 p-2 sm:p-3 hover:scale-110" />
             <div className="flex items-center h-full w-full">
               <img src="/topo.png" alt="Logo Topo FMTEAM" className="h-6 sm:h-8 w-auto max-w-[90px] sm:max-w-[120px] object-contain mx-auto" />
             </div>

@@ -117,19 +117,19 @@ const MentorshipSection = () => {
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-6 rounded-2xl text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Calendar className="h-8 w-8 text-purple-600" />
-              <span className="text-2xl font-bold text-purple-800">Toda última segunda-feira do mês às 20h00</span>
+              <span className="text-2xl font-bold text-purple-800">Toda última terça-feira do mês às 20h00</span>
             </div>
             <p className="text-purple-700/80 leading-relaxed mb-6">
-              Não perca os encontros mensais com a psicóloga Josie Peçanha. 
+              Não perca os encontros mensais com a psicóloga Josie Peçanha.
               Uma oportunidade única para trabalhar sua mentalidade e comportamento alimentar.
             </p>
-            
-            <Button 
+
+            <Button
               className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://meet.google.com/yqm-qnhg-yba?authuser=0', '_blank')}
+              onClick={() => window.open('https://fabriciomouratreinador.notion.site/ENCONTROS-COM-A-JOSIE-15312c259b72805e9c8ee84c767e3015', '_blank')}
             >
               <Calendar className="h-5 w-5 mr-3" />
-              Entrar na Mentoria de Hoje
+              Entrar na Mentoria
               <ExternalLink className="h-5 w-5 ml-3" />
             </Button>
           </div>
@@ -152,7 +152,7 @@ const MentorshipSection = () => {
         <CardContent>
           <div className="grid gap-4 grid-cols-1">
             {previousMentorships.map((mentorship, index) => (
-              <div 
+              <div
                 key={index}
                 className="gradient-card p-5 rounded-xl border border-purple-200/50 hover:scale-105 transition-all duration-300 group"
               >
@@ -165,7 +165,7 @@ const MentorshipSection = () => {
                       {mentorship.title}
                     </h4>
                   </div>
-                  <Button 
+                  <Button
                     className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-sm px-4 py-2 flex-shrink-0"
                     onClick={() => setPlayingVideo(mentorship.url)}
                   >
@@ -176,7 +176,7 @@ const MentorshipSection = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="mt-8 text-center">
             <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-6 rounded-2xl">
               <div className="flex items-center justify-center gap-2 mb-3">
@@ -187,7 +187,7 @@ const MentorshipSection = () => {
                 <Heart className="h-6 w-6 text-purple-600" />
               </div>
               <p className="text-purple-700/80 leading-relaxed">
-                Cada mentoria é uma oportunidade de entender melhor seus padrões comportamentais e 
+                Cada mentoria é uma oportunidade de entender melhor seus padrões comportamentais e
                 desenvolver uma relação mais saudável com a alimentação e com seu corpo.
               </p>
             </div>
@@ -197,7 +197,7 @@ const MentorshipSection = () => {
 
       {/* Modal do Player de Vídeo */}
       {playingVideo && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={() => setPlayingVideo(null)}
         >

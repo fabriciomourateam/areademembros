@@ -296,7 +296,11 @@ const SidebarTrigger = React.forwardRef<
       onClick={handleClick}
       {...props}
     >
-      <PanelLeft />
+      <div className="relative">
+        <div className="w-5 h-5 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
+          <span className="text-black font-bold text-lg leading-none">+</span>
+        </div>
+      </div>
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
