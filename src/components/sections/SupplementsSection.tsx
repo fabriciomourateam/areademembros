@@ -287,18 +287,44 @@ const SupplementsSection = () => {
                             { src: '/Whey Protein Concentrado 1.png', alt: 'Whey Concentrado 2' },
                             { src: '/Whey Protein Concentrado 2.png', alt: 'Whey Concentrado 3' },
                             { src: '/Whey Protein Concentrado 3.png', alt: 'Whey Concentrado 4' },
-                            { src: '/Whey Protein Concentrado 4.png', alt: 'Whey Concentrado 5' }
+                            { src: '/Whey Protein Concentrado 4.png', alt: 'Whey Concentrado 5' },
+                            { 
+                              src: '/xpro.png', 
+                              alt: 'Whey Protein Isolado Iso Blend Complex 2kg Xpro Nutrition',
+                              title: 'Whey Protein Isolado Iso Blend Complex 2kg Xpro Nutrition',
+                              description: 'Melhor custo x benefício - 2kg por R$78,00 (o sabor é ruim, mas o preço é bom, o de chocolate é o mais saboroso)',
+                              link: 'https://produto.mercadolivre.com.br/MLB-2763779137-whey-protein-isolado-iso-blend-complex-2kg-xpro-nutrition-_JM?has_official_store=false&highlight=false&searchVariation=175068065952&headerTopBrand=true#polycard_client=search-nordic&searchVariation=175068065952&search_layout=stack&position=3&type=item&tracking_id=147b4b98-39fe-4b61-9f69-1747e8e084b5'
+                            }
                           ].map((whey, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(whey)}
+                              onClick={() => {
+                                if (whey.link) {
+                                  window.open(whey.link, '_blank');
+                                } else {
+                                  setZoomedImage(whey);
+                                }
+                              }}
                             >
                               <img
                                 src={whey.src}
                                 alt={whey.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
+                              {whey.title && (
+                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-2 leading-tight">
+                                  {whey.title}
+                                </h4>
+                              )}
+                              {whey.description && (
+                                <p className="text-xs text-blue-600 text-center mt-1 leading-tight">
+                                  {whey.description}
+                                </p>
+                              )}
+                              <p className="text-xs text-blue-600 text-center mt-2 font-medium">
+                                {whey.link ? 'Clique para comprar' : 'Clique para ampliar'}
+                              </p>
                             </div>
                           ))}
                         </div>
