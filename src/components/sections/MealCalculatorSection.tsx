@@ -248,8 +248,8 @@ const MealCalculatorSection = () => {
         <CardContent className="space-y-6">
           {/* Upload de Imagem */}
           <div>
-            <label className="block text-sm font-semibold text-green-800 mb-4">
-              📸 Foto da Refeição
+            <label className="block text-lg font-bold text-green-800 mb-4">
+              📸 Opção 1 - Envie a Foto da sua Refeição
             </label>
 
             <div className="flex flex-col items-center gap-4 mb-4">
@@ -327,10 +327,19 @@ const MealCalculatorSection = () => {
             </div>
           </div>
 
+          {/* Separador OU */}
+          <div className="flex items-center gap-4 my-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+            <span className="text-green-700 font-bold text-lg px-4 py-2 bg-green-50 rounded-full border-2 border-green-300">
+              OU
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+          </div>
+
           {/* Descrição de Texto */}
           <div>
-            <label className="block text-sm font-semibold text-green-800 mb-2">
-              ✍️ Descreva sua Refeição
+            <label className="block text-lg font-bold text-green-800 mb-2">
+              ✍️ Opção 2 - Caso não tenha foto, descreva a sua Refeição
             </label>
             <Textarea
               placeholder="Ex: Uma fatia de pizza de calabresa com azeitonas pretas..."
