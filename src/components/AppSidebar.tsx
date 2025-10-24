@@ -45,11 +45,10 @@ const menuItems = [
     id: "food-substitution"
   },
   {
-    title: "Receitas",
-    icon: ChefHat,
-    id: "recipes"
+    title: "Calculadora de Refeição Livre",
+    icon: Utensils,
+    id: "meal-calculator"
   },
-
   {
     title: "Relatório de Evolução",
     icon: BookOpen,
@@ -64,6 +63,11 @@ const menuItems = [
     title: "E-books Bônus",
     icon: BookOpen,
     id: "ebooks"
+  },
+  {
+    title: "Receitas",
+    icon: ChefHat,
+    id: "recipes"
   },
   {
     title: "Programa de Incentivo",

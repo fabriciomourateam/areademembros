@@ -19,6 +19,7 @@ import BioimpedanceSection from '@/components/sections/BioimpedanceSection';
 import EvolutionReportSection from '@/components/sections/EvolutionReportSection';
 import WeeklyContentSection from '@/components/sections/WeeklyContentSection';
 import RecipesSection from '@/components/sections/RecipesSection';
+import MealCalculatorSection from '@/components/sections/MealCalculatorSection';
 
 const MENTORING_PASSWORD = 'fmteammentoria'; // Você pode alterar a senha aqui
 const BIOIMPEDANCE_PASSWORD = 'fmteambio'; // Senha exclusiva para bioimpedância
@@ -50,7 +51,8 @@ const Index = ({ defaultSection }: IndexProps) => {
         '/referral': 'referral',
         '/mentoring': 'mentoring',
         '/bioimpedance': 'bioimpedance',
-        '/recipes': 'recipes'
+        '/recipes': 'recipes',
+        '/meal-calculator': 'meal-calculator'
       };
       return sectionMap[hash] || 'home';
     }
@@ -96,7 +98,8 @@ const Index = ({ defaultSection }: IndexProps) => {
       'referral': '/referral',
       'mentoring': '/mentoring',
       'bioimpedance': '/bioimpedance',
-      'recipes': '/recipes'
+      'recipes': '/recipes',
+      'meal-calculator': '/meal-calculator'
     };
     
     const path = sectionToPath[sectionId];
@@ -164,6 +167,8 @@ const Index = ({ defaultSection }: IndexProps) => {
         return <MentorshipSection />;
       case 'recipes':
         return <RecipesSection />;
+      case 'meal-calculator':
+        return <MealCalculatorSection />;
       default:
         return <HomeSection />;
     }

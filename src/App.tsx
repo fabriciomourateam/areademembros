@@ -30,6 +30,7 @@ const App = () => (
           <Route path="/mentoring" element={<Index defaultSection="mentoring" />} />
           <Route path="/bioimpedance" element={<Index defaultSection="bioimpedance" />} />
           <Route path="/recipes" element={<Index defaultSection="recipes" />} />
+          <Route path="/meal-calculator" element={<Index defaultSection="meal-calculator" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
