@@ -225,7 +225,7 @@ const MealCalculatorSection = () => {
             </h1>
           </div>
           <p className="text-green-700/80 text-xl font-medium">
-            Analise as calorias e nutrientes da sua refeição livre
+            Analise as calorias e nutrientes da sua Refeição Livre
           </p>
         </div>
       </div>
@@ -248,10 +248,11 @@ const MealCalculatorSection = () => {
         <CardContent className="space-y-6">
           {/* Upload de Imagem */}
           <div>
-            <label className="block text-sm font-semibold text-green-800 mb-2">
+            <label className="block text-sm font-semibold text-green-800 mb-4">
               📸 Foto da Refeição
             </label>
-            <div className="flex flex-col items-center gap-4">
+
+            <div className="flex flex-col items-center gap-4 mb-4">
               {imagePreview && (
                 <div className="relative w-full max-w-md">
                   <img
@@ -285,6 +286,44 @@ const MealCalculatorSection = () => {
                   onChange={handleImageChange}
                 />
               </label>
+            </div>
+            
+            {/* Orientações para Foto Ideal */}
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+              <h4 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
+                <Camera className="h-5 w-5" />
+                Orientações para a Foto Ideal
+              </h4>
+              <p className="text-blue-700 text-sm mb-3">
+                Para seja feita uma análise precisa da sua refeição:
+              </p>
+              <ul className="space-y-2 text-blue-700 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span>Tire a foto de cima (visão aérea), mostrando todo o prato.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span>Mantenha uma boa iluminação natural — evite sombras fortes ou luz amarelada.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span>Deixe os alimentos bem separados, sem sobreposição (ex: arroz, carne e salada visíveis).</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span>Mantenha uma distância de cerca de 30 cm do prato.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span>Use fundo neutro (mesa clara ou toalha lisa) para destacar os alimentos.</span>
+                </li>
+              </ul>
+              <div className="mt-3 pt-3 border-t border-blue-200">
+                <p className="text-blue-800 text-sm font-semibold">
+                  💡 Quanto mais nítida e organizada a foto, mais precisa será sua análise nutricional!
+                </p>
+              </div>
             </div>
           </div>
 
