@@ -1,0 +1,40 @@
+═══════════════════════════════════════════════════════════════
+  COMO ATUALIZAR O LINK DA PRÓXIMA MENTORIA
+═══════════════════════════════════════════════════════════════
+
+📝 PASSO A PASSO:
+
+1. Abra o arquivo: public/mentorship-config.json
+
+2. Substitua o link antigo pelo novo link que a psicóloga enviou
+
+3. Atualize a data em "lastUpdated" (opcional)
+
+4. Salve o arquivo
+
+5. Faça o deploy/commit das alterações
+
+
+📋 EXEMPLO DO ARQUIVO:
+
+{
+  "nextMentorshipLink": "https://meet.google.com/abc-defg-hij",
+  "lastUpdated": "2025-10-30"
+}
+
+
+✅ PRONTO! 
+
+Após o deploy, todos os usuários verão o novo link automaticamente
+quando clicarem no botão "Entrar na Mentoria".
+
+
+💡 DICA: 
+
+Você pode usar qualquer link:
+- Google Meet
+- Zoom
+- Notion
+- Qualquer outra plataforma
+
+═══════════════════════════════════════════════════════════════

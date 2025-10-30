@@ -1,0 +1,52 @@
+═══════════════════════════════════════════════════════════════
+  🎯 COMO ATUALIZAR LINK E DATA DA MENTORIA (COM SUPABASE)
+═══════════════════════════════════════════════════════════════
+
+📱 PASSO A PASSO SUPER RÁPIDO:
+
+1. Acesse a página de Mentoria
+2. Clique em "Editar Link"
+3. Digite senha: admin123
+4. Preencha:
+   - Data: Ex: "26 de Novembro de 2025"
+   - Link: Cole o link da psicóloga
+5. Clique em "Salvar"
+6. PRONTO! ✅ Todos veem instantaneamente!
+
+═══════════════════════════════════════════════════════════════
+
+🔑 SENHA ADMIN: admin123
+
+💾 ARMAZENAMENTO: Supabase (nuvem)
+
+⏱️ TEMPO TOTAL: ~30 segundos
+
+✅ VANTAGENS:
+- Não precisa fazer deploy
+- Não precisa baixar/substituir arquivos
+- Todos veem instantaneamente
+- Funciona de qualquer dispositivo
+
+═══════════════════════════════════════════════════════════════
+
+💡 O QUE APARECE NA TELA:
+
+Antes de editar:
+  "Toda última terça-feira do mês às 20h00"
+
+Depois de editar:
+  "Toda última terça-feira do mês às 20h00"
+  
+  📅 Data da Mentoria
+  26 de Novembro de 2025
+
+═══════════════════════════════════════════════════════════════
+
+⚙️ CONFIGURAÇÃO INICIAL (só uma vez):
+
+1. Veja o arquivo: CONFIGURAR-SUPABASE.md
+2. Configure as variáveis de ambiente
+3. Crie a tabela no Supabase
+4. Pronto para usar!
+
+═══════════════════════════════════════════════════════════════

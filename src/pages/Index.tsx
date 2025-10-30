@@ -21,8 +21,8 @@ import WeeklyContentSection from '@/components/sections/WeeklyContentSection';
 import RecipesSection from '@/components/sections/RecipesSection';
 import MealCalculatorSection from '@/components/sections/MealCalculatorSection';
 
-const MENTORING_PASSWORD = 'fmteammentoria'; // Você pode alterar a senha aqui
-const BIOIMPEDANCE_PASSWORD = 'fmteambio'; // Senha exclusiva para bioimpedância
+const MENTORING_PASSWORD = 'mentoria123'; // Você pode alterar a senha aqui
+const BIOIMPEDANCE_PASSWORD = 'bio123'; // Senha exclusiva para bioimpedância
 
 interface IndexProps {
   defaultSection?: string;

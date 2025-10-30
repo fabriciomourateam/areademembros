@@ -1,10 +1,121 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Heart, Brain, Users, ExternalLink, Sparkles, Calendar, X } from 'lucide-react';
-import { useState } from 'react';
+import { Play, Heart, Brain, ExternalLink, Sparkles, Calendar, X, Edit, Save, Lock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { supabase } from '@/lib/supabase';
 
 const MentorshipSection = () => {
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const defaultLink = 'https://fabriciomouratreinador.notion.site/ENCONTROS-COM-A-JOSIE-15312c259b72805e9c8ee84c767e3015';
+  const [mentorshipLink, setMentorshipLink] = useState<string>(defaultLink);
+  const [mentorshipDate, setMentorshipDate] = useState<string>('');
+
+  // Estados para o painel admin
+  const [showAdminDialog, setShowAdminDialog] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [newLink, setNewLink] = useState('');
+  const [newDate, setNewDate] = useState('');
+  const [adminError, setAdminError] = useState('');
+
+  const ADMIN_PASSWORD = 'admin123'; // Senha para acessar o painel admin
+
+  // Função para formatar data de YYYY-MM-DD para formato brasileiro
+  const formatDateToBR = (dateString: string) => {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  };
+
+  // Função para formatar data brasileira para exibição bonita
+  const formatDateDisplay = (dateString: string) => {
+    if (!dateString) return '';
+    
+    // Se já está em formato brasileiro (dd/mm/yyyy)
+    if (dateString.includes('/')) {
+      const [day, month, year] = dateString.split('/');
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
+                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+      return `${day} de ${months[parseInt(month) - 1]} de ${year}`;
+    }
+    
+    // Se está em formato YYYY-MM-DD
+    if (dateString.includes('-')) {
+      const [year, month, day] = dateString.split('-');
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
+                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+      return `${day} de ${months[parseInt(month) - 1]} de ${year}`;
+    }
+    
+    return dateString;
+  };
+
+  useEffect(() => {
+    // Carregar configuração do Supabase
+    const loadConfig = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Link Mentoria')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+
+        if (error) throw error;
+
+        if (data) {
+          setMentorshipLink(data.Link || defaultLink);
+          setMentorshipDate(data.Data || '');
+        }
+      } catch (error) {
+        console.error('Erro ao carregar configuração da mentoria:', error);
+        // Fallback para valores padrão
+        setMentorshipLink(defaultLink);
+      }
+    };
+
+    loadConfig();
+  }, []);
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPassword === ADMIN_PASSWORD) {
+      setShowAdminDialog(false);
+      setShowEditDialog(true);
+      setNewLink(mentorshipLink);
+      setNewDate(mentorshipDate);
+      setAdminPassword('');
+      setAdminError('');
+    } else {
+      setAdminError('Senha incorreta');
+    }
+  };
+
+  const handleSaveLink = async () => {
+    if (newLink.trim()) {
+      try {
+        // Salvar no Supabase
+        const { error } = await supabase
+          .from('Link Mentoria')
+          .insert({
+            Link: newLink,
+            Data: newDate
+          });
+
+        if (error) throw error;
+
+        setMentorshipLink(newLink);
+        setMentorshipDate(newDate);
+        setShowEditDialog(false);
+
+        alert('✅ Link e data atualizados com sucesso!\n\n🎉 Todos os usuários já podem ver as alterações!');
+      } catch (error) {
+        console.error('Erro ao salvar:', error);
+        alert('❌ Erro ao salvar. Verifique sua conexão com o Supabase.\n\nErro: ' + error);
+      }
+    }
+  };
 
   // Função para extrair o ID do vídeo do YouTube
   const getYouTubeVideoId = (url: string) => {
@@ -115,26 +226,127 @@ const MentorshipSection = () => {
         </CardHeader>
         <CardContent>
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-6 rounded-2xl text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Calendar className="h-8 w-8 text-purple-600" />
-              <span className="text-2xl font-bold text-purple-800">Toda última terça-feira do mês às 20h00</span>
+            <div className="flex flex-col items-center gap-3 mb-4">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-8 w-8 text-purple-600" />
+                <span className="text-2xl font-bold text-purple-800">Toda última terça-feira do mês às 20h00</span>
+              </div>
+              {mentorshipDate && (
+                <div className="bg-purple-100 border-2 border-purple-300 rounded-xl px-6 py-3 mt-2">
+                  <p className="text-purple-800 font-bold text-lg">📅 Data da Mentoria</p>
+                  <p className="text-purple-700 text-xl font-semibold mt-1">{formatDateDisplay(mentorshipDate)}</p>
+                </div>
+              )}
             </div>
             <p className="text-purple-700/80 leading-relaxed mb-6">
               Não perca os encontros mensais com a psicóloga Josie Peçanha.
               Uma oportunidade única para trabalhar sua mentalidade e comportamento alimentar.
             </p>
 
-            <Button
-              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://fabriciomouratreinador.notion.site/ENCONTROS-COM-A-JOSIE-15312c259b72805e9c8ee84c767e3015', '_blank')}
-            >
-              <Calendar className="h-5 w-5 mr-3" />
-              Entrar na Mentoria
-              <ExternalLink className="h-5 w-5 ml-3" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button
+                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+                onClick={() => window.open(mentorshipLink, '_blank')}
+              >
+                <Calendar className="h-5 w-5 mr-3" />
+                Entrar na Mentoria
+                <ExternalLink className="h-5 w-5 ml-3" />
+              </Button>
+
+              <Button
+                variant="outline"
+                className="border-2 border-purple-300 text-purple-600 hover:bg-purple-50 font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 rounded-xl px-6 py-3"
+                onClick={() => setShowAdminDialog(true)}
+              >
+                <Edit className="h-4 w-4 mr-2" />
+                Editar Link
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
+
+      {/* Modal de Login Admin */}
+      <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex flex-col items-center gap-2">
+              <Lock className="h-10 w-10 text-purple-500 mb-2" />
+              <DialogTitle className="text-center text-purple-800">Acesso Administrativo</DialogTitle>
+              <p className="text-sm text-purple-600/70 text-center">Digite a senha de administrador para editar o link</p>
+            </div>
+          </DialogHeader>
+          <form onSubmit={handleAdminLogin} className="flex flex-col gap-4 items-center">
+            <input
+              type="password"
+              className="border-2 border-purple-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-black placeholder:text-purple-400"
+              placeholder="Senha de administrador"
+              value={adminPassword}
+              onChange={e => setAdminPassword(e.target.value)}
+              autoFocus
+            />
+            {adminError && <span className="text-red-600 text-sm">{adminError}</span>}
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all shadow-lg hover:shadow-xl w-full"
+            >
+              Entrar
+            </button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal de Edição do Link */}
+      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <div className="flex flex-col items-center gap-2">
+              <Edit className="h-10 w-10 text-purple-500 mb-2" />
+              <DialogTitle className="text-center text-purple-800">Editar Link da Próxima Mentoria</DialogTitle>
+              <p className="text-sm text-purple-600/70 text-center">Cole o novo link que a psicóloga enviou</p>
+            </div>
+          </DialogHeader>
+          <div className="flex flex-col gap-4">
+            <div>
+              <label className="text-sm font-semibold text-purple-700 mb-2 block">📅 Data da Próxima Mentoria:</label>
+              <input
+                type="date"
+                className="border-2 border-purple-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-black"
+                value={newDate}
+                onChange={e => setNewDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-purple-700 mb-2 block">🔗 Link da Mentoria:</label>
+              <input
+                type="text"
+                className="border-2 border-purple-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-black"
+                placeholder="Cole o novo link aqui (Google Meet, Zoom, etc)"
+                value={newLink}
+                onChange={e => setNewLink(e.target.value)}
+              />
+            </div>
+            <div className="flex gap-3 justify-end">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowEditDialog(false);
+                }}
+                className="border-2 border-gray-300"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleSaveLink}
+                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Salvar Link
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Mentorias Anteriores */}
       <Card className="floating-card gradient-card border-purple-200/50">
