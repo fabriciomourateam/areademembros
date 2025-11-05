@@ -93,27 +93,31 @@ const MentorshipSection = () => {
   };
 
   const handleSaveLink = async () => {
-    if (newLink.trim()) {
-      try {
-        // Salvar no Supabase
-        const { error } = await supabase
-          .from('Link Mentoria')
-          .insert({
-            Link: newLink,
-            Data: newDate
-          });
+    try {
+      // Salvar no Supabase (mesmo se estiver vazio - para standby)
+      const linkToSave = newLink.trim() || defaultLink; // Se vazio, volta para o link padrão (standby)
+      
+      const { error } = await supabase
+        .from('Link Mentoria')
+        .insert({
+          Link: linkToSave,
+          Data: newDate
+        });
 
-        if (error) throw error;
+      if (error) throw error;
 
-        setMentorshipLink(newLink);
-        setMentorshipDate(newDate);
-        setShowEditDialog(false);
+      setMentorshipLink(linkToSave);
+      setMentorshipDate(newDate);
+      setShowEditDialog(false);
 
+      if (linkToSave === defaultLink) {
+        alert('✅ Mentoria colocada em STANDBY!\n\n⏳ A mensagem "Aguardando Link Definitivo" será exibida para todos os usuários.');
+      } else {
         alert('✅ Link e data atualizados com sucesso!\n\n🎉 Todos os usuários já podem ver as alterações!');
-      } catch (error) {
-        console.error('Erro ao salvar:', error);
-        alert('❌ Erro ao salvar. Verifique sua conexão com o Supabase.\n\nErro: ' + error);
       }
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      alert('❌ Erro ao salvar. Verifique sua conexão com o Supabase.\n\nErro: ' + error);
     }
   };
 
@@ -231,10 +235,15 @@ const MentorshipSection = () => {
                 <Calendar className="h-8 w-8 text-purple-600" />
                 <span className="text-2xl font-bold text-purple-800">Toda última terça-feira do mês às 20h00</span>
               </div>
-              {mentorshipDate && (
+              {mentorshipDate ? (
                 <div className="bg-purple-100 border-2 border-purple-300 rounded-xl px-6 py-3 mt-2">
                   <p className="text-purple-800 font-bold text-lg">📅 Data da Mentoria</p>
                   <p className="text-purple-700 text-xl font-semibold mt-1">{formatDateDisplay(mentorshipDate)}</p>
+                </div>
+              ) : (
+                <div className="bg-amber-50 border-2 border-amber-300 rounded-xl px-6 py-3 mt-2">
+                  <p className="text-amber-800 font-bold text-lg">⏳ Aguardando Confirmação</p>
+                  <p className="text-amber-700 text-sm mt-1">A data será divulgada em breve</p>
                 </div>
               )}
             </div>
@@ -244,14 +253,21 @@ const MentorshipSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-                onClick={() => window.open(mentorshipLink, '_blank')}
-              >
-                <Calendar className="h-5 w-5 mr-3" />
-                Entrar na Mentoria
-                <ExternalLink className="h-5 w-5 ml-3" />
-              </Button>
+              {mentorshipLink && mentorshipLink !== defaultLink ? (
+                <Button
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+                  onClick={() => window.open(mentorshipLink, '_blank')}
+                >
+                  <Calendar className="h-5 w-5 mr-3" />
+                  Entrar na Mentoria
+                  <ExternalLink className="h-5 w-5 ml-3" />
+                </Button>
+              ) : (
+                <div className="bg-gradient-to-r from-amber-50 to-amber-100 border-2 border-amber-300 rounded-xl px-8 py-4 text-center w-full sm:w-auto">
+                  <p className="text-amber-800 font-bold text-lg mb-2">⏳ O link de acesso ainda será disponibilizado</p>
+                  <p className="text-amber-700 text-sm">Fique atento às atualizações!</p>
+                </div>
+              )}
 
               <Button
                 variant="outline"
@@ -315,6 +331,7 @@ const MentorshipSection = () => {
                 value={newDate}
                 onChange={e => setNewDate(e.target.value)}
               />
+              <p className="text-xs text-purple-600/70 mt-1">Deixe em branco se ainda não tiver a data confirmada</p>
             </div>
             <div>
               <label className="text-sm font-semibold text-purple-700 mb-2 block">🔗 Link da Mentoria:</label>
@@ -325,6 +342,7 @@ const MentorshipSection = () => {
                 value={newLink}
                 onChange={e => setNewLink(e.target.value)}
               />
+              <p className="text-xs text-purple-600/70 mt-1">💡 Deixe em branco para manter em standby (aguardando link)</p>
             </div>
             <div className="flex gap-3 justify-end">
               <Button

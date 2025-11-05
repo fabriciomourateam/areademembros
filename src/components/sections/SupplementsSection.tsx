@@ -19,12 +19,30 @@ const SupplementsSection = () => {
       usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
+      id: 'whey-blend',
+      name: 'Whey Protein Blend',
+      icon: Dumbbell,
+      color: 'blue',
+      description: 'Mistura de proteínas com ótimo custo-benefício',
+      benefits: ['Combina diferentes tipos de proteína', 'Absorção gradual', 'Excelente custo-benefício', 'Boa fonte proteica'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
+    },
+    {
       id: 'whey-soja',
-      name: 'Whey de Soja / Vegano',
+      name: 'Whey Vegano',
       icon: Heart,
       color: 'green',
       description: 'Alternativa vegetal rica em proteínas',
       benefits: ['100% vegetal', 'Rico em isoflavonas', 'Livre de lactose', 'Sustentável'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
+    },
+    {
+      id: 'hipercalorico',
+      name: 'Hipercalórico',
+      icon: Dumbbell,
+      color: 'green',
+      description: 'Suplemento para ganho de peso e massa muscular',
+      benefits: ['Alto valor calórico', 'Rico em carboidratos e proteínas', 'Facilita ganho de peso', 'Ideal para quem tem dificuldade em ganhar massa'],
       usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
@@ -73,6 +91,15 @@ const SupplementsSection = () => {
       usage: 'Tomar 20-30 minutos antes do treino'
     },
     {
+      id: 'vitamina-c',
+      name: 'Vitamina C',
+      icon: Heart,
+      color: 'orange',
+      description: 'Poderoso antioxidante para imunidade',
+      benefits: ['Fortalece imunidade', 'Antioxidante potente', 'Produção de colágeno', 'Absorção de ferro'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
+    },
+    {
       id: 'vitamina-d',
       name: 'Vitamina D',
       icon: Heart,
@@ -91,6 +118,15 @@ const SupplementsSection = () => {
       usage: 'Tomar conforme prescrição no seu plano alimentar'
     },
     {
+      id: 'outras-vitaminas',
+      name: 'Outras Vitaminas',
+      icon: Pill,
+      color: 'purple',
+      description: 'Suplementos especializados para saúde',
+      benefits: ['Antioxidantes potentes', 'Suporte celular', 'Saúde metabólica', 'Funções específicas'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar'
+    },
+    {
       id: 'omega-3',
       name: 'Ômega 3',
       icon: Heart,
@@ -98,6 +134,24 @@ const SupplementsSection = () => {
       description: 'Gorduras essenciais para saúde cardiovascular',
       benefits: ['Saúde cardiovascular', 'Anti-inflamatório', 'Função cerebral', 'Recuperação muscular'],
       usage: 'Tomar conforme prescrição no seu plano alimentar'
+    },
+    {
+      id: 'barras-proteina',
+      name: 'Barras de Proteínas',
+      icon: Dumbbell,
+      color: 'blue',
+      description: 'Praticidade para consumir proteína',
+      benefits: ['Praticidade', 'Fonte de proteína', 'Lanche saudável', 'Fácil transporte'],
+      usage: 'Consumir conforme prescrição no seu plano alimentar'
+    },
+    {
+      id: 'pasta-amendoim',
+      name: 'Pastas de Amendoim',
+      icon: Heart,
+      color: 'orange',
+      description: 'Fonte de gorduras boas e proteínas',
+      benefits: ['Gorduras saudáveis', 'Fonte de proteína', 'Energia', 'Versátil'],
+      usage: 'Consumir conforme prescrição no seu plano alimentar'
     }
   ];
 
@@ -283,47 +337,40 @@ const SupplementsSection = () => {
                         <h5 className="font-bold mb-4 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                           {[
-                            { src: '/Whey Protein Concentrado.png', alt: 'Whey Concentrado 1' },
-                            { src: '/Whey Protein Concentrado 1.png', alt: 'Whey Concentrado 2' },
-                            { src: '/Whey Protein Concentrado 2.png', alt: 'Whey Concentrado 3' },
-                            { src: '/Whey Protein Concentrado 3.png', alt: 'Whey Concentrado 4' },
-                            { src: '/Whey Protein Concentrado 4.png', alt: 'Whey Concentrado 5' },
                             { 
-                              src: '/xpro.png', 
-                              alt: 'Whey Protein Isolado Iso Blend Complex 2kg Xpro Nutrition',
-                              title: 'Whey Protein Isolado Iso Blend Complex 2kg Xpro Nutrition',
-                              description: 'Melhor custo x benefício - 2kg por R$78,00 (o sabor é ruim, mas o preço é bom, o de chocolate é o mais saboroso)',
-                              link: 'https://produto.mercadolivre.com.br/MLB-2763779137-whey-protein-isolado-iso-blend-complex-2kg-xpro-nutrition-_JM?has_official_store=false&highlight=false&searchVariation=175068065952&headerTopBrand=true#polycard_client=search-nordic&searchVariation=175068065952&search_layout=stack&position=3&type=item&tracking_id=147b4b98-39fe-4b61-9f69-1747e8e084b5'
+                              src: '/Whey 100%25 Pure 900g - Integralm%C3%A9dica.png', 
+                              alt: 'Whey 100% Pure 900g - Integralmédica',
+                              title: 'Whey 100% Pure 900g - Integralmédica',
+                              link: 'https://mercadolivre.com/sec/1cbuLSY'
+                            },
+                            { 
+                              src: '/Whey 100%25 900g - Max.png', 
+                              alt: 'Whey 100% 900g - Max',
+                              title: 'Whey 100% 900g - Max',
+                              link: 'https://mercadolivre.com/sec/14HA7LA'
+                            },
+                            { 
+                              src: '/Whey 100%25 900g - Black Skull.png', 
+                              alt: 'Whey 100% 900g - Black Skull',
+                              title: 'Whey 100% 900g - Black Skull',
+                              link: 'https://mercadolivre.com/sec/2xVknSS'
                             }
                           ].map((whey, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                              onClick={() => {
-                                if (whey.link) {
-                                  window.open(whey.link, '_blank');
-                                } else {
-                                  setZoomedImage(whey);
-                                }
-                              }}
+                              onClick={() => window.open(whey.link, '_blank')}
                             >
                               <img
                                 src={whey.src}
                                 alt={whey.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
-                              {whey.title && (
-                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-2 leading-tight">
-                                  {whey.title}
-                                </h4>
-                              )}
-                              {whey.description && (
-                                <p className="text-xs text-blue-600 text-center mt-1 leading-tight">
-                                  {whey.description}
-                                </p>
-                              )}
+                              <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
+                                {whey.title}
+                              </h4>
                               <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                {whey.link ? 'Clique para comprar' : 'Clique para ampliar'}
+                                Ver produto
                               </p>
                             </div>
                           ))}
@@ -337,17 +384,45 @@ const SupplementsSection = () => {
                           <h6 className="font-semibold mb-4 text-blue-700 flex items-center gap-2">
                             🥛 Zero Lactose (Para intolerantes à lactose)
                           </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                            <div
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage({ src: '/Whey Protein Concentrado Zero Lactose.png', alt: 'Whey Concentrado Zero Lactose' })}
-                            >
-                              <img
-                                src="/Whey Protein Concentrado Zero Lactose.png"
-                                alt="Whey Concentrado Zero Lactose"
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                            </div>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {[
+                              {
+                                src: '/Whey Zero Lactose 900g - New Millen.png',
+                                alt: 'Whey Zero Lactose 900g - New Millen',
+                                title: 'Whey Zero Lactose 900g - New Millen',
+                                link: 'https://mercadolivre.com/sec/1VWZ1TE'
+                              },
+                              {
+                                src: '/Whey Zero Lactose 900g - Chef.png',
+                                alt: 'Whey Zero Lactose 900g - Chef',
+                                title: 'Whey Zero Lactose 900g - Chef',
+                                link: 'https://mercadolivre.com/sec/1M54tfD'
+                              },
+                              {
+                                src: '/Whey - Proteína de Carne Carnibol 900g - Darkness.png',
+                                alt: 'Whey - Proteína de Carne Carnibol 900g - Darkness',
+                                title: 'Whey - Proteína de Carne Carnibol 900g - Darkness',
+                                link: 'https://mercadolivre.com/sec/2sze9kT'
+                              }
+                            ].map((wheyZero, index) => (
+                              <div
+                                key={index}
+                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
+                                onClick={() => window.open(wheyZero.link, '_blank')}
+                              >
+                                <img
+                                  src={wheyZero.src}
+                                  alt={wheyZero.alt}
+                                  className="w-full h-32 object-contain rounded-md"
+                                />
+                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
+                                  {wheyZero.title}
+                                </h4>
+                                <p className="text-xs text-blue-600 text-center mt-2 font-medium">
+                                  Ver produto
+                                </p>
+                              </div>
+                            ))}
                           </div>
                           <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-3 rounded-xl">
                             <p className="text-blue-700/80 text-sm text-center">
@@ -358,65 +433,108 @@ const SupplementsSection = () => {
                       </div>
                     )}
 
-                    {/* Exemplos de Whey Blend e Vegano */}
+                    {/* Exemplos de Whey Blend */}
+                    {supplement.id === 'whey-blend' && (
+                      <div className="mt-6 pt-6 border-t border-blue-200/50">
+                        <h5 className="font-bold mb-4 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[
+                            { 
+                              src: '/Whey Protein Isolado Iso-x 900g.png', 
+                              alt: 'Whey Protein Isolado Iso-x 900g',
+                              title: 'Whey Protein Isolado Iso-x 900g',
+                              link: 'https://mercadolivre.com/sec/1sYzS8H'
+                            },
+                            { 
+                              src: '/Whey Protein Isolado Iso Blend Complex 2kg.png', 
+                              alt: 'Whey Protein Isolado Iso Blend Complex 2kg',
+                              title: 'Whey Protein Isolado Iso Blend Complex 2kg',
+                              link: 'https://mercadolivre.com/sec/2tSbUza'
+                            }
+                          ].map((wheyBlend, index) => (
+                            <div
+                              key={index}
+                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
+                              onClick={() => window.open(wheyBlend.link, '_blank')}
+                            >
+                              <img
+                                src={wheyBlend.src}
+                                alt={wheyBlend.alt}
+                                className="w-full h-32 object-contain rounded-md"
+                              />
+                              <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
+                                {wheyBlend.title}
+                              </h4>
+                              <p className="text-xs text-blue-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-4 rounded-xl">
+                          <p className="text-blue-700/80 text-sm text-center">
+                            <strong>💡 Dica:</strong> Whey Blend combina diferentes tipos de proteína, tem melhor custo x benefício, apesar do sabor não ser o melhor.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Exemplos de Whey Vegano */}
                     {supplement.id === 'whey-soja' && (
                       <div className="mt-6 pt-6 border-t border-green-200/50">
-                        <h5 className="font-bold mb-6 text-green-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-
-                        {/* Whey Protein Blend */}
-                        <div className="mb-8">
-                          <h6 className="font-semibold mb-4 text-green-700 flex items-center gap-2">
-                            🥛 Whey Protein Blend (Mistura de proteínas)
-                          </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                              { src: '/Whey Protein Blend.png', alt: 'Whey Blend 1' },
-                              { src: '/Whey Protein Blend 1.png', alt: 'Whey Blend 2' }
-                            ].map((wheyBlend, index) => (
-                              <div
-                                key={index}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                                onClick={() => setZoomedImage(wheyBlend)}
-                              >
-                                <img
-                                  src={wheyBlend.src}
-                                  alt={wheyBlend.alt}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                              </div>
-                            ))}
+                        <h5 className="font-bold mb-4 text-green-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
+                          <div
+                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
+                            onClick={() => window.open('https://mercadolivre.com/sec/1uA97B3', '_blank')}
+                          >
+                            <img
+                              src="/Whey Vegano.png"
+                              alt="Whey Protein Vegano"
+                              className="w-full h-40 object-contain rounded-md"
+                            />
+                            <h4 className="text-sm font-semibold text-green-800 text-center mt-3">
+                              Whey Protein Vegano
+                            </h4>
+                            <p className="text-xs text-green-600 text-center mt-2 font-medium">
+                              Ver produto
+                            </p>
                           </div>
                         </div>
-
-                        {/* Whey Protein Vegano */}
-                        <div>
-                          <h6 className="font-semibold mb-4 text-green-700 flex items-center gap-2">
-                            🌱 Whey Protein Vegano (100% vegetal)
-                          </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                              { src: '/Whey Protein Vegano.png', alt: 'Whey Vegano 1' },
-                              { src: '/Whey Protein Vegano 1.png', alt: 'Whey Vegano 2' }
-                            ].map((wheyVegano, index) => (
-                              <div
-                                key={index}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                                onClick={() => setZoomedImage(wheyVegano)}
-                              >
-                                <img
-                                  src={wheyVegano.src}
-                                  alt={wheyVegano.alt}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
+                        <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
                           <p className="text-green-700/80 text-sm text-center">
-                            <strong>💡 Dica:</strong> Whey Blend combina diferentes tipos de proteína para absorção gradual.
-                            Whey Vegano é ideal para veganos, vegetarianos ou pessoas com intolerância à lactose.
+                            <strong>💡 Ideal para:</strong> Veganos, vegetarianos ou pessoas com intolerância à lactose.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Exemplos de Hipercalórico */}
+                    {supplement.id === 'hipercalorico' && (
+                      <div className="mt-6 pt-6 border-t border-green-200/50">
+                        <h5 className="font-bold mb-4 text-green-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
+                          <div
+                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
+                            onClick={() => window.open('https://mercadolivre.com/sec/1FTe8E5', '_blank')}
+                          >
+                            <img
+                              src="/Hipercalórico.png"
+                              alt="Hipercalórico"
+                              className="w-full h-40 object-contain rounded-md"
+                            />
+                            <h4 className="text-sm font-semibold text-green-800 text-center mt-3">
+                              Hipercalórico
+                            </h4>
+                            <p className="text-xs text-green-600 text-center mt-2 font-medium">
+                              Ver produto
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
+                          <p className="text-green-700/80 text-sm text-center">
+                            <strong>💪 Ideal para:</strong> Quem tem dificuldade em ganhar peso e massa muscular.
+                            Rico em calorias, carboidratos e proteínas para facilitar o ganho de massa.
                           </p>
                         </div>
                       </div>
@@ -426,24 +544,43 @@ const SupplementsSection = () => {
                     {supplement.id === 'multivitaminico' && (
                       <div className="mt-6 pt-6 border-t border-purple-200/50">
                         <h5 className="font-bold mb-4 text-purple-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           {[
-                            { src: '/Multivitaminico.png', alt: 'Multivitamínico 1' },
-                            { src: '/Multivitaminico1.png', alt: 'Multivitamínico 2' },
-                            { src: '/Multivitaminico2.png', alt: 'Multivitamínico 3' },
-                            { src: '/Multivitaminico3.png', alt: 'Multivitamínico 4' },
-                            { src: '/Multivitaminico4.png', alt: 'Multivitamínico 5' }
+                            { 
+                              src: '/Multi Vitamínico Growth 120 Cápsulas.png', 
+                              alt: 'Multi Vitamínico Growth 120 Cápsulas',
+                              title: 'Multi Vitamínico Growth 120 Cápsulas',
+                              link: 'https://mercadolivre.com/sec/2UcTAGZ'
+                            },
+                            { 
+                              src: '/Multi Vitamínico Dux 90 Cápsulas.png', 
+                              alt: 'Multi Vitamínico Dux 90 Cápsulas',
+                              title: 'Multi Vitamínico Dux 90 Cápsulas',
+                              link: 'https://mercadolivre.com/sec/12UVCAa'
+                            },
+                            { 
+                              src: '/Multi Vitamínico 3VS 120 Cápsulas.png', 
+                              alt: 'Multi Vitamínico 3VS 120 Cápsulas',
+                              title: 'Multi Vitamínico 3VS 120 Cápsulas',
+                              link: 'https://mercadolivre.com/sec/2MDgDzZ'
+                            }
                           ].map((multivit, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-purple-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(multivit)}
+                              onClick={() => window.open(multivit.link, '_blank')}
                             >
                               <img
                                 src={multivit.src}
                                 alt={multivit.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
+                              <h4 className="text-xs font-semibold text-purple-800 text-center mt-3 leading-tight">
+                                {multivit.title}
+                              </h4>
+                              <p className="text-xs text-purple-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -457,27 +594,43 @@ const SupplementsSection = () => {
                     {supplement.id === 'creatina' && (
                       <div className="mt-6 pt-6 border-t border-orange-200/50">
                         <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           {[
-                            { src: '/Creatina.png', alt: 'Creatina 1' },
-                            { src: '/Creatina1.png', alt: 'Creatina 2' },
-                            { src: '/Creatina2.png', alt: 'Creatina 3' },
-                            { src: '/Creatina3.png', alt: 'Creatina 4' },
-                            { src: '/Creatina4.png', alt: 'Creatina 5' },
-                            { src: '/Creatina5.png', alt: 'Creatina 6' },
-                            { src: '/Creatina6.png', alt: 'Creatina 7' },
-                            { src: '/Creatina7.png', alt: 'Creatina 8' }
+                            { 
+                              src: '/Creatina 600g - Soldiers.png', 
+                              alt: 'Creatina 600g - Soldiers',
+                              title: 'Creatina 600g - Soldiers',
+                              link: 'https://mercadolivre.com/sec/2v1dwdQ'
+                            },
+                            { 
+                              src: '/Creatina 500g - Dark Lab.png', 
+                              alt: 'Creatina 500g - Dark Lab',
+                              title: 'Creatina 500g - Dark Lab',
+                              link: 'https://mercadolivre.com/sec/2Rmy8qW'
+                            },
+                            { 
+                              src: '/Creatina 300g - Max.png', 
+                              alt: 'Creatina 300g - Max',
+                              title: 'Creatina 300g - Max',
+                              link: 'https://mercadolivre.com/sec/2q9Xykb'
+                            }
                           ].map((creatina, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(creatina)}
+                              onClick={() => window.open(creatina.link, '_blank')}
                             >
                               <img
                                 src={creatina.src}
                                 alt={creatina.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
+                              <h4 className="text-xs font-semibold text-orange-800 text-center mt-3 leading-tight">
+                                {creatina.title}
+                              </h4>
+                              <p className="text-xs text-orange-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -493,25 +646,118 @@ const SupplementsSection = () => {
                         <h5 className="font-bold mb-4 text-cyan-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           {[
-                            { src: '/Ômega 3.png', alt: 'Ômega 3 - Opção 1' },
-                            { src: '/Ômega 3 ..png', alt: 'Ômega 3 - Opção 2' },
-                            { src: '/Ômega 3 ...png', alt: 'Ômega 3 - Opção 3' }
+                            { 
+                              src: '/Ômega 3 Pro 100 Capsulas - Probiótica.png', 
+                              alt: 'Ômega 3 Pro 100 Capsulas - Probiótica',
+                              title: 'Ômega 3 Pro 100 Capsulas - Probiótica',
+                              link: 'https://mercadolivre.com/sec/2XtxWBm'
+                            },
+                            { 
+                              src: '/Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition.png', 
+                              alt: 'Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition',
+                              title: 'Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition',
+                              link: 'https://mercadolivre.com/sec/2RFUb9x'
+                            },
+                            { 
+                              src: '/Ômega 3 180 Capsulas - Canibal.png', 
+                              alt: 'Ômega 3 180 Capsulas - Canibal',
+                              title: 'Ômega 3 180 Capsulas - Canibal',
+                              link: 'https://mercadolivre.com/sec/1BhGYqy'
+                            }
                           ].map((omega, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-cyan-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(omega)}
+                              onClick={() => window.open(omega.link, '_blank')}
                             >
                               <img
                                 src={omega.src}
                                 alt={omega.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
+                              <h4 className="text-xs font-semibold text-cyan-800 text-center mt-3 leading-tight">
+                                {omega.title}
+                              </h4>
+                              <p className="text-xs text-cyan-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
                             </div>
                           ))}
                         </div>
                         <p className="text-cyan-600/70 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Exemplos de Barras de Proteínas */}
+                    {supplement.id === 'barras-proteina' && (
+                      <div className="mt-6 pt-6 border-t border-blue-200/50">
+                        <h5 className="font-bold mb-4 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[
+                            {
+                              src: '/Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly.png',
+                              alt: 'Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly',
+                              title: 'Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly',
+                              link: 'https://mercadolivre.com/sec/1oZw8EE'
+                            },
+                            {
+                              src: '/Barra de Proteína Whey Grego Bar 40g.png',
+                              alt: 'Barra de Proteína Whey Grego Bar 40g',
+                              title: 'Barra de Proteína Whey Grego Bar 40g',
+                              link: 'https://mercadolivre.com/sec/2B3qf2E'
+                            }
+                          ].map((barra, index) => (
+                            <div
+                              key={index}
+                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
+                              onClick={() => window.open(barra.link, '_blank')}
+                            >
+                              <img
+                                src={barra.src}
+                                alt={barra.alt}
+                                className="w-full h-32 object-contain rounded-md"
+                              />
+                              <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
+                                {barra.title}
+                              </h4>
+                              <p className="text-xs text-blue-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-blue-600/70 text-sm mt-3 text-center">
+                          Praticidade para consumir proteína em qualquer lugar
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Exemplos de Pastas de Amendoim */}
+                    {supplement.id === 'pasta-amendoim' && (
+                      <div className="mt-6 pt-6 border-t border-orange-200/50">
+                        <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
+                          <div
+                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
+                            onClick={() => window.open('https://mercadolivre.com/sec/2NmGePx', '_blank')}
+                          >
+                            <img
+                              src="/Pasta de Amendoim Gourmet 600g - Dr. Peanut.png"
+                              alt="Pasta de Amendoim Gourmet 600g - Dr. Peanut"
+                              className="w-full h-40 object-contain rounded-md"
+                            />
+                            <h4 className="text-sm font-semibold text-orange-800 text-center mt-3">
+                              Pasta de Amendoim Gourmet 600g - Dr. Peanut
+                            </h4>
+                            <p className="text-xs text-orange-600 text-center mt-2 font-medium">
+                              Ver produto
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-orange-600/70 text-sm mt-3 text-center">
+                          Fonte de gorduras saudáveis e proteínas, perfeita para lanches e receitas
                         </p>
                       </div>
                     )}
@@ -526,25 +772,37 @@ const SupplementsSection = () => {
                           <h6 className="font-semibold mb-4 text-blue-700 flex items-center gap-2">
                             ⚡ Com Cafeína (Energia Extra)
                           </h6>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
-                              { src: '/Pré Treino.png', alt: 'Pré-treino com Cafeína 1' },
-                              { src: '/Pré Treino 1.png', alt: 'Pré-treino com Cafeína 2' },
-                              { src: '/Pré Treino 2.png', alt: 'Pré-treino com Cafeína 3' },
-                              { src: '/Pré Treino 3.png', alt: 'Pré-treino com Cafeína 4' },
-                              { src: '/Pré Treino 4.png', alt: 'Pré-treino com Cafeína 5' },
-                              { src: '/Pré Treino 5.png', alt: 'Pré-treino com Cafeína 6' }
+                              { 
+                                src: '/Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção).png', 
+                                alt: 'Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção)',
+                                title: 'Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção)',
+                                link: 'https://mercadolivre.com/sec/2spg7K3'
+                              },
+                              { 
+                                src: '/Pré Treino 300g Évora - Darkness.png', 
+                                alt: 'Pré Treino 300g Évora - Darkness',
+                                title: 'Pré Treino 300g Évora - Darkness',
+                                link: 'https://mercadolivre.com/sec/1HWUigq'
+                              }
                             ].map((preTreino, index) => (
                               <div
                                 key={index}
                                 className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                                onClick={() => setZoomedImage(preTreino)}
+                                onClick={() => window.open(preTreino.link, '_blank')}
                               >
                                 <img
                                   src={preTreino.src}
                                   alt={preTreino.alt}
                                   className="w-full h-32 object-contain rounded-md"
                                 />
+                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
+                                  {preTreino.title}
+                                </h4>
+                                <p className="text-xs text-blue-600 text-center mt-2 font-medium">
+                                  Ver produto
+                                </p>
                               </div>
                             ))}
                           </div>
@@ -555,23 +813,37 @@ const SupplementsSection = () => {
                           <h6 className="font-semibold mb-4 text-green-700 flex items-center gap-2">
                             🌿 Sem Cafeína (Para treinos noturnos)
                           </h6>
-                          <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
-                              { src: '/Pré Treino Sem Cafeína.png', alt: 'Pré-treino Sem Cafeína 1' },
-                              { src: '/Pré Treino Sem Cafeína 1.png', alt: 'Pré-treino Sem Cafeína 2' },
-                              { src: '/Pré Treino Sem Cafeína 2.png', alt: 'Pré-treino Sem Cafeína 3' },
-                              { src: '/Pré Treino Sem Cafeína 3.png', alt: 'Pré-treino Sem Cafeína 4' }
+                              { 
+                                src: '/Taurina (Pré Treino sem cafeína) 500g - Soldiers.png', 
+                                alt: 'Taurina (Pré Treino sem cafeína) 500g - Soldiers',
+                                title: 'Taurina (Pré Treino sem cafeína) 500g - Soldiers',
+                                link: 'https://mercadolivre.com/sec/1ygnEBB'
+                              },
+                              { 
+                                src: '/Pré Treino sem cafeína - Max.png', 
+                                alt: 'Pré Treino sem cafeína - Max',
+                                title: 'Pré Treino sem cafeína - Max',
+                                link: 'https://mercadolivre.com/sec/2rJgFWw'
+                              }
                             ].map((preTreinoSemCafeina, index) => (
                               <div
                                 key={index}
                                 className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                                onClick={() => setZoomedImage(preTreinoSemCafeina)}
+                                onClick={() => window.open(preTreinoSemCafeina.link, '_blank')}
                               >
                                 <img
                                   src={preTreinoSemCafeina.src}
                                   alt={preTreinoSemCafeina.alt}
                                   className="w-full h-32 object-contain rounded-md"
                                 />
+                                <h4 className="text-xs font-semibold text-green-800 text-center mt-3 leading-tight">
+                                  {preTreinoSemCafeina.title}
+                                </h4>
+                                <p className="text-xs text-green-600 text-center mt-2 font-medium">
+                                  Ver produto
+                                </p>
                               </div>
                             ))}
                           </div>
@@ -586,29 +858,71 @@ const SupplementsSection = () => {
                       </div>
                     )}
 
+                    {/* Exemplos de Vitamina C */}
+                    {supplement.id === 'vitamina-c' && (
+                      <div className="mt-6 pt-6 border-t border-orange-200/50">
+                        <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[
+                            {
+                              src: '/Vitamina C Em P%C3%B3 %C3%81cido Asc%C3%B3bico 1kg - 100%25 Puro - Bellnutry.png',
+                              alt: 'Vitamina C Em Pó Ácido Ascóbico 1kg - 100% Puro - Bellnutry',
+                              title: 'Vitamina C Em Pó Ácido Ascóbico 1kg - 100% Puro - Bellnutry',
+                              link: 'https://mercadolivre.com/sec/1WTLFRv'
+                            },
+                            {
+                              src: '/Vitamina C Em P%C3%B3 %C3%81cido Asc%C3%B3bico 250g - 100%25 Puro - Soldiers.png',
+                              alt: 'Vitamina C Em Pó Ácido Ascóbico 250g - 100% Puro - Soldiers',
+                              title: 'Vitamina C Em Pó Ácido Ascóbico 250g - 100% Puro - Soldiers',
+                              link: 'https://mercadolivre.com/sec/1pAUaqd'
+                            }
+                          ].map((vitaminaC, index) => (
+                            <div
+                              key={index}
+                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
+                              onClick={() => window.open(vitaminaC.link, '_blank')}
+                            >
+                              <img
+                                src={vitaminaC.src}
+                                alt={vitaminaC.alt}
+                                className="w-full h-32 object-contain rounded-md"
+                              />
+                              <h4 className="text-xs font-semibold text-orange-800 text-center mt-3 leading-tight">
+                                {vitaminaC.title}
+                              </h4>
+                              <p className="text-xs text-orange-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-orange-600/70 text-sm mt-3 text-center">
+                          Poderoso antioxidante que fortalece a imunidade e auxilia na produção de colágeno
+                        </p>
+                      </div>
+                    )}
+
                     {/* Exemplos de Vitamina D */}
                     {supplement.id === 'vitamina-d' && (
                       <div className="mt-6 pt-6 border-t border-yellow-200/50">
-                        <h5 className="font-bold mb-4 text-yellow-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                          {[
-                            { src: '/Vitamina D.png', alt: 'Vitamina D - Opção 1' },
-                            { src: '/Vitamina D ..png', alt: 'Vitamina D - Opção 2' },
-                            { src: '/Vitamina D ...png', alt: 'Vitamina D - Opção 3' },
-                            { src: '/Vitamina D ....png', alt: 'Vitamina D - Opção 4' }
-                          ].map((vitaminaD, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-yellow-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(vitaminaD)}
-                            >
-                              <img
-                                src={vitaminaD.src}
-                                alt={vitaminaD.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                            </div>
-                          ))}
+                        <h5 className="font-bold mb-4 text-yellow-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
+                          <div
+                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-yellow-100 cursor-pointer hover:scale-105"
+                            onClick={() => window.open('https://mercadolivre.com/sec/2NFZwJZ', '_blank')}
+                          >
+                            <img
+                              src="/Vitamina D3 5000ui 120 Cápsulas.png"
+                              alt="Vitamina D3 5000ui 120 Cápsulas"
+                              className="w-full h-40 object-contain rounded-md"
+                            />
+                            <h4 className="text-sm font-semibold text-yellow-800 text-center mt-3">
+                              Vitamina D3 5000ui 120 Cápsulas
+                            </h4>
+                            <p className="text-xs text-yellow-600 text-center mt-2 font-medium">
+                              Ver produto
+                            </p>
+                          </div>
                         </div>
                         <p className="text-yellow-600/70 text-sm mt-3 text-center">
                           Essencial para saúde óssea, imunidade e regulação do humor
@@ -619,27 +933,77 @@ const SupplementsSection = () => {
                     {/* Exemplos de Vitamina B12 */}
                     {supplement.id === 'vitamina-b12' && (
                       <div className="mt-6 pt-6 border-t border-pink-200/50">
-                        <h5 className="font-bold mb-4 text-pink-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {[
-                            { src: '/Vitamina B12.png', alt: 'Vitamina B12 - Opção 1' },
-                            { src: '/Vitamina B12 ..png', alt: 'Vitamina B12 - Opção 2' }
-                          ].map((vitaminaB12, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-pink-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(vitaminaB12)}
-                            >
-                              <img
-                                src={vitaminaB12.src}
-                                alt={vitaminaB12.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                            </div>
-                          ))}
+                        <h5 className="font-bold mb-4 text-pink-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
+                          <div
+                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-pink-100 cursor-pointer hover:scale-105"
+                            onClick={() => window.open('https://mercadolivre.com/sec/22m8k2z', '_blank')}
+                          >
+                            <img
+                              src="/B12 - Metilcobalamina 1000mcg 120.png"
+                              alt="B12 - Metilcobalamina 1000mcg 120"
+                              className="w-full h-40 object-contain rounded-md"
+                            />
+                            <h4 className="text-sm font-semibold text-pink-800 text-center mt-3">
+                              B12 - Metilcobalamina 1000mcg 120
+                            </h4>
+                            <p className="text-xs text-pink-600 text-center mt-2 font-medium">
+                              Ver produto
+                            </p>
+                          </div>
                         </div>
                         <p className="text-pink-600/70 text-sm mt-3 text-center">
                           Vital para energia, sistema nervoso e formação de células sanguíneas
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Exemplos de Outras Vitaminas */}
+                    {supplement.id === 'outras-vitaminas' && (
+                      <div className="mt-6 pt-6 border-t border-purple-200/50">
+                        <h5 className="font-bold mb-4 text-purple-800">🏷️ Exemplos de Suplementos Especializados:</h5>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          {[
+                            {
+                              src: '/Coenzima Q10 100mg - 60 Cápsulas.png',
+                              alt: 'Coenzima Q10 100mg - 60 Cápsulas',
+                              title: 'Coenzima Q10 100mg - 60 Cápsulas',
+                              link: 'https://mercadolivre.com/sec/1ZQDTg4'
+                            },
+                            {
+                              src: '/NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri.png',
+                              alt: 'NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri',
+                              title: 'NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri',
+                              link: 'https://mercadolivre.com/sec/2R3m3dq'
+                            },
+                            {
+                              src: '/Berberina 500mg - 120 Cáps.png',
+                              alt: 'Berberina 500mg - 120 Cáps',
+                              title: 'Berberina 500mg - 120 Cáps',
+                              link: 'https://mercadolivre.com/sec/2Pk11cX'
+                            }
+                          ].map((vitamina, index) => (
+                            <div
+                              key={index}
+                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-purple-100 cursor-pointer hover:scale-105"
+                              onClick={() => window.open(vitamina.link, '_blank')}
+                            >
+                              <img
+                                src={vitamina.src}
+                                alt={vitamina.alt}
+                                className="w-full h-32 object-contain rounded-md"
+                              />
+                              <h4 className="text-xs font-semibold text-purple-800 text-center mt-3 leading-tight">
+                                {vitamina.title}
+                              </h4>
+                              <p className="text-xs text-purple-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-purple-600/70 text-sm mt-3 text-center">
+                          Suplementos especializados para funções específicas do organismo
                         </p>
                       </div>
                     )}
@@ -648,22 +1012,37 @@ const SupplementsSection = () => {
                     {supplement.id === 'termogenico' && (
                       <div className="mt-6 pt-6 border-t border-red-200/50">
                         <h5 className="font-bold mb-4 text-red-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {[
-                            { src: '/Termogênico.png', alt: 'Termogênico - Opção 1' },
-                            { src: '/Termogênico ..png', alt: 'Termogênico - Opção 2' },
-                            { src: '/Termogênico ...png', alt: 'Termogênico - Opção 3' }
+                            { 
+                              src: '/Termogênico - Soldiers.png', 
+                              alt: 'Termogênico - Soldiers',
+                              title: 'Termogênico - Soldiers',
+                              link: 'https://mercadolivre.com/sec/2Dg1u7F'
+                            },
+                            { 
+                              src: '/Termogênico Femme Burn.png', 
+                              alt: 'Termogênico Femme Burn',
+                              title: 'Termogênico Femme Burn',
+                              link: 'https://mercadolivre.com/sec/28MGGEQ'
+                            }
                           ].map((termogenico, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-red-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(termogenico)}
+                              onClick={() => window.open(termogenico.link, '_blank')}
                             >
                               <img
                                 src={termogenico.src}
                                 alt={termogenico.alt}
                                 className="w-full h-32 object-contain rounded-md"
                               />
+                              <h4 className="text-xs font-semibold text-red-800 text-center mt-3 leading-tight">
+                                {termogenico.title}
+                              </h4>
+                              <p className="text-xs text-red-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -682,20 +1061,41 @@ const SupplementsSection = () => {
                         <h5 className="font-bold mb-4 text-red-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           {[
-                            { src: '/Cafeína.png', alt: 'Cafeína - Opção 1' },
-                            { src: '/Cafeína ..png', alt: 'Cafeína - Opção 2' },
-                            { src: '/Cafeína ...png', alt: 'Cafeína - Opção 3' }
+                            { 
+                              src: '/Cafeína Max.png', 
+                              alt: 'Cafeína Max',
+                              title: 'Cafeína Max',
+                              link: 'https://mercadolivre.com/sec/2u1P6Ni'
+                            },
+                            { 
+                              src: '/Cafeína Dux.png', 
+                              alt: 'Cafeína Dux',
+                              title: 'Cafeína Dux',
+                              link: 'https://mercadolivre.com/sec/1rUUkES'
+                            },
+                            { 
+                              src: '/Cafeína Soldiers.png', 
+                              alt: 'Cafeína Soldiers',
+                              title: 'Cafeína Soldiers',
+                              link: 'https://mercadolivre.com/sec/2m6t7NC'
+                            }
                           ].map((cafeina, index) => (
                             <div
                               key={index}
                               className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-red-100 cursor-pointer hover:scale-105"
-                              onClick={() => setZoomedImage(cafeina)}
+                              onClick={() => window.open(cafeina.link, '_blank')}
                             >
                               <img
                                 src={cafeina.src}
                                 alt={cafeina.alt}
-                                className="w-full h-32 object-contain rounded-md"
+                                className="w-full h-40 object-contain rounded-md"
                               />
+                              <h4 className="text-sm font-semibold text-red-800 text-center mt-3">
+                                {cafeina.title}
+                              </h4>
+                              <p className="text-xs text-red-600 text-center mt-2 font-medium">
+                                Ver produto
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -711,62 +1111,6 @@ const SupplementsSection = () => {
                 </CollapsibleContent>
               </Collapsible>
             ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Catálogo Completo */}
-      <Card className="floating-card gradient-card border-blue-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
-          <CardTitle className="flex items-center gap-3 text-blue-800">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
-              <FileText className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">📁 Catálogo Completo</div>
-              <div className="text-sm text-blue-600/70 font-normal">Todos os suplementos recomendados</div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-6">
-            <p className="text-blue-700/80 leading-relaxed text-lg">
-              Acesse o catálogo com os suplementos que selecionei com melhor custo-benefício.
-            </p>
-
-            <Button
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://wa.me/+5511959121120?text=Oi%2C%20vim%20atrav%C3%A9s%20do%20Fabricio%20Moura%2C%20gostaria%20de%20solicitar%20o%20cat%C3%A1logo%2C%20por%20favor.', '_blank')}
-            >
-              <FileText className="h-5 w-5 mr-3" />
-              Acessar Catálogo
-            </Button>
-
-            <p className="text-blue-700/80 text-sm leading-relaxed">
-              <strong>Mencione que é indicação do Fabricio Moura</strong> ao efetuar o pedido, para conseguir condições especiais.
-            </p>
-
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200/50 p-6 rounded-2xl">
-              <h4 className="font-bold text-green-800 mb-3">🏆 Distribuidora com Excelente Custo-Benefício:</h4>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Produtos 100% originais</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Preços especiais para membros</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Entrega rápida e segura</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                  <span className="text-green-700 text-sm">Atendimento especializado</span>
-                </div>
-              </div>
-            </div>
           </div>
         </CardContent>
       </Card>
