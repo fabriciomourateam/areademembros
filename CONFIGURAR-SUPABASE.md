@@ -66,6 +66,12 @@ CREATE POLICY "Qualquer um pode ler as configurações"
   FOR SELECT
   USING (true);
 
+-- Criar política para permitir atualização
+CREATE POLICY "Qualquer um pode atualizar as configurações"
+  ON public.mentorship_config
+  FOR UPDATE
+  USING (true);
+
 -- Criar política para permitir inserção
 CREATE POLICY "Qualquer um pode inserir configurações"
   ON public.mentorship_config

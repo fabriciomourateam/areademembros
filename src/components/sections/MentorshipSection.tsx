@@ -56,17 +56,17 @@ const MentorshipSection = () => {
     const loadConfig = async () => {
       try {
         const { data, error } = await supabase
-          .from('Link Mentoria')
+          .from('mentorship_config')
           .select('*')
-          .order('created_at', { ascending: false })
+          .order('updated_at', { ascending: false })
           .limit(1)
           .single();
 
         if (error) throw error;
 
         if (data) {
-          setMentorshipLink(data.Link || defaultLink);
-          setMentorshipDate(data.Data || '');
+          setMentorshipLink(data.link || defaultLink);
+          setMentorshipDate(data.date || '');
         }
       } catch (error) {
         console.error('Erro ao carregar configuração da mentoria:', error);
@@ -97,27 +97,104 @@ const MentorshipSection = () => {
       // Salvar no Supabase (mesmo se estiver vazio - para standby)
       const linkToSave = newLink.trim() || defaultLink; // Se vazio, volta para o link padrão (standby)
       
-      const { error } = await supabase
-        .from('Link Mentoria')
-        .insert({
-          Link: linkToSave,
-          Data: newDate
-        });
+      // Primeiro, buscar o registro mais recente
+      const { data: existingData, error: fetchError } = await supabase
+        .from('mentorship_config')
+        .select('id')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
 
-      if (error) throw error;
+      let error;
+
+      // Se existe um registro, atualizar. Se não, inserir novo.
+      if (existingData && existingData.id) {
+        const { error: updateError } = await supabase
+          .from('mentorship_config')
+          .update({
+            link: linkToSave,
+            date: newDate,
+            updated_by: 'admin',
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', existingData.id);
+
+        error = updateError;
+      } else {
+        // Se não existe, inserir novo
+        const { error: insertError } = await supabase
+          .from('mentorship_config')
+          .insert({
+            link: linkToSave,
+            date: newDate,
+            updated_by: 'admin'
+          });
+
+        error = insertError;
+        // Ignorar erro de "nenhum registro encontrado" ao buscar
+        if (fetchError && fetchError.code !== 'PGRST116') {
+          error = fetchError;
+        }
+      }
+
+      if (error) {
+        console.error('Erro do Supabase:', error);
+        throw error;
+      }
 
       setMentorshipLink(linkToSave);
       setMentorshipDate(newDate);
       setShowEditDialog(false);
+
+      // Recarregar os dados após salvar
+      const { data: reloadedData, error: reloadError } = await supabase
+        .from('mentorship_config')
+        .select('*')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (reloadedData) {
+        setMentorshipLink(reloadedData.link || defaultLink);
+        setMentorshipDate(reloadedData.date || '');
+      }
 
       if (linkToSave === defaultLink) {
         alert('✅ Mentoria colocada em STANDBY!\n\n⏳ A mensagem "Aguardando Link Definitivo" será exibida para todos os usuários.');
       } else {
         alert('✅ Link e data atualizados com sucesso!\n\n🎉 Todos os usuários já podem ver as alterações!');
       }
-    } catch (error) {
-      console.error('Erro ao salvar:', error);
-      alert('❌ Erro ao salvar. Verifique sua conexão com o Supabase.\n\nErro: ' + error);
+    } catch (error: any) {
+      console.error('Erro completo ao salvar:', error);
+      
+      // Extrair mensagem de erro mais detalhada do Supabase
+      let errorMessage = 'Erro desconhecido';
+      let errorDetails = '';
+      
+      if (error) {
+        // Erro do Supabase geralmente tem essa estrutura
+        if (error.message) {
+          errorMessage = error.message;
+        }
+        if (error.details) {
+          errorDetails = `\nDetalhes: ${error.details}`;
+        }
+        if (error.hint) {
+          errorDetails += `\nDica: ${error.hint}`;
+        }
+        if (error.code) {
+          errorDetails += `\nCódigo: ${error.code}`;
+        }
+        
+        // Se não tem message, tenta outras propriedades
+        if (!error.message && typeof error === 'object') {
+          errorMessage = JSON.stringify(error, null, 2);
+        } else if (typeof error === 'string') {
+          errorMessage = error;
+        }
+      }
+      
+      alert(`❌ Erro ao salvar no Supabase.\n\nMensagem: ${errorMessage}${errorDetails}\n\nDica: Abra o Console (F12) para ver o erro completo.`);
     }
   };
 

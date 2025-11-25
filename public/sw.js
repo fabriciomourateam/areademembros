@@ -19,6 +19,19 @@ self.addEventListener('install', (event) => {
 
 // Interceptar requisições
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  
+  // NÃO interceptar requisições do Supabase (sempre buscar na rede)
+  if (url.hostname.includes('supabase.co')) {
+    return fetch(event.request);
+  }
+  
+  // NÃO interceptar requisições de API externas
+  if (url.hostname.includes('n8n.') || url.hostname.includes('webhook')) {
+    return fetch(event.request);
+  }
+  
+  // Para outros recursos, usar cache
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
