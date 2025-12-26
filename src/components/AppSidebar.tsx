@@ -45,7 +45,7 @@ const menuItems = [
     id: "food-substitution"
   },
   {
-    title: "Calculadora de Refeição Livre",
+    title: "Calcular Refeição Livre",
     icon: Utensils,
     id: "meal-calculator"
   },
@@ -80,7 +80,7 @@ const menuItems = [
     id: "mentoring"
   },
   {
-    title: "Bioimpedância Online",
+    title: "Bioimpedância",
     icon: Activity,
     id: "bioimpedance"
   },
