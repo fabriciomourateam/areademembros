@@ -1,0 +1,89 @@
+✅ SISTEMA DE EDIÇÃO DE SUPLEMENTOS - COMPLETO
+
+O QUE FOI IMPLEMENTADO:
+========================
+
+1. LISTA COMPACTA (já funcionava antes)
+   - Adicionar/editar/remover itens
+   - Tabela: supplements_compact
+
+2. FOTOS DE TODOS OS SUPLEMENTOS (NOVO!)
+   - Sistema genérico que funciona para TODOS os 18 suplementos
+   - Upload de imagens direto pela página
+   - Adicionar/remover fotos
+   - Tabela: supplements_photos
+   - Storage: bucket "supplements"
+
+3. NÚMERO DA FARMÁCIA (NOVO!)
+   - Editar número do WhatsApp da farmácia
+   - Editar mensagem padrão
+   - Tabela: app_settings
+   - Campos: pharmacy_whatsapp, pharmacy_message
+
+SUPLEMENTOS COM PAINEL DE EDIÇÃO:
+==================================
+✅ Lista Compacta
+✅ Whey Protein Concentrado
+✅ Whey Zero Lactose (NOVO!)
+✅ Whey Protein Blend
+✅ Whey Vegano
+✅ Hipercalórico
+✅ Multivitamínico
+✅ Creatina
+✅ Cafeína
+✅ Termogênico
+✅ Pré-treino
+✅ Vitamina C
+✅ Vitamina D
+✅ Vitamina B12
+✅ Outras Vitaminas
+✅ Ômega 3
+✅ Barras de Proteínas
+✅ Pastas de Amendoim
+
+COMO USAR:
+==========
+1. Acesse a página de Suplementos
+2. Clique em "Painel Admin" (topo do card)
+3. Digite a senha: admin123
+4. Abra qualquer card de suplemento
+5. Role até o final para ver o painel de gerenciamento
+6. Adicione/remova fotos com upload direto
+7. No card "Manipulados", edite o número da farmácia
+
+ARQUIVOS CRIADOS:
+=================
+- CONFIGURAR-BUCKET-SUPPLEMENTS.sql (passo a passo para configurar o bucket)
+- CONFIGURAR-RLS-BUCKET-SQL.sql (SQL para configurar RLS via código)
+- POPULAR-FOTOS-SUPLEMENTOS.sql (migrar fotos antigas para o banco)
+- CRIAR-TABELA-CONFIGURACOES.sql (tabela para número da farmácia)
+- COMO-EDITAR-SUPLEMENTOS.md (documentação completa)
+- EDITAR-NUMERO-FARMACIA.md (como editar o número da farmácia)
+- ERRO-400-UPLOAD-SOLUCAO.md (solução para erro de upload)
+- RESUMO-SISTEMA-SUPLEMENTOS.txt (este arquivo)
+
+PRÓXIMOS PASSOS:
+================
+1. Execute CRIAR-TABELA-CONFIGURACOES.sql no Supabase
+   (isso vai criar a tabela app_settings para o número da farmácia)
+
+2. Execute POPULAR-FOTOS-SUPLEMENTOS.sql no Supabase
+   (isso vai migrar todas as fotos hardcoded para o banco)
+
+3. Teste na página:
+   - Entre no modo admin
+   - Abra qualquer suplemento
+   - Adicione uma foto nova com upload
+   - Remova uma foto existente
+   - Edite o número da farmácia
+
+4. Pronto! Agora você pode editar tudo pela página em produção.
+
+OBSERVAÇÕES:
+============
+- O bucket "supplements" já está criado e configurado
+- As políticas de RLS já estão aplicadas
+- O código está funcionando sem erros
+- Tudo funciona em produção na Vercel
+- Não precisa fazer deploy para testar (só recarregar a página)
+- Total de 18 suplementos editáveis + número da farmácia

@@ -45,10 +45,17 @@ const SupplementsSection = () => {
   const [photosBySupplement, setPhotosBySupplement] = useState<Record<string, SupplementPhoto[]>>({});
   const [isLoadingPhotos, setIsLoadingPhotos] = useState(false);
 
-  // Formulário de nova foto para Whey Concentrado
-  const [wheyPhotoTitle, setWheyPhotoTitle] = useState('');
-  const [wheyPhotoLink, setWheyPhotoLink] = useState('');
-  const [wheyPhotoFile, setWheyPhotoFile] = useState<File | null>(null);
+  // Configurações da farmácia
+  const [pharmacyWhatsapp, setPharmacyWhatsapp] = useState('5511984955667');
+  const [pharmacyMessage, setPharmacyMessage] = useState('Oi, o Fabricio me passou seu contato para fazer um orçamento com desconto.');
+  const [editPharmacyWhatsapp, setEditPharmacyWhatsapp] = useState('');
+  const [editPharmacyMessage, setEditPharmacyMessage] = useState('');
+
+  // Formulário genérico de nova foto (para qualquer suplemento)
+  const [photoTitle, setPhotoTitle] = useState('');
+  const [photoLink, setPhotoLink] = useState('');
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [currentSupplementId, setCurrentSupplementId] = useState<string>('');
 
   useEffect(() => {
     const loadCompactItems = async () => {
@@ -105,15 +112,45 @@ const SupplementsSection = () => {
     loadPhotos();
   }, []);
 
-  const handleAddWheyPhoto = async () => {
-    if (!wheyPhotoTitle.trim() || !wheyPhotoLink.trim() || !wheyPhotoFile) {
+  // Carregar configurações da farmácia
+  useEffect(() => {
+    const loadPharmacySettings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('app_settings')
+          .select('key, value')
+          .in('key', ['pharmacy_whatsapp', 'pharmacy_message']);
+
+        if (error) throw error;
+
+        if (data) {
+          data.forEach(setting => {
+            if (setting.key === 'pharmacy_whatsapp') {
+              setPharmacyWhatsapp(setting.value);
+              setEditPharmacyWhatsapp(setting.value);
+            } else if (setting.key === 'pharmacy_message') {
+              setPharmacyMessage(setting.value);
+              setEditPharmacyMessage(setting.value);
+            }
+          });
+        }
+      } catch (err) {
+        console.error('Erro ao carregar configurações da farmácia:', err);
+      }
+    };
+
+    loadPharmacySettings();
+  }, []);
+
+  const handleAddPhoto = async (supplementId: string) => {
+    if (!photoTitle.trim() || !photoLink.trim() || !photoFile) {
       alert('Preencha título, link e escolha um arquivo de imagem antes de salvar.');
       return;
     }
 
     try {
-      const file = wheyPhotoFile;
-      const filePath = `whey-concentrado/${Date.now()}-${file.name}`;
+      const file = photoFile;
+      const filePath = `${supplementId}/${Date.now()}-${file.name}`;
 
       const { error: uploadError } = await supabase.storage
         .from('supplements')
@@ -130,11 +167,11 @@ const SupplementsSection = () => {
       const { data: inserted, error: insertError } = await supabase
         .from('supplements_photos')
         .insert({
-          supplement_id: 'whey-concentrado',
-          title: wheyPhotoTitle.trim(),
+          supplement_id: supplementId,
+          title: photoTitle.trim(),
           image_src: imageUrl,
-          link: wheyPhotoLink.trim(),
-          order_index: (photosBySupplement['whey-concentrado']?.length || 0) + 1,
+          link: photoLink.trim(),
+          order_index: (photosBySupplement[supplementId]?.length || 0) + 1,
           updated_by: 'admin'
         })
         .select('id, supplement_id, title, image_src, link, order_index')
@@ -144,20 +181,70 @@ const SupplementsSection = () => {
 
       setPhotosBySupplement(prev => ({
         ...prev,
-        'whey-concentrado': [
-          ...(prev['whey-concentrado'] || []),
+        [supplementId]: [
+          ...(prev[supplementId] || []),
           inserted as SupplementPhoto
         ]
       }));
 
-      setWheyPhotoTitle('');
-      setWheyPhotoLink('');
-      setWheyPhotoFile(null);
+      setPhotoTitle('');
+      setPhotoLink('');
+      setPhotoFile(null);
 
-      alert('✅ Foto adicionada com sucesso ao Whey Concentrado!');
+      alert(`✅ Foto adicionada com sucesso!`);
     } catch (err) {
-      console.error('Erro ao adicionar foto do Whey Concentrado:', err);
+      console.error(`Erro ao adicionar foto:`, err);
       alert('Erro ao adicionar a foto. Veja o console para mais detalhes.');
+    }
+  };
+
+  const handleRemovePhoto = async (supplementId: string, photoId: string) => {
+    if (!window.confirm('Tem certeza que deseja remover esta foto?')) return;
+    try {
+      await supabase.from('supplements_photos').delete().eq('id', photoId);
+      setPhotosBySupplement(prev => {
+        const updated = { ...prev };
+        updated[supplementId] = (updated[supplementId] || []).filter(
+          p => p.id !== photoId
+        );
+        return updated;
+      });
+    } catch (err) {
+      console.error('Erro ao remover foto:', err);
+      alert('Erro ao remover foto. Veja o console para detalhes.');
+    }
+  };
+
+  const handleSavePharmacySettings = async () => {
+    if (!editPharmacyWhatsapp.trim()) {
+      alert('Preencha o número do WhatsApp da farmácia.');
+      return;
+    }
+
+    try {
+      // Atualizar número do WhatsApp
+      const { error: whatsappError } = await supabase
+        .from('app_settings')
+        .update({ value: editPharmacyWhatsapp.trim(), updated_by: 'admin', updated_at: new Date().toISOString() })
+        .eq('key', 'pharmacy_whatsapp');
+
+      if (whatsappError) throw whatsappError;
+
+      // Atualizar mensagem
+      const { error: messageError } = await supabase
+        .from('app_settings')
+        .update({ value: editPharmacyMessage.trim(), updated_by: 'admin', updated_at: new Date().toISOString() })
+        .eq('key', 'pharmacy_message');
+
+      if (messageError) throw messageError;
+
+      setPharmacyWhatsapp(editPharmacyWhatsapp.trim());
+      setPharmacyMessage(editPharmacyMessage.trim());
+
+      alert('✅ Configurações da farmácia atualizadas com sucesso!');
+    } catch (err) {
+      console.error('Erro ao salvar configurações da farmácia:', err);
+      alert('Erro ao salvar. Veja o console para detalhes.');
     }
   };
 
@@ -169,7 +256,8 @@ const SupplementsSection = () => {
       color: 'purple',
       description: 'Visualização rápida dos suplementos recomendados',
       benefits: [],
-      usage: ''
+      usage: '',
+      hasPhotos: false
     },
     {
       id: 'whey-concentrado',
@@ -178,7 +266,18 @@ const SupplementsSection = () => {
       color: 'blue',
       description: 'Proteína de alta qualidade para construção muscular',
       benefits: ['Rico em aminoácidos essenciais', 'Absorção rápida', 'Ótima fonte proteica', 'Custo-benefício excelente'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
+    },
+    {
+      id: 'whey-zero-lactose',
+      name: 'Whey Zero Lactose',
+      icon: Heart,
+      color: 'blue',
+      description: 'Proteína sem lactose para intolerantes',
+      benefits: ['Livre de lactose', 'Alta qualidade proteica', 'Ideal para intolerantes', 'Boa digestibilidade'],
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'whey-blend',
@@ -187,7 +286,8 @@ const SupplementsSection = () => {
       color: 'blue',
       description: 'Mistura de proteínas com ótimo custo-benefício',
       benefits: ['Combina diferentes tipos de proteína', 'Absorção gradual', 'Excelente custo-benefício', 'Boa fonte proteica'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'whey-soja',
@@ -196,7 +296,8 @@ const SupplementsSection = () => {
       color: 'green',
       description: 'Alternativa vegetal rica em proteínas',
       benefits: ['100% vegetal', 'Rico em isoflavonas', 'Livre de lactose', 'Sustentável'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'hipercalorico',
@@ -205,7 +306,8 @@ const SupplementsSection = () => {
       color: 'green',
       description: 'Suplemento para ganho de peso e massa muscular',
       benefits: ['Alto valor calórico', 'Rico em carboidratos e proteínas', 'Facilita ganho de peso', 'Ideal para quem tem dificuldade em ganhar massa'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'multivitaminico',
@@ -214,7 +316,8 @@ const SupplementsSection = () => {
       color: 'purple',
       description: 'Complexo completo de vitaminas e minerais',
       benefits: ['Supre deficiências nutricionais', 'Melhora imunidade', 'Aumenta energia', 'Apoio ao metabolismo'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'creatina',
@@ -223,7 +326,8 @@ const SupplementsSection = () => {
       color: 'orange',
       description: 'Melhora performance e força muscular',
       benefits: ['Aumenta força e potência', 'Melhora recuperação', 'Ganho de massa muscular', 'Comprovação científica'],
-      usage: 'Tomar 3-5g por dia, conforme seu Planejamento Alimentar'
+      usage: 'Tomar 3-5g por dia, conforme seu Planejamento Alimentar',
+      hasPhotos: true
     },
     {
       id: 'cafeina',
@@ -232,7 +336,8 @@ const SupplementsSection = () => {
       color: 'red',
       description: 'Estimulante natural para energia e foco',
       benefits: ['Aumenta energia e foco', 'Melhora performance', 'Acelera metabolismo', 'Potencializa a queima de gordura'],
-      usage: 'Tomar 200 a 400mg no dia, conforme seu Planejamento Alimentar'
+      usage: 'Tomar 200 a 400mg no dia, conforme seu Planejamento Alimentar',
+      hasPhotos: true
     },
     {
       id: 'termogenico',
@@ -241,7 +346,8 @@ const SupplementsSection = () => {
       color: 'red',
       description: 'Acelera metabolismo e queima de gordura',
       benefits: ['Acelera metabolismo', 'Potencializa a queima de gordura', 'Aumenta energia', 'Controla apetite'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'pre-treino',
@@ -250,7 +356,8 @@ const SupplementsSection = () => {
       color: 'blue',
       description: 'Complexo para maximizar performance no treino',
       benefits: ['Energia explosiva', 'Foco mental', 'Resistência aumentada', 'Vasodilatação'],
-      usage: 'Tomar 20-30 minutos antes do treino'
+      usage: 'Tomar 20-30 minutos antes do treino',
+      hasPhotos: true
     },
     {
       id: 'vitamina-c',
@@ -259,7 +366,8 @@ const SupplementsSection = () => {
       color: 'orange',
       description: 'Poderoso antioxidante para imunidade',
       benefits: ['Fortalece imunidade', 'Antioxidante potente', 'Produção de colágeno', 'Absorção de ferro'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'vitamina-d',
@@ -268,7 +376,8 @@ const SupplementsSection = () => {
       color: 'yellow',
       description: 'Essencial para ossos e imunidade',
       benefits: ['Fortalece ossos', 'Melhora imunidade', 'Regula humor', 'Absorção de cálcio'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'vitamina-b12',
@@ -277,7 +386,8 @@ const SupplementsSection = () => {
       color: 'pink',
       description: 'Vital para sistema nervoso e energia',
       benefits: ['Combate fadiga', 'Saúde neurológica', 'Formação de células', 'Metabolismo energético'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'outras-vitaminas',
@@ -286,7 +396,8 @@ const SupplementsSection = () => {
       color: 'purple',
       description: 'Suplementos especializados para saúde',
       benefits: ['Antioxidantes potentes', 'Suporte celular', 'Saúde metabólica', 'Funções específicas'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'omega-3',
@@ -295,7 +406,8 @@ const SupplementsSection = () => {
       color: 'cyan',
       description: 'Gorduras essenciais para saúde cardiovascular',
       benefits: ['Saúde cardiovascular', 'Anti-inflamatório', 'Função cerebral', 'Recuperação muscular'],
-      usage: 'Tomar conforme prescrição no seu plano alimentar'
+      usage: 'Tomar conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'barras-proteina',
@@ -304,7 +416,8 @@ const SupplementsSection = () => {
       color: 'blue',
       description: 'Praticidade para consumir proteína',
       benefits: ['Praticidade', 'Fonte de proteína', 'Lanche saudável', 'Fácil transporte'],
-      usage: 'Consumir conforme prescrição no seu plano alimentar'
+      usage: 'Consumir conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     },
     {
       id: 'pasta-amendoim',
@@ -313,9 +426,125 @@ const SupplementsSection = () => {
       color: 'orange',
       description: 'Fonte de gorduras boas e proteínas',
       benefits: ['Gorduras saudáveis', 'Fonte de proteína', 'Energia', 'Versátil'],
-      usage: 'Consumir conforme prescrição no seu plano alimentar'
+      usage: 'Consumir conforme prescrição no seu plano alimentar',
+      hasPhotos: true
     }
   ];
+
+  // Componente reutilizável para gerenciar fotos de qualquer suplemento
+  const PhotoManagementPanel = ({ supplementId, supplementName, color }: { supplementId: string; supplementName: string; color: string }) => {
+    const photos = photosBySupplement[supplementId] || [];
+    
+    return (
+      <div className="mt-6 pt-6 border-t border-opacity-50" style={{ borderColor: `var(--${color}-200)` }}>
+        <h5 className={`font-bold mb-4 text-${color}-800`}>🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
+
+        {isLoadingPhotos ? (
+          <p className={`text-xs text-${color}-600/80`}>Carregando exemplos...</p>
+        ) : photos.length === 0 ? (
+          <p className={`text-xs text-${color}-600/80`}>
+            {isAdmin ? 'Nenhuma foto cadastrada. Use o painel abaixo para adicionar.' : 'Nenhum exemplo disponível no momento.'}
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {photos.map(photo => (
+              <div
+                key={photo.id}
+                className={`bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-${color}-100 cursor-pointer hover:scale-105`}
+                onClick={() => window.open(photo.link, '_blank')}
+              >
+                <img
+                  src={photo.image_src}
+                  alt={photo.title}
+                  className="w-full h-32 object-contain rounded-md"
+                />
+                <h4 className={`text-xs font-semibold text-${color}-800 text-center mt-3 leading-tight`}>
+                  {photo.title}
+                </h4>
+                <p className={`text-xs text-${color}-600 text-center mt-2 font-medium`}>
+                  Ver produto
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {isAdmin && (
+          <div className={`mt-4 border-t border-${color}-200/60 pt-4 space-y-3`}>
+            <h6 className={`text-xs font-semibold text-${color}-700 flex items-center gap-2`}>
+              <Edit className="h-3 w-3" />
+              Gerenciar fotos de {supplementName} (apenas você vê isso)
+            </h6>
+
+            <div className="grid gap-2">
+              {photos.map(photo => (
+                <div
+                  key={photo.id}
+                  className={`flex items-center gap-2 text-xs bg-white/80 border border-${color}-100 rounded-lg px-3 py-2`}
+                >
+                  <span className="flex-1 truncate">{photo.title}</span>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-7 w-7 text-red-500"
+                    onClick={() => handleRemovePhoto(supplementId, photo.id)}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-2 grid gap-2">
+              <input
+                type="text"
+                placeholder="Título (ex: Whey 100% Pure 900g - Integralmédica)"
+                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-${color}-300`}
+                value={currentSupplementId === supplementId ? photoTitle : ''}
+                onChange={e => {
+                  setCurrentSupplementId(supplementId);
+                  setPhotoTitle(e.target.value);
+                }}
+                onFocus={() => setCurrentSupplementId(supplementId)}
+              />
+              <input
+                type="text"
+                placeholder="Link de compra (ex: https://mercadolivre.com/...)"
+                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-${color}-300`}
+                value={currentSupplementId === supplementId ? photoLink : ''}
+                onChange={e => {
+                  setCurrentSupplementId(supplementId);
+                  setPhotoLink(e.target.value);
+                }}
+                onFocus={() => setCurrentSupplementId(supplementId)}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black`}
+                onChange={e => {
+                  const file = e.target.files?.[0] || null;
+                  setCurrentSupplementId(supplementId);
+                  setPhotoFile(file);
+                }}
+                onFocus={() => setCurrentSupplementId(supplementId)}
+              />
+              <div className="flex justify-end gap-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  className={`h-7 px-3 text-xs bg-${color}-600 hover:bg-${color}-700 text-white flex items-center gap-1`}
+                  onClick={() => handleAddPhoto(supplementId)}
+                >
+                  <Plus className="h-3 w-3" /> Adicionar foto
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
@@ -362,7 +591,15 @@ const SupplementsSection = () => {
         <CardContent>
           <div className="space-y-4">
             {supplements.map((supplement) => (
-              <Collapsible
+              <>
+                {/* Divisor após Lista Compacta */}
+                {supplement.id === 'whey-concentrado' && (
+                  <div className="relative py-6">
+                    <div className="w-full border-t-2 border-purple-200"></div>
+                  </div>
+                )}
+                
+                <Collapsible
                 key={supplement.id}
                 open={openSupplement === supplement.id}
                 onOpenChange={(isOpen) => setOpenSupplement(isOpen ? supplement.id : null)}
@@ -692,850 +929,265 @@ const SupplementsSection = () => {
                     )}
 
                     {/* Exemplos de Whey Protein Concentrado */}
-                    {supplement.id === 'whey-concentrado' && (
-                      <div className="mt-6 pt-6 border-t border-blue-200/50 space-y-4">
-                        <h5 className="font-bold mb-2 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-
-                        {isLoadingPhotos ? (
-                          <p className="text-xs text-blue-600/80">Carregando exemplos de whey...</p>
-                        ) : (
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {(photosBySupplement['whey-concentrado'] || []).map(photo => (
-                              <div
-                                key={photo.id}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                                onClick={() => window.open(photo.link, '_blank')}
-                              >
-                                <img
-                                  src={photo.image_src}
-                                  alt={photo.title}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
-                                  {photo.title}
-                                </h4>
-                                <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                  Ver produto
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {isAdmin && (
-                          <div className="mt-4 border-t border-blue-200/60 pt-4 space-y-3">
-                            <h6 className="text-xs font-semibold text-blue-700 flex items-center gap-2">
-                              <Edit className="h-3 w-3" />
-                              Gerenciar fotos do Whey Concentrado (apenas você vê isso)
-                            </h6>
-
-                            <div className="grid gap-2">
-                              {(photosBySupplement['whey-concentrado'] || []).map(photo => (
-                                <div
-                                  key={photo.id}
-                                  className="flex items-center gap-2 text-xs bg-white/80 border border-blue-100 rounded-lg px-3 py-2"
-                                >
-                                  <span className="flex-1 truncate">{photo.title}</span>
-                                  <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className="h-7 w-7 text-red-500"
-                                    onClick={async () => {
-                                      if (!window.confirm('Tem certeza que deseja remover esta foto do Whey Concentrado?')) return;
-                                      try {
-                                        await supabase.from('supplements_photos').delete().eq('id', photo.id);
-                                        setPhotosBySupplement(prev => {
-                                          const updated = { ...prev };
-                                          updated['whey-concentrado'] = (updated['whey-concentrado'] || []).filter(
-                                            p => p.id !== photo.id
-                                          );
-                                          return updated;
-                                        });
-                                      } catch (err) {
-                                        console.error('Erro ao remover foto do whey:', err);
-                                        alert('Erro ao remover foto. Veja o console para detalhes.');
-                                      }
-                                    }}
-                                  >
-                                    <Trash2 className="h-3 w-3" />
-                                  </Button>
-                                </div>
-                              ))}
-                            </div>
-
-                            <div className="mt-2 grid gap-2">
-                              <input
-                                type="text"
-                                placeholder="Título (ex: Whey 100% Pure 900g - Integralmédica)"
-                                className="border border-blue-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-blue-300"
-                                value={wheyPhotoTitle}
-                                onChange={e => setWheyPhotoTitle(e.target.value)}
-                              />
-                              <input
-                                type="text"
-                                placeholder="Link de compra (ex: https://mercadolivre.com/...)"
-                                className="border border-blue-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-blue-300"
-                                value={wheyPhotoLink}
-                                onChange={e => setWheyPhotoLink(e.target.value)}
-                              />
-                              <input
-                                type="file"
-                                accept="image/*"
-                                className="border border-blue-200 rounded-md px-2 py-1 text-xs bg-white text-black"
-                                onChange={e => {
-                                  const file = e.target.files?.[0] || null;
-                                  setWheyPhotoFile(file);
-                                }}
-                              />
-                              <div className="flex justify-end gap-2">
-                                <Button
-                                  type="button"
-                                  size="sm"
-                                  className="h-7 px-3 text-xs bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-1"
-                                  onClick={handleAddWheyPhoto}
-                                >
-                                  <Plus className="h-3 w-3" /> Adicionar foto
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                    {supplement.id === 'whey-concentrado' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="whey-concentrado" 
+                          supplementName="Whey Concentrado"
+                          color="blue"
+                        />
 
                         <p className="text-blue-600/70 text-sm mt-3 text-center">
                           Whey concentrado com excelente relação custo-benefício para ganho de massa muscular
                         </p>
+                      </>
+                    )}
 
-                        {/* Seção Zero Lactose */}
-                        <div className="mt-8 pt-6 border-t border-blue-200/30">
-                          <h6 className="font-semibold mb-4 text-blue-700 flex items-center gap-2">
-                            🥛 Zero Lactose (Para intolerantes à lactose)
-                          </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            {[
-                              {
-                                src: '/Whey Zero Lactose 900g - New Millen.png',
-                                alt: 'Whey Zero Lactose 900g - New Millen',
-                                title: 'Whey Zero Lactose 900g - New Millen',
-                                link: 'https://mercadolivre.com/sec/1VWZ1TE'
-                              },
-                              {
-                                src: '/Whey Zero Lactose 900g - Chef.png',
-                                alt: 'Whey Zero Lactose 900g - Chef',
-                                title: 'Whey Zero Lactose 900g - Chef',
-                                link: 'https://mercadolivre.com/sec/1M54tfD'
-                              },
-                              {
-                                src: '/Whey - Proteína de Carne Carnibol 900g - Darkness.png',
-                                alt: 'Whey - Proteína de Carne Carnibol 900g - Darkness',
-                                title: 'Whey - Proteína de Carne Carnibol 900g - Darkness',
-                                link: 'https://mercadolivre.com/sec/2sze9kT'
-                              }
-                            ].map((wheyZero, index) => (
-                              <div
-                                key={index}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                                onClick={() => window.open(wheyZero.link, '_blank')}
-                              >
-                                <img
-                                  src={wheyZero.src}
-                                  alt={wheyZero.alt}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
-                                  {wheyZero.title}
-                                </h4>
-                                <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                  Ver produto
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-3 rounded-xl">
-                            <p className="text-blue-700/80 text-sm text-center">
-                              <strong>💡 Ideal para:</strong> Pessoas com intolerância à lactose que querem os benefícios do whey concentrado
-                            </p>
-                          </div>
+                    {/* Exemplos de Whey Zero Lactose */}
+                    {supplement.id === 'whey-zero-lactose' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="whey-zero-lactose" 
+                          supplementName="Whey Zero Lactose"
+                          color="blue"
+                        />
+                        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-3 rounded-xl">
+                          <p className="text-blue-700/80 text-sm text-center">
+                            <strong>💡 Ideal para:</strong> Pessoas com intolerância à lactose que querem os benefícios do whey concentrado
+                          </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Whey Blend */}
-                    {supplement.id === 'whey-blend' && (
-                      <div className="mt-6 pt-6 border-t border-blue-200/50">
-                        <h5 className="font-bold mb-4 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {[
-                            { 
-                              src: '/Whey Protein Isolado Iso-x 900g.png', 
-                              alt: 'Whey Protein Isolado Iso-x 900g',
-                              title: 'Whey Protein Isolado Iso-x 900g',
-                              link: 'https://mercadolivre.com/sec/1sYzS8H'
-                            },
-                            { 
-                              src: '/Whey Protein Isolado Iso Blend Complex 2kg.png', 
-                              alt: 'Whey Protein Isolado Iso Blend Complex 2kg',
-                              title: 'Whey Protein Isolado Iso Blend Complex 2kg',
-                              link: 'https://mercadolivre.com/sec/2tSbUza'
-                            }
-                          ].map((wheyBlend, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(wheyBlend.link, '_blank')}
-                            >
-                              <img
-                                src={wheyBlend.src}
-                                alt={wheyBlend.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
-                                {wheyBlend.title}
-                              </h4>
-                              <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'whey-blend' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="whey-blend" 
+                          supplementName="Whey Blend"
+                          color="blue"
+                        />
                         <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-4 rounded-xl">
                           <p className="text-blue-700/80 text-sm text-center">
                             <strong>💡 Dica:</strong> Whey Blend combina diferentes tipos de proteína, tem melhor custo x benefício, apesar do sabor não ser o melhor.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Whey Vegano */}
-                    {supplement.id === 'whey-soja' && (
-                      <div className="mt-6 pt-6 border-t border-green-200/50">
-                        <h5 className="font-bold mb-4 text-green-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                          <div
-                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                            onClick={() => window.open('https://mercadolivre.com/sec/1uA97B3', '_blank')}
-                          >
-                            <img
-                              src="/Whey Vegano.png"
-                              alt="Whey Protein Vegano"
-                              className="w-full h-40 object-contain rounded-md"
-                            />
-                            <h4 className="text-sm font-semibold text-green-800 text-center mt-3">
-                              Whey Protein Vegano
-                            </h4>
-                            <p className="text-xs text-green-600 text-center mt-2 font-medium">
-                              Ver produto
-                            </p>
-                          </div>
-                        </div>
+                    {supplement.id === 'whey-soja' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="whey-soja" 
+                          supplementName="Whey Vegano"
+                          color="green"
+                        />
                         <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
                           <p className="text-green-700/80 text-sm text-center">
                             <strong>💡 Ideal para:</strong> Veganos, vegetarianos ou pessoas com intolerância à lactose.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Hipercalórico */}
-                    {supplement.id === 'hipercalorico' && (
-                      <div className="mt-6 pt-6 border-t border-green-200/50">
-                        <h5 className="font-bold mb-4 text-green-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                          <div
-                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                            onClick={() => window.open('https://mercadolivre.com/sec/1FTe8E5', '_blank')}
-                          >
-                            <img
-                              src="/Hipercalórico.png"
-                              alt="Hipercalórico"
-                              className="w-full h-40 object-contain rounded-md"
-                            />
-                            <h4 className="text-sm font-semibold text-green-800 text-center mt-3">
-                              Hipercalórico
-                            </h4>
-                            <p className="text-xs text-green-600 text-center mt-2 font-medium">
-                              Ver produto
-                            </p>
-                          </div>
-                        </div>
+                    {supplement.id === 'hipercalorico' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="hipercalorico" 
+                          supplementName="Hipercalórico"
+                          color="green"
+                        />
                         <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
                           <p className="text-green-700/80 text-sm text-center">
                             <strong>💪 Ideal para:</strong> Quem tem dificuldade em ganhar peso e massa muscular.
                             Rico em calorias, carboidratos e proteínas para facilitar o ganho de massa.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Multivitamínicos */}
-                    {supplement.id === 'multivitaminico' && (
-                      <div className="mt-6 pt-6 border-t border-purple-200/50">
-                        <h5 className="font-bold mb-4 text-purple-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {[
-                            { 
-                              src: '/Multi Vitamínico Growth 120 Cápsulas.png', 
-                              alt: 'Multi Vitamínico Growth 120 Cápsulas',
-                              title: 'Multi Vitamínico Growth 120 Cápsulas',
-                              link: 'https://mercadolivre.com/sec/2UcTAGZ'
-                            },
-                            { 
-                              src: '/Multi Vitamínico Dux 90 Cápsulas.png', 
-                              alt: 'Multi Vitamínico Dux 90 Cápsulas',
-                              title: 'Multi Vitamínico Dux 90 Cápsulas',
-                              link: 'https://mercadolivre.com/sec/12UVCAa'
-                            },
-                            { 
-                              src: '/Multi Vitamínico 3VS 120 Cápsulas.png', 
-                              alt: 'Multi Vitamínico 3VS 120 Cápsulas',
-                              title: 'Multi Vitamínico 3VS 120 Cápsulas',
-                              link: 'https://mercadolivre.com/sec/2MDgDzZ'
-                            }
-                          ].map((multivit, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-purple-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(multivit.link, '_blank')}
-                            >
-                              <img
-                                src={multivit.src}
-                                alt={multivit.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-purple-800 text-center mt-3 leading-tight">
-                                {multivit.title}
-                              </h4>
-                              <p className="text-xs text-purple-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'multivitaminico' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="multivitaminico" 
+                          supplementName="Multivitamínico"
+                          color="purple"
+                        />
                         <p className="text-purple-600/70 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Creatina */}
-                    {supplement.id === 'creatina' && (
-                      <div className="mt-6 pt-6 border-t border-orange-200/50">
-                        <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {[
-                            { 
-                              src: '/Creatina 600g - Soldiers.png', 
-                              alt: 'Creatina 600g - Soldiers',
-                              title: 'Creatina 600g - Soldiers',
-                              link: 'https://mercadolivre.com/sec/2v1dwdQ'
-                            },
-                            { 
-                              src: '/Creatina 500g - Dark Lab.png', 
-                              alt: 'Creatina 500g - Dark Lab',
-                              title: 'Creatina 500g - Dark Lab',
-                              link: 'https://mercadolivre.com/sec/2Rmy8qW'
-                            },
-                            { 
-                              src: '/Creatina 300g - Max.png', 
-                              alt: 'Creatina 300g - Max',
-                              title: 'Creatina 300g - Max',
-                              link: 'https://mercadolivre.com/sec/2q9Xykb'
-                            }
-                          ].map((creatina, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(creatina.link, '_blank')}
-                            >
-                              <img
-                                src={creatina.src}
-                                alt={creatina.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-orange-800 text-center mt-3 leading-tight">
-                                {creatina.title}
-                              </h4>
-                              <p className="text-xs text-orange-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'creatina' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="creatina" 
+                          supplementName="Creatina"
+                          color="orange"
+                        />
                         <p className="text-orange-600/70 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Ômega 3 */}
-                    {supplement.id === 'omega-3' && (
-                      <div className="mt-6 pt-6 border-t border-cyan-200/50">
-                        <h5 className="font-bold mb-4 text-cyan-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {[
-                            { 
-                              src: '/Ômega 3 Pro 100 Capsulas - Probiótica.png', 
-                              alt: 'Ômega 3 Pro 100 Capsulas - Probiótica',
-                              title: 'Ômega 3 Pro 100 Capsulas - Probiótica',
-                              link: 'https://mercadolivre.com/sec/2XtxWBm'
-                            },
-                            { 
-                              src: '/Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition.png', 
-                              alt: 'Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition',
-                              title: 'Ômega 3 1000mg 60 Cápsulas - Soldiers Nutrition',
-                              link: 'https://mercadolivre.com/sec/2RFUb9x'
-                            },
-                            { 
-                              src: '/Ômega 3 180 Capsulas - Canibal.png', 
-                              alt: 'Ômega 3 180 Capsulas - Canibal',
-                              title: 'Ômega 3 180 Capsulas - Canibal',
-                              link: 'https://mercadolivre.com/sec/1BhGYqy'
-                            }
-                          ].map((omega, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-cyan-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(omega.link, '_blank')}
-                            >
-                              <img
-                                src={omega.src}
-                                alt={omega.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-cyan-800 text-center mt-3 leading-tight">
-                                {omega.title}
-                              </h4>
-                              <p className="text-xs text-cyan-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'omega-3' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="omega-3" 
+                          supplementName="Ômega 3"
+                          color="cyan"
+                        />
                         <p className="text-cyan-600/70 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Barras de Proteínas */}
-                    {supplement.id === 'barras-proteina' && (
-                      <div className="mt-6 pt-6 border-t border-blue-200/50">
-                        <h5 className="font-bold mb-4 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {[
-                            {
-                              src: '/Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly.png',
-                              alt: 'Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly',
-                              title: 'Barra de Proteína Whey Grego Bar 40g - Morango com Chantilly',
-                              link: 'https://mercadolivre.com/sec/1oZw8EE'
-                            },
-                            {
-                              src: '/Barra de Proteína Whey Grego Bar 40g.png',
-                              alt: 'Barra de Proteína Whey Grego Bar 40g',
-                              title: 'Barra de Proteína Whey Grego Bar 40g',
-                              link: 'https://mercadolivre.com/sec/2B3qf2E'
-                            }
-                          ].map((barra, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(barra.link, '_blank')}
-                            >
-                              <img
-                                src={barra.src}
-                                alt={barra.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
-                                {barra.title}
-                              </h4>
-                              <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'barras-proteina' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="barras-proteina" 
+                          supplementName="Barras de Proteínas"
+                          color="blue"
+                        />
                         <p className="text-blue-600/70 text-sm mt-3 text-center">
                           Praticidade para consumir proteína em qualquer lugar
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Pastas de Amendoim */}
-                    {supplement.id === 'pasta-amendoim' && (
-                      <div className="mt-6 pt-6 border-t border-orange-200/50">
-                        <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                          <div
-                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
-                            onClick={() => window.open('https://mercadolivre.com/sec/2NmGePx', '_blank')}
-                          >
-                            <img
-                              src="/Pasta de Amendoim Gourmet 600g - Dr. Peanut.png"
-                              alt="Pasta de Amendoim Gourmet 600g - Dr. Peanut"
-                              className="w-full h-40 object-contain rounded-md"
-                            />
-                            <h4 className="text-sm font-semibold text-orange-800 text-center mt-3">
-                              Pasta de Amendoim Gourmet 600g - Dr. Peanut
-                            </h4>
-                            <p className="text-xs text-orange-600 text-center mt-2 font-medium">
-                              Ver produto
-                            </p>
-                          </div>
-                        </div>
+                    {supplement.id === 'pasta-amendoim' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="pasta-amendoim" 
+                          supplementName="Pastas de Amendoim"
+                          color="orange"
+                        />
                         <p className="text-orange-600/70 text-sm mt-3 text-center">
                           Fonte de gorduras saudáveis e proteínas, perfeita para lanches e receitas
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Pré-treino */}
-                    {supplement.id === 'pre-treino' && (
-                      <div className="mt-6 pt-6 border-t border-blue-200/50">
-                        <h5 className="font-bold mb-6 text-blue-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-
-                        {/* Pré-treinos COM Cafeína */}
-                        <div className="mb-8">
-                          <h6 className="font-semibold mb-4 text-blue-700 flex items-center gap-2">
-                            ⚡ Com Cafeína (Energia Extra)
-                          </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                              { 
-                                src: '/Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção).png', 
-                                alt: 'Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção)',
-                                title: 'Psichotic Hell (300g - 60 Doses) - Demons Lab (Excelente Opção)',
-                                link: 'https://mercadolivre.com/sec/2spg7K3'
-                              },
-                              { 
-                                src: '/Pré Treino 300g Évora - Darkness.png', 
-                                alt: 'Pré Treino 300g Évora - Darkness',
-                                title: 'Pré Treino 300g Évora - Darkness',
-                                link: 'https://mercadolivre.com/sec/1HWUigq'
-                              }
-                            ].map((preTreino, index) => (
-                              <div
-                                key={index}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 cursor-pointer hover:scale-105"
-                                onClick={() => window.open(preTreino.link, '_blank')}
-                              >
-                                <img
-                                  src={preTreino.src}
-                                  alt={preTreino.alt}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                                <h4 className="text-xs font-semibold text-blue-800 text-center mt-3 leading-tight">
-                                  {preTreino.title}
-                                </h4>
-                                <p className="text-xs text-blue-600 text-center mt-2 font-medium">
-                                  Ver produto
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Pré-treinos SEM Cafeína */}
-                        <div>
-                          <h6 className="font-semibold mb-4 text-green-700 flex items-center gap-2">
-                            🌿 Sem Cafeína (Para treinos noturnos)
-                          </h6>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                              { 
-                                src: '/Taurina (Pré Treino sem cafeína) 500g - Soldiers.png', 
-                                alt: 'Taurina (Pré Treino sem cafeína) 500g - Soldiers',
-                                title: 'Taurina (Pré Treino sem cafeína) 500g - Soldiers',
-                                link: 'https://mercadolivre.com/sec/1ygnEBB'
-                              },
-                              { 
-                                src: '/Pré Treino sem cafeína - Max.png', 
-                                alt: 'Pré Treino sem cafeína - Max',
-                                title: 'Pré Treino sem cafeína - Max',
-                                link: 'https://mercadolivre.com/sec/2rJgFWw'
-                              }
-                            ].map((preTreinoSemCafeina, index) => (
-                              <div
-                                key={index}
-                                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-green-100 cursor-pointer hover:scale-105"
-                                onClick={() => window.open(preTreinoSemCafeina.link, '_blank')}
-                              >
-                                <img
-                                  src={preTreinoSemCafeina.src}
-                                  alt={preTreinoSemCafeina.alt}
-                                  className="w-full h-32 object-contain rounded-md"
-                                />
-                                <h4 className="text-xs font-semibold text-green-800 text-center mt-3 leading-tight">
-                                  {preTreinoSemCafeina.title}
-                                </h4>
-                                <p className="text-xs text-green-600 text-center mt-2 font-medium">
-                                  Ver produto
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
+                    {supplement.id === 'pre-treino' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="pre-treino" 
+                          supplementName="Pré-treino"
+                          color="blue"
+                        />
                         <div className="mt-6 bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200/50 p-4 rounded-xl">
                           <p className="text-blue-700/80 text-sm text-center">
                             <strong>💡 Dica:</strong> Pré-treinos com cafeína são ideais para treinos matutinos ou vespertinos.
                             Para treinos noturnos, prefira as opções sem cafeína para não afetar o sono.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Vitamina C */}
-                    {supplement.id === 'vitamina-c' && (
-                      <div className="mt-6 pt-6 border-t border-orange-200/50">
-                        <h5 className="font-bold mb-4 text-orange-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {[
-                            {
-                              src: '/Vitamina C Em P%C3%B3 %C3%81cido Asc%C3%B3bico 1kg - 100%25 Puro - Bellnutry.png',
-                              alt: 'Vitamina C Em Pó Ácido Ascóbico 1kg - 100% Puro - Bellnutry',
-                              title: 'Vitamina C Em Pó Ácido Ascóbico 1kg - 100% Puro - Bellnutry',
-                              link: 'https://mercadolivre.com/sec/1WTLFRv'
-                            },
-                            {
-                              src: '/Vitamina C Em P%C3%B3 %C3%81cido Asc%C3%B3bico 250g - 100%25 Puro - Soldiers.png',
-                              alt: 'Vitamina C Em Pó Ácido Ascóbico 250g - 100% Puro - Soldiers',
-                              title: 'Vitamina C Em Pó Ácido Ascóbico 250g - 100% Puro - Soldiers',
-                              link: 'https://mercadolivre.com/sec/1pAUaqd'
-                            }
-                          ].map((vitaminaC, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-orange-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(vitaminaC.link, '_blank')}
-                            >
-                              <img
-                                src={vitaminaC.src}
-                                alt={vitaminaC.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-orange-800 text-center mt-3 leading-tight">
-                                {vitaminaC.title}
-                              </h4>
-                              <p className="text-xs text-orange-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'vitamina-c' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="vitamina-c" 
+                          supplementName="Vitamina C"
+                          color="orange"
+                        />
                         <p className="text-orange-600/70 text-sm mt-3 text-center">
                           Poderoso antioxidante que fortalece a imunidade e auxilia na produção de colágeno
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Vitamina D */}
-                    {supplement.id === 'vitamina-d' && (
-                      <div className="mt-6 pt-6 border-t border-yellow-200/50">
-                        <h5 className="font-bold mb-4 text-yellow-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                          <div
-                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-yellow-100 cursor-pointer hover:scale-105"
-                            onClick={() => window.open('https://mercadolivre.com/sec/2NFZwJZ', '_blank')}
-                          >
-                            <img
-                              src="/Vitamina D3 5000ui 120 Cápsulas.png"
-                              alt="Vitamina D3 5000ui 120 Cápsulas"
-                              className="w-full h-40 object-contain rounded-md"
-                            />
-                            <h4 className="text-sm font-semibold text-yellow-800 text-center mt-3">
-                              Vitamina D3 5000ui 120 Cápsulas
-                            </h4>
-                            <p className="text-xs text-yellow-600 text-center mt-2 font-medium">
-                              Ver produto
-                            </p>
-                          </div>
-                        </div>
+                    {supplement.id === 'vitamina-d' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="vitamina-d" 
+                          supplementName="Vitamina D"
+                          color="yellow"
+                        />
                         <p className="text-yellow-600/70 text-sm mt-3 text-center">
                           Essencial para saúde óssea, imunidade e regulação do humor
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Vitamina B12 */}
-                    {supplement.id === 'vitamina-b12' && (
-                      <div className="mt-6 pt-6 border-t border-pink-200/50">
-                        <h5 className="font-bold mb-4 text-pink-800">🏷️ Exemplo de Marca com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-md mx-auto">
-                          <div
-                            className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-pink-100 cursor-pointer hover:scale-105"
-                            onClick={() => window.open('https://mercadolivre.com/sec/22m8k2z', '_blank')}
-                          >
-                            <img
-                              src="/B12 - Metilcobalamina 1000mcg 120.png"
-                              alt="B12 - Metilcobalamina 1000mcg 120"
-                              className="w-full h-40 object-contain rounded-md"
-                            />
-                            <h4 className="text-sm font-semibold text-pink-800 text-center mt-3">
-                              B12 - Metilcobalamina 1000mcg 120
-                            </h4>
-                            <p className="text-xs text-pink-600 text-center mt-2 font-medium">
-                              Ver produto
-                            </p>
-                          </div>
-                        </div>
+                    {supplement.id === 'vitamina-b12' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="vitamina-b12" 
+                          supplementName="Vitamina B12"
+                          color="pink"
+                        />
                         <p className="text-pink-600/70 text-sm mt-3 text-center">
                           Vital para energia, sistema nervoso e formação de células sanguíneas
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Outras Vitaminas */}
-                    {supplement.id === 'outras-vitaminas' && (
-                      <div className="mt-6 pt-6 border-t border-purple-200/50">
-                        <h5 className="font-bold mb-4 text-purple-800">🏷️ Exemplos de Suplementos Especializados:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {[
-                            {
-                              src: '/Coenzima Q10 100mg - 60 Cápsulas.png',
-                              alt: 'Coenzima Q10 100mg - 60 Cápsulas',
-                              title: 'Coenzima Q10 100mg - 60 Cápsulas',
-                              link: 'https://mercadolivre.com/sec/1ZQDTg4'
-                            },
-                            {
-                              src: '/NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri.png',
-                              alt: 'NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri',
-                              title: 'NAC - N-acetilcisteina 500mg 120 Cápsulas - Bionutri',
-                              link: 'https://mercadolivre.com/sec/2R3m3dq'
-                            },
-                            {
-                              src: '/Berberina 500mg - 120 Cáps.png',
-                              alt: 'Berberina 500mg - 120 Cáps',
-                              title: 'Berberina 500mg - 120 Cáps',
-                              link: 'https://mercadolivre.com/sec/2Pk11cX'
-                            }
-                          ].map((vitamina, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-purple-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(vitamina.link, '_blank')}
-                            >
-                              <img
-                                src={vitamina.src}
-                                alt={vitamina.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-purple-800 text-center mt-3 leading-tight">
-                                {vitamina.title}
-                              </h4>
-                              <p className="text-xs text-purple-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'outras-vitaminas' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="outras-vitaminas" 
+                          supplementName="Outras Vitaminas"
+                          color="purple"
+                        />
                         <p className="text-purple-600/70 text-sm mt-3 text-center">
                           Suplementos especializados para funções específicas do organismo
                         </p>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Termogênicos */}
-                    {supplement.id === 'termogenico' && (
-                      <div className="mt-6 pt-6 border-t border-red-200/50">
-                        <h5 className="font-bold mb-4 text-red-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {[
-                            { 
-                              src: '/Termogênico - Soldiers.png', 
-                              alt: 'Termogênico - Soldiers',
-                              title: 'Termogênico - Soldiers',
-                              link: 'https://mercadolivre.com/sec/2Dg1u7F'
-                            },
-                            { 
-                              src: '/Termogênico Femme Burn.png', 
-                              alt: 'Termogênico Femme Burn',
-                              title: 'Termogênico Femme Burn',
-                              link: 'https://mercadolivre.com/sec/28MGGEQ'
-                            }
-                          ].map((termogenico, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-red-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(termogenico.link, '_blank')}
-                            >
-                              <img
-                                src={termogenico.src}
-                                alt={termogenico.alt}
-                                className="w-full h-32 object-contain rounded-md"
-                              />
-                              <h4 className="text-xs font-semibold text-red-800 text-center mt-3 leading-tight">
-                                {termogenico.title}
-                              </h4>
-                              <p className="text-xs text-red-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'termogenico' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="termogenico" 
+                          supplementName="Termogênico"
+                          color="red"
+                        />
                         <div className="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50 p-4 rounded-xl">
                           <p className="text-red-700/80 text-sm text-center">
                             <strong>⚠️ Importante:</strong> Termogênicos devem ser usados com moderação e preferencialmente
                             pela manhã ou antes do treino. Evite no final do dia para não afetar o sono.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
 
                     {/* Exemplos de Cafeína */}
-                    {supplement.id === 'cafeina' && (
-                      <div className="mt-6 pt-6 border-t border-red-200/50">
-                        <h5 className="font-bold mb-4 text-red-800">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {[
-                            { 
-                              src: '/Cafeína Max.png', 
-                              alt: 'Cafeína Max',
-                              title: 'Cafeína Max',
-                              link: 'https://mercadolivre.com/sec/2u1P6Ni'
-                            },
-                            { 
-                              src: '/Cafeína Dux.png', 
-                              alt: 'Cafeína Dux',
-                              title: 'Cafeína Dux',
-                              link: 'https://mercadolivre.com/sec/1rUUkES'
-                            },
-                            { 
-                              src: '/Cafeína Soldiers.png', 
-                              alt: 'Cafeína Soldiers',
-                              title: 'Cafeína Soldiers',
-                              link: 'https://mercadolivre.com/sec/2m6t7NC'
-                            }
-                          ].map((cafeina, index) => (
-                            <div
-                              key={index}
-                              className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-red-100 cursor-pointer hover:scale-105"
-                              onClick={() => window.open(cafeina.link, '_blank')}
-                            >
-                              <img
-                                src={cafeina.src}
-                                alt={cafeina.alt}
-                                className="w-full h-40 object-contain rounded-md"
-                              />
-                              <h4 className="text-sm font-semibold text-red-800 text-center mt-3">
-                                {cafeina.title}
-                              </h4>
-                              <p className="text-xs text-red-600 text-center mt-2 font-medium">
-                                Ver produto
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                    {supplement.id === 'cafeina' && supplement.hasPhotos && (
+                      <>
+                        <PhotoManagementPanel 
+                          supplementId="cafeina" 
+                          supplementName="Cafeína"
+                          color="red"
+                        />
                         <div className="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50 p-4 rounded-xl">
                           <p className="text-red-700/80 text-sm text-center">
                             <strong>⚡ Dica:</strong> Ideal para energia e foco. Tome pela manhã ou antes do treino.
                             Evite após 16h para não afetar o sono. Dose recomendada: 200-400mg por dia.
                           </p>
                         </div>
-                      </div>
+                      </>
                     )}
                   </div>
                 </CollapsibleContent>
               </Collapsible>
+              </>
             ))}
           </div>
         </CardContent>
@@ -1587,6 +1239,63 @@ const SupplementsSection = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Divisor */}
+      <div className="py-6">
+        <div className="w-full border-t-2 border-purple-200"></div>
+      </div>
+
+      {/* Distribuidora de Suplementos */}
+      <Card className="floating-card gradient-card border-blue-200/50">
+        <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
+          <CardTitle className="flex items-center gap-3 text-blue-800">
+            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <Pill className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold">🏪 Distribuidora de Suplementos</div>
+              <div className="text-sm text-blue-600/70 font-normal">Outra opção de suplementos com bom custo x benefício</div>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center space-y-6">
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200/50 p-6 rounded-2xl">
+              <div className="mb-4">
+                <p className="text-blue-800 font-bold text-xl mb-2">
+                  🎟️ Use o cupom: <span className="text-cyan-600">NUTRIFABRICIO</span>
+                </p>
+                <p className="text-blue-700 text-lg">
+                  Consiga <strong>5% de desconto</strong> nos pedidos
+                </p>
+              </div>
+              
+              <div className="grid gap-2 text-left max-w-md mx-auto">
+                <div className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg">✔</span>
+                  <span className="text-blue-700">Pedido mínimo: <strong>R$ 100,00</strong></span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold text-lg">✔</span>
+                  <span className="text-blue-700">Válido para <strong>todos os produtos</strong></span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-red-600 font-bold text-lg">❌</span>
+                  <span className="text-blue-700">Exceto <strong>itens em promoção</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <Button
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
+              onClick={() => window.open('https://glcdistribuidora.meucatalogodigital.com/', '_blank')}
+            >
+              <ExternalLink className="h-5 w-5 mr-3" />
+              Acessar Catálogo da Distribuidora
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Manipulados */}
       <Card className="floating-card gradient-card border-orange-200/50">
         <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 to-yellow-50">
@@ -1606,35 +1315,58 @@ const SupplementsSection = () => {
               Acesse o link abaixo para pedir manipulados com qualidade farmacêutica e preços acessíveis.
             </p>
 
-            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200/50 p-6 rounded-2xl">
-              <h4 className="font-bold text-orange-800 mb-3">💊 Farmácia de Manipulação:</h4>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                  <span className="text-orange-700 text-sm">Fórmulas personalizadas</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                  <span className="text-orange-700 text-sm">Qualidade farmacêutica</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                  <span className="text-orange-700 text-sm">Preços competitivos</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                  <span className="text-orange-700 text-sm">Atendimento especializado</span>
-                </div>
-              </div>
-            </div>
-
             <Button
               className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://api.whatsapp.com/send?phone=5511984955667&text=Oi%2C%20o%20Fabricio%20me%20passou%20seu%20contato%20para%20fazer%20um%20or%C3%A7amento%20com%20desconto.', '_blank')}
+              onClick={() => window.open(`https://api.whatsapp.com/send?phone=${pharmacyWhatsapp}&text=${encodeURIComponent(pharmacyMessage)}`, '_blank')}
             >
               <ExternalLink className="h-5 w-5 mr-3" />
               Contatar Farmácia via WhatsApp
             </Button>
+
+            {isAdmin && (
+              <div className="mt-6 pt-6 border-t border-orange-200/60 space-y-3">
+                <h6 className="text-xs font-semibold text-orange-700 flex items-center gap-2">
+                  <Edit className="h-3 w-3" />
+                  Editar contato da farmácia (apenas você vê isso)
+                </h6>
+                <div className="grid gap-2">
+                  <div>
+                    <label className="text-xs text-orange-700 font-medium block mb-1">
+                      Número do WhatsApp (com DDI e DDD, ex: 5511984955667)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="5511984955667"
+                      className="border border-orange-200 rounded-md px-3 py-2 text-sm bg-white text-black placeholder:text-orange-300 w-full"
+                      value={editPharmacyWhatsapp}
+                      onChange={e => setEditPharmacyWhatsapp(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-orange-700 font-medium block mb-1">
+                      Mensagem padrão
+                    </label>
+                    <textarea
+                      placeholder="Oi, o Fabricio me passou seu contato..."
+                      className="border border-orange-200 rounded-md px-3 py-2 text-sm bg-white text-black placeholder:text-orange-300 w-full"
+                      rows={3}
+                      value={editPharmacyMessage}
+                      onChange={e => setEditPharmacyMessage(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      className="h-8 px-4 text-xs bg-orange-600 hover:bg-orange-700 text-white flex items-center gap-1"
+                      onClick={handleSavePharmacySettings}
+                    >
+                      <Save className="h-3 w-3" /> Salvar configurações
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
