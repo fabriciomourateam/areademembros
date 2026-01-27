@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, Heart, Brain, ExternalLink, Sparkles, Calendar, X, Edit, Save, Lock } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { supabase } from '@/lib/supabase';
 
 const MentorshipSection = () => {
@@ -31,23 +31,23 @@ const MentorshipSection = () => {
   // Função para formatar data brasileira para exibição bonita
   const formatDateDisplay = (dateString: string) => {
     if (!dateString) return '';
-    
+
     // Se já está em formato brasileiro (dd/mm/yyyy)
     if (dateString.includes('/')) {
       const [day, month, year] = dateString.split('/');
-      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
-                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
       return `${day} de ${months[parseInt(month) - 1]} de ${year}`;
     }
-    
+
     // Se está em formato YYYY-MM-DD
     if (dateString.includes('-')) {
       const [year, month, day] = dateString.split('-');
-      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
-                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
       return `${day} de ${months[parseInt(month) - 1]} de ${year}`;
     }
-    
+
     return dateString;
   };
 
@@ -96,7 +96,7 @@ const MentorshipSection = () => {
     try {
       // Salvar no Supabase (mesmo se estiver vazio - para standby)
       const linkToSave = newLink.trim() || defaultLink; // Se vazio, volta para o link padrão (standby)
-      
+
       // Primeiro, buscar o registro mais recente
       const { data: existingData, error: fetchError } = await supabase
         .from('mentorship_config')
@@ -166,11 +166,11 @@ const MentorshipSection = () => {
       }
     } catch (error: any) {
       console.error('Erro completo ao salvar:', error);
-      
+
       // Extrair mensagem de erro mais detalhada do Supabase
       let errorMessage = 'Erro desconhecido';
       let errorDetails = '';
-      
+
       if (error) {
         // Erro do Supabase geralmente tem essa estrutura
         if (error.message) {
@@ -185,7 +185,7 @@ const MentorshipSection = () => {
         if (error.code) {
           errorDetails += `\nCódigo: ${error.code}`;
         }
-        
+
         // Se não tem message, tenta outras propriedades
         if (!error.message && typeof error === 'object') {
           errorMessage = JSON.stringify(error, null, 2);
@@ -193,7 +193,7 @@ const MentorshipSection = () => {
           errorMessage = error;
         }
       }
-      
+
       alert(`❌ Erro ao salvar no Supabase.\n\nMensagem: ${errorMessage}${errorDetails}\n\nDica: Abra o Console (F12) para ver o erro completo.`);
     }
   };
@@ -366,7 +366,7 @@ const MentorshipSection = () => {
             <div className="flex flex-col items-center gap-2">
               <Lock className="h-10 w-10 text-purple-500 mb-2" />
               <DialogTitle className="text-center text-purple-800">Acesso Administrativo</DialogTitle>
-              <p className="text-sm text-purple-600/70 text-center">Digite a senha de administrador para editar o link</p>
+              <DialogDescription className="text-sm text-purple-600/70 text-center">Digite a senha de administrador para editar o link</DialogDescription>
             </div>
           </DialogHeader>
           <form onSubmit={handleAdminLogin} className="flex flex-col gap-4 items-center">
@@ -396,7 +396,7 @@ const MentorshipSection = () => {
             <div className="flex flex-col items-center gap-2">
               <Edit className="h-10 w-10 text-purple-500 mb-2" />
               <DialogTitle className="text-center text-purple-800">Editar Link da Próxima Mentoria</DialogTitle>
-              <p className="text-sm text-purple-600/70 text-center">Cole o novo link que a psicóloga enviou</p>
+              <DialogDescription className="text-sm text-purple-600/70 text-center">Cole o novo link que a psicóloga enviou</DialogDescription>
             </div>
           </DialogHeader>
           <div className="flex flex-col gap-4">
