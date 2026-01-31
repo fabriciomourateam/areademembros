@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Dumbbell, Target, Brain, CheckCircle, Clock, TrendingUp, Zap, Instagram } from 'lucide-react';
+import { Play, Dumbbell, Target, Brain, CheckCircle, Clock, TrendingUp, Zap, Instagram, ChevronDown, ChevronUp } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const WorkoutsSection = () => {
+  const [expandedCards, setExpandedCards] = useState<string[]>([]);
+
+  const toggleCard = (id: string) => {
+    setExpandedCards(prev =>
+      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
+    );
+  };
   const keyPoints = [
     "Priorize sempre a técnica e a amplitude completa de movimento",
     "Busque progressão de carga sempre que possível, dentro da faixa de repetições",
@@ -86,18 +94,29 @@ const WorkoutsSection = () => {
 
       {/* Fundamentos */}
       <Card className="floating-card gradient-card border-orange-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 to-red-50">
-          <CardTitle className="flex items-start gap-3 text-orange-800">
-            <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg">
-              <Target className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-orange-50 to-red-50 cursor-pointer hover:from-orange-100 hover:to-orange-200/50 transition-all duration-300"
+          onClick={() => toggleCard('fundamentos')}
+        >
+          <CardTitle className="flex items-start justify-between text-orange-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg">
+                <Target className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <div className="text-2xl font-bold">Fundamentos do Treino</div>
+                <div className="text-sm text-orange-600/70 font-normal mt-1">Base para resultados reais</div>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">Fundamentos do Treino</div>
-              <div className="text-sm text-orange-600/70 font-normal mt-1">Base para resultados reais</div>
-            </div>
+            {expandedCards.includes('fundamentos') ? (
+              <ChevronUp className="h-6 w-6 text-orange-600 flex-shrink-0" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-orange-600 flex-shrink-0" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        {expandedCards.includes('fundamentos') && (
+        <CardContent className="space-y-6 animate-in slide-in-from-top-2 duration-300">
           <div className="space-y-4">
             <p className="text-orange-700/80 leading-relaxed text-lg">
               Para ter resultados reais você precisa <strong>DAR SEU MÁXIMO EM CADA TREINO</strong>. 
@@ -139,6 +158,7 @@ const WorkoutsSection = () => {
             </div>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Exemplos Reais */}
@@ -181,18 +201,29 @@ const WorkoutsSection = () => {
 
       {/* Pontos Importantes */}
       <Card className="floating-card gradient-card border-green-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-green-50 to-emerald-50">
-          <CardTitle className="flex items-start gap-3 text-green-800">
-            <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
-              <CheckCircle className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-green-50 to-emerald-50 cursor-pointer hover:from-green-100 hover:to-emerald-200/50 transition-all duration-300"
+          onClick={() => toggleCard('pontos-importantes')}
+        >
+          <CardTitle className="flex items-start justify-between text-green-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
+                <CheckCircle className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <div className="text-2xl font-bold">✅ Reforçando os Pontos Mais Importantes</div>
+                <div className="text-sm text-green-600/70 font-normal mt-1">Lembre-se sempre</div>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">✅ Reforçando os Pontos Mais Importantes</div>
-              <div className="text-sm text-green-600/70 font-normal mt-1">Lembre-se sempre</div>
-            </div>
+            {expandedCards.includes('pontos-importantes') ? (
+              <ChevronUp className="h-6 w-6 text-green-600 flex-shrink-0" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-green-600 flex-shrink-0" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        {expandedCards.includes('pontos-importantes') && (
+        <CardContent className="animate-in slide-in-from-top-2 duration-300">
           <div className="space-y-4">
             {keyPoints.map((point, index) => (
               <div key={index} className="flex items-start gap-3 p-4 gradient-card rounded-xl border border-green-200/50">
@@ -204,22 +235,34 @@ const WorkoutsSection = () => {
             ))}
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Vídeos Complementares */}
       <Card className="floating-card gradient-card border-red-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-red-50 to-pink-50">
-          <CardTitle className="flex items-start gap-3 text-red-800">
-            <div className="p-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl shadow-lg">
-              <Play className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-red-50 to-pink-50 cursor-pointer hover:from-red-100 hover:to-red-200/50 transition-all duration-300"
+          onClick={() => toggleCard('videos-complementares')}
+        >
+          <CardTitle className="flex items-start justify-between text-red-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl shadow-lg">
+                <Play className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <div className="text-2xl font-bold">🎥 Vídeos Complementares</div>
+                <div className="text-sm text-red-600/70 font-normal mt-1">Conhecimento avançado</div>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">🎥 Vídeos Complementares</div>
-              <div className="text-sm text-red-600/70 font-normal mt-1">Conhecimento avançado</div>
-            </div>
+            {expandedCards.includes('videos-complementares') ? (
+              <ChevronUp className="h-6 w-6 text-red-600 flex-shrink-0" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-red-600 flex-shrink-0" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        {expandedCards.includes('videos-complementares') && (
+        <CardContent className="animate-in slide-in-from-top-2 duration-300">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {complementaryVideos.map((video, index) => (
               <div 
@@ -243,6 +286,7 @@ const WorkoutsSection = () => {
             ))}
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Call to Action Final */}

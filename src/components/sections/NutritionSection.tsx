@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, AlertTriangle, CheckCircle, Clock, Utensils, Droplets, Coffee, Salad, Scale, FileText, Heart, Brain, X, RefreshCw } from 'lucide-react';
+import { Play, AlertTriangle, CheckCircle, Clock, Utensils, Droplets, Coffee, Salad, Scale, FileText, Heart, Brain, X, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const NutritionSection = () => {
+  const [expandedCards, setExpandedCards] = useState<string[]>([]);
+
+  const toggleCard = (id: string) => {
+    setExpandedCards(prev =>
+      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
+    );
+  };
   const recommendations = [
     {
       title: "Hidratação",
@@ -74,18 +82,29 @@ const NutritionSection = () => {
 
       {/* Instruções Gerais */}
       <Card className="floating-card gradient-card border-green-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-green-50 to-green-100/50">
-          <CardTitle className="flex items-center gap-3 text-green-800">
-            <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-lg">
-              <CheckCircle className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-green-50 to-green-100/50 cursor-pointer hover:from-green-100 hover:to-green-200/50 transition-all duration-300"
+          onClick={() => toggleCard('instrucoes-gerais')}
+        >
+          <CardTitle className="flex items-center justify-between text-green-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-lg">
+                <CheckCircle className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">📌 Instruções Gerais</div>
+                <div className="text-sm text-green-600/70 font-normal">Base do seu sucesso</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">📌 Instruções Gerais</div>
-              <div className="text-sm text-green-600/70 font-normal">Base do seu sucesso</div>
-            </div>
+            {expandedCards.includes('instrucoes-gerais') ? (
+              <ChevronUp className="h-6 w-6 text-green-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-green-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        {expandedCards.includes('instrucoes-gerais') && (
+        <CardContent className="space-y-6 animate-in slide-in-from-top-2 duration-300">
           <div className="space-y-4">
             <p className="text-green-700/80 leading-relaxed text-lg">
               A alimentação será peça-chave para atingir seus objetivos.
@@ -156,22 +175,34 @@ const NutritionSection = () => {
             </div>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Erros Comuns */}
       <Card className="floating-card gradient-card border-orange-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 to-red-50">
-          <CardTitle className="flex items-center gap-3 text-orange-800">
-            <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg">
-              <AlertTriangle className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-orange-50 to-red-50 cursor-pointer hover:from-orange-100 hover:to-orange-200/50 transition-all duration-300"
+          onClick={() => toggleCard('erros-comuns')}
+        >
+          <CardTitle className="flex items-center justify-between text-orange-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg">
+                <AlertTriangle className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">⚠️ Erros Comuns</div>
+                <div className="text-sm text-orange-600/70 font-normal">Evite essas armadilhas</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">⚠️ Erros Comuns</div>
-              <div className="text-sm text-orange-600/70 font-normal">Evite essas armadilhas</div>
-            </div>
+            {expandedCards.includes('erros-comuns') ? (
+              <ChevronUp className="h-6 w-6 text-orange-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-orange-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        {expandedCards.includes('erros-comuns') && (
+        <CardContent className="animate-in slide-in-from-top-2 duration-300">
           <div className="grid md:grid-cols-3 gap-6">
             <div className="gradient-card p-6 rounded-xl border border-orange-200/50">
               <h4 className="font-bold text-orange-800 mb-3">Finais de semana</h4>
@@ -195,26 +226,38 @@ const NutritionSection = () => {
             </div>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Pesagem de Alimentos */}
       <Card className="floating-card gradient-card border-blue-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-blue-100/50">
-          <CardTitle className="flex items-center gap-3 text-blue-800">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg">
-              <Scale className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-blue-50 to-blue-100/50 cursor-pointer hover:from-blue-100 hover:to-blue-200/50 transition-all duration-300"
+          onClick={() => toggleCard('pesagem')}
+        >
+          <CardTitle className="flex items-center justify-between text-blue-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg">
+                <Scale className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">⚖️ Pesagem de Alimentos</div>
+                <div className="text-sm text-blue-600/70 font-normal">Precisão é fundamental</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">⚖️ Pesagem de Alimentos</div>
-              <div className="text-sm text-blue-600/70 font-normal">Precisão é fundamental</div>
-            </div>
+            {expandedCards.includes('pesagem') ? (
+              <ChevronUp className="h-6 w-6 text-blue-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-blue-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        {expandedCards.includes('pesagem') && (
+        <CardContent className="space-y-6 animate-in slide-in-from-top-2 duration-300">
           <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200/50 p-6 rounded-2xl">
-            <h4 className="font-bold text-blue-800 mb-4 text-lg">
-              Todos os alimentos devem ser pesados, sem exceção
-            </h4>
+            <p className="text-blue-800 mb-4 text-lg leading-relaxed">
+              Sempre que houver a possibilidade, <strong>pese os alimentos</strong>, quanto mais precisão maior a eficácia nos resultados.
+            </p>
             
             <div className="space-y-4">
               <Button 
@@ -222,7 +265,7 @@ const NutritionSection = () => {
                 onClick={() => window.open('https://drive.google.com/file/d/1192kf3LvLZ9xjgw2PNBWZ9y48Y9vsj9P/view?usp=drivesdk', '_blank')}
               >
                 <Play className="h-4 w-4 mr-2" />
-                📎 Veja a explicação em vídeo
+                📎 Veja a explicação
               </Button>
               
               <div className="space-y-3 text-blue-700/80">
@@ -238,22 +281,34 @@ const NutritionSection = () => {
             </div>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Outras Recomendações */}
       <Card className="floating-card gradient-card border-purple-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50">
-          <CardTitle className="flex items-center gap-3 text-purple-800">
-            <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
-              <Heart className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50 cursor-pointer hover:from-purple-100 hover:to-purple-200/50 transition-all duration-300"
+          onClick={() => toggleCard('outras-recomendacoes')}
+        >
+          <CardTitle className="flex items-center justify-between text-purple-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
+                <Heart className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">💧 Outras Recomendações Importantes</div>
+                <div className="text-sm text-purple-600/70 font-normal">Para o seu bem-estar</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">💧 Outras Recomendações Importantes</div>
-              <div className="text-sm text-purple-600/70 font-normal">Para o seu bem-estar</div>
-            </div>
+            {expandedCards.includes('outras-recomendacoes') ? (
+              <ChevronUp className="h-6 w-6 text-purple-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-purple-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        {expandedCards.includes('outras-recomendacoes') && (
+        <CardContent className="animate-in slide-in-from-top-2 duration-300">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {recommendations.map((rec, index) => (
               <div 
@@ -281,22 +336,34 @@ const NutritionSection = () => {
             ))}
           </div>
         </CardContent>
+        )}
       </Card>
 
-      {/* Vídeos Complementares */}
+      {/* Vídeos Complementares - Hábitos Saudáveis */}
       <Card className="floating-card gradient-card border-red-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-red-50 to-pink-50">
-          <CardTitle className="flex items-center gap-3 text-red-800">
-            <div className="p-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl shadow-lg">
-              <Play className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-red-50 to-pink-50 cursor-pointer hover:from-red-100 hover:to-red-200/50 transition-all duration-300"
+          onClick={() => toggleCard('habitos-saudaveis')}
+        >
+          <CardTitle className="flex items-center justify-between text-red-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl shadow-lg">
+                <Play className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">🥗 Hábitos Saudáveis</div>
+                <div className="text-sm text-red-600/70 font-normal">Conhecimento essencial</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">🥗 Hábitos Saudáveis</div>
-              <div className="text-sm text-red-600/70 font-normal">Conhecimento essencial</div>
-            </div>
+            {expandedCards.includes('habitos-saudaveis') ? (
+              <ChevronUp className="h-6 w-6 text-red-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-red-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        {expandedCards.includes('habitos-saudaveis') && (
+        <CardContent className="animate-in slide-in-from-top-2 duration-300">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="text-center">
               <h4 className="font-bold text-red-800 mb-4">Hábitos saudáveis, rotina, sono e álcool</h4>
@@ -319,22 +386,34 @@ const NutritionSection = () => {
             </div>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Refeição Livre */}
       <Card className="floating-card gradient-card border-yellow-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-yellow-50 to-amber-50">
-          <CardTitle className="flex items-center gap-3 text-yellow-800">
-            <div className="p-3 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-xl shadow-lg">
-              <RefreshCw className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-yellow-50 to-amber-50 cursor-pointer hover:from-yellow-100 hover:to-amber-200/50 transition-all duration-300"
+          onClick={() => toggleCard('refeicao-livre')}
+        >
+          <CardTitle className="flex items-center justify-between text-yellow-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-xl shadow-lg">
+                <RefreshCw className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">🍔 Refeição Livre</div>
+                <div className="text-sm text-yellow-600/70 font-normal">Use com moderação</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">Refeição Livre</div>
-              <div className="text-sm text-yellow-600/70 font-normal">Use com moderação</div>
-            </div>
+            {expandedCards.includes('refeicao-livre') ? (
+              <ChevronUp className="h-6 w-6 text-yellow-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-yellow-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        {expandedCards.includes('refeicao-livre') && (
+        <CardContent className="space-y-6 animate-in slide-in-from-top-2 duration-300">
           <div className="space-y-4">
             <p className="text-yellow-700/80 leading-relaxed">
               A refeição livre é facultativa, é só por caráter psicológico mesmo, para caso sinta necessidade e possa aproveitar momentos sociais com a família e com amigos, então guarde para momentos como estes.
@@ -391,36 +470,41 @@ const NutritionSection = () => {
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Dica Final sobre Refeição Livre */}
-      <Card className="floating-card gradient-card border-emerald-200/50">
-        <CardContent className="py-8">
-          <div className="text-center">
-            <div className="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-200/50 p-6 rounded-2xl">
-              <p className="text-emerald-700 font-semibold text-lg">
-                ✨ Deixe a refeição livre para quando realmente quiser comer algo diferente — e aproveite com consciência!
-              </p>
-            </div>
+          <div className="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-200/50 p-6 rounded-2xl text-center">
+            <p className="text-emerald-700 font-semibold text-lg">
+              ✨ Deixe a refeição livre para quando realmente quiser comer algo diferente — e aproveite com consciência!
+            </p>
           </div>
         </CardContent>
+        )}
       </Card>
 
       {/* Controle de Doces */}
       <Card className="floating-card gradient-card border-pink-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-pink-50 to-purple-50">
-          <CardTitle className="flex items-center gap-3 text-pink-800">
-            <div className="p-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl shadow-lg">
-              <Brain className="h-6 w-6 text-white" />
+        <CardHeader
+          className="pb-6 bg-gradient-to-r from-pink-50 to-purple-50 cursor-pointer hover:from-pink-100 hover:to-purple-200/50 transition-all duration-300"
+          onClick={() => toggleCard('controle-doces')}
+        >
+          <CardTitle className="flex items-center justify-between text-pink-800">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl shadow-lg">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
+                <div className="text-sm text-pink-600/70 font-normal">Estratégias comportamentais</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
-              <div className="text-sm text-pink-600/70 font-normal">Estratégias comportamentais</div>
-            </div>
+            {expandedCards.includes('controle-doces') ? (
+              <ChevronUp className="h-6 w-6 text-pink-600" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-pink-600" />
+            )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        {expandedCards.includes('controle-doces') && (
+        <CardContent className="space-y-6 animate-in slide-in-from-top-2 duration-300">
           <div className="bg-gradient-to-r from-pink-50 to-purple-50 border-2 border-pink-200/50 p-6 rounded-2xl">
             <p className="text-pink-700 font-medium mb-4">
               Essa vontade é comportamental, não fisiológica.
@@ -464,6 +548,7 @@ const NutritionSection = () => {
           </div>
 
         </CardContent>
+        )}
       </Card>
     </div>
   );

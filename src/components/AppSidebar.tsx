@@ -49,11 +49,7 @@ const menuItems = [
     icon: Utensils,
     id: "meal-calculator"
   },
-  {
-    title: "Relatório de Evolução",
-    icon: BookOpen,
-    id: "evolution-report"
-  },
+  // { title: "Relatório de Evolução", icon: BookOpen, id: "evolution-report" }, // Oculto - descomente para exibir
   {
     title: "Suplementos",
     icon: Pill,
@@ -64,11 +60,7 @@ const menuItems = [
     icon: BookOpen,
     id: "ebooks"
   },
-  {
-    title: "Receitas",
-    icon: ChefHat,
-    id: "recipes"
-  },
+  // { title: "Receitas", icon: ChefHat, id: "recipes" }, // Agora dentro de E-books Bônus - descomente para exibir separado
   {
     title: "Programa de Incentivo",
     icon: Gift,

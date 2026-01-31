@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Download, ExternalLink, Calendar, Heart, Moon, Dumbbell, Apple, Baby, Zap, Utensils, Shield, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpen, Download, ExternalLink, Calendar, Heart, Moon, Dumbbell, Apple, Baby, Zap, Utensils, Shield, ChevronDown, ChevronUp, ChefHat } from 'lucide-react';
 
 const EbooksSection = () => {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
@@ -124,6 +124,20 @@ const EbooksSection = () => {
           url: 'https://drive.google.com/file/d/1ZcMirrhhF6xAvpheaOsnb7NlNN4VIqAd/view?usp=sharing'
         }
       ]
+    },
+    {
+      id: 'receitas',
+      category: 'Receitas',
+      icon: ChefHat,
+      color: 'orange',
+      books: [
+        {
+          title: 'Portal de Receitas FM Team',
+          description: 'Receitas saudáveis para encaixar nas refeições livres ou usar como substituições esporádicas.',
+          url: 'https://receitas-fmteam.vercel.app/',
+          buttonText: 'Acesse aqui'
+        }
+      ]
     }
   ];
 
@@ -220,9 +234,18 @@ const EbooksSection = () => {
                       className={`w-full bg-gradient-to-r from-${category.color}-500 to-${category.color}-600 hover:from-${category.color}-600 hover:to-${category.color}-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl`}
                       onClick={() => window.open(book.url, '_blank')}
                     >
-                      <Download className="h-4 w-4 mr-2" />
-                      Baixar E-book
-                      <ExternalLink className="h-4 w-4 ml-2" />
+                      {'buttonText' in book ? (
+                        <>
+                          Acesse aqui
+                          <ExternalLink className="h-4 w-4 ml-2" />
+                        </>
+                      ) : (
+                        <>
+                          <Download className="h-4 w-4 mr-2" />
+                          Baixar E-book
+                          <ExternalLink className="h-4 w-4 ml-2" />
+                        </>
+                      )}
                     </Button>
                   </div>
                 </div>
