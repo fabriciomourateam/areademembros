@@ -84,8 +84,8 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) {
-  const { state, isMobile, setOpenMobile } = useSidebar();
-  
+  const { state, isMobile, toggleSidebar } = useSidebar();
+
   return (
     <Sidebar className="h-full bg-gradient-to-b from-black via-zinc-900 to-zinc-800 text-white border-r border-yellow-700/40 shadow-xl">
       <SidebarHeader className="border-b border-yellow-600/30 p-6 bg-gradient-to-br from-black via-zinc-900 to-zinc-800">
@@ -104,7 +104,7 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
           )}
         </div>
       </SidebarHeader>
-      
+
       <SidebarContent className="bg-gradient-to-b from-white to-amber-50/30">
         <SidebarGroup>
           <SidebarGroupLabel className="text-amber-700 font-semibold text-sm uppercase tracking-wider px-4 py-3">
@@ -114,18 +114,18 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
             <SidebarMenu className="space-y-1">
               {menuItems.map((item, index) => (
                 <SidebarMenuItem key={item.id} className="slide-in-right" style={{ animationDelay: `${index * 0.05}s` }}>
-                  <SidebarMenuButton 
+                  <SidebarMenuButton
                     onClick={() => {
                       onSectionChange(item.id);
-                      if (isMobile) setOpenMobile(false);
+                      if (isMobile && state === "expanded") toggleSidebar();
                     }}
                     isActive={activeSection === item.id}
                     tooltip={state === "collapsed" ? item.title : undefined}
                     className={
                       `
                       relative rounded-lg sm:rounded-xl transition-all duration-300 group
-                      ${activeSection === item.id 
-                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-white shadow-lg glow-effect' 
+                      ${activeSection === item.id
+                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-white shadow-lg glow-effect'
                         : 'hover:bg-amber-50 text-amber-700 hover:text-amber-800'
                       }
                       ${state === "expanded" ? 'p-2.5 sm:p-3' : 'p-2.5 sm:p-3'}
@@ -134,13 +134,13 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
                     }
                   >
                     <div className="flex items-center gap-2">
-                      <item.icon 
+                      <item.icon
                         className={
                           `
                           h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:scale-110
                           ${activeSection === item.id ? 'text-white' : 'text-amber-600'}
                           `
-                        } 
+                        }
                       />
                       {state === "expanded" && (
                         <span className={
@@ -168,7 +168,7 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        
+
         {state === "expanded" && (
           <div className="mt-auto p-4 border-t border-amber-200/50">
             <div className="gradient-card p-4 rounded-xl text-center">

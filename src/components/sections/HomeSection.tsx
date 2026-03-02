@@ -95,7 +95,7 @@ const HomeSection = () => {
                   className="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-semibold shadow-lg hover:shadow-xl transform transition-all duration-300 border-0 rounded-xl px-6 py-3 hover:scale-105"
                 >
                   <PanelLeft className="h-4 w-4 mr-2" />
-                  Clique aqui para acessar os conteúdos da Área de Membros
+                  Clique nos conteúdos da barra lateral para ver todos os vídeos e materiais da Área de Membros
                 </Button>
               </div>
             </CardContent>
