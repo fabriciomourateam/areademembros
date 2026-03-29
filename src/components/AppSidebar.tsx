@@ -71,11 +71,6 @@ const menuItems = [
     icon: Users,
     id: "mentoring"
   },
-  {
-    title: "Bioimpedância",
-    icon: Activity,
-    id: "bioimpedance"
-  },
 ];
 
 interface AppSidebarProps {
@@ -156,9 +151,7 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
                     {item.id === 'mentoring' && state === "expanded" && (
                       <Lock className="ml-2 h-4 w-4 text-amber-500" />
                     )}
-                    {item.id === 'bioimpedance' && state === "expanded" && (
-                      <Lock className="ml-2 h-4 w-4 text-amber-500" />
-                    )}
+
                     {activeSection === item.id && (
                       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400/20 to-amber-500/20 animate-pulse" />
                     )}

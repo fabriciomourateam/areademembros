@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import SupplementsPublic from "./pages/SupplementsPublic";
 import InstallAppModal from "./components/InstallAppModal";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/bioimpedance" element={<Index defaultSection="bioimpedance" />} />
           <Route path="/recipes" element={<Index defaultSection="recipes" />} />
           <Route path="/meal-calculator" element={<Index defaultSection="meal-calculator" />} />
+          <Route path="/suplementos-lista" element={<SupplementsPublic />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
