@@ -229,7 +229,7 @@ const AppsSection = () => {
               
               <Button 
                 className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:from-purple-600 hover:via-pink-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4 w-full"
-                onClick={() => window.open('https://chat.whatsapp.com/IjfSPvLYnZIBvvLhkZAXOb', '_blank')}
+                onClick={() => window.open('https://chat.whatsapp.com/FDeCoRNGobGLC3JkYWxMZd', '_blank')}
               >
                 <MessageCircle className="h-5 w-5 mr-3" />
                 📩 Entrar na Comunidade VIP
