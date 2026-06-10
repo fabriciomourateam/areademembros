@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Gift, Users, Calendar, Heart, Star, Trophy, Target, MessageCircle, Crown } from 'lucide-react';
+import { Gift, Users, Heart, Star, Trophy, MessageCircle, Crown, Video, Shirt, Pill, RefreshCw } from 'lucide-react';
 
 const ReferralSection = () => {
   return (
@@ -35,22 +35,23 @@ const ReferralSection = () => {
         <CardContent>
           <div className="text-center space-y-6">
             <p className="text-emerald-700/80 text-lg leading-relaxed max-w-4xl mx-auto">
-              Se você tiver algum conhecido ou familiar que queira <strong>presentear e incentivar</strong> a 
-              melhorar a alimentação e hábitos saudáveis, esse é um benefício que estou trazendo pra você!
+              Esse programa existe pra recompensar quem realmente <strong>abraça o processo</strong>.
+              Aqui você ganha por <strong>continuar evoluindo, renovar seu acompanhamento</strong> e, quando
+              indicar alguém que feche, isso vira <strong>vantagem direta na sua renovação</strong>.
             </p>
-            
+
             <div className="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-200/50 p-6 rounded-2xl">
-              <h3 className="text-emerald-800 font-bold text-xl mb-4">✨ Transforme vidas e seja recompensado!</h3>
+              <h3 className="text-emerald-800 font-bold text-xl mb-4">✨ Comprometimento que vale prêmio!</h3>
               <p className="text-emerald-700 text-lg">
-                Cada indicação é uma oportunidade de espalhar saúde e bem-estar, 
-                enquanto você ganha benefícios incríveis em troca.
+                Cada renovação e cada pessoa que você traz com você te aproxima
+                de benefícios exclusivos e de pagar menos pra continuar evoluindo.
               </p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Benefícios para Você */}
+      {/* Trilha de Indicações */}
       <Card className="floating-card gradient-card border-blue-200/50">
         <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
           <CardTitle className="flex items-center gap-3 text-blue-800">
@@ -58,48 +59,108 @@ const ReferralSection = () => {
               <Trophy className="h-6 w-6 text-white" />
             </div>
             <div>
-              <div className="text-2xl font-bold">🎁 Seus Benefícios</div>
-              <div className="text-sm text-blue-600/70 font-normal">O que você ganha indicando</div>
+              <div className="text-2xl font-bold">🎯 Trilha de Indicações</div>
+              <div className="text-sm text-blue-600/70 font-normal">Quanto mais você traz, menos você paga na renovação</div>
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
-            {/* Benefício Principal */}
-            <div className="gradient-card p-8 rounded-2xl border-2 border-blue-200/50 text-center">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-blue-800">🎉 Para cada pessoa indicada:</h3>
-              </div>
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-xl shadow-lg mb-2">
-                <p className="text-2xl font-bold">30 DIAS DE ACOMPANHAMENTO</p>
-                <p className="text-blue-100 text-lg mt-2">Totalmente GRÁTIS para você!</p>
-              </div>
-              <p className="text-blue-700 text-lg font-semibold text-center mt-4 mb-6">Ganhe 1 mês a mais no seu acompanhamento</p>
-            </div>
+          <div className="space-y-8">
+            <p className="text-blue-700/80 text-lg leading-relaxed text-center max-w-3xl mx-auto">
+              Indicou e a pessoa <strong>fechou</strong> o acompanhamento? Você avança na trilha.
+              Quanto mais longe você chega, maior o desconto na hora de <strong>renovar seu plano anual</strong>.
+            </p>
 
-            {/* Benefício Cumulativo */}
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200/50 p-8 rounded-2xl">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-purple-800 mb-4">🎯 Benefício Cumulativo!</h3>
-                <p className="text-purple-700 text-lg mb-6">
-                  Quanto mais você indica, mais você ganha!
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white p-4 rounded-xl shadow-lg border border-purple-200/50">
-                    <div className="text-3xl font-bold text-purple-600 mb-2">1</div>
-                    <div className="text-sm text-purple-700">Amigo = <strong>1 Mês</strong></div>
-                  </div>
-                  <div className="bg-white p-4 rounded-xl shadow-lg border border-purple-200/50">
-                    <div className="text-3xl font-bold text-purple-600 mb-2">3</div>
-                    <div className="text-sm text-purple-700">Amigos = <strong>3 Meses</strong></div>
-                  </div>
-                  <div className="bg-white p-4 rounded-xl shadow-lg border border-purple-200/50">
-                    <div className="text-3xl font-bold text-purple-600 mb-2">∞</div>
-                    <div className="text-sm text-purple-700">Sem limite!</div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* 1 indicação */}
+              <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-200/50 text-center flex flex-col">
+                <div className="text-5xl mb-2">🥉</div>
+                <div className="text-2xl font-bold text-blue-700 mb-1">1 indicação</div>
+                <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-4 rounded-xl mt-auto">
+                  <p className="text-lg font-bold leading-tight">Renove e pague só 11 meses</p>
+                  <p className="text-blue-100 text-sm mt-1">1 mês grátis 🎁</p>
+                </div>
+              </div>
+
+              {/* 3 indicações */}
+              <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-200/50 text-center flex flex-col">
+                <div className="text-5xl mb-2">🥈</div>
+                <div className="text-2xl font-bold text-blue-700 mb-1">3 indicações</div>
+                <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-4 rounded-xl mt-auto">
+                  <p className="text-lg font-bold leading-tight">Renove e pague só 9 meses</p>
+                  <p className="text-blue-100 text-sm mt-1">3 meses grátis 🎁</p>
+                </div>
+              </div>
+
+              {/* 5 indicações - destaque */}
+              <div className="relative bg-white p-6 rounded-2xl shadow-xl border-2 border-amber-300 text-center flex flex-col ring-2 ring-amber-300/50">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                  MAIOR PRÊMIO 🔥
+                </div>
+                <div className="text-5xl mb-2">🥇</div>
+                <div className="text-2xl font-bold text-amber-700 mb-1">5 indicações</div>
+                <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 rounded-xl mt-auto">
+                  <p className="text-lg font-bold leading-tight">Renove e pague só 6 meses</p>
+                  <p className="text-amber-50 text-sm mt-1">6 meses grátis 🎁</p>
                 </div>
               </div>
             </div>
+
+            <div className="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-200/50 p-4 rounded-xl text-center">
+              <p className="text-emerald-800 font-semibold">
+                💚 Seu prêmio te espera na renovação: você renova por mais 1 ano e abate os meses que conquistou.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Bônus de Renovação Anual */}
+      <Card className="floating-card gradient-card border-purple-200/50">
+        <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50">
+          <CardTitle className="flex items-center gap-3 text-purple-800">
+            <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
+              <RefreshCw className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold">💎 Bônus de Renovação Anual</div>
+              <div className="text-sm text-purple-600/70 font-normal">Um presente pra quem continua no time</div>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center space-y-6">
+            <p className="text-purple-700/80 text-lg leading-relaxed max-w-3xl mx-auto">
+              Renovou seu plano anual? Você desbloqueia um <strong>presente exclusivo</strong> de quem é de casa.
+              Escolha o seu:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-200/50 flex flex-col items-center gap-3">
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow">
+                  <Video className="h-6 w-6 text-white" />
+                </div>
+                <p className="font-semibold text-purple-800">Videochamada de acompanhamento</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-200/50 flex flex-col items-center gap-3">
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow">
+                  <Shirt className="h-6 w-6 text-white" />
+                </div>
+                <p className="font-semibold text-purple-800">Camiseta oficial do Time</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-200/50 flex flex-col items-center gap-3">
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow">
+                  <Pill className="h-6 w-6 text-white" />
+                </div>
+                <p className="font-semibold text-purple-800">Suplemento</p>
+              </div>
+            </div>
+
+            <p className="text-purple-600/80 italic">
+              Esse benefício é de quem permanece evoluindo com a gente. Renovou, ganhou. 💚
+            </p>
           </div>
         </CardContent>
       </Card>
@@ -176,16 +237,16 @@ const ReferralSection = () => {
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
                   <div>
-                    <h4 className="font-semibold text-orange-800">Pessoa contrata o serviço</h4>
-                    <p className="text-orange-700/80">Quando a pessoa iniciar a consultoria</p>
+                    <h4 className="font-semibold text-orange-800">A pessoa fecha o acompanhamento</h4>
+                    <p className="text-orange-700/80">Cada indicação que fecha conta na sua trilha</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
                   <div>
-                    <h4 className="font-semibold text-orange-800">Receba seus 30 dias!</h4>
-                    <p className="text-orange-700/80">Seu benefício é ativado automaticamente</p>
+                    <h4 className="font-semibold text-orange-800">Abata os meses na sua renovação</h4>
+                    <p className="text-orange-700/80">Quanto mais indicações, menos meses você paga pra renovar mais 1 ano</p>
                   </div>
                 </div>
               </div>

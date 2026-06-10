@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Smartphone, Play, MessageCircle, ExternalLink, Star, Crown, Zap, Users, AlertTriangle, Mail, Phone, Award, Gift } from 'lucide-react';
+import { Smartphone, ExternalLink, Crown, Zap, Mail } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const AppsSection = () => {
@@ -171,77 +171,6 @@ const AppsSection = () => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Comunidade VIP */}
-      <Card className="floating-card gradient-card border-purple-200/50 overflow-hidden">
-        <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50">
-          <CardTitle className="flex items-center gap-3 text-purple-800">
-            <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg glow-effect">
-              <Users className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">👥 Comunidade VIP do Time</div>
-              <div className="text-sm text-purple-600/70 font-normal">Grupo Exclusivo de Membros</div>
-            </div>
-            <div className="ml-auto">
-              <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
-                <Crown className="h-3 w-3 text-white" />
-                <span className="text-white text-xs font-semibold">VIP</span>
-              </div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="text-purple-700/80 mb-6 leading-relaxed text-lg">
-                Participe da nossa comunidade exclusiva para:
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200/50">
-                  <Users className="h-5 w-5 text-purple-600 flex-shrink-0" />
-                  <span className="text-purple-700 font-medium">Estar com pessoas com os mesmos objetivos</span>
-                </div>
-                
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200/50">
-                  <Star className="h-5 w-5 text-purple-600 flex-shrink-0" />
-                  <span className="text-purple-700 font-medium">Evoluir com o grupo</span>
-                </div>
-                
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200/50">
-                  <Award className="h-5 w-5 text-purple-600 flex-shrink-0" />
-                  <span className="text-purple-700 font-medium">Concorrer a prêmios e desafios</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-6">
-                <div className="w-24 h-24 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl glow-effect">
-                  <MessageCircle className="h-12 w-12 text-white" />
-                </div>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Gift className="h-5 w-5 text-purple-600" />
-                  <span className="text-purple-700 font-semibold">Entre na comunidade exclusiva!</span>
-                </div>
-              </div>
-              
-              <Button 
-                className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:from-purple-600 hover:via-pink-600 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4 w-full"
-                onClick={() => window.open('https://chat.whatsapp.com/FDeCoRNGobGLC3JkYWxMZd', '_blank')}
-              >
-                <MessageCircle className="h-5 w-5 mr-3" />
-                📩 Entrar na Comunidade VIP
-              </Button>
-              
-              <p className="text-xs text-purple-600/70 mt-3">
-                Link direto para o grupo do WhatsApp exclusivo.
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
