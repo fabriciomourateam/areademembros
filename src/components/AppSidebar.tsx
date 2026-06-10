@@ -19,11 +19,7 @@ const menuItems = [
     icon: Home,
     id: "home"
   },
-  {
-    title: "Acesso aos Aplicativos",
-    icon: Smartphone,
-    id: "apps"
-  },
+  // { title: "Acesso aos Aplicativos", icon: Smartphone, id: "apps" }, // Oculto - descomente para exibir
   {
     title: "Plano Nutricional",
     icon: Utensils,
