@@ -1,11 +1,13 @@
 // Catálogo de conteúdo da Área de Membros no estilo Netflix.
-// Cada seção antiga vira uma "fileira" (row) e cada vídeo/ferramenta/e-book
-// vira uma "capa" (card). Nada é descartado: capas de vídeo abrem o player,
-// capas de seção levam à seção detalhada completa, capas de link abrem o
-// conteúdo externo.
+//
+// Modelo: a HOME mostra UMA fileira de CARDS GRANDES (as categorias). Ao clicar
+// numa categoria, abre-se a visão daquela categoria, que "engloba" a seção
+// interna completa e mostra, no topo, os demais conteúdos (vídeos/ferramentas)
+// como capas de acesso rápido. Nada é descartado.
 
 import type { LucideIcon } from 'lucide-react';
 import type { LockKey } from './access';
+import type { SectionKey } from '@/components/netflix/sectionRegistry';
 import {
   Play,
   Utensils,
@@ -23,7 +25,8 @@ import {
   Clock,
   Zap,
   TrendingUp,
-  ListChecks,
+  Wrench,
+  Sparkles,
 } from 'lucide-react';
 
 export type CardType = 'video' | 'section' | 'link';
@@ -47,25 +50,39 @@ export interface CatalogItem {
   badge?: string;
 }
 
-export interface CatalogRow {
+export interface Category {
   id: string;
   title: string;
+  description: string;
+  icon: LucideIcon;
+  gradient: string;
+  badge?: string;
+  locked?: boolean;
+  lockKey?: LockKey;
+  /** capas de acesso rápido exibidas dentro da categoria */
   items: CatalogItem[];
+  /** seção detalhada completa embutida na categoria (opcional) */
+  embedSection?: SectionKey;
 }
 
 export const HERO = {
-  title: 'Comece por aqui',
-  tagline: 'Bem-vindo(a) à FM Team',
+  title: 'Bem-vindo(a) à FM Team',
+  tagline: 'Área de Membros',
   description:
-    'É essencial que você veja todos os módulos antes de iniciar o planejamento. Assista ao vídeo de boas-vindas e destrave o seu melhor resultado.',
+    'Escolha uma categoria abaixo para começar. Cada uma reúne todos os vídeos, orientações e ferramentas em um só lugar.',
   videoId: 'ZebZRgAckcQ',
   icon: Play,
 };
 
-export const ROWS: CatalogRow[] = [
+export const CATEGORIES: Category[] = [
   {
     id: 'start',
     title: 'Comece por aqui',
+    description: 'Vídeo de boas-vindas e o passo a passo para dar o primeiro passo.',
+    icon: Play,
+    gradient: 'from-green-600 to-emerald-800',
+    badge: 'Essencial',
+    embedSection: 'home',
     items: [
       {
         id: 'welcome',
@@ -77,38 +94,15 @@ export const ROWS: CatalogRow[] = [
         gradient: 'from-green-600 to-emerald-700',
         badge: 'Essencial',
       },
-      {
-        id: 'nutrition-section',
-        title: 'Plano Nutricional',
-        subtitle: 'Como seguir sua dieta',
-        type: 'section',
-        route: '/nutrition',
-        icon: Utensils,
-        gradient: 'from-amber-500 to-orange-600',
-      },
-      {
-        id: 'workouts-section',
-        title: 'Orientações de Treino',
-        subtitle: 'Técnica e progressão',
-        type: 'section',
-        route: '/workouts',
-        icon: Dumbbell,
-        gradient: 'from-red-500 to-rose-700',
-      },
-      {
-        id: 'checkin-section',
-        title: 'Importância do Check-in',
-        subtitle: 'Acompanhe sua evolução',
-        type: 'section',
-        route: '/checkin',
-        icon: CheckCircle,
-        gradient: 'from-sky-500 to-blue-700',
-      },
     ],
   },
   {
     id: 'nutrition',
     title: 'Plano Nutricional',
+    description: 'Como seguir sua dieta, montar refeições e tirar as principais dúvidas.',
+    icon: Utensils,
+    gradient: 'from-amber-500 to-orange-700',
+    embedSection: 'nutrition',
     items: [
       {
         id: 'nutri-video-1',
@@ -137,20 +131,15 @@ export const ROWS: CatalogRow[] = [
         icon: Utensils,
         gradient: 'from-amber-500 to-orange-600',
       },
-      {
-        id: 'nutrition-full',
-        title: 'Ver seção completa',
-        subtitle: 'Todas as orientações',
-        type: 'section',
-        route: '/nutrition',
-        icon: ListChecks,
-        gradient: 'from-zinc-600 to-zinc-800',
-      },
     ],
   },
   {
     id: 'workouts',
     title: 'Treinos',
+    description: 'Orientação principal e vídeos complementares de técnica e execução.',
+    icon: Dumbbell,
+    gradient: 'from-red-500 to-rose-800',
+    embedSection: 'workouts',
     items: [
       {
         id: 'workout-main',
@@ -225,20 +214,15 @@ export const ROWS: CatalogRow[] = [
         icon: Target,
         gradient: 'from-red-500 to-rose-700',
       },
-      {
-        id: 'workouts-full',
-        title: 'Ver seção completa',
-        subtitle: 'Todas as orientações',
-        type: 'section',
-        route: '/workouts',
-        icon: ListChecks,
-        gradient: 'from-zinc-600 to-zinc-800',
-      },
     ],
   },
   {
     id: 'checkin',
     title: 'Check-in & Evolução',
+    description: 'Entenda a importância do check-in e como acompanhar sua evolução.',
+    icon: CheckCircle,
+    gradient: 'from-sky-500 to-blue-800',
+    embedSection: 'checkin',
     items: [
       {
         id: 'checkin-video',
@@ -249,20 +233,14 @@ export const ROWS: CatalogRow[] = [
         icon: CheckCircle,
         gradient: 'from-sky-500 to-blue-700',
       },
-      {
-        id: 'checkin-full',
-        title: 'Ver seção completa',
-        subtitle: 'Importância do Check-in',
-        type: 'section',
-        route: '/checkin',
-        icon: ListChecks,
-        gradient: 'from-zinc-600 to-zinc-800',
-      },
     ],
   },
   {
     id: 'tools',
     title: 'Ferramentas',
+    description: 'Calculadora de refeição livre, substituição de alimentos e bioimpedância.',
+    icon: Wrench,
+    gradient: 'from-violet-500 to-purple-800',
     items: [
       {
         id: 'meal-calculator',
@@ -299,6 +277,9 @@ export const ROWS: CatalogRow[] = [
   {
     id: 'bonus',
     title: 'Bônus & Conteúdos',
+    description: 'E-books, receitas saudáveis, guia de suplementos e programa de incentivo.',
+    icon: Gift,
+    gradient: 'from-indigo-500 to-blue-800',
     items: [
       {
         id: 'ebooks',
@@ -340,15 +321,22 @@ export const ROWS: CatalogRow[] = [
   },
   {
     id: 'premium',
-    title: 'Premium',
+    title: 'Mentorias (Premium)',
+    description: 'Área exclusiva para membros Premium: mentorias em grupo gravadas.',
+    icon: Users,
+    gradient: 'from-amber-500 to-yellow-700',
+    badge: 'Premium',
+    locked: true,
+    lockKey: 'mentoring',
+    embedSection: 'mentoring',
     items: [
       {
-        id: 'mentoring',
+        id: 'mentoring-info',
         title: 'Mentorias em Grupo',
         subtitle: 'Área exclusiva Premium',
         type: 'section',
         route: '/mentoring',
-        icon: Users,
+        icon: Sparkles,
         gradient: 'from-amber-500 to-yellow-600',
         locked: true,
         lockKey: 'mentoring',
@@ -357,6 +345,10 @@ export const ROWS: CatalogRow[] = [
     ],
   },
 ];
+
+export function getCategory(id: string): Category | undefined {
+  return CATEGORIES.find((c) => c.id === id);
+}
 
 export function youtubeThumb(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import NetflixHome from "./components/netflix/NetflixHome";
+import CategoryView from "./components/netflix/CategoryView";
 import SectionView from "./components/netflix/SectionView";
 import NotFound from "./pages/NotFound";
 import SupplementsPublic from "./pages/SupplementsPublic";
@@ -19,6 +20,7 @@ const App = () => (
       <HashRouter>
         <Routes>
           <Route path="/" element={<NetflixHome />} />
+          <Route path="/categoria/:id" element={<CategoryView />} />
           <Route path="/apps" element={<SectionView section="apps" />} />
           <Route path="/nutrition" element={<SectionView section="nutrition" />} />
           <Route path="/workouts" element={<SectionView section="workouts" />} />
