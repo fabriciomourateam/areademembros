@@ -39,7 +39,7 @@ const FoodSubstitutionSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">🔄</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">APP DE SUBSTITUIÇÃO DE ALIMENTOS</h1>
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">APP DE SUBSTITUIÇÃO DE ALIMENTOS</h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
             Substitua ingredientes com inteligência e mantenha seus resultados
           </p>
@@ -49,7 +49,7 @@ const FoodSubstitutionSection = () => {
       {/* Introdução */}
       <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
         <div className="text-center">
-          <h2 className="font-display text-xl text-amber-50">🔄 Revolucione Sua Flexibilidade Alimentar</h2>
+          <h2 className="font-heading text-xl text-amber-50">🔄 Revolucione Sua Flexibilidade Alimentar</h2>
           <p className="mx-auto mt-3 max-w-3xl text-zinc-400 leading-relaxed">
             Nosso aplicativo exclusivo de substituição de alimentos é a solução perfeita para
             momentos de imprevisto na cozinha. Com tecnologia avançada, você encontra
@@ -80,7 +80,7 @@ const FoodSubstitutionSection = () => {
       {/* Como Funciona */}
       <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
         <div className="text-center">
-          <h3 className="font-display text-xl text-amber-50">📱 Como Funciona</h3>
+          <h3 className="font-heading text-xl text-amber-50">📱 Como Funciona</h3>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/15 ring-1 ring-teal-400/25">
@@ -114,7 +114,7 @@ const FoodSubstitutionSection = () => {
             <RefreshCw className="h-6 w-6 text-teal-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">Ferramenta de Substituição</h2>
+            <h2 className="font-heading text-xl text-amber-50">Ferramenta de Substituição</h2>
             <p className="text-sm text-zinc-500">Use nossa calculadora online para encontrar substitutos perfeitos</p>
           </div>
         </header>
@@ -147,7 +147,7 @@ const FoodSubstitutionSection = () => {
             <CheckCircle className="h-6 w-6 text-teal-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">Benefícios Exclusivos</h2>
+            <h2 className="font-heading text-xl text-amber-50">Benefícios Exclusivos</h2>
             <p className="text-sm text-zinc-500">Por que usar nosso app de substituição?</p>
           </div>
         </header>
@@ -167,7 +167,7 @@ const FoodSubstitutionSection = () => {
       {/* Dica Importante */}
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <RefreshCw className="mx-auto mb-4 h-16 w-16 text-amber-300" />
-        <h3 className="font-display text-xl text-amber-100">💡 Dica Importante!</h3>
+        <h3 className="font-heading text-xl text-amber-100">💡 Dica Importante!</h3>
         <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
           O app de substituição é uma ferramenta complementar ao seu plano nutricional.
           Use com sabedoria e sempre priorize os alimentos recomendados no seu plano alimentar!

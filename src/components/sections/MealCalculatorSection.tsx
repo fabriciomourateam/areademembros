@@ -218,7 +218,7 @@ const MealCalculatorSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">🍽️</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">
             Calculadora de Refeição Livre
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
@@ -234,7 +234,7 @@ const MealCalculatorSection = () => {
             <Camera className="h-5 w-5 text-violet-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">Envie sua Refeição</h2>
+            <h2 className="font-heading text-xl text-amber-50">Envie sua Refeição</h2>
             <p className="text-sm text-zinc-500">
               Tire uma foto ou descreva o que você vai comer (escolha apenas uma opção, foto ou texto)
             </p>
@@ -388,7 +388,7 @@ const MealCalculatorSection = () => {
                 <CheckCircle className="h-5 w-5 text-violet-300" />
               </span>
               <div>
-                <h2 className="font-display text-xl text-amber-50">Análise Nutricional</h2>
+                <h2 className="font-heading text-xl text-amber-50">Análise Nutricional</h2>
                 <p className="text-sm text-zinc-500">
                   {editedResult.descricao}
                 </p>
@@ -515,7 +515,7 @@ const MealCalculatorSection = () => {
                     {insight.type === 'success' && <CheckCircle className="h-5 w-5 text-violet-300" />}
                   </span>
                   <div className="flex-1">
-                    <h3 className="mb-2 font-display text-lg text-amber-100">
+                    <h3 className="mb-2 font-heading text-lg text-amber-100">
                       Análise da Refeição Livre
                     </h3>
                     <p className="leading-relaxed text-zinc-400">
@@ -537,7 +537,7 @@ const MealCalculatorSection = () => {
               <Edit2 className="h-5 w-5 text-violet-300" />
             </span>
             <div>
-              <h2 className="font-display text-xl text-amber-50">Faltou Algum Item?</h2>
+              <h2 className="font-heading text-xl text-amber-50">Faltou Algum Item?</h2>
               <p className="text-sm text-zinc-500">
                 Adicione ingredientes que não foram identificados e recalcule
               </p>

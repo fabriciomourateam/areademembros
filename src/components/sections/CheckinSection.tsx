@@ -32,7 +32,7 @@ const CheckinSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">✅</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">A Importância do Check-in</h1>
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">A Importância do Check-in</h1>
         </div>
       </div>
 
@@ -43,7 +43,7 @@ const CheckinSection = () => {
             <MessageCircle className="h-5 w-5 text-sky-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">📌 Por que o Check-in é tão importante?</h2>
+            <h2 className="font-heading text-xl text-amber-50">📌 Por que o Check-in é tão importante?</h2>
             <p className="text-sm text-zinc-500">O coração do acompanhamento</p>
           </div>
         </header>
@@ -104,7 +104,7 @@ const CheckinSection = () => {
             <Target className="h-5 w-5 text-sky-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">🎯 Benefícios do Check-in Regular</h2>
+            <h2 className="font-heading text-xl text-amber-50">🎯 Benefícios do Check-in Regular</h2>
             <p className="text-sm text-zinc-500">Por que funciona tão bem</p>
           </div>
         </header>
@@ -133,7 +133,7 @@ const CheckinSection = () => {
             <Play className="h-5 w-5 text-sky-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">🎥 Vídeo Explicativo</h2>
+            <h2 className="font-heading text-xl text-amber-50">🎥 Vídeo Explicativo</h2>
             <p className="text-sm text-zinc-500">Entenda na prática</p>
           </div>
         </header>
@@ -177,7 +177,7 @@ const CheckinSection = () => {
             <MessageCircle className="h-5 w-5 text-sky-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">📱 Como Funciona na Prática</h2>
+            <h2 className="font-heading text-xl text-amber-50">📱 Como Funciona na Prática</h2>
             <p className="text-sm text-zinc-500">Processo simples e eficiente</p>
           </div>
         </header>
@@ -222,7 +222,7 @@ const CheckinSection = () => {
       {/* Call to Action / Aviso */}
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <CheckCircle className="mx-auto mb-4 h-14 w-14 text-gold" />
-        <h3 className="font-display text-xl text-amber-100">Comprometimento é a Chave!</h3>
+        <h3 className="font-heading text-xl text-amber-100">Comprometimento é a Chave!</h3>
         <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
           O check-in regular é seu passaporte para resultados consistentes e duradouros.
           Cada resposta sua me trás clareza de como te ajudar da melhor maneira!

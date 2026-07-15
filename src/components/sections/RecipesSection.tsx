@@ -37,7 +37,7 @@ const RecipesSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">👨‍🍳</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">Receitas Saudáveis</h1>
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">Receitas Saudáveis</h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
             Sugestões saudáveis e gostosas pra você escolher na sua refeição livre — ou até para
             substituir alguma das refeições da dieta esporadicamente.
@@ -52,7 +52,7 @@ const RecipesSection = () => {
             <Utensils className="h-6 w-6 text-orange-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">Por que nossas receitas são especiais?</h2>
+            <h2 className="font-heading text-xl text-amber-50">Por que nossas receitas são especiais?</h2>
             <p className="text-sm text-zinc-500">Desenvolvidas pensando no seu sucesso</p>
           </div>
         </header>
@@ -81,14 +81,14 @@ const RecipesSection = () => {
             <ChefHat className="h-6 w-6 text-orange-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">Portal de Receitas FM Team</h2>
+            <h2 className="font-heading text-xl text-amber-50">Portal de Receitas FM Team</h2>
             <p className="text-sm text-zinc-500">Acesse nosso site exclusivo com receitas saudáveis</p>
           </div>
         </header>
 
         <div className="rounded-xl border border-white/[0.06] bg-gradient-to-br from-[#17171e] to-[#101015] px-6 py-10 text-center">
           <span className="mb-4 block text-6xl">🍳</span>
-          <h3 className="font-display text-2xl text-amber-50">Centenas de Receitas Saudáveis</h3>
+          <h3 className="font-heading text-2xl text-amber-50">Centenas de Receitas Saudáveis</h3>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">
             Explore nosso portal exclusivo com receitas desenvolvidas especialmente para quem quer
             manter a dieta sem abrir mão do sabor!
@@ -119,7 +119,7 @@ const RecipesSection = () => {
       {/* Aviso */}
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <span className="mb-3 block text-5xl">👨‍🍳</span>
-        <h3 className="font-display text-xl text-amber-100">💡 Dica Importante!</h3>
+        <h3 className="font-heading text-xl text-amber-100">💡 Dica Importante!</h3>
         <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
           Veja a receita que melhor se adeque às calorias da refeição substituída. Caso não seja a
           refeição livre, faça essas substituições apenas de forma esporádica — mesmo com a mesma

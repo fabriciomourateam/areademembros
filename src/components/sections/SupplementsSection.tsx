@@ -567,7 +567,7 @@ const SupplementsSection = () => {
         <div className="relative">
           <div className="flex items-center justify-center gap-4 mb-2">
             <span className="text-5xl md:text-6xl">💊</span>
-            <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">
+            <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">
               SUPLEMENTOS COM BOM CUSTO-BENEFÍCIO
             </h1>
           </div>
@@ -583,7 +583,7 @@ const SupplementsSection = () => {
                 <Pill className="h-6 w-6 text-amber-300" />
               </div>
               <div>
-                <div className="font-display text-2xl font-bold text-amber-50">Suplementos</div>
+                <div className="font-heading text-2xl font-bold text-amber-50">Suplementos</div>
                 <div className="text-sm text-zinc-500 font-normal">Clique em cada um para entender suas funções</div>
               </div>
             </div>
@@ -1162,7 +1162,7 @@ const SupplementsSection = () => {
           <div className="text-center">
             <div className="mb-6">
               <span className="text-6xl mb-4 block">💊</span>
-              <h3 className="font-display text-2xl font-bold text-amber-100 mb-2">⚠️ Importante!</h3>
+              <h3 className="font-heading text-2xl font-bold text-amber-100 mb-2">⚠️ Importante!</h3>
               <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
                 Estas são sugestões baseadas em custo-benefício. Sempre fale comigo antes de iniciar qualquer suplementação que não esteja prescrita no seu Planejamento.
               </p>

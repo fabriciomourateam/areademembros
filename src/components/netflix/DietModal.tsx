@@ -29,7 +29,7 @@ const DietModal = ({ open, onClose }: DietModalProps) => {
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-lg gap-0 overflow-hidden rounded-3xl border border-amber-500/25 bg-[#0a0a0b] p-0 text-white shadow-2xl">
         <DialogHeader className="border-b border-amber-500/15 bg-gradient-to-r from-[#0a0a0b] to-zinc-900 px-5 py-4">
-          <DialogTitle className="font-display text-lg text-amber-50 sm:text-xl">
+          <DialogTitle className="font-heading text-lg text-amber-50 sm:text-xl">
             Calcule sua dieta pro Mês
           </DialogTitle>
           <p className="mt-1 text-sm text-zinc-400">

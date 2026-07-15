@@ -72,7 +72,7 @@ const NutritionSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">🥗</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">
             ORIENTAÇÕES SOBRE O PLANO ALIMENTAR
           </h1>
         </div>
@@ -89,7 +89,7 @@ const NutritionSection = () => {
               <CheckCircle className="h-5 w-5 text-emerald-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">📌 Instruções Gerais</div>
+              <div className="font-heading text-xl text-amber-50">📌 Instruções Gerais</div>
               <div className="text-sm text-zinc-500">Base do seu sucesso</div>
             </div>
           </div>
@@ -164,8 +164,9 @@ const NutritionSection = () => {
               </div>
             </div>
 
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
-              <p className="text-base font-semibold text-amber-100">
+            <div className="relative overflow-hidden rounded-xl border border-amber-400/40 bg-gradient-to-br from-amber-500/[0.14] via-amber-500/[0.05] to-transparent p-6 text-center gold-glow">
+              <div className="warm-glow pointer-events-none absolute inset-0 opacity-40" />
+              <p className="relative text-base font-semibold text-amber-100">
                 📢 Em caso de dificuldade, me chame a qualquer momento. Estou aqui pra te ajudar sempre!
               </p>
             </div>
@@ -185,7 +186,7 @@ const NutritionSection = () => {
               <AlertTriangle className="h-5 w-5 text-orange-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">⚠️ Erros Comuns</div>
+              <div className="font-heading text-xl text-amber-50">⚠️ Erros Comuns</div>
               <div className="text-sm text-zinc-500">Evite essas armadilhas</div>
             </div>
           </div>
@@ -234,7 +235,7 @@ const NutritionSection = () => {
               <Scale className="h-5 w-5 text-blue-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">⚖️ Pesagem de Alimentos</div>
+              <div className="font-heading text-xl text-amber-50">⚖️ Pesagem de Alimentos</div>
               <div className="text-sm text-zinc-500">Precisão é fundamental</div>
             </div>
           </div>
@@ -287,7 +288,7 @@ const NutritionSection = () => {
               <Heart className="h-5 w-5 text-purple-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">💧 Outras Recomendações Importantes</div>
+              <div className="font-heading text-xl text-amber-50">💧 Outras Recomendações Importantes</div>
               <div className="text-sm text-zinc-500">Para o seu bem-estar</div>
             </div>
           </div>
@@ -340,7 +341,7 @@ const NutritionSection = () => {
               <Play className="h-5 w-5 text-red-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">🥗 Hábitos Saudáveis</div>
+              <div className="font-heading text-xl text-amber-50">🥗 Hábitos Saudáveis</div>
               <div className="text-sm text-zinc-500">Conhecimento essencial</div>
             </div>
           </div>
@@ -388,7 +389,7 @@ const NutritionSection = () => {
               <RefreshCw className="h-5 w-5 text-amber-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">🍔 Refeição Livre</div>
+              <div className="font-heading text-xl text-amber-50">🍔 Refeição Livre</div>
               <div className="text-sm text-zinc-500">Use com moderação</div>
             </div>
           </div>
@@ -477,7 +478,7 @@ const NutritionSection = () => {
               <Brain className="h-5 w-5 text-pink-300" />
             </span>
             <div>
-              <div className="font-display text-xl text-amber-50">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
+              <div className="font-heading text-xl text-amber-50">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
               <div className="text-sm text-zinc-500">Estratégias comportamentais</div>
             </div>
           </div>

@@ -61,7 +61,7 @@ const WorkoutsSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">💪</span>
-          <h1 className="font-display text-3xl font-bold text-gold sm:text-4xl">
+          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">
             ORIENTAÇÕES SOBRE OS TREINOS
           </h1>
         </div>
@@ -74,7 +74,7 @@ const WorkoutsSection = () => {
             <Brain className="h-5 w-5 text-red-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">🧠 Mindset Correto</h2>
+            <h2 className="font-heading text-xl text-amber-50">🧠 Mindset Correto</h2>
             <p className="text-sm text-zinc-500">Entenda o propósito</p>
           </div>
         </header>
@@ -94,7 +94,7 @@ const WorkoutsSection = () => {
               <Target className="h-5 w-5 text-red-300" />
             </span>
             <div>
-              <h2 className="font-display text-xl text-amber-50">Fundamentos do Treino</h2>
+              <h2 className="font-heading text-xl text-amber-50">Fundamentos do Treino</h2>
               <p className="text-sm text-zinc-500">Base para resultados reais</p>
             </div>
           </div>
@@ -155,26 +155,26 @@ const WorkoutsSection = () => {
             <Instagram className="h-5 w-5 text-red-300" />
           </span>
           <div>
-            <h2 className="font-display text-xl text-amber-50">📲 Exemplos Reais de Execução até a Falha</h2>
+            <h2 className="font-heading text-xl text-amber-50">📲 Exemplos Reais de Execução até a Falha</h2>
             <p className="text-sm text-zinc-500">Veja na prática como fazer</p>
           </div>
         </header>
         <div className="grid gap-4 sm:grid-cols-2">
           <button
             type="button"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-sm font-semibold text-amber-50 transition-colors hover:bg-white/[0.04]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:brightness-110"
             onClick={() => window.open('https://www.instagram.com/reel/CqLGTduAhp4/?igsh=MTF4NXVzdmhpOXV2', '_blank')}
           >
-            <Instagram className="h-4 w-4 text-red-300" />
+            <Instagram className="h-4 w-4 text-white" />
             Exemplo 1
           </button>
 
           <button
             type="button"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-sm font-semibold text-amber-50 transition-colors hover:bg-white/[0.04]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:brightness-110"
             onClick={() => window.open('https://www.instagram.com/reel/C56Xsa9AVnB/?igsh=OG4xcXRxbGV3c25y', '_blank')}
           >
-            <Instagram className="h-4 w-4 text-red-300" />
+            <Instagram className="h-4 w-4 text-white" />
             Exemplo 2
           </button>
         </div>
@@ -191,7 +191,7 @@ const WorkoutsSection = () => {
               <CheckCircle className="h-5 w-5 text-red-300" />
             </span>
             <div>
-              <h2 className="font-display text-xl text-amber-50">✅ Reforçando os Pontos Mais Importantes</h2>
+              <h2 className="font-heading text-xl text-amber-50">✅ Reforçando os Pontos Mais Importantes</h2>
               <p className="text-sm text-zinc-500">Lembre-se sempre</p>
             </div>
           </div>
@@ -226,7 +226,7 @@ const WorkoutsSection = () => {
               <Play className="h-5 w-5 text-red-300" />
             </span>
             <div>
-              <h2 className="font-display text-xl text-amber-50">🎥 Vídeos Complementares</h2>
+              <h2 className="font-heading text-xl text-amber-50">🎥 Vídeos Complementares</h2>
               <p className="text-sm text-zinc-500">Conhecimento avançado</p>
             </div>
           </div>
@@ -266,7 +266,7 @@ const WorkoutsSection = () => {
       {/* Call to Action Final */}
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <Dumbbell className="mx-auto mb-4 h-16 w-16 text-amber-400" />
-        <h3 className="font-display text-xl text-amber-100">Pronto para Treinar?</h3>
+        <h3 className="font-heading text-xl text-amber-100">Pronto para Treinar?</h3>
         <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
           Agora que você conhece todas as orientações, é hora de colocar em prática e alcançar seus objetivos!
         </p>
