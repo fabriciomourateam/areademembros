@@ -8,7 +8,7 @@ import VideoModal from './VideoModal';
 import SectionModal from './SectionModal';
 import DietModal from './DietModal';
 import PasswordDialog from './PasswordDialog';
-import { SECTIONS } from './sectionRegistry';
+import { SECTIONS, type SectionKey } from './sectionRegistry';
 import { getCategory, type CatalogItem } from '@/lib/catalog';
 import { isUnlocked, type LockKey } from '@/lib/access';
 
@@ -18,7 +18,7 @@ const CategoryView = () => {
   const category = id ? getCategory(id) : undefined;
 
   const [videoModal, setVideoModal] = useState<{ id: string; title: string } | null>(null);
-  const [sectionOpen, setSectionOpen] = useState(false);
+  const [sectionModal, setSectionModal] = useState<{ key: SectionKey; title: string } | null>(null);
   const [dietOpen, setDietOpen] = useState(false);
   const [lockPrompt, setLockPrompt] = useState<{ key: LockKey; route: string } | null>(null);
   const [granted, setGranted] = useState(
@@ -58,7 +58,7 @@ const CategoryView = () => {
         if (item.href) window.open(item.href, '_blank');
         break;
       case 'guide':
-        setSectionOpen(true);
+        if (category.embedSection) setSectionModal({ key: category.embedSection, title: category.title });
         break;
       case 'info':
         if (item.id === 'diet-month') setDietOpen(true);
@@ -66,6 +66,8 @@ const CategoryView = () => {
       case 'section':
         if (item.locked && item.lockKey && !isUnlocked(item.lockKey)) {
           setLockPrompt({ key: item.lockKey, route: item.route! });
+        } else if (item.modalSection) {
+          setSectionModal({ key: item.modalSection, title: item.title });
         } else if (item.route) {
           navigate(item.route);
         }
@@ -170,14 +172,13 @@ const CategoryView = () => {
         onClose={() => setVideoModal(null)}
       />
 
-      {EmbeddedSection && (
-        <SectionModal
-          open={sectionOpen}
-          title={category.title}
-          onClose={() => setSectionOpen(false)}
-        >
+      {sectionModal && (
+        <SectionModal open title={sectionModal.title} onClose={() => setSectionModal(null)}>
           <div className="fade-in-up">
-            <EmbeddedSection />
+            {(() => {
+              const Comp = SECTIONS[sectionModal.key]?.component;
+              return Comp ? <Comp /> : null;
+            })()}
           </div>
         </SectionModal>
       )}

@@ -37,6 +37,8 @@ export interface CatalogItem {
   videoId?: string;
   /** rota interna da seção detalhada (para type === 'section') */
   route?: string;
+  /** se definido, o item abre a seção num modal em vez de navegar */
+  modalSection?: SectionKey;
   /** URL externa (para type === 'link') */
   href?: string;
   icon: LucideIcon;
@@ -260,6 +262,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Materiais para download',
             type: 'section',
             route: '/ebooks',
+            modalSection: 'ebooks',
             icon: BookOpen,
             gradient: 'from-indigo-500 to-blue-700',
           },
@@ -269,6 +272,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Para sua refeição livre',
             type: 'section',
             route: '/recipes',
+            modalSection: 'recipes',
             icon: ChefHat,
             gradient: 'from-orange-500 to-red-600',
           },
@@ -278,6 +282,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Guia de suplementação',
             type: 'section',
             route: '/supplements',
+            modalSection: 'supplements',
             icon: Pill,
             gradient: 'from-lime-500 to-green-700',
           },
@@ -287,6 +292,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Indique e ganhe',
             type: 'section',
             route: '/referral',
+            modalSection: 'referral',
             icon: Gift,
             gradient: 'from-pink-500 to-rose-700',
           },
@@ -301,6 +307,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Ferramenta',
             type: 'section',
             route: '/meal-calculator',
+            modalSection: 'meal-calculator',
             icon: Calculator,
             gradient: 'from-violet-500 to-purple-700',
           },
@@ -310,6 +317,7 @@ export const CATEGORIES: Category[] = [
             subtitle: 'Ferramenta',
             type: 'section',
             route: '/food-substitution',
+            modalSection: 'food-substitution',
             icon: RefreshCw,
             gradient: 'from-teal-500 to-emerald-700',
           },
