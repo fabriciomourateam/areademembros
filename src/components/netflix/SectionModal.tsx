@@ -52,7 +52,7 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
             <div
               className={cn(
                 'w-full px-3 py-5 sm:px-5 [zoom:0.8]',
-                dark ? 'section-dark' : 'bg-gradient-to-br from-amber-50/40 to-white'
+                dark ? 'bg-[#0e0e12]' : 'bg-gradient-to-br from-amber-50/40 to-white'
               )}
             >
               {children}

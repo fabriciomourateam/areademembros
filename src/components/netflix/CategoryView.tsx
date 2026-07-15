@@ -93,6 +93,9 @@ const CategoryView = () => {
 
   const cards = EmbeddedSection ? [...category.items, guideItem] : category.items;
 
+  // Seções já reescritas no tema escuro (abrem o modal com o chrome dark).
+  const DARK_SECTIONS = new Set<string>(['recipes']);
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full flex-col bg-[#0b0b0b]">
@@ -177,7 +180,7 @@ const CategoryView = () => {
           open
           title={sectionModal.title}
           onClose={() => setSectionModal(null)}
-          dark={sectionModal.key === 'supplements'}
+          dark={DARK_SECTIONS.has(sectionModal.key)}
         >
           <div className="fade-in-up">
             {(() => {
