@@ -94,7 +94,18 @@ const CategoryView = () => {
   const cards = EmbeddedSection ? [...category.items, guideItem] : category.items;
 
   // Seções já reescritas no tema escuro (abrem o modal com o chrome dark).
-  const DARK_SECTIONS = new Set<string>(['recipes']);
+  const DARK_SECTIONS = new Set<string>([
+    'home',
+    'nutrition',
+    'workouts',
+    'checkin',
+    'supplements',
+    'ebooks',
+    'referral',
+    'food-substitution',
+    'recipes',
+    'meal-calculator',
+  ]);
 
   return (
     <SidebarProvider>

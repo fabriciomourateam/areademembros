@@ -45,7 +45,7 @@ const SectionView = ({ section }: SectionViewProps) => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-gradient-to-br from-amber-50/20 to-white">
+      <div className="min-h-screen w-full bg-[#0a0a0b]">
         <NetflixNavbar showBack />
         <main className="px-3 pb-16 pt-20 sm:px-6 sm:pt-24 lg:px-8">
           <div className="fade-in-up">
