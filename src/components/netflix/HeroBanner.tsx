@@ -1,5 +1,5 @@
-import { Play, Info } from 'lucide-react';
-import { HERO, youtubeThumb } from '@/lib/catalog';
+import { Play, ChevronRight } from 'lucide-react';
+import { HERO } from '@/lib/catalog';
 
 interface HeroBannerProps {
   onPlay: () => void;
@@ -7,43 +7,60 @@ interface HeroBannerProps {
 
 const HeroBanner = ({ onPlay }: HeroBannerProps) => {
   return (
-    <div className="relative h-[70vh] min-h-[420px] w-full overflow-hidden">
-      {/* Fundo: thumbnail do vídeo de boas-vindas */}
-      <img
-        src={youtubeThumb(HERO.videoId)}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full scale-105 object-cover"
-      />
-      {/* Camadas de escurecimento estilo Netflix */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/40" />
+    <div className="relative flex h-[80vh] min-h-[460px] w-full items-center overflow-hidden bg-[#0a0a0b]">
+      {/* Brilho dourado radial (lado direito) */}
+      <div className="warm-glow pointer-events-none absolute inset-0" />
+      {/* Vinheta para profundidade */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0a0a0b] via-[#0a0a0b]/85 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-transparent to-[#0a0a0b]/60" />
+      {/* Filete dourado inferior */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
 
-      <div className="relative z-10 flex h-full max-w-[1600px] flex-col justify-end px-4 pb-16 sm:px-8 sm:pb-24">
-        <span className="mb-3 inline-flex w-fit items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-400 ring-1 ring-amber-400/30">
-          {HERO.tagline}
-        </span>
-        <h1 className="max-w-2xl text-3xl font-extrabold leading-tight text-white drop-shadow-lg sm:text-5xl">
-          {HERO.title}
-        </h1>
-        <p className="mt-4 max-w-xl text-sm text-zinc-200 sm:text-base">{HERO.description}</p>
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10">
+        <div className="max-w-2xl">
+          {/* Emblema + wordmark */}
+          <div className="mb-6 flex items-center gap-3">
+            <img
+              src="/logo.png"
+              alt="FM Team"
+              className="h-10 w-10 rounded-md object-cover ring-1 ring-amber-500/40"
+              onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
+            />
+            <div>
+              <p className="font-display text-lg leading-none text-gold">FM TEAM</p>
+              <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.35em] text-amber-200/70">
+                {HERO.tagline}
+              </p>
+            </div>
+          </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={onPlay}
-            className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-2.5 text-sm font-bold text-black shadow-lg transition-transform hover:scale-105 sm:text-base"
-          >
-            <Play className="h-5 w-5 fill-black" />
-            Assistir agora
-          </button>
-          <a
-            href="#conteudos"
-            className="inline-flex items-center gap-2 rounded-md bg-white/20 px-6 py-2.5 text-sm font-bold text-white backdrop-blur transition-colors hover:bg-white/30 sm:text-base"
-          >
-            <Info className="h-5 w-5" />
-            Explorar conteúdos
-          </a>
+          <h1 className="font-display text-4xl font-bold leading-[1.1] text-white drop-shadow sm:text-6xl">
+            {HERO.title}
+          </h1>
+
+          <div className="gold-hairline my-6 w-40" />
+
+          <p className="max-w-xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+            {HERO.description}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={onPlay}
+              className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3 text-sm font-bold text-black shadow-lg transition-all hover:shadow-amber-500/30 hover:brightness-110 sm:text-base"
+            >
+              <Play className="h-5 w-5 fill-black" />
+              Assistir boas-vindas
+            </button>
+            <a
+              href="#conteudos"
+              className="inline-flex items-center gap-2 rounded-md border border-amber-500/40 bg-white/5 px-7 py-3 text-sm font-semibold text-amber-100 backdrop-blur transition-colors hover:border-amber-400/70 hover:bg-white/10 sm:text-base"
+            >
+              Explorar conteúdos
+              <ChevronRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

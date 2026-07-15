@@ -30,16 +30,22 @@ const NetflixHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white">
+    <div className="min-h-screen bg-[#0a0a0b] text-white">
       <NetflixNavbar />
 
       <main>
         <HeroBanner onPlay={() => setVideoModal({ id: HERO.videoId, title: HERO.title })} />
 
-        <div id="conteudos" className="relative z-10 -mt-16 pb-20 sm:-mt-24">
-          <h2 className="mb-4 px-4 text-lg font-bold text-white sm:px-8 sm:text-2xl">
-            Escolha uma categoria
-          </h2>
+        <div id="conteudos" className="relative z-10 -mt-12 pb-24 sm:-mt-16">
+          <div className="mb-6 px-4 sm:px-8">
+            <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-amber-200/60">
+              Explore
+            </p>
+            <h2 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
+              Escolha uma <span className="text-gold">categoria</span>
+            </h2>
+            <div className="gold-hairline mt-3 w-32" />
+          </div>
 
           <div className="group/row relative">
             <button

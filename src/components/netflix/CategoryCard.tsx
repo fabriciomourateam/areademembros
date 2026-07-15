@@ -1,4 +1,4 @@
-import { ChevronRight, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Category } from '@/lib/catalog';
 
@@ -9,50 +9,49 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
   const Icon = category.icon;
-  const count = category.items.length;
 
   return (
     <button
       type="button"
       onClick={() => onSelect(category)}
-      className="group relative w-[280px] shrink-0 snap-start text-left focus:outline-none sm:w-[360px]"
+      className="group relative w-[240px] shrink-0 snap-start text-left focus:outline-none sm:w-[300px]"
       aria-label={category.title}
     >
-      <div
-        className={cn(
-          'relative flex aspect-[16/10] flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br p-5 shadow-xl ring-1 ring-white/10 transition-all duration-300 group-hover:scale-[1.03] group-hover:ring-2 group-hover:ring-amber-400/80 group-hover:shadow-amber-500/25 group-focus-visible:ring-2 group-focus-visible:ring-amber-400 sm:p-6',
-          category.gradient
-        )}
-      >
-        {/* brilho decorativo */}
-        <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+      <div className="overflow-hidden rounded-xl border border-amber-500/20 bg-[#0e0e0f] shadow-[0_12px_45px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-amber-400/70 group-hover:gold-glow group-focus-visible:border-amber-400">
+        {/* Poster */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0b]">
+          {/* tom da categoria em baixa opacidade sobre o preto */}
+          <div className={cn('absolute inset-0 bg-gradient-to-br opacity-30', category.gradient)} />
+          {/* brilho dourado */}
+          <div className="warm-glow absolute inset-0 opacity-70" />
+          {/* ícone marca d'água */}
+          <Icon className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 text-white/85 drop-shadow transition-transform duration-500 group-hover:scale-110" />
 
-        <div className="flex items-start justify-between">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-black/25 ring-1 ring-white/20 backdrop-blur-sm sm:h-14 sm:w-14">
-            <Icon className="h-6 w-6 text-white sm:h-7 sm:w-7" />
-          </span>
-          <div className="flex items-center gap-2">
-            {category.badge && (
-              <span className="rounded bg-black/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-300 ring-1 ring-amber-300/40">
-                {category.badge}
-              </span>
-            )}
-            {category.locked && (
-              <span className="rounded-full bg-black/50 p-1.5 ring-1 ring-white/30">
-                <Lock className="h-3.5 w-3.5 text-white" />
-              </span>
-            )}
-          </div>
+          {category.badge && (
+            <span className="absolute left-3 top-3 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-300 ring-1 ring-amber-400/40 backdrop-blur">
+              {category.badge}
+            </span>
+          )}
+          {category.locked && (
+            <span className="absolute right-3 top-3 rounded-full bg-black/60 p-1.5 ring-1 ring-amber-400/40 backdrop-blur">
+              <Lock className="h-3.5 w-3.5 text-amber-300" />
+            </span>
+          )}
         </div>
 
-        <div className="relative z-10">
-          <h3 className="text-xl font-extrabold leading-tight text-white drop-shadow sm:text-2xl">
+        {/* Faixa de rótulo */}
+        <div className="relative border-t border-amber-500/15 bg-black/70 px-4 py-4 text-center">
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-amber-200/60">
+            Guia FM Team
+          </p>
+          <h3 className="mt-1.5 font-display text-base font-semibold leading-tight text-amber-50 sm:text-lg">
             {category.title}
           </h3>
-          <p className="mt-1 line-clamp-2 text-xs text-white/85 sm:text-sm">{category.description}</p>
-          <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90">
-            Acessar
-            <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {/* selo dourado */}
+          <span className="mx-auto mt-3 block h-4 w-4">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 text-amber-400" aria-hidden fill="currentColor">
+              <path d="M12 3l2.09 4.26L18.8 8l-3.4 3.32.8 4.68L12 13.9 7.8 16l.8-4.68L5.2 8l4.71-.74L12 3z" />
+            </svg>
           </span>
         </div>
       </div>
