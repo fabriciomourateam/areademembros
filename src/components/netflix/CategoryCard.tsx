@@ -62,10 +62,7 @@ const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
 
         {/* Faixa de rótulo */}
         <div className="relative border-t border-amber-500/15 bg-black/70 px-4 py-4 text-center">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-amber-200/60">
-            Guia FM Team
-          </p>
-          <h3 className="mt-1.5 font-display text-base font-semibold leading-tight text-amber-50 sm:text-lg">
+          <h3 className="font-display text-base font-semibold leading-tight text-amber-50 sm:text-lg">
             {category.title}
           </h3>
           {/* selo dourado */}
