@@ -22,8 +22,19 @@ const ContentCard = ({ item, onSelect }: ContentCardProps) => {
       aria-label={item.title}
     >
       <div className="relative aspect-video overflow-hidden rounded-lg bg-zinc-900 ring-1 ring-white/10 shadow-lg transition-all duration-300 group-hover:ring-2 group-hover:ring-amber-400/80 group-hover:shadow-amber-500/20 group-hover:scale-[1.04] group-focus-visible:ring-2 group-focus-visible:ring-amber-400">
-        {/* Thumbnail (YouTube) ou fallback com gradiente + ícone */}
-        {showImage ? (
+        {/* Thumbnail (YouTube/imagem) · guia com logo · ou fallback gradiente + ícone */}
+        {item.type === 'guide' ? (
+          <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-900 to-black">
+            <div className="warm-glow absolute inset-0 opacity-50" />
+            <img
+              src="/logo.png"
+              alt=""
+              aria-hidden
+              className="relative h-[70%] w-[70%] object-contain opacity-90 drop-shadow transition-transform duration-500 group-hover:scale-105"
+              onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
+            />
+          </div>
+        ) : showImage ? (
           <img
             src={thumb!}
             alt={item.title}

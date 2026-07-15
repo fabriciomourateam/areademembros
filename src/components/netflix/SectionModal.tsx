@@ -17,13 +17,13 @@ interface SectionModalProps {
 const SectionModal = ({ open, title, onClose, children }: SectionModalProps) => {
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-5xl gap-0 border-amber-500/25 bg-[#0a0a0b] p-0 text-white">
-        <DialogHeader className="border-b border-amber-500/15 bg-gradient-to-r from-[#0a0a0b] to-zinc-900 px-5 py-4">
-          <DialogTitle className="font-display text-lg text-amber-50 sm:text-xl">{title}</DialogTitle>
+      <DialogContent className="max-w-5xl gap-0 border-amber-300/50 bg-white p-0 text-zinc-900">
+        <DialogHeader className="border-b border-amber-200 bg-gradient-to-r from-amber-50 to-white px-5 py-4">
+          <DialogTitle className="font-display text-lg text-zinc-900 sm:text-xl">{title}</DialogTitle>
         </DialogHeader>
-        <div className="max-h-[78vh] overflow-y-auto">
+        <div className="max-h-[78vh] overflow-y-auto bg-white">
           <SidebarProvider>
-            <div className="w-full bg-gradient-to-br from-amber-50/20 to-white px-3 py-6 sm:px-6">
+            <div className="w-full bg-gradient-to-br from-amber-50/40 to-white px-3 py-6 sm:px-6">
               {children}
             </div>
           </SidebarProvider>

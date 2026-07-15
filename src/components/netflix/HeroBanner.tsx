@@ -10,6 +10,14 @@ const HeroBanner = ({ onPlay }: HeroBannerProps) => {
     <div className="relative flex h-[80vh] min-h-[460px] w-full items-center overflow-hidden bg-[#0a0a0b]">
       {/* Brilho dourado radial (lado direito) */}
       <div className="warm-glow pointer-events-none absolute inset-0" />
+      {/* Logo em marca d'água (lado direito) — reforça o branding de forma premium */}
+      <img
+        src="/logo.png"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute right-4 top-1/2 hidden w-[38vw] max-w-[520px] -translate-y-1/2 opacity-[0.07] mix-blend-screen md:block"
+        onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
+      />
       {/* Vinheta para profundidade */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0a0a0b] via-[#0a0a0b]/85 to-transparent" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-transparent to-[#0a0a0b]/60" />
@@ -27,7 +35,7 @@ const HeroBanner = ({ onPlay }: HeroBannerProps) => {
               onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
             />
             <div>
-              <p className="font-display text-lg leading-none text-gold">FM TEAM</p>
+              <p className="font-wordmark text-xl leading-none text-gold">FM TEAM</p>
               <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.35em] text-amber-200/70">
                 {HERO.tagline}
               </p>

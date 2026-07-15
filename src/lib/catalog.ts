@@ -19,15 +19,15 @@ import {
   BookOpen,
   ChefHat,
   Gift,
-  Activity,
   Target,
   Clock,
   Zap,
   TrendingUp,
   Wrench,
+  ShoppingCart,
 } from 'lucide-react';
 
-export type CardType = 'video' | 'section' | 'link' | 'guide';
+export type CardType = 'video' | 'section' | 'link' | 'guide' | 'info';
 
 export interface CatalogItem {
   id: string;
@@ -68,7 +68,7 @@ export interface Category {
 }
 
 export const HERO = {
-  title: 'Bem-vindo(a) à FM Team',
+  title: 'Bem-vindo ao Time!',
   tagline: 'Área de Membros',
   description:
     'Escolha uma categoria abaixo para começar. Cada uma reúne todos os vídeos, orientações e ferramentas em um só lugar.',
@@ -248,7 +248,7 @@ export const CATEGORIES: Category[] = [
   {
     id: 'tools',
     title: 'Ferramentas',
-    description: 'Calculadora de refeição livre, substituição de alimentos e bioimpedância.',
+    description: 'Calculadora de refeição livre, substituição de alimentos e cálculo da sua dieta pro mês.',
     icon: Wrench,
     gradient: 'from-violet-500 to-purple-800',
     image:
@@ -273,23 +273,19 @@ export const CATEGORIES: Category[] = [
         gradient: 'from-teal-500 to-emerald-700',
       },
       {
-        id: 'bioimpedance',
-        title: 'Bioimpedância',
-        subtitle: 'Área Premium',
-        type: 'section',
-        route: '/bioimpedance',
-        icon: Activity,
-        gradient: 'from-cyan-500 to-blue-700',
-        locked: true,
-        lockKey: 'bioimpedance',
-        badge: 'Premium',
+        id: 'diet-month',
+        title: 'Calcule sua dieta pro Mês',
+        subtitle: 'Lista de compras da sua dieta',
+        type: 'info',
+        icon: ShoppingCart,
+        gradient: 'from-amber-500 to-orange-700',
       },
     ],
   },
   {
     id: 'bonus',
-    title: 'Bônus & Conteúdos',
-    description: 'E-books, receitas saudáveis, guia de suplementos e programa de incentivo.',
+    title: 'Bônus',
+    description: 'E-books, receitas saudáveis, guia de suplementos e programa de indicação.',
     icon: Gift,
     gradient: 'from-indigo-500 to-blue-800',
     image:
@@ -324,7 +320,7 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'referral',
-        title: 'Programa de Incentivo',
+        title: 'Programa de Indicação',
         subtitle: 'Indique e ganhe',
         type: 'section',
         route: '/referral',

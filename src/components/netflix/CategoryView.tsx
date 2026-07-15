@@ -6,6 +6,7 @@ import NetflixNavbar from './NetflixNavbar';
 import ContentCard from './ContentCard';
 import VideoModal from './VideoModal';
 import SectionModal from './SectionModal';
+import DietModal from './DietModal';
 import PasswordDialog from './PasswordDialog';
 import { SECTIONS } from './sectionRegistry';
 import { getCategory, type CatalogItem } from '@/lib/catalog';
@@ -18,6 +19,7 @@ const CategoryView = () => {
 
   const [videoModal, setVideoModal] = useState<{ id: string; title: string } | null>(null);
   const [sectionOpen, setSectionOpen] = useState(false);
+  const [dietOpen, setDietOpen] = useState(false);
   const [lockPrompt, setLockPrompt] = useState<{ key: LockKey; route: string } | null>(null);
   const [granted, setGranted] = useState(
     () => !category?.lockKey || isUnlocked(category.lockKey)
@@ -57,6 +59,9 @@ const CategoryView = () => {
         break;
       case 'guide':
         setSectionOpen(true);
+        break;
+      case 'info':
+        if (item.id === 'diet-month') setDietOpen(true);
         break;
       case 'section':
         if (item.locked && item.lockKey && !isUnlocked(item.lockKey)) {
@@ -158,6 +163,8 @@ const CategoryView = () => {
           </div>
         </SectionModal>
       )}
+
+      <DietModal open={dietOpen} onClose={() => setDietOpen(false)} />
 
       <PasswordDialog
         lockKey={lockPrompt?.key ?? null}
