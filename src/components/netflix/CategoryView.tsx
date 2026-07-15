@@ -127,18 +127,36 @@ const CategoryView = () => {
           </div>
         </header>
 
-        {/* Fileira de conteúdos: vídeos/itens + card "Guia completo" (modal) */}
-        {cards.length > 0 && (
-          <section className="flex-1 bg-[#0b0b0b] px-4 py-8 sm:px-8">
-            <div className="mx-auto max-w-[1600px]">
-              <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
-              <div className="flex flex-wrap gap-4">
-                {cards.map((item) => (
-                  <ContentCard key={item.id} item={item} onSelect={handleSelect} />
-                ))}
-              </div>
+        {/* Sub-fileiras rotuladas (ex.: Bônus / Ferramentas) */}
+        {category.groups && category.groups.length > 0 ? (
+          <section className="flex-1 space-y-8 bg-[#0b0b0b] px-4 py-8 sm:px-8">
+            <div className="mx-auto max-w-[1600px] space-y-8">
+              {category.groups.map((group) => (
+                <div key={group.title}>
+                  <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">{group.title}</h2>
+                  <div className="flex flex-wrap gap-4">
+                    {group.items.map((item) => (
+                      <ContentCard key={item.id} item={item} onSelect={handleSelect} />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
+        ) : (
+          /* Fileira de conteúdos: vídeos/itens + card "Guia completo" (modal) */
+          cards.length > 0 && (
+            <section className="flex-1 bg-[#0b0b0b] px-4 py-8 sm:px-8">
+              <div className="mx-auto max-w-[1600px]">
+                <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
+                <div className="flex flex-wrap gap-4">
+                  {cards.map((item) => (
+                    <ContentCard key={item.id} item={item} onSelect={handleSelect} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
         )}
 
         <footer className="mt-auto border-t border-white/10 bg-[#0b0b0b] px-4 py-8 text-center text-xs text-zinc-500 sm:px-8">

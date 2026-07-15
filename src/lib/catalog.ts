@@ -23,7 +23,6 @@ import {
   Clock,
   Zap,
   TrendingUp,
-  Wrench,
   ShoppingCart,
 } from 'lucide-react';
 
@@ -63,6 +62,8 @@ export interface Category {
   lockKey?: LockKey;
   /** capas de acesso rápido exibidas dentro da categoria */
   items: CatalogItem[];
+  /** sub-fileiras rotuladas dentro da categoria (ex.: Bônus / Ferramentas) */
+  groups?: { title: string; items: CatalogItem[] }[];
   /** seção detalhada completa embutida na categoria (opcional) */
   embedSection?: SectionKey;
 }
@@ -83,8 +84,7 @@ export const CATEGORIES: Category[] = [
     description: 'Vídeo de boas-vindas e o passo a passo para dar o primeiro passo.',
     icon: Play,
     gradient: 'from-green-600 to-emerald-800',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_163842_eed83614-9a18-4558-98fd-5cb21fa90051_min.webp',
+    image: '/start.png',
     badge: 'Essencial',
     embedSection: 'home',
     items: [
@@ -106,8 +106,7 @@ export const CATEGORIES: Category[] = [
     description: 'Como seguir sua dieta, montar refeições e tirar as principais dúvidas.',
     icon: Utensils,
     gradient: 'from-amber-500 to-orange-700',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_163859_c5b7f7f6-5bbd-4a0f-bb8c-9094cdb058f4_min.webp',
+    image: '/nutrition.png',
     embedSection: 'nutrition',
     items: [
       {
@@ -145,8 +144,7 @@ export const CATEGORIES: Category[] = [
     description: 'Orientação principal e vídeos complementares de técnica e execução.',
     icon: Dumbbell,
     gradient: 'from-red-500 to-rose-800',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164318_1b465020-9916-4cd7-9b9c-452117cb4998_min.webp',
+    image: '/workouts.png',
     embedSection: 'workouts',
     items: [
       {
@@ -230,8 +228,7 @@ export const CATEGORIES: Category[] = [
     description: 'Entenda a importância do check-in e como acompanhar sua evolução.',
     icon: CheckCircle,
     gradient: 'from-sky-500 to-blue-800',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164409_1db857cc-4747-4a2c-a0da-136504c8b9e6_min.webp',
+    image: '/checkin.png',
     embedSection: 'checkin',
     items: [
       {
@@ -246,86 +243,85 @@ export const CATEGORIES: Category[] = [
     ],
   },
   {
-    id: 'tools',
-    title: 'Ferramentas',
-    description: 'Calculadora de refeição livre, substituição de alimentos e cálculo da sua dieta pro mês.',
-    icon: Wrench,
-    gradient: 'from-violet-500 to-purple-800',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164458_126e5c76-aef9-4d0d-8033-dc480ad99154_min.webp',
-    items: [
-      {
-        id: 'meal-calculator',
-        title: 'Calcular Refeição Livre',
-        subtitle: 'Ferramenta',
-        type: 'section',
-        route: '/meal-calculator',
-        icon: Calculator,
-        gradient: 'from-violet-500 to-purple-700',
-      },
-      {
-        id: 'food-substitution',
-        title: 'Substituição de Alimentos',
-        subtitle: 'Ferramenta',
-        type: 'section',
-        route: '/food-substitution',
-        icon: RefreshCw,
-        gradient: 'from-teal-500 to-emerald-700',
-      },
-      {
-        id: 'diet-month',
-        title: 'Calcule sua dieta pro Mês',
-        subtitle: 'Lista de compras da sua dieta',
-        type: 'info',
-        icon: ShoppingCart,
-        gradient: 'from-amber-500 to-orange-700',
-      },
-    ],
-  },
-  {
-    id: 'bonus',
-    title: 'Bônus',
-    description: 'E-books, receitas saudáveis, guia de suplementos e programa de indicação.',
+    id: 'bonus-tools',
+    title: 'Bônus & Ferramentas',
+    description: 'Seus bônus e as ferramentas práticas do FM Team, num só lugar.',
     icon: Gift,
-    gradient: 'from-indigo-500 to-blue-800',
-    image:
-      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164546_f7b18bbb-9056-433b-a43a-cbf764e14497_min.webp',
-    items: [
+    gradient: 'from-violet-500 to-purple-800',
+    image: '/tools.png',
+    items: [],
+    groups: [
       {
-        id: 'ebooks',
-        title: 'E-books Bônus',
-        subtitle: 'Materiais para download',
-        type: 'section',
-        route: '/ebooks',
-        icon: BookOpen,
-        gradient: 'from-indigo-500 to-blue-700',
+        title: 'Bônus',
+        items: [
+          {
+            id: 'ebooks',
+            title: 'E-books Bônus',
+            subtitle: 'Materiais para download',
+            type: 'section',
+            route: '/ebooks',
+            icon: BookOpen,
+            gradient: 'from-indigo-500 to-blue-700',
+          },
+          {
+            id: 'recipes',
+            title: 'Receitas Saudáveis',
+            subtitle: 'Para sua refeição livre',
+            type: 'section',
+            route: '/recipes',
+            icon: ChefHat,
+            gradient: 'from-orange-500 to-red-600',
+          },
+          {
+            id: 'supplements',
+            title: 'Suplementos',
+            subtitle: 'Guia de suplementação',
+            type: 'section',
+            route: '/supplements',
+            icon: Pill,
+            gradient: 'from-lime-500 to-green-700',
+          },
+          {
+            id: 'referral',
+            title: 'Programa de Indicação',
+            subtitle: 'Indique e ganhe',
+            type: 'section',
+            route: '/referral',
+            icon: Gift,
+            gradient: 'from-pink-500 to-rose-700',
+          },
+        ],
       },
       {
-        id: 'recipes',
-        title: 'Receitas Saudáveis',
-        subtitle: 'Para sua refeição livre',
-        type: 'section',
-        route: '/recipes',
-        icon: ChefHat,
-        gradient: 'from-orange-500 to-red-600',
-      },
-      {
-        id: 'supplements',
-        title: 'Suplementos',
-        subtitle: 'Guia de suplementação',
-        type: 'section',
-        route: '/supplements',
-        icon: Pill,
-        gradient: 'from-lime-500 to-green-700',
-      },
-      {
-        id: 'referral',
-        title: 'Programa de Indicação',
-        subtitle: 'Indique e ganhe',
-        type: 'section',
-        route: '/referral',
-        icon: Gift,
-        gradient: 'from-pink-500 to-rose-700',
+        title: 'Ferramentas',
+        items: [
+          {
+            id: 'meal-calculator',
+            title: 'Calcular Refeição Livre',
+            subtitle: 'Ferramenta',
+            type: 'section',
+            route: '/meal-calculator',
+            icon: Calculator,
+            gradient: 'from-violet-500 to-purple-700',
+          },
+          {
+            id: 'food-substitution',
+            title: 'Substituição de Alimentos',
+            subtitle: 'Ferramenta',
+            type: 'section',
+            route: '/food-substitution',
+            icon: RefreshCw,
+            gradient: 'from-teal-500 to-emerald-700',
+          },
+          {
+            id: 'diet-month',
+            title: 'Calcule sua dieta pro Mês',
+            subtitle: 'Lista de compras da sua dieta',
+            type: 'info',
+            icon: ShoppingCart,
+            gradient: 'from-amber-500 to-orange-700',
+          },
+        ],
       },
     ],
   },
