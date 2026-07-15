@@ -27,7 +27,7 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
         className={cn(
           'max-w-4xl gap-0 overflow-hidden rounded-3xl p-0 shadow-2xl',
           dark
-            ? 'border border-amber-500/25 bg-[#0e0e12] text-zinc-100'
+            ? 'border border-amber-500/25 bg-[#0a0a0b] text-zinc-100'
             : 'border border-amber-200/70 bg-white text-zinc-900'
         )}
       >
@@ -35,7 +35,7 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
           className={cn(
             'px-6 py-4',
             dark
-              ? 'border-b border-amber-500/15 bg-gradient-to-r from-[#0e0e12] to-zinc-900'
+              ? 'border-b border-amber-500/15 bg-gradient-to-r from-[#0a0a0b] to-zinc-900'
               : 'border-b border-amber-100 bg-gradient-to-r from-amber-50 to-white'
           )}
         >
@@ -45,14 +45,14 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
             {title}
           </DialogTitle>
         </DialogHeader>
-        <div className={cn('max-h-[76vh] overflow-y-auto', dark ? 'bg-[#0e0e12]' : 'bg-white')}>
+        <div className={cn('max-h-[76vh] overflow-y-auto', dark ? 'bg-[#0a0a0b]' : 'bg-white')}>
           <SidebarProvider>
             {/* zoom reduz o conteúdo original (feito para tela cheia) para caber
                 de forma elegante no modal premium */}
             <div
               className={cn(
                 'w-full px-3 py-5 sm:px-5 [zoom:0.8]',
-                dark ? 'bg-[#0e0e12]' : 'bg-gradient-to-br from-amber-50/40 to-white'
+                dark ? 'bg-[#0a0a0b]' : 'bg-gradient-to-br from-amber-50/40 to-white'
               )}
             >
               {children}

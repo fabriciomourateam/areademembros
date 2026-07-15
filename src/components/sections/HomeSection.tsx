@@ -10,9 +10,9 @@ const HomeSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <div className="mb-4 flex items-center justify-center gap-3">
-            <CheckCircle className="h-6 w-6 text-green-300 sm:h-7 sm:w-7" />
+            <CheckCircle className="h-6 w-6 text-amber-300 sm:h-7 sm:w-7" />
             <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">COMECE POR AQUI</h1>
-            <CheckCircle className="h-6 w-6 text-green-300 sm:h-7 sm:w-7" />
+            <CheckCircle className="h-6 w-6 text-amber-300 sm:h-7 sm:w-7" />
           </div>
           <div className="mb-8 text-center">
             <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-400">
@@ -25,10 +25,10 @@ const HomeSection = () => {
           </div>
 
           {/* Vídeo de Boas-vindas */}
-          <div className="mx-auto max-w-2xl rounded-2xl border border-white/[0.07] bg-[#15151b] p-6 text-left">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6 text-left">
             <div className="mb-4 flex items-center justify-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-                <Play className="h-5 w-5 text-red-300" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <Play className="h-5 w-5 text-amber-300" />
               </span>
               <h2 className="font-heading text-xl text-amber-50">Vídeo de Boas-vindas</h2>
             </div>
@@ -40,9 +40,9 @@ const HomeSection = () => {
       </div>
 
       {/* Comunicação */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-400/25">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
             <MessageCircle className="h-6 w-6 text-amber-300" />
           </span>
           <div>
@@ -74,10 +74,10 @@ const HomeSection = () => {
       </section>
 
       {/* WhatsApp Suporte */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/15 ring-1 ring-green-400/25">
-            <Phone className="h-6 w-6 text-green-300" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Phone className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">SUPORTE - WHATSAPP</h2>
@@ -145,10 +145,10 @@ const HomeSection = () => {
       </section>
 
       {/* Comunidade VIP */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/15 ring-1 ring-purple-400/25">
-            <Users className="h-6 w-6 text-purple-300" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Users className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">👥 Comunidade VIP do Time</h2>
@@ -156,7 +156,7 @@ const HomeSection = () => {
           </div>
           <div className="ml-auto">
             <div className="flex items-center gap-1 rounded-full bg-purple-500/15 px-3 py-1 ring-1 ring-purple-400/25">
-              <Crown className="h-3 w-3 text-purple-300" />
+              <Crown className="h-3 w-3 text-amber-300" />
               <span className="text-xs font-semibold text-purple-200">VIP</span>
             </div>
           </div>
@@ -167,17 +167,17 @@ const HomeSection = () => {
 
             <div className="space-y-4">
               <div className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                <Users className="h-5 w-5 flex-shrink-0 text-purple-300" />
+                <Users className="h-5 w-5 flex-shrink-0 text-amber-300" />
                 <span className="font-medium text-zinc-300">Estar com pessoas com os mesmos objetivos</span>
               </div>
 
               <div className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                <Star className="h-5 w-5 flex-shrink-0 text-purple-300" />
+                <Star className="h-5 w-5 flex-shrink-0 text-amber-300" />
                 <span className="font-medium text-zinc-300">Evoluir com o grupo</span>
               </div>
 
               <div className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                <Award className="h-5 w-5 flex-shrink-0 text-purple-300" />
+                <Award className="h-5 w-5 flex-shrink-0 text-amber-300" />
                 <span className="font-medium text-zinc-300">Concorrer a prêmios e desafios</span>
               </div>
             </div>
@@ -185,11 +185,11 @@ const HomeSection = () => {
 
           <div className="text-center">
             <div className="mb-6">
-              <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-purple-500/15 ring-1 ring-purple-400/25">
-                <MessageCircle className="h-12 w-12 text-purple-300" />
+              <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <MessageCircle className="h-12 w-12 text-amber-300" />
               </div>
               <div className="mb-2 flex items-center justify-center gap-2">
-                <Gift className="h-5 w-5 text-purple-300" />
+                <Gift className="h-5 w-5 text-amber-300" />
                 <span className="font-semibold text-amber-50">Entre na comunidade exclusiva!</span>
               </div>
             </div>
@@ -210,10 +210,10 @@ const HomeSection = () => {
       {/* Financeiro e Contrato */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Financeiro WhatsApp */}
-        <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+        <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
           <header className="mb-5 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 ring-1 ring-blue-400/25">
-              <DollarSign className="h-6 w-6 text-blue-300" />
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <DollarSign className="h-6 w-6 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">FINANCEIRO</h2>
@@ -236,10 +236,10 @@ const HomeSection = () => {
         </section>
 
         {/* Contrato de Adesão */}
-        <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+        <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
           <header className="mb-5 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/15 ring-1 ring-purple-400/25">
-              <FileText className="h-6 w-6 text-purple-300" />
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <FileText className="h-6 w-6 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">CONTRATO DE ADESÃO</h2>

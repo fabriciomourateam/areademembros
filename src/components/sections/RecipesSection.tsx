@@ -46,10 +46,10 @@ const RecipesSection = () => {
       </div>
 
       {/* Características */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/15 ring-1 ring-orange-400/25">
-            <Utensils className="h-6 w-6 text-orange-300" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Utensils className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Por que nossas receitas são especiais?</h2>
@@ -62,8 +62,8 @@ const RecipesSection = () => {
               key={feature.title}
               className="flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
             >
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-orange-500/15 ring-1 ring-orange-400/20">
-                <feature.icon className="h-5 w-5 text-orange-300" />
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <feature.icon className="h-5 w-5 text-amber-300" />
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">{feature.title}</h4>
@@ -75,10 +75,10 @@ const RecipesSection = () => {
       </section>
 
       {/* Portal de Receitas */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/15 ring-1 ring-orange-400/25">
-            <ChefHat className="h-6 w-6 text-orange-300" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <ChefHat className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Portal de Receitas FM Team</h2>

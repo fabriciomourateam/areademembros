@@ -79,14 +79,14 @@ const NutritionSection = () => {
       </div>
 
       {/* Instruções Gerais */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('instrucoes-gerais')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-500/15 ring-1 ring-emerald-400/20">
-              <CheckCircle className="h-5 w-5 text-emerald-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <CheckCircle className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">📌 Instruções Gerais</div>
@@ -176,14 +176,14 @@ const NutritionSection = () => {
       </section>
 
       {/* Erros Comuns */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('erros-comuns')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/15 ring-1 ring-orange-400/20">
-              <AlertTriangle className="h-5 w-5 text-orange-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <AlertTriangle className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">⚠️ Erros Comuns</div>
@@ -225,14 +225,14 @@ const NutritionSection = () => {
       </section>
 
       {/* Pesagem de Alimentos */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('pesagem')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-500/15 ring-1 ring-blue-400/20">
-              <Scale className="h-5 w-5 text-blue-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Scale className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">⚖️ Pesagem de Alimentos</div>
@@ -278,14 +278,14 @@ const NutritionSection = () => {
       </section>
 
       {/* Outras Recomendações */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('outras-recomendacoes')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-purple-500/15 ring-1 ring-purple-400/20">
-              <Heart className="h-5 w-5 text-purple-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Heart className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">💧 Outras Recomendações Importantes</div>
@@ -331,14 +331,14 @@ const NutritionSection = () => {
       </section>
 
       {/* Vídeos Complementares - Hábitos Saudáveis */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('habitos-saudaveis')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-              <Play className="h-5 w-5 text-red-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Play className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">🥗 Hábitos Saudáveis</div>
@@ -379,13 +379,13 @@ const NutritionSection = () => {
       </section>
 
       {/* Refeição Livre */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('refeicao-livre')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-amber-500/15 ring-1 ring-amber-400/20">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
               <RefreshCw className="h-5 w-5 text-amber-300" />
             </span>
             <div>
@@ -468,14 +468,14 @@ const NutritionSection = () => {
       </section>
 
       {/* Controle de Doces */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
           onClick={() => toggleCard('controle-doces')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-pink-500/15 ring-1 ring-pink-400/20">
-              <Brain className="h-5 w-5 text-pink-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Brain className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
@@ -502,7 +502,7 @@ const NutritionSection = () => {
             <div className="space-y-3">
               {sweetsTips.map((tip, index) => (
                 <div key={index} className="flex items-start gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                  <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-pink-500/15 text-sm font-bold text-pink-300 ring-1 ring-pink-400/20">
+                  <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-pink-500/15 text-sm font-bold text-amber-300 ring-1 ring-pink-400/20">
                     {index + 1}
                   </div>
                   <span className="text-zinc-300">{tip}</span>

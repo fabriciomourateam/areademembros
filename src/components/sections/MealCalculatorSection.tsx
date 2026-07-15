@@ -228,10 +228,10 @@ const MealCalculatorSection = () => {
       </div>
 
       {/* Formulário de Input */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-violet-500/15 ring-1 ring-violet-400/20">
-            <Camera className="h-5 w-5 text-violet-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Camera className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Envie sua Refeição</h2>
@@ -286,7 +286,7 @@ const MealCalculatorSection = () => {
             {/* Orientações para Foto Ideal */}
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
               <h4 className="mb-3 flex items-center gap-2 font-semibold text-amber-50">
-                <Camera className="h-5 w-5 text-violet-300" />
+                <Camera className="h-5 w-5 text-amber-300" />
                 Orientações para a Foto Ideal
               </h4>
               <p className="mb-3 text-sm text-zinc-400">
@@ -382,10 +382,10 @@ const MealCalculatorSection = () => {
       {result && editedResult && (
         <>
           {/* Informações Nutricionais */}
-          <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
             <header className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-violet-500/15 ring-1 ring-violet-400/20">
-                <CheckCircle className="h-5 w-5 text-violet-300" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <CheckCircle className="h-5 w-5 text-amber-300" />
               </span>
               <div>
                 <h2 className="font-heading text-xl text-amber-50">Análise Nutricional</h2>
@@ -509,10 +509,10 @@ const MealCalculatorSection = () => {
             return (
               <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] p-6">
                 <div className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-violet-500/15 ring-1 ring-violet-400/20">
-                    {insight.type === 'warning' && <AlertCircle className="h-5 w-5 text-violet-300" />}
-                    {insight.type === 'info' && <AlertCircle className="h-5 w-5 text-violet-300" />}
-                    {insight.type === 'success' && <CheckCircle className="h-5 w-5 text-violet-300" />}
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                    {insight.type === 'warning' && <AlertCircle className="h-5 w-5 text-amber-300" />}
+                    {insight.type === 'info' && <AlertCircle className="h-5 w-5 text-amber-300" />}
+                    {insight.type === 'success' && <CheckCircle className="h-5 w-5 text-amber-300" />}
                   </span>
                   <div className="flex-1">
                     <h3 className="mb-2 font-heading text-lg text-amber-100">
@@ -531,10 +531,10 @@ const MealCalculatorSection = () => {
 
       {/* Adicionar Itens Não Identificados */}
       {result && (
-        <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+        <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
           <header className="mb-5 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-violet-500/15 ring-1 ring-violet-400/20">
-              <Edit2 className="h-5 w-5 text-violet-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Edit2 className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">Faltou Algum Item?</h2>

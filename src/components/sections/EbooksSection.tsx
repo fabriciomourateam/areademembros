@@ -154,10 +154,10 @@ const EbooksSection = () => {
       </div>
 
       {/* Introdução */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6 text-center">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6 text-center">
         <div className="mb-3 flex items-center justify-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-indigo-500/15 ring-1 ring-indigo-400/20">
-            <Download className="h-5 w-5 text-indigo-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Download className="h-5 w-5 text-amber-300" />
           </span>
           <h2 className="font-heading text-xl text-amber-50">📚 Biblioteca Completa de Conhecimento</h2>
         </div>
@@ -173,14 +173,14 @@ const EbooksSection = () => {
         const isExpanded = expandedCategories.includes(category.id);
 
         return (
-          <section key={category.id} className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#15151b]">
+          <section key={category.id} className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
             <header
               className="flex cursor-pointer items-center justify-between gap-3 p-6 transition-colors hover:bg-white/[0.02]"
               onClick={() => toggleCategory(category.id)}
             >
               <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/15 ring-1 ring-indigo-400/20">
-                  <category.icon className="h-6 w-6 text-indigo-300" />
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                  <category.icon className="h-6 w-6 text-amber-300" />
                 </span>
                 <div>
                   <div className="font-heading text-xl text-amber-50">{category.category}</div>
@@ -207,8 +207,8 @@ const EbooksSection = () => {
                       className="group flex flex-col gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/10"
                     >
                       <div className="flex items-start gap-3">
-                        <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-500/15 ring-1 ring-indigo-400/20 transition-transform duration-300 group-hover:scale-110">
-                          <BookOpen className="h-6 w-6 text-indigo-300" />
+                        <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30 transition-transform duration-300 group-hover:scale-110">
+                          <BookOpen className="h-6 w-6 text-amber-300" />
                         </span>
                         <div className="flex-1">
                           <h4 className="font-semibold leading-tight text-amber-50">

@@ -68,10 +68,10 @@ const WorkoutsSection = () => {
       </div>
 
       {/* Mindset Correto */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-            <Brain className="h-5 w-5 text-red-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Brain className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🧠 Mindset Correto</h2>
@@ -84,14 +84,14 @@ const WorkoutsSection = () => {
       </section>
 
       {/* Fundamentos */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header
           className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
           onClick={() => toggleCard('fundamentos')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-              <Target className="h-5 w-5 text-red-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Target className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">Fundamentos do Treino</h2>
@@ -123,7 +123,7 @@ const WorkoutsSection = () => {
           {/* Exemplo Prático */}
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
             <h4 className="mb-3 flex items-center gap-2 font-semibold text-amber-50">
-              <Target className="h-5 w-5 text-red-300" />
+              <Target className="h-5 w-5 text-amber-300" />
               📌 Exemplo Prático:
             </h4>
             <div className="space-y-2 text-sm leading-relaxed text-zinc-400">
@@ -149,10 +149,10 @@ const WorkoutsSection = () => {
       </section>
 
       {/* Exemplos Reais */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-            <Instagram className="h-5 w-5 text-red-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Instagram className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📲 Exemplos Reais de Execução até a Falha</h2>
@@ -181,14 +181,14 @@ const WorkoutsSection = () => {
       </section>
 
       {/* Pontos Importantes */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header
           className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
           onClick={() => toggleCard('pontos-importantes')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-              <CheckCircle className="h-5 w-5 text-red-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <CheckCircle className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">✅ Reforçando os Pontos Mais Importantes</h2>
@@ -216,14 +216,14 @@ const WorkoutsSection = () => {
       </section>
 
       {/* Vídeos Complementares */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header
           className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
           onClick={() => toggleCard('videos-complementares')}
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-              <Play className="h-5 w-5 text-red-300" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Play className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">🎥 Vídeos Complementares</h2>
@@ -244,8 +244,8 @@ const WorkoutsSection = () => {
               className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
             >
               <div className="mb-3 flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-red-500/15 ring-1 ring-red-400/20">
-                  <video.icon className="h-5 w-5 text-red-300" />
+                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                  <video.icon className="h-5 w-5 text-amber-300" />
                 </span>
                 <h4 className="text-sm font-semibold leading-tight text-amber-50">{video.title}</h4>
               </div>

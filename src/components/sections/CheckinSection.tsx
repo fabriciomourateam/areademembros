@@ -37,10 +37,10 @@ const CheckinSection = () => {
       </div>
 
       {/* Por que é importante */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-            <MessageCircle className="h-5 w-5 text-sky-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <MessageCircle className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📌 Por que o Check-in é tão importante?</h2>
@@ -69,8 +69,8 @@ const CheckinSection = () => {
           {/* Tempo */}
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
             <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <Clock className="h-5 w-5 text-sky-300" />
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <Clock className="h-5 w-5 text-amber-300" />
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">⏱️ Rápido e Prático</h4>
@@ -82,8 +82,8 @@ const CheckinSection = () => {
           {/* Sem julgamentos */}
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
             <div className="flex items-start gap-3">
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <Heart className="h-5 w-5 text-sky-300" />
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <Heart className="h-5 w-5 text-amber-300" />
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">💬 Ambiente Seguro e Acolhedor</h4>
@@ -98,10 +98,10 @@ const CheckinSection = () => {
       </section>
 
       {/* Benefícios */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-            <Target className="h-5 w-5 text-sky-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Target className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎯 Benefícios do Check-in Regular</h2>
@@ -114,8 +114,8 @@ const CheckinSection = () => {
               key={index}
               className="flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
             >
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <benefit.icon className="h-5 w-5 text-sky-300" />
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <benefit.icon className="h-5 w-5 text-amber-300" />
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">{benefit.title}</h4>
@@ -127,10 +127,10 @@ const CheckinSection = () => {
       </section>
 
       {/* Vídeo Explicativo */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-            <Play className="h-5 w-5 text-sky-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Play className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎥 Vídeo Explicativo</h2>
@@ -150,19 +150,19 @@ const CheckinSection = () => {
             <h4 className="mb-3 font-semibold text-amber-50">O que você vai aprender:</h4>
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
+                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
                 <span className="text-sm text-zinc-400">Como funciona o processo</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
+                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
                 <span className="text-sm text-zinc-400">Por que é tão eficaz</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
+                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
                 <span className="text-sm text-zinc-400">Como preencher corretamente</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
+                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
                 <span className="text-sm text-zinc-400">Dicas para melhores resultados</span>
               </div>
             </div>
@@ -171,10 +171,10 @@ const CheckinSection = () => {
       </section>
 
       {/* Como funciona */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-            <MessageCircle className="h-5 w-5 text-sky-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <MessageCircle className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📱 Como Funciona na Prática</h2>
@@ -185,24 +185,24 @@ const CheckinSection = () => {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <span className="font-bold text-sky-300">1</span>
+              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="font-bold text-amber-300">1</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Receba no WhatsApp</h4>
               <p className="text-sm leading-relaxed text-zinc-400">Check-in chega diretamente no seu WhatsApp na data programada</p>
             </div>
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <span className="font-bold text-sky-300">2</span>
+              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="font-bold text-amber-300">2</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Preencha Honestamente</h4>
               <p className="text-sm leading-relaxed text-zinc-400">Responda as perguntas com sinceridade (5-10 minutos)</p>
             </div>
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/15 ring-1 ring-sky-400/20">
-                <span className="font-bold text-sky-300">3</span>
+              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="font-bold text-amber-300">3</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Receba Ajustes</h4>
               <p className="text-sm leading-relaxed text-zinc-400">Sua dieta e treino são ajustados conforme necessário</p>

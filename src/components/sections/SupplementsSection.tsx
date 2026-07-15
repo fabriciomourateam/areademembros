@@ -9,17 +9,14 @@ import { supabase } from '@/lib/supabase';
 const ADMIN_PASSWORD = 'admin123'; // mesma senha do painel da mentoria
 
 // Mapeamento de acento (aparência apenas) para o tema dark premium
-const accentMap: Record<string, { chipBg: string; ring: string; icon: string; chevron: string }> = {
-  blue: { chipBg: 'bg-sky-500/15', ring: 'ring-sky-400/20', icon: 'text-sky-300', chevron: 'text-amber-400' },
-  green: { chipBg: 'bg-emerald-500/15', ring: 'ring-emerald-400/20', icon: 'text-emerald-300', chevron: 'text-amber-400' },
-  purple: { chipBg: 'bg-violet-500/15', ring: 'ring-violet-400/20', icon: 'text-violet-300', chevron: 'text-amber-400' },
-  orange: { chipBg: 'bg-amber-500/15', ring: 'ring-amber-400/20', icon: 'text-amber-300', chevron: 'text-amber-400' },
-  red: { chipBg: 'bg-rose-500/15', ring: 'ring-rose-400/20', icon: 'text-rose-300', chevron: 'text-amber-400' },
-  yellow: { chipBg: 'bg-amber-500/15', ring: 'ring-amber-400/20', icon: 'text-amber-300', chevron: 'text-amber-400' },
-  pink: { chipBg: 'bg-rose-500/15', ring: 'ring-rose-400/20', icon: 'text-rose-300', chevron: 'text-amber-400' },
-  cyan: { chipBg: 'bg-sky-500/15', ring: 'ring-sky-400/20', icon: 'text-sky-300', chevron: 'text-amber-400' },
+const GOLD_ACCENT = {
+  chipBg: 'bg-amber-400/12',
+  ring: 'ring-amber-400/30',
+  icon: 'text-amber-300',
+  chevron: 'text-amber-400',
 };
-const getAccent = (c: string) => accentMap[c] || accentMap.purple;
+// Chips padronizados no dourado premium (independente da cor original)
+const getAccent = (_c: string) => GOLD_ACCENT;
 
 interface CompactItem {
   id: string;
@@ -575,7 +572,7 @@ const SupplementsSection = () => {
       </div>
 
       {/* Sugestões */}
-      <Card className="rounded-2xl border border-white/[0.07] bg-[#15151b]">
+      <Card className="rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <CardHeader className="pb-6">
           <CardTitle className="flex items-center justify-between gap-3 text-amber-50">
             <div className="flex items-center gap-3">
@@ -626,7 +623,7 @@ const SupplementsSection = () => {
                     className="w-full justify-between p-4 h-auto rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-amber-400/40 hover:bg-white/[0.04] transition"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-lg ring-1 ${accent.chipBg} ${accent.ring}`}>
+                      <div className={`flex h-11 w-11 items-center justify-center rounded-full ring-1 ${accent.chipBg} ${accent.ring}`}>
                         <supplement.icon className={`h-5 w-5 ${accent.icon}`} />
                       </div>
                       <div className="text-left">

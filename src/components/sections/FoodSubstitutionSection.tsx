@@ -47,7 +47,7 @@ const FoodSubstitutionSection = () => {
       </div>
 
       {/* Introdução */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <div className="text-center">
           <h2 className="font-heading text-xl text-amber-50">🔄 Revolucione Sua Flexibilidade Alimentar</h2>
           <p className="mx-auto mt-3 max-w-3xl text-zinc-400 leading-relaxed">
@@ -66,8 +66,8 @@ const FoodSubstitutionSection = () => {
             key={index}
             className="flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
           >
-            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-teal-500/15 ring-1 ring-teal-400/20">
-              <feature.icon className="h-5 w-5 text-teal-300" />
+            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <feature.icon className="h-5 w-5 text-amber-300" />
             </span>
             <div>
               <h3 className="mb-1 font-semibold text-amber-50">{feature.title}</h3>
@@ -78,27 +78,27 @@ const FoodSubstitutionSection = () => {
       </div>
 
       {/* Como Funciona */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <div className="text-center">
           <h3 className="font-heading text-xl text-amber-50">📱 Como Funciona</h3>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/15 ring-1 ring-teal-400/25">
-                <span className="text-xl font-bold text-teal-300">1</span>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="text-xl font-bold text-amber-300">1</span>
               </div>
               <h4 className="font-semibold text-amber-50">Digite o Alimento</h4>
               <p className="text-sm text-zinc-400">Informe qual ingrediente você precisa substituir</p>
             </div>
             <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/15 ring-1 ring-teal-400/25">
-                <span className="text-xl font-bold text-teal-300">2</span>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="text-xl font-bold text-amber-300">2</span>
               </div>
               <h4 className="font-semibold text-amber-50">Receba Opções</h4>
               <p className="text-sm text-zinc-400">Veja substitutos nutricionalmente equivalentes</p>
             </div>
             <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/15 ring-1 ring-teal-400/25">
-                <span className="text-xl font-bold text-teal-300">3</span>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <span className="text-xl font-bold text-amber-300">3</span>
               </div>
               <h4 className="font-semibold text-amber-50">Aplique e Continue</h4>
               <p className="text-sm text-zinc-400">Use o substituto e mantenha seus resultados</p>
@@ -108,10 +108,10 @@ const FoodSubstitutionSection = () => {
       </section>
 
       {/* Ferramenta de Substituição - Iframe */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal-500/15 ring-1 ring-teal-400/20">
-            <RefreshCw className="h-6 w-6 text-teal-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <RefreshCw className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Ferramenta de Substituição</h2>
@@ -141,10 +141,10 @@ const FoodSubstitutionSection = () => {
       </section>
 
       {/* Benefícios */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal-500/15 ring-1 ring-teal-400/20">
-            <CheckCircle className="h-6 w-6 text-teal-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <CheckCircle className="h-6 w-6 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Benefícios Exclusivos</h2>
@@ -157,7 +157,7 @@ const FoodSubstitutionSection = () => {
               key={index}
               className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
             >
-              <CheckCircle className="h-5 w-5 flex-shrink-0 text-teal-300" />
+              <CheckCircle className="h-5 w-5 flex-shrink-0 text-amber-300" />
               <span className="text-sm font-medium text-amber-100">{benefit}</span>
             </div>
           ))}

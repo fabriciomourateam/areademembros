@@ -22,10 +22,10 @@ const ReferralSection = () => {
       </div>
 
       {/* Introdução */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-pink-500/15 ring-1 ring-pink-400/20">
-            <Users className="h-5 w-5 text-pink-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Users className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🤝🏼 Como Funciona</h2>
@@ -51,10 +51,10 @@ const ReferralSection = () => {
       </section>
 
       {/* Trilha de Indicações */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-pink-500/15 ring-1 ring-pink-400/20">
-            <Trophy className="h-5 w-5 text-pink-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Trophy className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎯 Trilha de Indicações</h2>
@@ -105,10 +105,10 @@ const ReferralSection = () => {
       </section>
 
       {/* Benefícios para o Indicado */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-pink-500/15 ring-1 ring-pink-400/20">
-            <Heart className="h-5 w-5 text-pink-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Heart className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">💝 Benefício para o Indicado</h2>
@@ -135,10 +135,10 @@ const ReferralSection = () => {
       </section>
 
       {/* Como Participar */}
-      <section className="rounded-2xl border border-white/[0.07] bg-[#15151b] p-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-pink-500/15 ring-1 ring-pink-400/20">
-            <MessageCircle className="h-5 w-5 text-pink-300" />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <MessageCircle className="h-5 w-5 text-amber-300" />
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📲 Como Participar</h2>
@@ -186,7 +186,7 @@ const ReferralSection = () => {
 
       {/* Mensagem de Agradecimento */}
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
-        <Heart className="mx-auto mb-4 h-16 w-16 text-pink-300" />
+        <Heart className="mx-auto mb-4 h-16 w-16 text-amber-300" />
         <h3 className="mb-3 font-heading text-2xl text-amber-100">Obrigado pela confiança!</h3>
         <p className="mx-auto max-w-2xl leading-relaxed text-zinc-400">
           Sua indicação é a maior prova de que nosso trabalho está transformando vidas. Juntos, vamos
