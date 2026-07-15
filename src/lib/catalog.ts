@@ -19,17 +19,15 @@ import {
   BookOpen,
   ChefHat,
   Gift,
-  Users,
   Activity,
   Target,
   Clock,
   Zap,
   TrendingUp,
   Wrench,
-  Sparkles,
 } from 'lucide-react';
 
-export type CardType = 'video' | 'section' | 'link';
+export type CardType = 'video' | 'section' | 'link' | 'guide';
 
 export interface CatalogItem {
   id: string;
@@ -43,8 +41,10 @@ export interface CatalogItem {
   /** URL externa (para type === 'link') */
   href?: string;
   icon: LucideIcon;
-  /** classes tailwind de gradiente usadas na capa quando não há thumbnail */
+  /** classes tailwind de gradiente usadas na capa quando não há thumbnail/imagem */
   gradient: string;
+  /** imagem de capa (opcional); se falhar, cai no gradiente + ícone */
+  image?: string;
   locked?: boolean;
   lockKey?: LockKey;
   badge?: string;
@@ -330,31 +330,6 @@ export const CATEGORIES: Category[] = [
         route: '/referral',
         icon: Gift,
         gradient: 'from-pink-500 to-rose-700',
-      },
-    ],
-  },
-  {
-    id: 'premium',
-    title: 'Mentorias (Premium)',
-    description: 'Área exclusiva para membros Premium: mentorias em grupo gravadas.',
-    icon: Users,
-    gradient: 'from-amber-500 to-yellow-700',
-    badge: 'Premium',
-    locked: true,
-    lockKey: 'mentoring',
-    embedSection: 'mentoring',
-    items: [
-      {
-        id: 'mentoring-info',
-        title: 'Mentorias em Grupo',
-        subtitle: 'Área exclusiva Premium',
-        type: 'section',
-        route: '/mentoring',
-        icon: Sparkles,
-        gradient: 'from-amber-500 to-yellow-600',
-        locked: true,
-        lockKey: 'mentoring',
-        badge: 'Premium',
       },
     ],
   },

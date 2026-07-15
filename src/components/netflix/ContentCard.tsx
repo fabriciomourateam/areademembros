@@ -11,7 +11,7 @@ interface ContentCardProps {
 const ContentCard = ({ item, onSelect }: ContentCardProps) => {
   const [imgFailed, setImgFailed] = useState(false);
   const Icon = item.icon;
-  const thumb = item.videoId ? youtubeThumb(item.videoId) : null;
+  const thumb = item.image ?? (item.videoId ? youtubeThumb(item.videoId) : null);
   const showImage = thumb && !imgFailed;
 
   return (
@@ -32,8 +32,10 @@ const ContentCard = ({ item, onSelect }: ContentCardProps) => {
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className={cn('flex h-full w-full items-center justify-center bg-gradient-to-br', item.gradient)}>
-            <Icon className="h-10 w-10 text-white/90 drop-shadow" />
+          <div className="relative flex h-full w-full items-center justify-center bg-[#0e0e0f]">
+            <div className={cn('absolute inset-0 bg-gradient-to-br opacity-25', item.gradient)} />
+            <div className="warm-glow absolute inset-0 opacity-60" />
+            <Icon className="relative h-10 w-10 text-amber-100/90 drop-shadow" />
           </div>
         )}
 

@@ -53,13 +53,16 @@ const HeroBanner = ({ onPlay }: HeroBannerProps) => {
               <Play className="h-5 w-5 fill-black" />
               Assistir boas-vindas
             </button>
-            <a
-              href="#conteudos"
+            <button
+              type="button"
+              onClick={() =>
+                document.getElementById('conteudos')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
               className="inline-flex items-center gap-2 rounded-md border border-amber-500/40 bg-white/5 px-7 py-3 text-sm font-semibold text-amber-100 backdrop-blur transition-colors hover:border-amber-400/70 hover:bg-white/10 sm:text-base"
             >
               Explorar conteúdos
               <ChevronRight className="h-4 w-4" />
-            </a>
+            </button>
           </div>
         </div>
       </div>

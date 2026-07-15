@@ -133,8 +133,9 @@
 @layer components {
   /* Tema premium (preto + dourado, estilo cinematográfico) */
   .font-display {
-    font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
-    letter-spacing: 0.03em;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-weight: 800;
+    letter-spacing: 0;
   }
 
   .text-gold {

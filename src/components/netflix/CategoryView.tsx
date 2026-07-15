@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { BookOpen } from 'lucide-react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import NetflixNavbar from './NetflixNavbar';
 import ContentCard from './ContentCard';
 import VideoModal from './VideoModal';
+import SectionModal from './SectionModal';
 import PasswordDialog from './PasswordDialog';
 import { SECTIONS } from './sectionRegistry';
 import { getCategory, type CatalogItem } from '@/lib/catalog';
@@ -15,6 +17,7 @@ const CategoryView = () => {
   const category = id ? getCategory(id) : undefined;
 
   const [videoModal, setVideoModal] = useState<{ id: string; title: string } | null>(null);
+  const [sectionOpen, setSectionOpen] = useState(false);
   const [lockPrompt, setLockPrompt] = useState<{ key: LockKey; route: string } | null>(null);
   const [granted, setGranted] = useState(
     () => !category?.lockKey || isUnlocked(category.lockKey)
@@ -52,6 +55,9 @@ const CategoryView = () => {
       case 'link':
         if (item.href) window.open(item.href, '_blank');
         break;
+      case 'guide':
+        setSectionOpen(true);
+        break;
       case 'section':
         if (item.locked && item.lockKey && !isUnlocked(item.lockKey)) {
           setLockPrompt({ key: item.lockKey, route: item.route! });
@@ -65,6 +71,20 @@ const CategoryView = () => {
   const EmbeddedSection = category.embedSection
     ? SECTIONS[category.embedSection]?.component
     : undefined;
+
+  // Card "Guia completo" que abre o conteúdo detalhado num modal premium,
+  // mantendo o tema escuro/dourado (sem a seção clara solta na página).
+  const guideItem: CatalogItem = {
+    id: `${category.id}-guide`,
+    title: 'Guia completo',
+    subtitle: 'Orientações detalhadas',
+    type: 'guide',
+    icon: BookOpen,
+    gradient: 'from-amber-500 to-yellow-700',
+    badge: 'Guia',
+  };
+
+  const cards = EmbeddedSection ? [...category.items, guideItem] : category.items;
 
   return (
     <SidebarProvider>
@@ -93,7 +113,7 @@ const CategoryView = () => {
                 {category.badge}
               </span>
             )}
-            <h1 className="mt-2 text-3xl font-extrabold text-white drop-shadow sm:text-4xl">
+            <h1 className="mt-2 font-display text-3xl font-bold text-white drop-shadow sm:text-4xl">
               {category.title}
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-white/90 sm:text-base">
@@ -102,27 +122,18 @@ const CategoryView = () => {
           </div>
         </header>
 
-        {/* Capas de acesso rápido aos conteúdos da categoria */}
-        {category.items.length > 0 && (
-          <section className="bg-[#0b0b0b] px-4 py-8 sm:px-8">
+        {/* Fileira de conteúdos: vídeos/itens + card "Guia completo" (modal) */}
+        {cards.length > 0 && (
+          <section className="flex-1 bg-[#0b0b0b] px-4 py-8 sm:px-8">
             <div className="mx-auto max-w-[1600px]">
               <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
               <div className="flex flex-wrap gap-4">
-                {category.items.map((item) => (
+                {cards.map((item) => (
                   <ContentCard key={item.id} item={item} onSelect={handleSelect} />
                 ))}
               </div>
             </div>
           </section>
-        )}
-
-        {/* Seção detalhada completa embutida (conteúdo original preservado) */}
-        {EmbeddedSection && (
-          <main className="flex-1 bg-gradient-to-br from-amber-50/20 to-white px-3 pb-16 pt-6 sm:px-6 lg:px-8">
-            <div className="fade-in-up">
-              <EmbeddedSection />
-            </div>
-          </main>
         )}
 
         <footer className="mt-auto border-t border-white/10 bg-[#0b0b0b] px-4 py-8 text-center text-xs text-zinc-500 sm:px-8">
@@ -135,6 +146,18 @@ const CategoryView = () => {
         title={videoModal?.title}
         onClose={() => setVideoModal(null)}
       />
+
+      {EmbeddedSection && (
+        <SectionModal
+          open={sectionOpen}
+          title={category.title}
+          onClose={() => setSectionOpen(false)}
+        >
+          <div className="fade-in-up">
+            <EmbeddedSection />
+          </div>
+        </SectionModal>
+      )}
 
       <PasswordDialog
         lockKey={lockPrompt?.key ?? null}

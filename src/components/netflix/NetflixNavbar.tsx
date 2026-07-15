@@ -53,9 +53,7 @@ const NetflixNavbar = ({ showBack = false }: NetflixNavbarProps) => {
               (e.currentTarget as HTMLImageElement).style.display = 'none';
             }}
           />
-          <span className="font-display text-base font-bold tracking-wide text-gold sm:text-lg">
-            FM TEAM
-          </span>
+          <span className="font-display text-base text-gold sm:text-lg">FM TEAM</span>
         </button>
 
         <div className="ml-auto flex items-center gap-2">
