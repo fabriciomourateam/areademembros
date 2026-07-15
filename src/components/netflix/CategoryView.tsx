@@ -173,7 +173,12 @@ const CategoryView = () => {
       />
 
       {sectionModal && (
-        <SectionModal open title={sectionModal.title} onClose={() => setSectionModal(null)}>
+        <SectionModal
+          open
+          title={sectionModal.title}
+          onClose={() => setSectionModal(null)}
+          dark={sectionModal.key === 'supplements'}
+        >
           <div className="fade-in-up">
             {(() => {
               const Comp = SECTIONS[sectionModal.key]?.component;
