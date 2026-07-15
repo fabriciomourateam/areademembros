@@ -56,6 +56,8 @@ export interface Category {
   description: string;
   icon: LucideIcon;
   gradient: string;
+  /** imagem de capa (opcional); se falhar ao carregar, cai no gradiente + ícone */
+  image?: string;
   badge?: string;
   locked?: boolean;
   lockKey?: LockKey;
@@ -81,6 +83,8 @@ export const CATEGORIES: Category[] = [
     description: 'Vídeo de boas-vindas e o passo a passo para dar o primeiro passo.',
     icon: Play,
     gradient: 'from-green-600 to-emerald-800',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_163842_eed83614-9a18-4558-98fd-5cb21fa90051_min.webp',
     badge: 'Essencial',
     embedSection: 'home',
     items: [
@@ -102,6 +106,8 @@ export const CATEGORIES: Category[] = [
     description: 'Como seguir sua dieta, montar refeições e tirar as principais dúvidas.',
     icon: Utensils,
     gradient: 'from-amber-500 to-orange-700',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_163859_c5b7f7f6-5bbd-4a0f-bb8c-9094cdb058f4_min.webp',
     embedSection: 'nutrition',
     items: [
       {
@@ -139,6 +145,8 @@ export const CATEGORIES: Category[] = [
     description: 'Orientação principal e vídeos complementares de técnica e execução.',
     icon: Dumbbell,
     gradient: 'from-red-500 to-rose-800',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164318_1b465020-9916-4cd7-9b9c-452117cb4998_min.webp',
     embedSection: 'workouts',
     items: [
       {
@@ -222,6 +230,8 @@ export const CATEGORIES: Category[] = [
     description: 'Entenda a importância do check-in e como acompanhar sua evolução.',
     icon: CheckCircle,
     gradient: 'from-sky-500 to-blue-800',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164409_1db857cc-4747-4a2c-a0da-136504c8b9e6_min.webp',
     embedSection: 'checkin',
     items: [
       {
@@ -241,6 +251,8 @@ export const CATEGORIES: Category[] = [
     description: 'Calculadora de refeição livre, substituição de alimentos e bioimpedância.',
     icon: Wrench,
     gradient: 'from-violet-500 to-purple-800',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164458_126e5c76-aef9-4d0d-8033-dc480ad99154_min.webp',
     items: [
       {
         id: 'meal-calculator',
@@ -280,6 +292,8 @@ export const CATEGORIES: Category[] = [
     description: 'E-books, receitas saudáveis, guia de suplementos e programa de incentivo.',
     icon: Gift,
     gradient: 'from-indigo-500 to-blue-800',
+    image:
+      'https://d8j0ntlcm91z4.cloudfront.net/user_3DzxQiG0KYKPKwvHvP0S04ovAAs/hf_20260715_164546_f7b18bbb-9056-433b-a43a-cbf764e14497_min.webp',
     items: [
       {
         id: 'ebooks',

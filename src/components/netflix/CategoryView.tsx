@@ -71,11 +71,23 @@ const CategoryView = () => {
       <div className="flex min-h-screen w-full flex-col bg-[#0b0b0b]">
         <NetflixNavbar showBack />
 
-        {/* Faixa de destaque da categoria (título + descrição) */}
+        {/* Faixa de destaque da categoria (imagem/tom + título + descrição) */}
         <header
-          className={`bg-gradient-to-br ${category.gradient} px-4 pb-10 pt-20 sm:px-8 sm:pt-28`}
+          className={`relative overflow-hidden bg-gradient-to-br ${category.gradient} px-4 pb-10 pt-20 sm:px-8 sm:pt-28`}
         >
-          <div className="mx-auto max-w-[1600px]">
+          {category.image && (
+            <>
+              <img
+                src={category.image}
+                alt=""
+                aria-hidden
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0b] via-[#0a0a0b]/80 to-[#0a0a0b]/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] to-transparent" />
+            </>
+          )}
+          <div className="relative mx-auto max-w-[1600px]">
             {category.badge && (
               <span className="rounded bg-black/40 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-amber-300 ring-1 ring-amber-300/40">
                 {category.badge}

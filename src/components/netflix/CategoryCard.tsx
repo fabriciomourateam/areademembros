@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Category } from '@/lib/catalog';
@@ -9,6 +10,8 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
   const Icon = category.icon;
+  const [imgOk, setImgOk] = useState(true);
+  const showImage = !!category.image && imgOk;
 
   return (
     <button
@@ -20,12 +23,30 @@ const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
       <div className="overflow-hidden rounded-xl border border-amber-500/20 bg-[#0e0e0f] shadow-[0_12px_45px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-amber-400/70 group-hover:gold-glow group-focus-visible:border-amber-400">
         {/* Poster */}
         <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0b]">
-          {/* tom da categoria em baixa opacidade sobre o preto */}
-          <div className={cn('absolute inset-0 bg-gradient-to-br opacity-30', category.gradient)} />
-          {/* brilho dourado */}
-          <div className="warm-glow absolute inset-0 opacity-70" />
-          {/* ícone marca d'água */}
-          <Icon className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 text-white/85 drop-shadow transition-transform duration-500 group-hover:scale-110" />
+          {showImage ? (
+            <>
+              {/* imagem de capa */}
+              <img
+                src={category.image}
+                alt={category.title}
+                loading="lazy"
+                onError={() => setImgOk(false)}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              {/* escurecimento para legibilidade + toque dourado */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
+              <div className="warm-glow absolute inset-0 opacity-40 mix-blend-soft-light" />
+            </>
+          ) : (
+            <>
+              {/* tom da categoria em baixa opacidade sobre o preto */}
+              <div className={cn('absolute inset-0 bg-gradient-to-br opacity-30', category.gradient)} />
+              {/* brilho dourado */}
+              <div className="warm-glow absolute inset-0 opacity-70" />
+              {/* ícone marca d'água */}
+              <Icon className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 text-white/85 drop-shadow transition-transform duration-500 group-hover:scale-110" />
+            </>
+          )}
 
           {category.badge && (
             <span className="absolute left-3 top-3 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-300 ring-1 ring-amber-400/40 backdrop-blur">
