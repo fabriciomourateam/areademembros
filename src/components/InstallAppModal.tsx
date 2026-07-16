@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Smartphone, Download, Share, Plus, X } from 'lucide-react';
+import { Smartphone, Download, Share, Plus } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -85,7 +85,7 @@ const InstallAppModal = () => {
         </Button>
       </div>
 
-      <Dialog open={showModal} onOpenChange={setShowModal}>
+      <Dialog open={showModal} onOpenChange={(o) => (o ? setShowModal(true) : handleDismiss())}>
         <DialogContent className="mx-auto max-w-md gap-0 overflow-hidden rounded-3xl border border-amber-500/25 bg-[#0a0a0b] p-6 text-zinc-100 shadow-2xl duration-300 data-[state=open]:zoom-in-90">
           <DialogHeader>
             <div className="flex items-center justify-between">
@@ -100,14 +100,6 @@ const InstallAppModal = () => {
                   </div>
                 </div>
               </DialogTitle>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleDismiss}
-                className="text-zinc-500 hover:bg-white/5 hover:text-zinc-200"
-              >
-                <X className="h-4 w-4" />
-              </Button>
             </div>
           </DialogHeader>
 
