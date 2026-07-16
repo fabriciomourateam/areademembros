@@ -26,6 +26,8 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
       <DialogContent
         className={cn(
           'max-w-4xl gap-0 overflow-hidden rounded-3xl p-0 shadow-2xl',
+          // abertura mais suave (fade + escala mais generosa que o padrão)
+          'duration-300 data-[state=open]:zoom-in-90 data-[state=open]:slide-in-from-top-[42%]',
           dark
             ? 'border border-amber-500/25 bg-[#0a0a0b] text-zinc-100'
             : 'border border-amber-200/70 bg-white text-zinc-900'
@@ -45,13 +47,19 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
             {title}
           </DialogTitle>
         </DialogHeader>
-        <div className={cn('max-h-[76vh] overflow-y-auto', dark ? 'bg-[#0a0a0b]' : 'bg-white')}>
+        <div
+          className={cn(
+            'gold-scroll scroll-fade-mask max-h-[76vh] overflow-y-auto',
+            dark ? 'bg-[#0a0a0b]' : 'bg-white'
+          )}
+        >
           <SidebarProvider>
-            {/* zoom reduz o conteúdo original (feito para tela cheia) para caber
-                de forma elegante no modal premium */}
+            {/* modal-content-scale reduz o conteúdo original (feito para tela
+                cheia) para caber de forma elegante no modal premium, com um
+                passo responsivo (encolhe menos no mobile) */}
             <div
               className={cn(
-                'w-full px-3 py-5 sm:px-5 [zoom:0.8]',
+                'modal-content-scale w-full px-3 py-5 sm:px-5',
                 dark ? 'bg-[#0a0a0b]' : 'bg-gradient-to-br from-amber-50/40 to-white'
               )}
             >

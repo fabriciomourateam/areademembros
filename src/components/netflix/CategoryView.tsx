@@ -11,6 +11,7 @@ import PasswordDialog from './PasswordDialog';
 import { SECTIONS, type SectionKey } from './sectionRegistry';
 import { getCategory, type CatalogItem } from '@/lib/catalog';
 import { isUnlocked, type LockKey } from '@/lib/access';
+import { markVisited, setLastCategory } from '@/lib/progress';
 
 const CategoryView = () => {
   const navigate = useNavigate();
@@ -28,6 +29,11 @@ const CategoryView = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setGranted(!category?.lockKey || isUnlocked(category?.lockKey));
+    // Registra a categoria para "Continue de onde parou" e o selo de visitada.
+    if (category?.id) {
+      setLastCategory(category.id);
+      markVisited(category.id);
+    }
   }, [category?.id, category?.lockKey]);
 
   if (!category) {

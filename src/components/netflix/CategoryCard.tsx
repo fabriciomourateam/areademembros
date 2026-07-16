@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Category } from '@/lib/catalog';
 
 interface CategoryCardProps {
   category: Category;
   onSelect: (category: Category) => void;
+  /** índice na fileira — usado para a entrada escalonada */
+  index?: number;
+  /** já visitada — mostra o selo dourado de concluído */
+  visited?: boolean;
 }
 
-const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
+const CategoryCard = ({ category, onSelect, index = 0, visited = false }: CategoryCardProps) => {
   const Icon = category.icon;
   const [imgOk, setImgOk] = useState(true);
   const showImage = !!category.image && imgOk;
@@ -17,7 +21,8 @@ const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
     <button
       type="button"
       onClick={() => onSelect(category)}
-      className="group relative w-[240px] shrink-0 snap-start text-left focus:outline-none sm:w-[300px]"
+      className="card-enter group relative w-[240px] shrink-0 snap-start text-left focus:outline-none sm:w-[300px]"
+      style={{ animationDelay: `${Math.min(index, 8) * 80}ms` }}
       aria-label={category.title}
     >
       <div className="overflow-hidden rounded-xl border border-amber-500/20 bg-[#0e0e0f] shadow-[0_12px_45px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-amber-400/70 group-hover:gold-glow group-focus-visible:border-amber-400">
@@ -48,6 +53,9 @@ const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
             </>
           )}
 
+          {/* Varredura de brilho no hover */}
+          <div className="card-sheen pointer-events-none absolute inset-0" />
+
           {category.badge && (
             <span className="absolute left-3 top-3 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-300 ring-1 ring-amber-400/40 backdrop-blur">
               {category.badge}
@@ -56,6 +64,14 @@ const CategoryCard = ({ category, onSelect }: CategoryCardProps) => {
           {category.locked && (
             <span className="absolute right-3 top-3 rounded-full bg-black/60 p-1.5 ring-1 ring-amber-400/40 backdrop-blur">
               <Lock className="h-3.5 w-3.5 text-amber-300" />
+            </span>
+          )}
+          {!category.locked && visited && (
+            <span
+              className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-amber-600 shadow ring-1 ring-amber-200/60"
+              title="Você já acessou"
+            >
+              <Check className="h-3.5 w-3.5 text-black" strokeWidth={3} />
             </span>
           )}
         </div>
