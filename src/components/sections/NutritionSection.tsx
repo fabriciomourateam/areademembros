@@ -91,7 +91,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">📌 Como Seguir Sua Dieta</div>
-              <div className="text-sm text-zinc-400">Base do seu sucesso + erros a evitar</div>
+              <div className="text-sm text-zinc-400">Base do seu sucesso e erros a evitar</div>
             </div>
           </div>
           {expandedCards.includes('como-seguir') ? (

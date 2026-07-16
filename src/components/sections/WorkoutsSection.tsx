@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Play, Dumbbell, Target, Brain, CheckCircle, Clock, TrendingUp, Zap, Instagram, ChevronDown, ChevronUp } from 'lucide-react';
+import { Dumbbell, Target, Brain, CheckCircle, Instagram, ChevronDown, ChevronUp } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const WorkoutsSection = () => {
@@ -14,44 +14,6 @@ const WorkoutsSection = () => {
     "Priorize sempre a técnica e a amplitude completa de movimento",
     "Busque progressão de carga sempre que possível, dentro da faixa de repetições",
     "Mantenha pelo menos 1 minuto de descanso entre as séries"
-  ];
-
-  const complementaryVideos = [
-    {
-      title: "Aquecimento e Ordem dos Exercícios",
-      url: "https://youtu.be/QBRv1gMNXn4",
-      icon: TrendingUp
-    },
-    {
-      title: "Cadência na Execução dos Exercícios",
-      url: "https://youtu.be/rnsxA-WOMWU",
-      icon: Clock
-    },
-    {
-      title: "Amplitude de Movimento",
-      url: "https://youtu.be/M7AysVzH7wU",
-      icon: Target
-    },
-    {
-      title: "Descanso entre Séries e Exercícios",
-      url: "https://youtu.be/AVjUuppmYXE",
-      icon: Clock
-    },
-    {
-      title: "O que fazer quando perder um treino",
-      url: "https://youtu.be/9zFo29uQiHE",
-      icon: CheckCircle
-    },
-    {
-      title: "Como fazer Drop Set",
-      url: "https://youtu.be/DdjB2tRuagU",
-      icon: Zap
-    },
-    {
-      title: "Abdominais e perda de barriga",
-      url: "https://www.youtube.com/watch?v=e8TJsdFyMYY&ab_channel=FabricioMoura",
-      icon: Target
-    }
   ];
 
   return (
@@ -209,54 +171,6 @@ const WorkoutsSection = () => {
                 {index + 1}
               </span>
               <span className="font-medium leading-relaxed text-zinc-300">{point}</span>
-            </div>
-          ))}
-        </div>
-        )}
-      </section>
-
-      {/* Vídeos Complementares */}
-      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
-        <header
-          className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
-          onClick={() => toggleCard('videos-complementares')}
-        >
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-              <Play className="h-5 w-5 text-amber-300" />
-            </span>
-            <div>
-              <h2 className="font-heading text-xl text-amber-50">🎥 Vídeos Complementares</h2>
-              <p className="text-sm text-zinc-400">Conhecimento avançado</p>
-            </div>
-          </div>
-          {expandedCards.includes('videos-complementares') ? (
-            <ChevronUp className="h-6 w-6 flex-shrink-0 text-amber-400" />
-          ) : (
-            <ChevronDown className="h-6 w-6 flex-shrink-0 text-amber-400" />
-          )}
-        </header>
-        {expandedCards.includes('videos-complementares') && (
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 animate-in slide-in-from-top-2 duration-300">
-          {complementaryVideos.map((video, index) => (
-            <div
-              key={index}
-              className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
-            >
-              <div className="mb-3 flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-                  <video.icon className="h-5 w-5 text-amber-300" />
-                </span>
-                <h4 className="text-sm font-semibold leading-tight text-amber-50">{video.title}</h4>
-              </div>
-              <button
-                type="button"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-4 py-2.5 text-sm font-bold text-black transition-all hover:brightness-110"
-                onClick={() => window.open(video.url, '_blank')}
-              >
-                <Play className="h-3 w-3" />
-                Assistir
-              </button>
             </div>
           ))}
         </div>

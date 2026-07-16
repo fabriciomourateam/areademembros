@@ -7,6 +7,7 @@
 
 const LAST_KEY = 'fmteam:last-category';
 const VISITED_KEY = 'fmteam:visited-categories';
+const WATCHED_KEY = 'fmteam:watched-videos';
 
 export function getLastCategory(): string | null {
   try {
@@ -41,6 +42,28 @@ export function markVisited(id: string): void {
     if (visited.has(id)) return;
     visited.add(id);
     localStorage.setItem(VISITED_KEY, JSON.stringify([...visited]));
+  } catch {
+    /* noop */
+  }
+}
+
+export function getWatchedVideos(): Set<string> {
+  try {
+    const raw = localStorage.getItem(WATCHED_KEY);
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? new Set(parsed as string[]) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+export function markVideoWatched(id: string): void {
+  try {
+    const watched = getWatchedVideos();
+    if (watched.has(id)) return;
+    watched.add(id);
+    localStorage.setItem(WATCHED_KEY, JSON.stringify([...watched]));
   } catch {
     /* noop */
   }

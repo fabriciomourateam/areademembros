@@ -43,7 +43,7 @@ const NetflixHome = () => {
       <main>
         <HeroBanner onPlay={() => setVideoModal({ id: HERO.videoId, title: HERO.title })} />
 
-        <div id="conteudos" className="relative z-10 -mt-12 pb-24 sm:-mt-16">
+        <div id="conteudos" className="relative z-10 pb-24 pt-6">
           <div className="mb-6 px-4 sm:px-8">
             <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-amber-200/60">
               Explore

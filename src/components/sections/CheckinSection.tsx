@@ -1,5 +1,4 @@
-import { Play, CheckCircle, MessageCircle, Clock, AlertTriangle, Heart, Target, Calendar, Zap } from 'lucide-react';
-import YouTubeEmbed from '@/components/YouTubeEmbed';
+import { CheckCircle, MessageCircle, Clock, AlertTriangle, Heart, Target, Calendar, Zap } from 'lucide-react';
 
 const CheckinSection = () => {
   const benefits = [
@@ -123,50 +122,6 @@ const CheckinSection = () => {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Vídeo Explicativo */}
-      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
-        <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-            <Play className="h-5 w-5 text-amber-300" />
-          </span>
-          <div>
-            <h2 className="font-heading text-xl text-amber-50">🎥 Vídeo Explicativo</h2>
-            <p className="text-sm text-zinc-400">Entenda na prática</p>
-          </div>
-        </header>
-
-        <div className="space-y-6">
-          <div className="mx-auto aspect-video max-w-2xl overflow-hidden rounded-xl border border-white/[0.06]">
-            <YouTubeEmbed
-              videoId="hwUYrE6cfww"
-              title="Vídeo explicativo sobre check-in - FM Team"
-            />
-          </div>
-
-          <div className="mx-auto max-w-2xl">
-            <h4 className="mb-3 font-semibold text-amber-50">O que você vai aprender:</h4>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-300">Como funciona o processo</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-300">Por que é tão eficaz</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-300">Como preencher corretamente</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-300">Dicas para melhores resultados</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
