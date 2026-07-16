@@ -450,7 +450,14 @@ const SupplementsSection = () => {
         <h5 className="font-semibold mb-4 text-amber-100">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
 
         {isLoadingPhotos ? (
-          <p className="text-xs text-zinc-500">Carregando exemplos...</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3" aria-busy="true" aria-label="Carregando exemplos">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                <div className="mb-2 aspect-square animate-pulse rounded bg-white/[0.06]" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-white/10" />
+              </div>
+            ))}
+          </div>
         ) : photos.length === 0 ? (
           <p className="text-xs text-zinc-500">
             {isAdmin ? 'Nenhuma foto cadastrada. Use o painel abaixo para adicionar.' : 'Nenhum exemplo disponível no momento.'}
@@ -646,7 +653,17 @@ const SupplementsSection = () => {
                         </p>
 
                         {isLoadingCompact ? (
-                          <p className="text-xs text-zinc-500">Carregando lista compacta...</p>
+                          <div className="grid gap-2" aria-busy="true" aria-label="Carregando lista compacta">
+                            {[...Array(5)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-2.5"
+                              >
+                                <span className="h-3 w-2/3 animate-pulse rounded bg-white/10" />
+                                <span className="h-4 w-4 animate-pulse rounded bg-amber-400/20" />
+                              </div>
+                            ))}
+                          </div>
                         ) : compactItems.length === 0 ? (
                           <p className="text-xs text-zinc-500">
                             Nenhum item cadastrado ainda. Utilize o painel admin para adicionar os primeiros suplementos.
