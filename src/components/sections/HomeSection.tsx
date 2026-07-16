@@ -47,11 +47,11 @@ const HomeSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">COMUNICAÇÃO & SUPORTE</h2>
-            <p className="text-sm text-zinc-400">Canal oficial — WhatsApp</p>
+            <p className="text-sm text-zinc-300">Canal oficial — WhatsApp</p>
           </div>
         </header>
         <div className="space-y-5">
-          <p className="leading-relaxed text-zinc-300">
+          <p className="leading-relaxed text-zinc-200">
             A comunicação direta e constante é a nossa principal ferramenta. Me avise sempre que houver
             qualquer dificuldade pelo <strong className="text-amber-100">WhatsApp oficial</strong>. É por
             ele que você tira <strong className="text-amber-100">todas as suas dúvidas</strong> comigo e
@@ -110,7 +110,7 @@ const HomeSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">👥 Comunidade VIP do Time</h2>
-            <p className="text-sm text-zinc-400">Grupo Exclusivo de Membros</p>
+            <p className="text-sm text-zinc-300">Grupo Exclusivo de Membros</p>
           </div>
           <div className="ml-auto">
             <div className="flex items-center gap-1 rounded-full bg-purple-500/15 px-3 py-1 ring-1 ring-purple-400/25">
@@ -175,7 +175,7 @@ const HomeSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">FINANCEIRO</h2>
-              <p className="text-sm text-zinc-400">WhatsApp</p>
+              <p className="text-sm text-zinc-300">WhatsApp</p>
             </div>
           </header>
           <p className="mb-6 text-zinc-300">Para tratar de pagamentos, boletos e faturas:</p>
@@ -201,7 +201,7 @@ const HomeSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">CONTRATO DE ADESÃO</h2>
-              <p className="text-sm text-zinc-400">Documento oficial</p>
+              <p className="text-sm text-zinc-300">Documento oficial</p>
             </div>
           </header>
           <p className="leading-relaxed text-zinc-300">
