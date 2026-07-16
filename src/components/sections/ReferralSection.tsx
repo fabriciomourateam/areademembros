@@ -1,4 +1,4 @@
-import { Users, Heart, Trophy, MessageCircle } from 'lucide-react';
+import { Heart, Trophy, MessageCircle } from 'lucide-react';
 
 const ReferralSection = () => {
   const tiers = [
@@ -20,35 +20,6 @@ const ReferralSection = () => {
           </p>
         </div>
       </div>
-
-      {/* Introdução */}
-      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
-        <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-            <Users className="h-5 w-5 text-amber-300" />
-          </span>
-          <div>
-            <h2 className="font-heading text-xl text-amber-50">🤝🏼 Como Funciona</h2>
-          </div>
-        </header>
-        <div className="space-y-5 text-center">
-          <p className="mx-auto max-w-3xl leading-relaxed text-zinc-400">
-            Esse programa existe pra recompensar quem realmente{' '}
-            <strong className="text-amber-100">abraça o processo</strong>. Cada pessoa que você indica e
-            que <strong className="text-amber-100">fecha o acompanhamento</strong> vira{' '}
-            <strong className="text-amber-100">tempo grátis</strong> pra você continuar evoluindo com a
-            gente.
-          </p>
-
-          <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-6 py-5">
-            <h3 className="mb-3 font-heading text-xl text-amber-100">✨ Indicou, ganhou!</h3>
-            <p className="leading-relaxed text-zinc-400">
-              Quanto mais pessoas você traz com você, mais meses de acompanhamento você acumula de
-              graça — chegando até <strong className="text-amber-100">1 ano inteiro grátis</strong>.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Trilha de Indicações */}
       <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">

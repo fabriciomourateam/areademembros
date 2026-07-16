@@ -11,16 +11,17 @@ const NutritionSection = () => {
       prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
     );
   };
+
   const recommendations = [
     {
       title: "Hidratação",
-      description: "Beba no mínimo <strong>40ml de água por kg corporal</strong>. \nEx: 80kg → 3,2L por dia. <strong>Pode consumir Coca Zero, H2O, refrigerantes e sucos zero com moderação.</strong> \nEvite sucos de caixinha e sucos naturais, se não estiverem na dieta.",
+      description: "Mínimo <strong>40ml de água por kg</strong> (ex: 80kg → 3,2L/dia). \n<strong>Pode:</strong> Coca Zero, H2O, refri e sucos zero com moderação. \nEvite sucos de caixinha e naturais fora da dieta.",
       icon: Droplets,
       color: "blue"
     },
     {
       title: "Sono",
-      description: "Durma no mínimo **6 a 7 horas por noite**.\nO sono é essencial para recuperação muscular e melhora metabólica.",
+      description: "Durma **6 a 7 horas por noite**.\nEssencial para recuperação muscular e metabolismo.",
       icon: Clock,
       color: "purple"
     },
@@ -32,19 +33,19 @@ const NutritionSection = () => {
     },
     {
       title: "Açúcar",
-      description: "Evite o consumo de açúcar, prefira fazer uso de adoçantes, pois não contém calorias. Pode usar Sucralose ou Stevia.",
+      description: "Evite açúcar. Prefira adoçantes sem calorias: **Sucralose ou Stevia**.",
       icon: X,
       color: "red"
     },
     {
       title: "Salada",
-      description: "Pode consumir folhas verdes à vontade em qualquer momento do dia. Tempere apenas com vinagre, sal, limão, orégano e ervas naturais. **Não use azeite, a menos que esteja especificado na dieta.**",
+      description: "Folhas verdes à vontade, a qualquer hora. Tempere com vinagre, sal, limão, orégano e ervas. **Sem azeite, salvo se estiver na dieta.**",
       icon: Salad,
       color: "green"
     },
     {
       title: "Sal e Temperos",
-      description: "Use sal moderado e dê preferência a temperos naturais como alho, cebola, páprica, cúrcuma, orégano, chimichurri etc.",
+      description: "Sal moderado. Prefira temperos naturais: alho, cebola, páprica, cúrcuma, orégano, chimichurri.",
       icon: Utensils,
       color: "orange"
     }
@@ -78,147 +79,129 @@ const NutritionSection = () => {
         </div>
       </div>
 
-      {/* Instruções Gerais */}
+      {/* Como Seguir Sua Dieta (Instruções + Erros Comuns) */}
       <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
-          onClick={() => toggleCard('instrucoes-gerais')}
+          onClick={() => toggleCard('como-seguir')}
         >
           <div className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
               <CheckCircle className="h-5 w-5 text-amber-300" />
             </span>
             <div>
-              <div className="font-heading text-xl text-amber-50">📌 Instruções Gerais</div>
-              <div className="text-sm text-zinc-500">Base do seu sucesso</div>
+              <div className="font-heading text-xl text-amber-50">📌 Como Seguir Sua Dieta</div>
+              <div className="text-sm text-zinc-500">Base do seu sucesso + erros a evitar</div>
             </div>
           </div>
-          {expandedCards.includes('instrucoes-gerais') ? (
+          {expandedCards.includes('como-seguir') ? (
             <ChevronUp className="h-6 w-6 text-amber-400" />
           ) : (
             <ChevronDown className="h-6 w-6 text-amber-400" />
           )}
         </div>
-        {expandedCards.includes('instrucoes-gerais') && (
+        {expandedCards.includes('como-seguir') && (
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-          <div className="space-y-4">
-            <p className="text-zinc-400 leading-relaxed">
-              A alimentação será peça-chave para atingir seus objetivos.
-              Toda a dieta foi adaptada aos seus hábitos, levando em conta suas preferências alimentares.
-            </p>
+          <ul className="space-y-2 text-zinc-400">
+            <li className="flex items-start gap-2">
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
+              Dieta adaptada aos seus hábitos e preferências alimentares.
+            </li>
+            <li className="flex items-start gap-2">
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
+              Pareça muita ou pouca comida, tudo foi calculado para o seu corpo e metabolismo.
+            </li>
+          </ul>
 
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
-              <p className="mb-4 text-zinc-300">
-                Mesmo que pareça muita ou pouca comida, tudo foi calculado com precisão para o seu corpo e metabolismo.
-              </p>
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 flex-shrink-0 text-emerald-400" />
-                <span className="font-semibold text-amber-100">
-                  Siga exatamente como está na dieta, respeitando as quantidades e os alimentos.
-                </span>
-              </div>
-            </div>
-
-            {/* Você pode / Evite */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-6">
-                <h4 className="mb-4 flex items-center gap-2 font-bold text-emerald-200">
-                  <CheckCircle className="h-5 w-5 text-emerald-400" />
-                  🔄 Você pode:
-                </h4>
-                <ul className="space-y-3 text-sm text-emerald-200">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                    Alterar os horários das refeições conforme sua rotina
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                    Inverter a ordem das refeições sem prejuízo
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                    Usar as subtituições contidas em cada alimento
-                  </li>
-                </ul>
-              </div>
-
-              <div className="rounded-xl border border-red-500/20 bg-red-500/[0.06] p-6">
-                <h4 className="mb-4 flex items-center gap-2 font-bold text-red-200">
-                  <X className="h-5 w-5 text-red-400" />
-                  ❌ Evite:
-                </h4>
-                <ul className="space-y-3 text-sm text-red-200">
-                  <li className="flex items-start gap-2">
-                    <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
-                    Perder refeições
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
-                    Comer a mais ou a menos
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
-                    Beliscar entre as refeições
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-xl border border-amber-400/40 bg-gradient-to-br from-amber-500/[0.14] via-amber-500/[0.05] to-transparent p-6 text-center gold-glow">
-              <div className="warm-glow pointer-events-none absolute inset-0 opacity-40" />
-              <p className="relative text-base font-semibold text-amber-100">
-                📢 Em caso de dificuldade, me chame a qualquer momento. Estou aqui pra te ajudar sempre!
-              </p>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+            <div className="flex items-center gap-3">
+              <CheckCircle className="h-5 w-5 flex-shrink-0 text-emerald-400" />
+              <span className="font-semibold text-amber-100">
+                Siga exatamente como está na dieta, respeitando quantidades e alimentos.
+              </span>
             </div>
           </div>
-        </div>
-        )}
-      </section>
 
-      {/* Erros Comuns */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
-        <div
-          className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
-          onClick={() => toggleCard('erros-comuns')}
-        >
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+          {/* Você pode / Evite */}
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-6">
+              <h4 className="mb-4 flex items-center gap-2 font-bold text-emerald-200">
+                <CheckCircle className="h-5 w-5 text-emerald-400" />
+                🔄 Você pode:
+              </h4>
+              <ul className="space-y-3 text-sm text-emerald-200">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+                  Alterar os horários das refeições conforme sua rotina
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+                  Inverter a ordem das refeições sem prejuízo
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+                  Usar as substituições contidas em cada alimento
+                </li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-red-500/20 bg-red-500/[0.06] p-6">
+              <h4 className="mb-4 flex items-center gap-2 font-bold text-red-200">
+                <X className="h-5 w-5 text-red-400" />
+                ❌ Evite:
+              </h4>
+              <ul className="space-y-3 text-sm text-red-200">
+                <li className="flex items-start gap-2">
+                  <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
+                  Perder refeições
+                </li>
+                <li className="flex items-start gap-2">
+                  <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
+                  Comer a mais ou a menos
+                </li>
+                <li className="flex items-start gap-2">
+                  <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
+                  Beliscar entre as refeições
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Erros comuns */}
+          <div>
+            <h4 className="mb-4 flex items-center gap-2 font-bold text-amber-50">
               <AlertTriangle className="h-5 w-5 text-amber-300" />
-            </span>
-            <div>
-              <div className="font-heading text-xl text-amber-50">⚠️ Erros Comuns</div>
-              <div className="text-sm text-zinc-500">Evite essas armadilhas</div>
+              ⚠️ Erros comuns
+            </h4>
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+                <h4 className="mb-3 font-bold text-amber-50">Finais de semana</h4>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  São <strong className="text-amber-100">30% da sua semana.</strong> Não jogue fora 5 dias de esforço exagerando no fim de semana.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+                <h4 className="mb-3 font-bold text-amber-50">Café da manhã e Lanche da tarde</h4>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Refeições importantes: <strong className="text-amber-100">planeje-se</strong> com antecedência para não deixar de fazê-las.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+                <h4 className="mb-3 font-bold text-amber-50">Esquecer de comer</h4>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Tenha tudo <strong className="text-amber-100">pronto e organizado</strong> para não pular refeições — <strong className="text-amber-100">não coma a mais nem a menos</strong> do que o previsto.
+                </p>
+              </div>
             </div>
           </div>
-          {expandedCards.includes('erros-comuns') ? (
-            <ChevronUp className="h-6 w-6 text-amber-400" />
-          ) : (
-            <ChevronDown className="h-6 w-6 text-amber-400" />
-          )}
-        </div>
-        {expandedCards.includes('erros-comuns') && (
-        <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
-              <h4 className="mb-3 font-bold text-amber-50">Finais de semana</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">
-                Esses 2 dias representam praticamente <strong className="text-amber-100">30% da sua semana.</strong> Não jogue fora 5 dias de esforço exagendo no final de semana.
-              </p>
-            </div>
 
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
-              <h4 className="mb-3 font-bold text-amber-50">Café da manhã e Lanche da tarde</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">
-                São refeições de extrema importância, então procure <strong className="text-amber-100">se planejar</strong> com antecedência para não deixar de fazê-las.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
-              <h4 className="mb-3 font-bold text-amber-50">Esquecer de comer</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">
-                Esse ponto requer planejamento em ter tudo <strong className="text-amber-100">pronto e organizado</strong> para não pular refeições, é importante <strong className="text-amber-100">não comer a mais e também não comer a menos</strong> do que o previsto
-              </p>
-            </div>
+          <div className="relative overflow-hidden rounded-xl border border-amber-400/40 bg-gradient-to-br from-amber-500/[0.14] via-amber-500/[0.05] to-transparent p-6 text-center gold-glow">
+            <div className="warm-glow pointer-events-none absolute inset-0 opacity-40" />
+            <p className="relative text-base font-semibold text-amber-100">
+              📢 Em caso de dificuldade, me chame a qualquer momento. Estou aqui pra te ajudar sempre!
+            </p>
           </div>
         </div>
         )}
@@ -249,7 +232,7 @@ const NutritionSection = () => {
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
             <p className="mb-4 leading-relaxed text-zinc-300">
-              Sempre que houver a possibilidade, <strong className="text-amber-100">pese os alimentos</strong>, quanto mais precisão maior a eficácia nos resultados.
+              Sempre que possível, <strong className="text-amber-100">pese os alimentos</strong>. Mais precisão = mais resultado.
             </p>
 
             <div className="space-y-4">
@@ -264,11 +247,11 @@ const NutritionSection = () => {
               <div className="space-y-3 text-zinc-400">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
-                  <span>Os alimentos devem ser pesados <strong className="text-amber-100">prontos (após o cozimento)</strong></span>
+                  <span>Pese os alimentos <strong className="text-amber-100">prontos (após o cozimento)</strong>.</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
-                  <span>Não usar azeite nem óleo no preparo dos alimentos. Apenas um fio mínimo para untar, se necessário.</span>
+                  <span>Sem azeite nem óleo no preparo. Apenas um fio mínimo para untar, se necessário.</span>
                 </div>
               </div>
             </div>
@@ -277,29 +260,29 @@ const NutritionSection = () => {
         )}
       </section>
 
-      {/* Outras Recomendações */}
+      {/* Recomendações & Hábitos (Outras Recomendações + Hábitos Saudáveis) */}
       <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
         <div
           className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
-          onClick={() => toggleCard('outras-recomendacoes')}
+          onClick={() => toggleCard('recomendacoes-habitos')}
         >
           <div className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
               <Heart className="h-5 w-5 text-amber-300" />
             </span>
             <div>
-              <div className="font-heading text-xl text-amber-50">💧 Outras Recomendações Importantes</div>
+              <div className="font-heading text-xl text-amber-50">💧 Recomendações & Hábitos</div>
               <div className="text-sm text-zinc-500">Para o seu bem-estar</div>
             </div>
           </div>
-          {expandedCards.includes('outras-recomendacoes') ? (
+          {expandedCards.includes('recomendacoes-habitos') ? (
             <ChevronUp className="h-6 w-6 text-amber-400" />
           ) : (
             <ChevronDown className="h-6 w-6 text-amber-400" />
           )}
         </div>
-        {expandedCards.includes('outras-recomendacoes') && (
-        <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
+        {expandedCards.includes('recomendacoes-habitos') && (
+        <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {recommendations.map((rec, index) => (
               <div
@@ -326,33 +309,7 @@ const NutritionSection = () => {
               </div>
             ))}
           </div>
-        </div>
-        )}
-      </section>
 
-      {/* Vídeos Complementares - Hábitos Saudáveis */}
-      <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
-        <div
-          className="flex cursor-pointer items-center justify-between p-6 transition-colors hover:bg-white/[0.02]"
-          onClick={() => toggleCard('habitos-saudaveis')}
-        >
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-              <Play className="h-5 w-5 text-amber-300" />
-            </span>
-            <div>
-              <div className="font-heading text-xl text-amber-50">🥗 Hábitos Saudáveis</div>
-              <div className="text-sm text-zinc-500">Conhecimento essencial</div>
-            </div>
-          </div>
-          {expandedCards.includes('habitos-saudaveis') ? (
-            <ChevronUp className="h-6 w-6 text-amber-400" />
-          ) : (
-            <ChevronDown className="h-6 w-6 text-amber-400" />
-          )}
-        </div>
-        {expandedCards.includes('habitos-saudaveis') && (
-        <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="text-center">
               <h4 className="mb-4 font-bold text-amber-50">Hábitos saudáveis, rotina, sono e álcool</h4>
@@ -401,14 +358,16 @@ const NutritionSection = () => {
         </div>
         {expandedCards.includes('refeicao-livre') && (
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-          <div className="space-y-4">
-            <p className="text-zinc-400 leading-relaxed">
-              A refeição livre é facultativa, é só por caráter psicológico mesmo, para caso sinta necessidade e possa aproveitar momentos sociais com a família e com amigos, então guarde para momentos como estes.
-            </p>
-            <p className="text-zinc-400 leading-relaxed">
-              Faça apenas <strong className="text-amber-100">UMA</strong> refeição livre na semana e sempre de forma moderada (coma até ficar satisfeito, <strong className="text-amber-100">PARE QUANDO SENTIR QUE ESTÁ 80% CHEIO</strong>), assim continuará progredindo e tendo excelentes resultados.
-            </p>
-          </div>
+          <ul className="space-y-2 text-zinc-400">
+            <li className="flex items-start gap-2">
+              <RefreshCw className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
+              Facultativa e psicológica: guarde para momentos sociais com família e amigos.
+            </li>
+            <li className="flex items-start gap-2">
+              <RefreshCw className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
+              Faça apenas <strong className="text-amber-100">UMA por semana</strong>, de forma moderada — <strong className="text-amber-100">PARE QUANDO ESTIVER 80% CHEIO</strong>.
+            </li>
+          </ul>
 
           <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.06] p-6">
             <h4 className="mb-4 flex items-center gap-2 font-bold text-amber-100">
@@ -422,15 +381,15 @@ const NutritionSection = () => {
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-bold text-amber-400">▪️</span>
-                <span className="text-zinc-300">Procure não exagerar, coma com moderação!</span>
+                <span className="text-zinc-300">Não exagere, coma com moderação.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-bold text-amber-400">▪️</span>
-                <span className="text-zinc-300">Tente não fazer refeição livre nos primeiros <strong className="text-amber-100">15 dias</strong>, até se adaptar ao planejamento.</span>
+                <span className="text-zinc-300">Evite nos primeiros <strong className="text-amber-100">15 dias</strong>, até se adaptar.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="font-bold text-amber-400">▪️</span>
-                <span className="text-zinc-300">Você pode consumir qualquer alimento que tenha vontade, sem exageros e com moderação.</span>
+                <span className="text-zinc-300">Pode consumir qualquer alimento, sem exageros.</span>
               </div>
             </div>
           </div>
@@ -478,7 +437,7 @@ const NutritionSection = () => {
               <Brain className="h-5 w-5 text-amber-300" />
             </span>
             <div>
-              <div className="font-heading text-xl text-amber-50">🍫 Dicas para Controlar a Vontade de Doces e Ansiedade</div>
+              <div className="font-heading text-xl text-amber-50">🍫 Controle de Doces e Ansiedade</div>
               <div className="text-sm text-zinc-500">Estratégias comportamentais</div>
             </div>
           </div>
@@ -492,8 +451,7 @@ const NutritionSection = () => {
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
             <p className="text-zinc-300">
-              Essa vontade é comportamental, não fisiológica.
-              O ideal é reduzir aos poucos, não cortar de forma radical.
+              Essa vontade é comportamental, não fisiológica. Reduza aos poucos, sem cortar de forma radical.
             </p>
           </div>
 
@@ -527,7 +485,7 @@ const NutritionSection = () => {
             <div className="flex items-start gap-3">
               <span className="text-lg font-bold text-amber-400">➡️</span>
               <p className="font-semibold leading-relaxed text-amber-100">
-                Procure deixar os doces ou beliscadas para quando for fazer sua refeição livre, e sempre coma devagar, aproveitando o paladar do alimento, pois se comer rápido ou comer com os olhos, acabará exagerando na quantidade.
+                Deixe os doces para a refeição livre. Coma devagar, aproveitando o paladar — comer rápido ou "com os olhos" leva ao exagero.
               </p>
             </div>
           </div>

@@ -295,23 +295,15 @@ const MealCalculatorSection = () => {
               <ul className="space-y-2 text-sm text-zinc-400">
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 font-bold text-amber-300">•</span>
-                  <span>Tire a foto de cima (visão aérea), mostrando todo o prato.</span>
+                  <span>Foto de cima (visão aérea) mostrando o prato todo, com boa iluminação natural.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 font-bold text-amber-300">•</span>
-                  <span>Mantenha uma boa iluminação natural — evite sombras fortes ou luz amarelada.</span>
+                  <span>Alimentos separados, sem sobreposição (arroz, carne e salada bem visíveis).</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 font-bold text-amber-300">•</span>
-                  <span>Deixe os alimentos bem separados, sem sobreposição (ex: arroz, carne e salada visíveis).</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 font-bold text-amber-300">•</span>
-                  <span>Mantenha uma distância de cerca de 30 cm do prato.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 font-bold text-amber-300">•</span>
-                  <span>Use fundo neutro (mesa clara ou toalha lisa) para destacar os alimentos.</span>
+                  <span>Fundo neutro e a ~30 cm do prato, pra destacar a comida.</span>
                 </li>
               </ul>
               <div className="mt-3 border-t border-white/[0.06] pt-3">
