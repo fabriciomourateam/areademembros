@@ -265,6 +265,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'ebooks',
             icon: BookOpen,
             gradient: 'from-indigo-500 to-blue-700',
+            image: '/ebooks.webp',
           },
           {
             id: 'recipes',
@@ -275,6 +276,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'recipes',
             icon: ChefHat,
             gradient: 'from-orange-500 to-red-600',
+            image: '/recipes.webp',
           },
           {
             id: 'supplements',
@@ -285,6 +287,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'supplements',
             icon: Pill,
             gradient: 'from-lime-500 to-green-700',
+            image: '/supplements.webp',
           },
           {
             id: 'referral',
@@ -295,6 +298,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'referral',
             icon: Gift,
             gradient: 'from-pink-500 to-rose-700',
+            image: '/referral.webp',
           },
         ],
       },
@@ -310,6 +314,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'meal-calculator',
             icon: Calculator,
             gradient: 'from-violet-500 to-purple-700',
+            image: '/meal-calculator.webp',
           },
           {
             id: 'food-substitution',
@@ -320,6 +325,7 @@ export const CATEGORIES: Category[] = [
             modalSection: 'food-substitution',
             icon: RefreshCw,
             gradient: 'from-teal-500 to-emerald-700',
+            image: '/food-substitution.webp',
           },
           {
             id: 'diet-month',
@@ -328,6 +334,7 @@ export const CATEGORIES: Category[] = [
             type: 'info',
             icon: ShoppingCart,
             gradient: 'from-amber-500 to-orange-700',
+            image: '/diet-month.webp',
           },
         ],
       },
