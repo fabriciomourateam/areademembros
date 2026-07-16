@@ -147,7 +147,7 @@ const EbooksSection = () => {
         <div className="relative">
           <span className="mb-3 block text-5xl">📚</span>
           <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">E-BOOKS EXCLUSIVOS</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Materiais completos para potencializar seus resultados
           </p>
         </div>
@@ -161,7 +161,7 @@ const EbooksSection = () => {
           </span>
           <h2 className="font-heading text-xl text-amber-50">📚 Biblioteca Completa de Conhecimento</h2>
         </div>
-        <p className="mx-auto max-w-3xl text-sm leading-relaxed text-zinc-400">
+        <p className="mx-auto max-w-3xl text-sm leading-relaxed text-zinc-300">
           Acesse nossa coleção exclusiva de e-books com estratégias comprovadas,
           guias práticos e protocolos especializados para acelerar seus resultados
           e resolver desafios específicos do seu dia a dia.
@@ -184,12 +184,12 @@ const EbooksSection = () => {
                 </span>
                 <div>
                   <div className="font-heading text-xl text-amber-50">{category.category}</div>
-                  <div className="text-sm text-zinc-500">
+                  <div className="text-sm text-zinc-400">
                     {category.books.length} e-book{category.books.length > 1 ? 's' : ''} disponível{category.books.length > 1 ? 'is' : ''}
                   </div>
                 </div>
               </div>
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.02] text-zinc-400 transition-colors hover:text-amber-100">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.02] text-zinc-300 transition-colors hover:text-amber-100">
                 {isExpanded ? (
                   <ChevronUp className="h-5 w-5" />
                 ) : (
@@ -214,7 +214,7 @@ const EbooksSection = () => {
                           <h4 className="font-semibold leading-tight text-amber-50">
                             {book.title}
                           </h4>
-                          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
                             {book.description}
                           </p>
                         </div>
@@ -251,7 +251,7 @@ const EbooksSection = () => {
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <BookOpen className="mx-auto mb-4 h-16 w-16 text-amber-300" />
         <h3 className="font-heading text-xl text-amber-100">💡 Dica Importante!</h3>
-        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
           Baixe os e-books para ter acesso offline. Leia com calma e aplique as estratégias
           no seu dia a dia. O conhecimento só funciona quando colocado em prática!
         </p>

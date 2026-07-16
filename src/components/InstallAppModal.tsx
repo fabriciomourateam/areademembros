@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Smartphone, Download, Share, Plus, X } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -87,16 +86,16 @@ const InstallAppModal = () => {
       </div>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-md mx-auto">
+        <DialogContent className="mx-auto max-w-md gap-0 overflow-hidden rounded-3xl border border-amber-500/25 bg-[#0a0a0b] p-6 text-zinc-100 shadow-2xl duration-300 data-[state=open]:zoom-in-90">
           <DialogHeader>
             <div className="flex items-center justify-between">
-              <DialogTitle className="flex items-center gap-3 text-amber-800">
-                <div className="p-3 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-xl shadow-lg">
-                  <Smartphone className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <div className="text-xl font-bold">Instalar App</div>
-                  <div className="text-sm text-amber-600/70 font-normal">
+              <DialogTitle className="flex items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/15 ring-1 ring-amber-400/40">
+                  <Smartphone className="h-6 w-6 text-amber-300" />
+                </span>
+                <div className="text-left">
+                  <div className="font-heading text-xl text-amber-50">Instalar App</div>
+                  <div className="text-sm font-normal text-zinc-500">
                     Acesso rápido no seu celular
                   </div>
                 </div>
@@ -105,96 +104,90 @@ const InstallAppModal = () => {
                 variant="ghost"
                 size="sm"
                 onClick={handleDismiss}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-zinc-500 hover:bg-white/5 hover:text-zinc-200"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
           </DialogHeader>
 
-          <div className="space-y-4">
+          <div className="mt-2 space-y-4">
             <div className="text-center">
-              <div className="text-6xl mb-4">📱</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <div className="mb-4 text-6xl">📱</div>
+              <h3 className="mb-2 font-heading text-lg text-amber-50">
                 Instale a Área de Membros no seu celular!
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-sm text-zinc-400">
                 Tenha acesso rápido a todos os conteúdos, como um app nativo.
               </p>
             </div>
 
             {/* Android/Chrome */}
             {deferredPrompt && (
-              <Card className="border-green-200 bg-green-50">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                      <Download className="h-4 w-4 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-green-800">Android / Chrome</h4>
-                  </div>
-                  <p className="text-green-700 text-sm mb-3">
-                    Clique no botão abaixo para instalar automaticamente:
-                  </p>
-                  <Button
-                    onClick={handleInstallClick}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Instalar Agora
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="rounded-xl border border-emerald-500/25 bg-emerald-500/[0.07] p-4">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 ring-1 ring-emerald-400/30">
+                    <Download className="h-4 w-4 text-emerald-300" />
+                  </span>
+                  <h4 className="font-semibold text-emerald-200">Android / Chrome</h4>
+                </div>
+                <p className="mb-3 text-sm text-zinc-400">
+                  Clique no botão abaixo para instalar automaticamente:
+                </p>
+                <Button
+                  onClick={handleInstallClick}
+                  className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white hover:brightness-110"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Instalar Agora
+                </Button>
+              </div>
             )}
 
             {/* iOS Safari */}
             {isIOS && (
-              <Card className="border-blue-200 bg-blue-50">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                      <Share className="h-4 w-4 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-blue-800">iPhone / iPad</h4>
+              <div className="rounded-xl border border-sky-500/25 bg-sky-500/[0.07] p-4">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/20 ring-1 ring-sky-400/30">
+                    <Share className="h-4 w-4 text-sky-300" />
+                  </span>
+                  <h4 className="font-semibold text-sky-200">iPhone / iPad</h4>
+                </div>
+                <div className="space-y-2 text-sm text-zinc-400">
+                  <p className="font-medium text-zinc-300">Siga estes passos:</p>
+                  <div className="space-y-1">
+                    <p>1. Toque no ícone <Share className="inline h-4 w-4 text-sky-300" /> (Compartilhar) na barra inferior</p>
+                    <p>2. Role para baixo e toque em "Adicionar à Tela de Início"</p>
+                    <p>3. Toque em "Adicionar" no canto superior direito</p>
                   </div>
-                  <div className="space-y-2 text-blue-700 text-sm">
-                    <p className="font-medium">Siga estes passos:</p>
-                    <div className="space-y-1">
-                      <p>1. Toque no ícone <Share className="inline h-4 w-4" /> (Compartilhar) na barra inferior</p>
-                      <p>2. Role para baixo e toque em "Adicionar à Tela de Início"</p>
-                      <p>3. Toque em "Adicionar" no canto superior direito</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )}
 
             {/* Instruções gerais */}
             {!deferredPrompt && !isIOS && (
-              <Card className="border-amber-200 bg-amber-50">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
-                      <Plus className="h-4 w-4 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-amber-800">Outros Navegadores</h4>
+              <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-4">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400/15 ring-1 ring-amber-400/30">
+                    <Plus className="h-4 w-4 text-amber-300" />
+                  </span>
+                  <h4 className="font-semibold text-amber-100">Outros Navegadores</h4>
+                </div>
+                <div className="space-y-2 text-sm text-zinc-400">
+                  <p>Procure pela opção:</p>
+                  <div className="space-y-1">
+                    <p>• "Adicionar à tela inicial"</p>
+                    <p>• "Instalar app"</p>
+                    <p>• "Adicionar atalho"</p>
                   </div>
-                  <div className="space-y-2 text-amber-700 text-sm">
-                    <p>Procure pela opção:</p>
-                    <div className="space-y-1">
-                      <p>• "Adicionar à tela inicial"</p>
-                      <p>• "Instalar app"</p>
-                      <p>• "Adicionar atalho"</p>
-                    </div>
-                    <p className="mt-2">Geralmente no menu do navegador (⋮ ou ⋯)</p>
-                  </div>
-                </CardContent>
-              </Card>
+                  <p className="mt-2">Geralmente no menu do navegador (⋮ ou ⋯)</p>
+                </div>
+              </div>
             )}
 
-            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 p-4 rounded-lg">
-              <h4 className="font-semibold text-amber-800 mb-2">✨ Vantagens do App:</h4>
-              <ul className="text-amber-700 text-sm space-y-1">
+            <div className="rounded-xl border border-white/[0.07] bg-white/[0.035] p-4">
+              <h4 className="mb-2 font-semibold text-amber-100">✨ Vantagens do App:</h4>
+              <ul className="space-y-1 text-sm text-zinc-400">
                 <li>• Acesso rápido sem abrir o navegador</li>
                 <li>• Funciona offline para conteúdos já visitados</li>
                 <li>• Ícone na tela inicial do celular</li>
@@ -206,13 +199,13 @@ const InstallAppModal = () => {
               <Button
                 variant="outline"
                 onClick={handleDismiss}
-                className="flex-1"
+                className="flex-1 border-white/10 bg-transparent text-zinc-300 hover:bg-white/5 hover:text-zinc-100"
               >
                 Agora Não
               </Button>
               <Button
                 onClick={() => setShowModal(false)}
-                className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white"
+                className="flex-1 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 font-semibold text-black hover:brightness-110"
               >
                 Entendi
               </Button>

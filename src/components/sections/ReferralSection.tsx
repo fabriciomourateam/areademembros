@@ -15,7 +15,7 @@ const ReferralSection = () => {
         <div className="relative">
           <span className="mb-3 block text-5xl">🎁</span>
           <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">PROGRAMA DE INCENTIVO</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Indique amigos e ganhe meses de acompanhamento totalmente grátis
           </p>
         </div>
@@ -29,11 +29,11 @@ const ReferralSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎯 Trilha de Indicações</h2>
-            <p className="text-sm text-zinc-500">Quanto mais você traz, mais tempo grátis você ganha</p>
+            <p className="text-sm text-zinc-400">Quanto mais você traz, mais tempo grátis você ganha</p>
           </div>
         </header>
         <div className="space-y-6">
-          <p className="mx-auto max-w-3xl text-center leading-relaxed text-zinc-400">
+          <p className="mx-auto max-w-3xl text-center leading-relaxed text-zinc-300">
             Indicou e a pessoa <strong className="text-amber-100">fechou</strong> o acompanhamento? Você
             avança na trilha. Quanto mais longe você chega, mais{' '}
             <strong className="text-amber-100">meses grátis</strong> você conquista.
@@ -49,7 +49,7 @@ const ReferralSection = () => {
                 <div className="mb-1 font-heading text-2xl text-amber-50">{t.qtd}</div>
                 <div className="mt-auto rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
                   <p className="text-lg font-bold leading-tight text-amber-100">{t.reward}</p>
-                  <p className="mt-1 text-sm text-zinc-500">🎁</p>
+                  <p className="mt-1 text-sm text-zinc-400">🎁</p>
                 </div>
               </div>
             ))}
@@ -83,7 +83,7 @@ const ReferralSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">💝 Benefício para o Indicado</h2>
-            <p className="text-sm text-zinc-500">Quem você indica também ganha</p>
+            <p className="text-sm text-zinc-400">Quem você indica também ganha</p>
           </div>
         </header>
         <div className="text-center">
@@ -97,7 +97,7 @@ const ReferralSection = () => {
               <p className="mt-2 text-lg text-amber-100/80">Condições especiais para começar</p>
             </div>
 
-            <p className="mt-6 leading-relaxed text-zinc-400">
+            <p className="mt-6 leading-relaxed text-zinc-300">
               Seus amigos e familiares começam a jornada com um incentivo especial, tornando ainda mais
               fácil dar o primeiro passo rumo à saúde!
             </p>
@@ -113,7 +113,7 @@ const ReferralSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📲 Como Participar</h2>
-            <p className="text-sm text-zinc-500">Processo simples e direto</p>
+            <p className="text-sm text-zinc-400">Processo simples e direto</p>
           </div>
         </header>
         <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
@@ -124,7 +124,7 @@ const ReferralSection = () => {
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-sm font-bold text-black">1</div>
               <div>
                 <h4 className="font-semibold text-amber-50">Indique uma pessoa</h4>
-                <p className="text-sm text-zinc-400">Compartilhe sobre os benefícios da consultoria</p>
+                <p className="text-sm text-zinc-300">Compartilhe sobre os benefícios da consultoria</p>
               </div>
             </div>
 
@@ -132,7 +132,7 @@ const ReferralSection = () => {
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-sm font-bold text-black">2</div>
               <div>
                 <h4 className="font-semibold text-amber-50">Me avise da indicação</h4>
-                <p className="text-sm text-zinc-400">Sempre me informe quando indicar alguém</p>
+                <p className="text-sm text-zinc-300">Sempre me informe quando indicar alguém</p>
               </div>
             </div>
 
@@ -140,7 +140,7 @@ const ReferralSection = () => {
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-sm font-bold text-black">3</div>
               <div>
                 <h4 className="font-semibold text-amber-50">A pessoa fecha o acompanhamento</h4>
-                <p className="text-sm text-zinc-400">Cada indicação que fecha conta na sua trilha</p>
+                <p className="text-sm text-zinc-300">Cada indicação que fecha conta na sua trilha</p>
               </div>
             </div>
 
@@ -148,7 +148,7 @@ const ReferralSection = () => {
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-sm font-bold text-black">4</div>
               <div>
                 <h4 className="font-semibold text-amber-50">Ganhe seus meses grátis</h4>
-                <p className="text-sm text-zinc-400">Quanto mais indicações, mais tempo de acompanhamento você ganha de graça</p>
+                <p className="text-sm text-zinc-300">Quanto mais indicações, mais tempo de acompanhamento você ganha de graça</p>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@ const ReferralSection = () => {
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <Heart className="mx-auto mb-4 h-16 w-16 text-amber-300" />
         <h3 className="mb-3 font-heading text-2xl text-amber-100">Obrigado pela confiança!</h3>
-        <p className="mx-auto max-w-2xl leading-relaxed text-zinc-400">
+        <p className="mx-auto max-w-2xl leading-relaxed text-zinc-300">
           Sua indicação é a maior prova de que nosso trabalho está transformando vidas. Juntos, vamos
           espalhar saúde e bem-estar!
         </p>

@@ -44,12 +44,12 @@ const CheckinSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📌 Por que o Check-in é tão importante?</h2>
-            <p className="text-sm text-zinc-500">O coração do acompanhamento</p>
+            <p className="text-sm text-zinc-400">O coração do acompanhamento</p>
           </div>
         </header>
 
         <div className="space-y-4">
-          <p className="text-zinc-400 leading-relaxed">
+          <p className="text-zinc-300 leading-relaxed">
             Os Check-ins são enviados diretamente no seu WhatsApp na data prevista.
           </p>
 
@@ -59,7 +59,7 @@ const CheckinSection = () => {
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-300" />
               <div>
                 <h4 className="mb-1 font-semibold text-amber-100">⚠️ Evite ao máximo pular os check-ins!</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-zinc-300">
                   Essa é uma das partes mais importantes do processo — é o maior diferencial do meu acompanhamento.
                 </p>
               </div>
@@ -74,7 +74,7 @@ const CheckinSection = () => {
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">⏱️ Rápido e Prático</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">Eles são rápidos, duram cerca de <strong className="text-amber-100">5 a 10 minutos</strong>.</p>
+                <p className="text-sm leading-relaxed text-zinc-300">Eles são rápidos, duram cerca de <strong className="text-amber-100">5 a 10 minutos</strong>.</p>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ const CheckinSection = () => {
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">💬 Ambiente Seguro e Acolhedor</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-zinc-300">
                   Sei que nem sempre conseguimos seguir tudo 100%, e está tudo bem!
                   O Check-in não é para te julgar, é para que eu entenda onde estão as dificuldades e consiga fazer ajustes personalizados para acelerar seus resultados.
                 </p>
@@ -105,7 +105,7 @@ const CheckinSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎯 Benefícios do Check-in Regular</h2>
-            <p className="text-sm text-zinc-500">Por que funciona tão bem</p>
+            <p className="text-sm text-zinc-400">Por que funciona tão bem</p>
           </div>
         </header>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -119,7 +119,7 @@ const CheckinSection = () => {
               </span>
               <div>
                 <h4 className="mb-1 font-semibold text-amber-50">{benefit.title}</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">{benefit.description}</p>
+                <p className="text-sm leading-relaxed text-zinc-300">{benefit.description}</p>
               </div>
             </div>
           ))}
@@ -134,7 +134,7 @@ const CheckinSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🎥 Vídeo Explicativo</h2>
-            <p className="text-sm text-zinc-500">Entenda na prática</p>
+            <p className="text-sm text-zinc-400">Entenda na prática</p>
           </div>
         </header>
 
@@ -151,19 +151,19 @@ const CheckinSection = () => {
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
                 <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-400">Como funciona o processo</span>
+                <span className="text-sm text-zinc-300">Como funciona o processo</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
                 <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-400">Por que é tão eficaz</span>
+                <span className="text-sm text-zinc-300">Por que é tão eficaz</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
                 <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-400">Como preencher corretamente</span>
+                <span className="text-sm text-zinc-300">Como preencher corretamente</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
                 <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-300" />
-                <span className="text-sm text-zinc-400">Dicas para melhores resultados</span>
+                <span className="text-sm text-zinc-300">Dicas para melhores resultados</span>
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@ const CheckinSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📱 Como Funciona na Prática</h2>
-            <p className="text-sm text-zinc-500">Processo simples e eficiente</p>
+            <p className="text-sm text-zinc-400">Processo simples e eficiente</p>
           </div>
         </header>
 
@@ -189,7 +189,7 @@ const CheckinSection = () => {
                 <span className="font-bold text-amber-300">1</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Receba no WhatsApp</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">Check-in chega diretamente no seu WhatsApp na data programada</p>
+              <p className="text-sm leading-relaxed text-zinc-300">Check-in chega diretamente no seu WhatsApp na data programada</p>
             </div>
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
@@ -197,7 +197,7 @@ const CheckinSection = () => {
                 <span className="font-bold text-amber-300">2</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Preencha Honestamente</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">Responda as perguntas com sinceridade (5-10 minutos)</p>
+              <p className="text-sm leading-relaxed text-zinc-300">Responda as perguntas com sinceridade (5-10 minutos)</p>
             </div>
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
@@ -205,7 +205,7 @@ const CheckinSection = () => {
                 <span className="font-bold text-amber-300">3</span>
               </div>
               <h4 className="mb-1 font-semibold text-amber-50">Receba Ajustes</h4>
-              <p className="text-sm leading-relaxed text-zinc-400">Sua dieta e treino são ajustados conforme necessário</p>
+              <p className="text-sm leading-relaxed text-zinc-300">Sua dieta e treino são ajustados conforme necessário</p>
             </div>
           </div>
 
@@ -223,7 +223,7 @@ const CheckinSection = () => {
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <CheckCircle className="mx-auto mb-4 h-14 w-14 text-gold" />
         <h3 className="font-heading text-xl text-amber-100">Comprometimento é a Chave!</h3>
-        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
           O check-in regular é seu passaporte para resultados consistentes e duradouros.
           Cada resposta sua me trás clareza de como te ajudar da melhor maneira!
         </p>

@@ -75,7 +75,7 @@ const WorkoutsSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">🧠 Mindset Correto</h2>
-            <p className="text-sm text-zinc-500">Entenda o propósito</p>
+            <p className="text-sm text-zinc-400">Entenda o propósito</p>
           </div>
         </header>
         <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4 text-center text-sm font-semibold text-amber-100">
@@ -95,7 +95,7 @@ const WorkoutsSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">Fundamentos do Treino</h2>
-              <p className="text-sm text-zinc-500">Base para resultados reais</p>
+              <p className="text-sm text-zinc-400">Base para resultados reais</p>
             </div>
           </div>
           {expandedCards.includes('fundamentos') ? (
@@ -106,10 +106,10 @@ const WorkoutsSection = () => {
         </header>
         {expandedCards.includes('fundamentos') && (
         <div className="mt-5 space-y-4 animate-in slide-in-from-top-2 duration-300">
-          <p className="leading-relaxed text-zinc-400">
+          <p className="leading-relaxed text-zinc-300">
             Para ter resultados reais você precisa <strong className="text-amber-100">DAR SEU MÁXIMO EM CADA TREINO</strong>.
           </p>
-          <p className="leading-relaxed text-zinc-400">
+          <p className="leading-relaxed text-zinc-300">
             Foque sempre em progressão de cargas e de esforço, com boa técnica e buscando a falha muscular em todos os exercícios.
           </p>
 
@@ -126,7 +126,7 @@ const WorkoutsSection = () => {
               <Target className="h-5 w-5 text-amber-300" />
               📌 Exemplo Prático:
             </h4>
-            <div className="space-y-2 text-sm leading-relaxed text-zinc-400">
+            <div className="space-y-2 text-sm leading-relaxed text-zinc-300">
               <p>Se a faixa de repetições for de <strong className="text-amber-100">8 a 10</strong>, o ideal é chegar à falha dentro dessa margem.</p>
               <p>Se você consegue fazer <strong className="text-amber-100">11 ou mais</strong>, a carga está leve – <strong className="text-amber-100">aumente na próxima!</strong></p>
             </div>
@@ -156,7 +156,7 @@ const WorkoutsSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">📲 Exemplos Reais de Execução até a Falha</h2>
-            <p className="text-sm text-zinc-500">Veja na prática como fazer</p>
+            <p className="text-sm text-zinc-400">Veja na prática como fazer</p>
           </div>
         </header>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -192,7 +192,7 @@ const WorkoutsSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">✅ Reforçando os Pontos Mais Importantes</h2>
-              <p className="text-sm text-zinc-500">Lembre-se sempre</p>
+              <p className="text-sm text-zinc-400">Lembre-se sempre</p>
             </div>
           </div>
           {expandedCards.includes('pontos-importantes') ? (
@@ -227,7 +227,7 @@ const WorkoutsSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">🎥 Vídeos Complementares</h2>
-              <p className="text-sm text-zinc-500">Conhecimento avançado</p>
+              <p className="text-sm text-zinc-400">Conhecimento avançado</p>
             </div>
           </div>
           {expandedCards.includes('videos-complementares') ? (
@@ -267,7 +267,7 @@ const WorkoutsSection = () => {
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <Dumbbell className="mx-auto mb-4 h-16 w-16 text-amber-400" />
         <h3 className="font-heading text-xl text-amber-100">Pronto para Treinar?</h3>
-        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
           Agora que você conhece todas as orientações, é hora de colocar em prática e alcançar seus objetivos!
         </p>
         <div className="mx-auto mt-5 max-w-xl rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4 text-sm font-semibold text-amber-100">

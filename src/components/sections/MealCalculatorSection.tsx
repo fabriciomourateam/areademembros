@@ -221,7 +221,7 @@ const MealCalculatorSection = () => {
           <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">
             Calculadora de Refeição Livre
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Analise as calorias e nutrientes da sua Refeição Livre
           </p>
         </div>
@@ -235,7 +235,7 @@ const MealCalculatorSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Envie sua Refeição</h2>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-400">
               Tire uma foto ou descreva o que você vai comer (escolha apenas uma opção, foto ou texto)
             </p>
           </div>
@@ -289,10 +289,10 @@ const MealCalculatorSection = () => {
                 <Camera className="h-5 w-5 text-amber-300" />
                 Orientações para a Foto Ideal
               </h4>
-              <p className="mb-3 text-sm text-zinc-400">
+              <p className="mb-3 text-sm text-zinc-300">
                 Para seja feita uma análise precisa da sua refeição:
               </p>
-              <ul className="space-y-2 text-sm text-zinc-400">
+              <ul className="space-y-2 text-sm text-zinc-300">
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 font-bold text-amber-300">•</span>
                   <span>Foto de cima (visão aérea) mostrando o prato todo, com boa iluminação natural.</span>
@@ -332,7 +332,7 @@ const MealCalculatorSection = () => {
               placeholder="Ex: Uma fatia de pizza de calabresa com azeitonas pretas..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="min-h-[120px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:border-amber-400"
+              className="min-h-[120px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:border-amber-400"
             />
           </div>
 
@@ -381,7 +381,7 @@ const MealCalculatorSection = () => {
               </span>
               <div>
                 <h2 className="font-heading text-xl text-amber-50">Análise Nutricional</h2>
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm text-zinc-400">
                   {editedResult.descricao}
                 </p>
               </div>
@@ -402,21 +402,21 @@ const MealCalculatorSection = () => {
                 <h4 className="mb-4 text-lg font-semibold text-amber-50">📊 Macronutrientes</h4>
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-                    <p className="mb-2 text-sm font-semibold text-zinc-400">Proteínas</p>
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Proteínas</p>
                     <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.proteinas_g}g
                     </p>
                   </div>
 
                   <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-                    <p className="mb-2 text-sm font-semibold text-zinc-400">Carboidratos</p>
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Carboidratos</p>
                     <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.carboidratos_g}g
                     </p>
                   </div>
 
                   <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-                    <p className="mb-2 text-sm font-semibold text-zinc-400">Gorduras</p>
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Gorduras</p>
                     <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.gorduras_totais_g}g
                     </p>
@@ -429,22 +429,22 @@ const MealCalculatorSection = () => {
                 <h4 className="mb-4 text-lg font-semibold text-amber-50">🔍 Detalhes Nutricionais</h4>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                    <span className="font-medium text-zinc-400">Fibras:</span>
+                    <span className="font-medium text-zinc-300">Fibras:</span>
                     <span className="font-bold text-amber-100">{editedResult.detalhes.fibras_g}g</span>
                   </div>
 
                   <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                    <span className="font-medium text-zinc-400">Açúcares:</span>
+                    <span className="font-medium text-zinc-300">Açúcares:</span>
                     <span className="font-bold text-amber-100">{editedResult.detalhes.acucares_g}g</span>
                   </div>
 
                   <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                    <span className="font-medium text-zinc-400">Sódio:</span>
+                    <span className="font-medium text-zinc-300">Sódio:</span>
                     <span className="font-bold text-amber-100">{editedResult.detalhes.sodio_mg}mg</span>
                   </div>
 
                   <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
-                    <span className="font-medium text-zinc-400">Gorduras Saturadas:</span>
+                    <span className="font-medium text-zinc-300">Gorduras Saturadas:</span>
                     <span className="font-bold text-amber-100">{editedResult.detalhes.gorduras_saturadas_g}g</span>
                   </div>
                 </div>
@@ -459,23 +459,23 @@ const MealCalculatorSection = () => {
                       <div key={index} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
                         <div className="mb-2 flex items-start justify-between">
                           <h5 className="font-semibold text-amber-50">{ingredient.name}</h5>
-                          <span className="text-sm font-medium text-zinc-400">{ingredient.quantity}</span>
+                          <span className="text-sm font-medium text-zinc-300">{ingredient.quantity}</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2 text-sm">
                           <div>
-                            <p className="text-zinc-500">Calorias</p>
+                            <p className="text-zinc-400">Calorias</p>
                             <p className="font-semibold text-amber-100">{ingredient.calories}</p>
                           </div>
                           <div>
-                            <p className="text-zinc-500">Proteína</p>
+                            <p className="text-zinc-400">Proteína</p>
                             <p className="font-semibold text-amber-100">{ingredient.protein}</p>
                           </div>
                           <div>
-                            <p className="text-zinc-500">Carbs</p>
+                            <p className="text-zinc-400">Carbs</p>
                             <p className="font-semibold text-amber-100">{ingredient.carbs}</p>
                           </div>
                           <div>
-                            <p className="text-zinc-500">Gordura</p>
+                            <p className="text-zinc-400">Gordura</p>
                             <p className="font-semibold text-amber-100">{ingredient.fat}</p>
                           </div>
                         </div>
@@ -510,7 +510,7 @@ const MealCalculatorSection = () => {
                     <h3 className="mb-2 font-heading text-lg text-amber-100">
                       Análise da Refeição Livre
                     </h3>
-                    <p className="leading-relaxed text-zinc-400">
+                    <p className="leading-relaxed text-zinc-300">
                       {insight.message}
                     </p>
                   </div>
@@ -530,7 +530,7 @@ const MealCalculatorSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">Faltou Algum Item?</h2>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-zinc-400">
                 Adicione ingredientes que não foram identificados e recalcule
               </p>
             </div>
@@ -544,7 +544,7 @@ const MealCalculatorSection = () => {
                 placeholder="Ex: Faltaram os ovos que estavam dentro do pão. Adicione aqui: 2 ovos cozidos"
                 value={additionalItems}
                 onChange={(e) => setAdditionalItems(e.target.value)}
-                className="min-h-[100px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:border-amber-400"
+                className="min-h-[100px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:border-amber-400"
               />
             </div>
 

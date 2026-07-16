@@ -459,7 +459,7 @@ const SupplementsSection = () => {
             ))}
           </div>
         ) : photos.length === 0 ? (
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-zinc-400">
             {isAdmin ? 'Nenhuma foto cadastrada. Use o painel abaixo para adicionar.' : 'Nenhum exemplo disponível no momento.'}
           </p>
         ) : (
@@ -516,7 +516,7 @@ const SupplementsSection = () => {
               <input
                 type="text"
                 placeholder="Título (ex: Whey 100% Pure 900g - Integralmédica)"
-                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                 value={currentSupplementId === supplementId ? photoTitle : ''}
                 onChange={e => {
                   setCurrentSupplementId(supplementId);
@@ -527,7 +527,7 @@ const SupplementsSection = () => {
               <input
                 type="text"
                 placeholder="Link de compra (ex: https://mercadolivre.com/...)"
-                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                 value={currentSupplementId === supplementId ? photoLink : ''}
                 onChange={e => {
                   setCurrentSupplementId(supplementId);
@@ -588,7 +588,7 @@ const SupplementsSection = () => {
               </div>
               <div>
                 <div className="font-heading text-2xl font-bold text-amber-50">Suplementos</div>
-                <div className="text-sm text-zinc-500 font-normal">Clique em cada um para entender suas funções</div>
+                <div className="text-sm text-zinc-400 font-normal">Clique em cada um para entender suas funções</div>
               </div>
             </div>
             <Button
@@ -635,7 +635,7 @@ const SupplementsSection = () => {
                       </div>
                       <div className="text-left">
                         <h4 className="font-semibold text-amber-50">{supplement.name}</h4>
-                        <p className="text-sm text-zinc-400">{supplement.description}</p>
+                        <p className="text-sm text-zinc-300">{supplement.description}</p>
                       </div>
                     </div>
                     <ChevronRight
@@ -648,7 +648,7 @@ const SupplementsSection = () => {
                     {/* Caso especial: conteúdo da Lista Compacta */}
                     {supplement.id === 'lista-compacta' ? (
                       <div className="space-y-4">
-                        <p className="text-sm text-zinc-400">
+                        <p className="text-sm text-zinc-300">
                           Pesquisei no mercado livre os que tem melhor custo x benefício e inclui aqui um link com sugestão de compra pra facilitar:
                         </p>
 
@@ -665,7 +665,7 @@ const SupplementsSection = () => {
                             ))}
                           </div>
                         ) : compactItems.length === 0 ? (
-                          <p className="text-xs text-zinc-500">
+                          <p className="text-xs text-zinc-400">
                             Nenhum item cadastrado ainda. Utilize o painel admin para adicionar os primeiros suplementos.
                           </p>
                         ) : (
@@ -739,14 +739,14 @@ const SupplementsSection = () => {
                               <input
                                 type="text"
                                 placeholder="Nome do suplemento (ex: Whey 100% Pure 900g - Integralmédica)"
-                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                                 value={newItemName}
                                 onChange={e => setNewItemName(e.target.value)}
                               />
                               <input
                                 type="text"
                                 placeholder="Link de compra (ex: https://mercadolivre.com/...)"
-                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                                 value={newItemLink}
                                 onChange={e => setNewItemLink(e.target.value)}
                               />
@@ -851,7 +851,7 @@ const SupplementsSection = () => {
                       </div>
                       <div>
                         <h5 className="font-semibold mb-3 text-amber-100">📋 Como usar:</h5>
-                        <p className="text-sm leading-relaxed text-zinc-400">
+                        <p className="text-sm leading-relaxed text-zinc-300">
                           {supplement.usage}
                         </p>
                       </div>
@@ -867,7 +867,7 @@ const SupplementsSection = () => {
                           color="blue"
                         />
 
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Whey concentrado com excelente relação custo-benefício para ganho de massa muscular
                         </p>
                       </>
@@ -946,7 +946,7 @@ const SupplementsSection = () => {
                           supplementName="Multivitamínico"
                           color="purple"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -960,7 +960,7 @@ const SupplementsSection = () => {
                           supplementName="Creatina"
                           color="orange"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -974,7 +974,7 @@ const SupplementsSection = () => {
                           supplementName="Ômega 3"
                           color="cyan"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -988,7 +988,7 @@ const SupplementsSection = () => {
                           supplementName="Barras de Proteínas"
                           color="blue"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Praticidade para consumir proteína em qualquer lugar
                         </p>
                       </>
@@ -1002,7 +1002,7 @@ const SupplementsSection = () => {
                           supplementName="Pastas de Amendoim"
                           color="orange"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Fonte de gorduras saudáveis e proteínas, perfeita para lanches e receitas
                         </p>
                       </>
@@ -1033,7 +1033,7 @@ const SupplementsSection = () => {
                           supplementName="Vitamina C"
                           color="orange"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Poderoso antioxidante que fortalece a imunidade e auxilia na produção de colágeno
                         </p>
                       </>
@@ -1047,7 +1047,7 @@ const SupplementsSection = () => {
                           supplementName="Vitamina D"
                           color="yellow"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Essencial para saúde óssea, imunidade e regulação do humor
                         </p>
                       </>
@@ -1061,7 +1061,7 @@ const SupplementsSection = () => {
                           supplementName="Vitamina B12"
                           color="pink"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Vital para energia, sistema nervoso e formação de células sanguíneas
                         </p>
                       </>
@@ -1075,7 +1075,7 @@ const SupplementsSection = () => {
                           supplementName="Outras Vitaminas"
                           color="purple"
                         />
-                        <p className="text-zinc-500 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Suplementos especializados para funções específicas do organismo
                         </p>
                       </>
@@ -1131,7 +1131,7 @@ const SupplementsSection = () => {
             <div className="flex flex-col items-center gap-2">
               <Lock className="h-10 w-10 text-amber-400 mb-2" />
               <DialogTitle className="text-center text-amber-50">Painel Admin - Suplementos</DialogTitle>
-              <DialogDescription className="text-sm text-zinc-400 text-center">
+              <DialogDescription className="text-sm text-zinc-300 text-center">
                 Digite a senha de administrador para editar a Lista Compacta de suplementos.
               </DialogDescription>
             </div>
@@ -1153,7 +1153,7 @@ const SupplementsSection = () => {
           >
             <input
               type="password"
-              className="border border-white/10 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-500"
+              className="border border-white/10 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400"
               placeholder="Senha de administrador"
               value={adminPassword}
               onChange={e => setAdminPassword(e.target.value)}
@@ -1177,7 +1177,7 @@ const SupplementsSection = () => {
             <div className="mb-6">
               <span className="text-6xl mb-4 block">💊</span>
               <h3 className="font-heading text-2xl font-bold text-amber-100 mb-2">⚠️ Importante!</h3>
-              <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              <p className="text-zinc-300 text-lg max-w-2xl mx-auto">
                 Estas são sugestões baseadas em custo-benefício. Sempre fale comigo antes de iniciar qualquer suplementação que não esteja prescrita no seu Planejamento.
               </p>
             </div>

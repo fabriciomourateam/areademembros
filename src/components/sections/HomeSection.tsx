@@ -15,7 +15,7 @@ const HomeSection = () => {
             <CheckCircle className="h-6 w-6 text-amber-300 sm:h-7 sm:w-7" />
           </div>
           <div className="mb-8 text-center">
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-400">
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-300">
               <span className="block font-bold text-amber-100">
                 É ESSENCIAL QUE VOCÊ VEJA TODOS OS MÓDULOS ANTES DE INICIAR O PLANEJAMENTO!
               </span>
@@ -47,15 +47,15 @@ const HomeSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">COMUNICAÇÃO & SUPORTE</h2>
-            <p className="text-sm text-zinc-500">Canal oficial — WhatsApp</p>
+            <p className="text-sm text-zinc-400">Canal oficial — WhatsApp</p>
           </div>
         </header>
         <div className="space-y-5">
-          <p className="leading-relaxed text-zinc-400">
-            A comunicação direta e constante é a nossa principal ferramenta. Me avise sempre — se a
-            semana foi boa ou ruim — pelo <strong className="text-amber-100">WhatsApp oficial</strong>.
-            É por ele que você tira <strong className="text-amber-100">todas as suas dúvidas</strong>{' '}
-            sobre dieta, treino e acompanhamento, com eu e a equipe no seu suporte.
+          <p className="leading-relaxed text-zinc-300">
+            A comunicação direta e constante é a nossa principal ferramenta. Me avise sempre que houver
+            qualquer dificuldade pelo <strong className="text-amber-100">WhatsApp oficial</strong>. É por
+            ele que você tira <strong className="text-amber-100">todas as suas dúvidas</strong> comigo e
+            com minha Equipe sobre dieta, treino e tudo relacionado ao seu acompanhamento.
           </p>
 
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 text-center">
@@ -79,7 +79,7 @@ const HomeSection = () => {
             }
           >
             <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-            <span className="text-sm sm:text-base">Falar com a Equipe FMTeam no WhatsApp</span>
+            <span className="text-sm sm:text-base">Falar com Fabricio Moura</span>
           </Button>
         </div>
       </section>
@@ -110,7 +110,7 @@ const HomeSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">👥 Comunidade VIP do Time</h2>
-            <p className="text-sm text-zinc-500">Grupo Exclusivo de Membros</p>
+            <p className="text-sm text-zinc-400">Grupo Exclusivo de Membros</p>
           </div>
           <div className="ml-auto">
             <div className="flex items-center gap-1 rounded-full bg-purple-500/15 px-3 py-1 ring-1 ring-purple-400/25">
@@ -121,7 +121,7 @@ const HomeSection = () => {
         </header>
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <p className="mb-6 leading-relaxed text-zinc-400">Participe da nossa comunidade exclusiva para:</p>
+            <p className="mb-6 leading-relaxed text-zinc-300">Participe da nossa comunidade exclusiva para:</p>
 
             <div className="space-y-4">
               <div className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
@@ -160,7 +160,7 @@ const HomeSection = () => {
               📩 Entrar na Comunidade VIP
             </Button>
 
-            <p className="mt-3 text-xs text-zinc-500">Link direto para o grupo do WhatsApp exclusivo.</p>
+            <p className="mt-3 text-xs text-zinc-400">Link direto para o grupo do WhatsApp exclusivo.</p>
           </div>
         </div>
       </section>
@@ -175,10 +175,10 @@ const HomeSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">FINANCEIRO</h2>
-              <p className="text-sm text-zinc-500">WhatsApp</p>
+              <p className="text-sm text-zinc-400">WhatsApp</p>
             </div>
           </header>
-          <p className="mb-6 text-zinc-400">Para tratar de pagamentos, boletos e faturas:</p>
+          <p className="mb-6 text-zinc-300">Para tratar de pagamentos, boletos e faturas:</p>
           <Button
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-3 font-semibold text-white shadow-lg transition-all hover:brightness-110"
             onClick={() =>
@@ -201,10 +201,10 @@ const HomeSection = () => {
             </span>
             <div>
               <h2 className="font-heading text-xl text-amber-50">CONTRATO DE ADESÃO</h2>
-              <p className="text-sm text-zinc-500">Documento oficial</p>
+              <p className="text-sm text-zinc-400">Documento oficial</p>
             </div>
           </header>
-          <p className="leading-relaxed text-zinc-400">
+          <p className="leading-relaxed text-zinc-300">
             O contrato é enviado para o e-mail cadastrado após o preenchimento da anamnese, junto com a
             concordância dos Termos do Plano de Acompanhamento escolhido.
           </p>

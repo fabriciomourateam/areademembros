@@ -91,7 +91,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">📌 Como Seguir Sua Dieta</div>
-              <div className="text-sm text-zinc-500">Base do seu sucesso + erros a evitar</div>
+              <div className="text-sm text-zinc-400">Base do seu sucesso + erros a evitar</div>
             </div>
           </div>
           {expandedCards.includes('como-seguir') ? (
@@ -102,7 +102,7 @@ const NutritionSection = () => {
         </div>
         {expandedCards.includes('como-seguir') && (
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-          <ul className="space-y-2 text-zinc-400">
+          <ul className="space-y-2 text-zinc-300">
             <li className="flex items-start gap-2">
               <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
               Dieta adaptada aos seus hábitos e preferências alimentares.
@@ -176,21 +176,21 @@ const NutritionSection = () => {
             <div className="grid gap-6 md:grid-cols-3">
               <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
                 <h4 className="mb-3 font-bold text-amber-50">Finais de semana</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-zinc-300">
                   São <strong className="text-amber-100">30% da sua semana.</strong> Não jogue fora 5 dias de esforço exagerando no fim de semana.
                 </p>
               </div>
 
               <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
                 <h4 className="mb-3 font-bold text-amber-50">Café da manhã e Lanche da tarde</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-zinc-300">
                   Refeições importantes: <strong className="text-amber-100">planeje-se</strong> com antecedência para não deixar de fazê-las.
                 </p>
               </div>
 
               <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
                 <h4 className="mb-3 font-bold text-amber-50">Esquecer de comer</h4>
-                <p className="text-sm leading-relaxed text-zinc-400">
+                <p className="text-sm leading-relaxed text-zinc-300">
                   Tenha tudo <strong className="text-amber-100">pronto e organizado</strong> para não pular refeições — <strong className="text-amber-100">não coma a mais nem a menos</strong> do que o previsto.
                 </p>
               </div>
@@ -219,7 +219,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">⚖️ Pesagem de Alimentos</div>
-              <div className="text-sm text-zinc-500">Precisão é fundamental</div>
+              <div className="text-sm text-zinc-400">Precisão é fundamental</div>
             </div>
           </div>
           {expandedCards.includes('pesagem') ? (
@@ -244,7 +244,7 @@ const NutritionSection = () => {
                 📎 Veja a explicação
               </Button>
 
-              <div className="space-y-3 text-zinc-400">
+              <div className="space-y-3 text-zinc-300">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
                   <span>Pese os alimentos <strong className="text-amber-100">prontos (após o cozimento)</strong>.</span>
@@ -272,7 +272,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">💧 Recomendações & Hábitos</div>
-              <div className="text-sm text-zinc-500">Para o seu bem-estar</div>
+              <div className="text-sm text-zinc-400">Para o seu bem-estar</div>
             </div>
           </div>
           {expandedCards.includes('recomendacoes-habitos') ? (
@@ -295,7 +295,7 @@ const NutritionSection = () => {
                   </div>
                   <h4 className={`font-bold text-${rec.color}-300`}>{rec.title}</h4>
                 </div>
-                <div className="text-sm leading-relaxed text-zinc-400">
+                <div className="text-sm leading-relaxed text-zinc-300">
                   {rec.description.includes('**') || rec.description.includes('<strong>') ? (
                     <div dangerouslySetInnerHTML={{
                       __html: rec.description
@@ -347,7 +347,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">🍔 Refeição Livre</div>
-              <div className="text-sm text-zinc-500">Use com moderação</div>
+              <div className="text-sm text-zinc-400">Use com moderação</div>
             </div>
           </div>
           {expandedCards.includes('refeicao-livre') ? (
@@ -358,7 +358,7 @@ const NutritionSection = () => {
         </div>
         {expandedCards.includes('refeicao-livre') && (
         <div className="space-y-6 px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-          <ul className="space-y-2 text-zinc-400">
+          <ul className="space-y-2 text-zinc-300">
             <li className="flex items-start gap-2">
               <RefreshCw className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
               Facultativa e psicológica: guarde para momentos sociais com família e amigos.
@@ -438,7 +438,7 @@ const NutritionSection = () => {
             </span>
             <div>
               <div className="font-heading text-xl text-amber-50">🍫 Controle de Doces e Ansiedade</div>
-              <div className="text-sm text-zinc-500">Estratégias comportamentais</div>
+              <div className="text-sm text-zinc-400">Estratégias comportamentais</div>
             </div>
           </div>
           {expandedCards.includes('controle-doces') ? (

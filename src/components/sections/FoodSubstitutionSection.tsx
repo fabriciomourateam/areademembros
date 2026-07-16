@@ -40,7 +40,7 @@ const FoodSubstitutionSection = () => {
         <div className="relative">
           <span className="mb-3 block text-5xl">🔄</span>
           <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">APP DE SUBSTITUIÇÃO DE ALIMENTOS</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Substitua ingredientes com inteligência e mantenha seus resultados
           </p>
         </div>
@@ -50,7 +50,7 @@ const FoodSubstitutionSection = () => {
       <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <div className="text-center">
           <h2 className="font-heading text-xl text-amber-50">🔄 Revolucione Sua Flexibilidade Alimentar</h2>
-          <p className="mx-auto mt-3 max-w-3xl text-zinc-400 leading-relaxed">
+          <p className="mx-auto mt-3 max-w-3xl text-zinc-300 leading-relaxed">
             Nosso aplicativo exclusivo de substituição de alimentos é a solução perfeita para
             momentos de imprevisto na cozinha. Com tecnologia avançada, você encontra
             substitutos nutricionalmente equivalentes em segundos, mantendo a consistência
@@ -71,7 +71,7 @@ const FoodSubstitutionSection = () => {
             </span>
             <div>
               <h3 className="mb-1 font-semibold text-amber-50">{feature.title}</h3>
-              <p className="text-sm leading-relaxed text-zinc-400">{feature.description}</p>
+              <p className="text-sm leading-relaxed text-zinc-300">{feature.description}</p>
             </div>
           </div>
         ))}
@@ -87,21 +87,21 @@ const FoodSubstitutionSection = () => {
                 <span className="text-xl font-bold text-amber-300">1</span>
               </div>
               <h4 className="font-semibold text-amber-50">Digite o Alimento</h4>
-              <p className="text-sm text-zinc-400">Informe qual ingrediente você precisa substituir</p>
+              <p className="text-sm text-zinc-300">Informe qual ingrediente você precisa substituir</p>
             </div>
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
                 <span className="text-xl font-bold text-amber-300">2</span>
               </div>
               <h4 className="font-semibold text-amber-50">Receba Opções</h4>
-              <p className="text-sm text-zinc-400">Veja substitutos nutricionalmente equivalentes</p>
+              <p className="text-sm text-zinc-300">Veja substitutos nutricionalmente equivalentes</p>
             </div>
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
                 <span className="text-xl font-bold text-amber-300">3</span>
               </div>
               <h4 className="font-semibold text-amber-50">Aplique e Continue</h4>
-              <p className="text-sm text-zinc-400">Use o substituto e mantenha seus resultados</p>
+              <p className="text-sm text-zinc-300">Use o substituto e mantenha seus resultados</p>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ const FoodSubstitutionSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Ferramenta de Substituição</h2>
-            <p className="text-sm text-zinc-500">Use nossa calculadora online para encontrar substitutos perfeitos</p>
+            <p className="text-sm text-zinc-400">Use nossa calculadora online para encontrar substitutos perfeitos</p>
           </div>
         </header>
 
@@ -148,7 +148,7 @@ const FoodSubstitutionSection = () => {
           </span>
           <div>
             <h2 className="font-heading text-xl text-amber-50">Benefícios Exclusivos</h2>
-            <p className="text-sm text-zinc-500">Por que usar nosso app de substituição?</p>
+            <p className="text-sm text-zinc-400">Por que usar nosso app de substituição?</p>
           </div>
         </header>
         <div className="grid gap-4 md:grid-cols-2">
@@ -168,7 +168,7 @@ const FoodSubstitutionSection = () => {
       <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
         <RefreshCw className="mx-auto mb-4 h-16 w-16 text-amber-300" />
         <h3 className="font-heading text-xl text-amber-100">💡 Dica Importante!</h3>
-        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
           O app de substituição é uma ferramenta complementar ao seu plano nutricional.
           Use com sabedoria e sempre priorize os alimentos recomendados no seu plano alimentar!
         </p>

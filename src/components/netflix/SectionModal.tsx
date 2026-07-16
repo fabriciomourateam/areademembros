@@ -42,7 +42,7 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
           )}
         >
           <DialogTitle
-            className={cn('font-display text-base sm:text-lg', dark ? 'text-amber-50' : 'text-zinc-900')}
+            className={cn('font-heading text-base sm:text-lg', dark ? 'text-amber-50' : 'text-zinc-900')}
           >
             {title}
           </DialogTitle>
