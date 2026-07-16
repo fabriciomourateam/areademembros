@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import NetflixNavbar from './NetflixNavbar';
 import HeroBanner from './HeroBanner';
 import CategoryCard from './CategoryCard';
 import VideoModal from './VideoModal';
@@ -37,6 +38,8 @@ const NetflixHome = () => {
 
   return (
     <div className="min-h-screen animate-in fade-in duration-500 bg-[#0a0a0b] text-white">
+      <NetflixNavbar />
+
       <main>
         <HeroBanner onPlay={() => setVideoModal({ id: HERO.videoId, title: HERO.title })} />
 

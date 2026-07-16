@@ -45,18 +45,24 @@ const CardRow = ({ children, count }: CardRowProps) => {
       </div>
 
       {count > 1 && (
-        <div className="mt-3 flex justify-center gap-1.5">
+        <div className="mt-3 flex items-center justify-center gap-0.5">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
               type="button"
               aria-label={`Ir para o conteúdo ${i + 1}`}
               onClick={() => goTo(i)}
-              className={cn(
-                'h-1.5 rounded-full transition-all duration-300',
-                i === active ? 'w-5 bg-amber-400' : 'w-1.5 bg-white/25 hover:bg-white/40'
-              )}
-            />
+              className="group/dot flex min-h-0 items-center justify-center px-1 py-2"
+            >
+              <span
+                className={cn(
+                  'block h-[3px] rounded-full transition-all duration-500 ease-out',
+                  i === active
+                    ? 'w-4 bg-amber-300'
+                    : 'w-[3px] bg-white/20 group-hover/dot:bg-white/40'
+                )}
+              />
+            </button>
           ))}
         </div>
       )}
