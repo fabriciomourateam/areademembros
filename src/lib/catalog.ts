@@ -86,7 +86,7 @@ export const CATEGORIES: Category[] = [
     description: 'Vídeo de boas-vindas e o passo a passo para dar o primeiro passo.',
     icon: Play,
     gradient: 'from-green-600 to-emerald-800',
-    image: '/start.png',
+    image: '/start.webp',
     badge: 'Essencial',
     embedSection: 'home',
     items: [
@@ -108,7 +108,7 @@ export const CATEGORIES: Category[] = [
     description: 'Como seguir sua dieta, montar refeições e tirar as principais dúvidas.',
     icon: Utensils,
     gradient: 'from-amber-500 to-orange-700',
-    image: '/nutrition.png',
+    image: '/nutrition.webp',
     embedSection: 'nutrition',
     items: [
       {
@@ -146,7 +146,7 @@ export const CATEGORIES: Category[] = [
     description: 'Orientação principal e vídeos complementares de técnica e execução.',
     icon: Dumbbell,
     gradient: 'from-red-500 to-rose-800',
-    image: '/workouts.png',
+    image: '/workouts.webp',
     embedSection: 'workouts',
     items: [
       {
@@ -230,7 +230,7 @@ export const CATEGORIES: Category[] = [
     description: 'Entenda a importância do check-in e como acompanhar sua evolução.',
     icon: CheckCircle,
     gradient: 'from-sky-500 to-blue-800',
-    image: '/checkin.png',
+    image: '/checkin.webp',
     embedSection: 'checkin',
     items: [
       {
@@ -250,7 +250,7 @@ export const CATEGORIES: Category[] = [
     description: 'Seus bônus e as ferramentas práticas do FM Team, num só lugar.',
     icon: Gift,
     gradient: 'from-violet-500 to-purple-800',
-    image: '/tools.png',
+    image: '/tools.webp',
     items: [],
     groups: [
       {
