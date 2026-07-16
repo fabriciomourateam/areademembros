@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import NetflixNavbar from './NetflixNavbar';
 import PasswordDialog from './PasswordDialog';
+import SectionLoader from './SectionLoader';
 import { SECTIONS, type SectionKey } from './sectionRegistry';
 import { isUnlocked } from '@/lib/access';
 
@@ -49,7 +50,9 @@ const SectionView = ({ section }: SectionViewProps) => {
         <NetflixNavbar showBack />
         <main className="px-3 pb-16 pt-20 sm:px-6 sm:pt-24 lg:px-8">
           <div className="fade-in-up">
-            <SectionComponent />
+            <Suspense fallback={<SectionLoader />}>
+              <SectionComponent />
+            </Suspense>
           </div>
         </main>
       </div>

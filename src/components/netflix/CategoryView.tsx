@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
 import { SidebarProvider } from '@/components/ui/sidebar';
@@ -6,6 +6,7 @@ import NetflixNavbar from './NetflixNavbar';
 import ContentCard from './ContentCard';
 import VideoModal from './VideoModal';
 import SectionModal from './SectionModal';
+import SectionLoader from './SectionLoader';
 import DietModal from './DietModal';
 import PasswordDialog from './PasswordDialog';
 import { SECTIONS, type SectionKey } from './sectionRegistry';
@@ -200,10 +201,12 @@ const CategoryView = () => {
           dark={DARK_SECTIONS.has(sectionModal.key)}
         >
           <div className="fade-in-up">
-            {(() => {
-              const Comp = SECTIONS[sectionModal.key]?.component;
-              return Comp ? <Comp /> : null;
-            })()}
+            <Suspense fallback={<SectionLoader />}>
+              {(() => {
+                const Comp = SECTIONS[sectionModal.key]?.component;
+                return Comp ? <Comp /> : null;
+              })()}
+            </Suspense>
           </div>
         </SectionModal>
       )}

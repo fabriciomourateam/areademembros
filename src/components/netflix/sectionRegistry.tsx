@@ -1,22 +1,26 @@
 // Registro central das seções detalhadas, reutilizado tanto pela página de
 // seção isolada quanto pela visão de categoria (que "engloba" as internas).
+//
+// Cada seção é carregada sob demanda (React.lazy) para reduzir o bundle
+// inicial — só baixa o código da seção quando o usuário realmente a abre.
 
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
 import type { LockKey } from '@/lib/access';
 
-import HomeSection from '@/components/sections/HomeSection';
-import NutritionSection from '@/components/sections/NutritionSection';
-import WorkoutsSection from '@/components/sections/WorkoutsSection';
-import CheckinSection from '@/components/sections/CheckinSection';
-import SupplementsSection from '@/components/sections/SupplementsSection';
-import EbooksSection from '@/components/sections/EbooksSection';
-import ReferralSection from '@/components/sections/ReferralSection';
-import MentorshipSection from '@/components/sections/MentorshipSection';
-import FoodSubstitutionSection from '@/components/sections/FoodSubstitutionSection';
-import BioimpedanceSection from '@/components/sections/BioimpedanceSection';
-import EvolutionReportSection from '@/components/sections/EvolutionReportSection';
-import RecipesSection from '@/components/sections/RecipesSection';
-import MealCalculatorSection from '@/components/sections/MealCalculatorSection';
-import AppsSection from '@/components/sections/AppsSection';
+const HomeSection = lazy(() => import('@/components/sections/HomeSection'));
+const NutritionSection = lazy(() => import('@/components/sections/NutritionSection'));
+const WorkoutsSection = lazy(() => import('@/components/sections/WorkoutsSection'));
+const CheckinSection = lazy(() => import('@/components/sections/CheckinSection'));
+const SupplementsSection = lazy(() => import('@/components/sections/SupplementsSection'));
+const EbooksSection = lazy(() => import('@/components/sections/EbooksSection'));
+const ReferralSection = lazy(() => import('@/components/sections/ReferralSection'));
+const MentorshipSection = lazy(() => import('@/components/sections/MentorshipSection'));
+const FoodSubstitutionSection = lazy(() => import('@/components/sections/FoodSubstitutionSection'));
+const BioimpedanceSection = lazy(() => import('@/components/sections/BioimpedanceSection'));
+const EvolutionReportSection = lazy(() => import('@/components/sections/EvolutionReportSection'));
+const RecipesSection = lazy(() => import('@/components/sections/RecipesSection'));
+const MealCalculatorSection = lazy(() => import('@/components/sections/MealCalculatorSection'));
+const AppsSection = lazy(() => import('@/components/sections/AppsSection'));
 
 export type SectionKey =
   | 'home'
@@ -34,7 +38,10 @@ export type SectionKey =
   | 'meal-calculator'
   | 'apps';
 
-export const SECTIONS: Record<SectionKey, { component: () => JSX.Element; lockKey?: LockKey }> = {
+export const SECTIONS: Record<
+  SectionKey,
+  { component: LazyExoticComponent<ComponentType>; lockKey?: LockKey }
+> = {
   home: { component: HomeSection },
   nutrition: { component: NutritionSection },
   workouts: { component: WorkoutsSection },
