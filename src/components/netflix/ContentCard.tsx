@@ -20,7 +20,7 @@ const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
     <button
       type="button"
       onClick={() => onSelect(item)}
-      className="group relative w-[190px] sm:w-[240px] shrink-0 snap-start text-left focus:outline-none"
+      className="group relative w-[85vw] max-w-[340px] sm:w-[240px] sm:max-w-none shrink-0 snap-start text-left focus:outline-none"
       aria-label={item.title}
     >
       <div className="relative aspect-video overflow-hidden rounded-lg bg-zinc-900 ring-1 ring-white/10 shadow-lg transition-all duration-300 group-hover:ring-2 group-hover:ring-amber-400/80 group-hover:shadow-amber-500/20 group-hover:scale-[1.04] group-focus-visible:ring-2 group-focus-visible:ring-amber-400">

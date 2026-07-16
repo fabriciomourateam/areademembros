@@ -93,7 +93,7 @@ const ReferralSection = () => {
             </div>
 
             <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] px-6 py-5">
-              <p className="text-2xl font-bold text-gold">DESCONTO EXCLUSIVO</p>
+              <p className="text-2xl font-black text-gold">DESCONTO EXCLUSIVO</p>
               <p className="mt-2 text-lg text-amber-100/80">Condições especiais para começar</p>
             </div>
 
@@ -166,7 +166,7 @@ const ReferralSection = () => {
 
         <div className="mx-auto mt-5 max-w-xl rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
           <h4 className="mb-2 font-heading text-xl text-amber-100">💪🏼 CONTE COMIGO DURANTE TODO PROCESSO</h4>
-          <p className="mb-2 text-2xl font-bold text-gold">BOOOORA PRA CIMA!</p>
+          <p className="mb-2 text-2xl font-black text-gold">BOOOORA PRA CIMA!</p>
           <div className="flex items-center justify-center gap-2">
             <span className="text-2xl">🎯</span>
             <span className="text-2xl">🎯</span>

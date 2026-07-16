@@ -629,17 +629,17 @@ const SupplementsSection = () => {
                     variant="outline"
                     className="w-full justify-between p-4 h-auto rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-amber-400/40 hover:bg-white/[0.04] transition"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-full ring-1 ${accent.chipBg} ${accent.ring}`}>
+                    <div className="flex min-w-0 items-center gap-3">
+                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-1 ${accent.chipBg} ${accent.ring}`}>
                         <supplement.icon className={`h-5 w-5 ${accent.icon}`} />
                       </div>
-                      <div className="text-left">
+                      <div className="min-w-0 text-left">
                         <h4 className="font-semibold text-amber-50">{supplement.name}</h4>
-                        <p className="text-sm text-zinc-300">{supplement.description}</p>
+                        <p className="whitespace-normal break-words text-sm text-zinc-300">{supplement.description}</p>
                       </div>
                     </div>
                     <ChevronRight
-                      className={`h-5 w-5 transition-transform duration-300 ${openSupplement === supplement.id ? 'rotate-90' : ''} ${accent.chevron}`}
+                      className={`h-5 w-5 shrink-0 transition-transform duration-300 ${openSupplement === supplement.id ? 'rotate-90' : ''} ${accent.chevron}`}
                     />
                   </Button>
                 </CollapsibleTrigger>

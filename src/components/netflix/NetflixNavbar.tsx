@@ -48,12 +48,13 @@ const NetflixNavbar = ({ showBack = false }: NetflixNavbarProps) => {
           <img
             src="/topo.png"
             alt="FM Team"
-            className="h-6 w-auto max-w-[110px] object-contain sm:h-8"
+            className="h-6 w-auto max-w-[92px] object-contain sm:h-8 sm:max-w-[110px]"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).style.display = 'none';
             }}
           />
-          <span className="font-wordmark text-base text-gold sm:text-lg">FMTeam</span>
+          {/* Wordmark redundante ao lado do logo — só no desktop, pra não sobrepor no mobile */}
+          <span className="hidden font-wordmark text-base text-gold sm:inline sm:text-lg">FMTeam</span>
         </button>
 
         <div className="ml-auto flex items-center gap-2">
