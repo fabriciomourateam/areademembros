@@ -52,13 +52,13 @@ const HeroBanner = ({ onPlay }: HeroBannerProps) => {
             {HERO.description}
           </p>
 
-          <div className="mt-8 grid max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="mt-8 grid max-w-md grid-cols-1 gap-3 sm:max-w-xl sm:grid-cols-2">
             <button
               type="button"
               onClick={onPlay}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3 text-sm font-bold text-black shadow-lg transition-all hover:shadow-amber-500/30 hover:brightness-110 sm:text-base"
+              className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3 text-sm font-bold text-black shadow-lg transition-all hover:shadow-amber-500/30 hover:brightness-110 sm:text-base"
             >
-              <Play className="h-5 w-5 fill-black" />
+              <Play className="h-5 w-5 shrink-0 fill-black" />
               Assistir boas-vindas
             </button>
             <button
@@ -66,7 +66,7 @@ const HeroBanner = ({ onPlay }: HeroBannerProps) => {
               onClick={() =>
                 document.getElementById('conteudos')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }
-              className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-amber-500/40 bg-white/5 px-7 py-3 text-sm font-semibold text-amber-100 backdrop-blur transition-colors hover:border-amber-400/70 hover:bg-white/10 sm:text-base"
+              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border border-amber-500/40 bg-white/5 px-7 py-3 text-sm font-semibold text-amber-100 backdrop-blur transition-colors hover:border-amber-400/70 hover:bg-white/10 sm:text-base"
             >
               Explorar conteúdos
               <ChevronRight className="h-4 w-4" />
