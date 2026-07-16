@@ -60,7 +60,7 @@ const ReferralSection = () => {
                 MAIOR PRÊMIO 🔥
               </div>
               <div className="mb-2 text-5xl">🏆</div>
-              <div className="mb-1 font-heading text-2xl text-gold">8 indicações</div>
+              <div className="mb-1 font-heading text-2xl font-bold text-gold">8 indicações</div>
               <div className="mt-auto rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-4">
                 <p className="text-lg font-bold leading-tight text-amber-100">Ganhe 1 ano Grátis</p>
                 <p className="mt-1 text-sm text-amber-100/70">🎁</p>
