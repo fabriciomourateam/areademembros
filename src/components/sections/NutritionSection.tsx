@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, AlertTriangle, CheckCircle, Clock, Utensils, Droplets, Coffee, Salad, Scale, FileText, Heart, Brain, X, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
-import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const NutritionSection = () => {
   const [expandedCards, setExpandedCards] = useState<string[]>([]);
@@ -309,28 +308,6 @@ const NutritionSection = () => {
               </div>
             ))}
           </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="text-center">
-              <h4 className="mb-4 font-bold text-amber-50">Hábitos saudáveis, rotina, sono e álcool</h4>
-              <div className="aspect-video overflow-hidden rounded-xl border border-white/[0.06]">
-                <YouTubeEmbed
-                  videoId="GnaPPoal7OQ"
-                  title="Hábitos saudáveis, rotina, sono e álcool - FM Team"
-                />
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h4 className="mb-4 font-bold text-amber-50">Alimentos saudáveis e não saudáveis</h4>
-              <div className="aspect-video overflow-hidden rounded-xl border border-white/[0.06]">
-                <YouTubeEmbed
-                  videoId="41IXoXJRc1E"
-                  title="Alimentos saudáveis e não saudáveis - FM Team"
-                />
-              </div>
-            </div>
-          </div>
         </div>
         )}
       </section>
@@ -394,27 +371,15 @@ const NutritionSection = () => {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="text-center">
-              <h4 className="mb-4 font-bold text-amber-50">📄 Dicas de Refeições Livres</h4>
-              <Button
-                className="w-full rounded-xl border-0 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 font-semibold text-black shadow-lg transition-all hover:brightness-110"
-                onClick={() => window.open('https://drive.google.com/file/d/119Y6bkWAiZ44gxkY5vjpg-THLggttQKx/view?usp=drivesdk', '_blank')}
-              >
-                <FileText className="mr-2 h-4 w-4" />
-                Ver Dicas no Drive
-              </Button>
-            </div>
-
-            <div className="text-center">
-              <h4 className="mb-4 font-bold text-amber-50">🎥 Vídeo sobre Refeição Livre</h4>
-              <div className="aspect-video overflow-hidden rounded-xl border border-white/[0.06]">
-                <YouTubeEmbed
-                  videoId="M0VtCP6Bfu0"
-                  title="Vídeo sobre Refeição Livre - FM Team"
-                />
-              </div>
-            </div>
+          <div className="text-center">
+            <h4 className="mb-4 font-bold text-amber-50">📄 Dicas de Refeições Livres</h4>
+            <Button
+              className="w-full rounded-xl border-0 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 font-semibold text-black shadow-lg transition-all hover:brightness-110 sm:w-auto sm:px-8"
+              onClick={() => window.open('https://drive.google.com/file/d/119Y6bkWAiZ44gxkY5vjpg-THLggttQKx/view?usp=drivesdk', '_blank')}
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              Ver Dicas no Drive
+            </Button>
           </div>
 
           <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-6 text-center">

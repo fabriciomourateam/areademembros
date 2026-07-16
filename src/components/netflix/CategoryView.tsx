@@ -166,7 +166,7 @@ const CategoryView = () => {
               {category.groups.map((group) => (
                 <div key={group.title}>
                   <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">{group.title}</h2>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                     {group.items.map((item) => (
                       <ContentCard
                         key={item.id}
@@ -199,7 +199,7 @@ const CategoryView = () => {
                     );
                   })()}
                 </div>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                   {cards.map((item) => (
                     <ContentCard
                       key={item.id}

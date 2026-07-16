@@ -49,7 +49,7 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
         </DialogHeader>
         <div
           className={cn(
-            'gold-scroll scroll-fade-mask max-h-[76vh] overflow-y-auto',
+            'gold-scroll scroll-fade-mask max-h-[76vh] overflow-y-auto overflow-x-hidden',
             dark ? 'bg-[#0a0a0b]' : 'bg-white'
           )}
         >
