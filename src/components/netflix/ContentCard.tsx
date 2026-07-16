@@ -20,7 +20,7 @@ const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
     <button
       type="button"
       onClick={() => onSelect(item)}
-      className="group relative w-[85vw] max-w-[340px] shrink-0 snap-start text-left focus:outline-none sm:w-[240px] sm:max-w-none"
+      className="group relative w-[240px] shrink-0 snap-start text-left focus:outline-none sm:w-[300px]"
       aria-label={item.title}
     >
       {/* Mesmo formato dos cards da home: pôster em cima + faixa de título embaixo */}

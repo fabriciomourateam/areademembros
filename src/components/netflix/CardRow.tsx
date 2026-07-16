@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState, type ReactNode } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface CardRowProps {
@@ -34,14 +35,42 @@ const CardRow = ({ children, count }: CardRowProps) => {
     ref.current?.scrollTo({ left: i * stepSize(), behavior: 'smooth' });
   };
 
+  const scrollByRow = (dir: 1 | -1) => {
+    const el = ref.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.85), behavior: 'smooth' });
+  };
+
   return (
     <div>
-      <div
-        ref={ref}
-        onScroll={handleScroll}
-        className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {children}
+      <div className="group/row relative">
+        {/* Seta esquerda (desktop) */}
+        <button
+          type="button"
+          aria-label="Voltar"
+          onClick={() => scrollByRow(-1)}
+          className="absolute inset-y-0 left-0 z-10 hidden w-12 items-center justify-center bg-gradient-to-r from-black/80 to-transparent text-white opacity-0 transition-opacity hover:from-black md:flex group-hover/row:opacity-100"
+        >
+          <ChevronLeft className="h-8 w-8" />
+        </button>
+
+        <div
+          ref={ref}
+          onScroll={handleScroll}
+          className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {children}
+        </div>
+
+        {/* Seta direita (desktop) */}
+        <button
+          type="button"
+          aria-label="Avançar"
+          onClick={() => scrollByRow(1)}
+          className="absolute inset-y-0 right-0 z-10 hidden w-12 items-center justify-center bg-gradient-to-l from-black/80 to-transparent text-white opacity-0 transition-opacity hover:from-black md:flex group-hover/row:opacity-100"
+        >
+          <ChevronRight className="h-8 w-8" />
+        </button>
       </div>
 
       {count > 1 && (
