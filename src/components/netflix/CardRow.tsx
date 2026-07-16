@@ -57,7 +57,7 @@ const CardRow = ({ children, count }: CardRowProps) => {
         <div
           ref={ref}
           onScroll={handleScroll}
-          className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-3 pt-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {children}
         </div>
