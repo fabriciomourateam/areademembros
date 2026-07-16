@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { BookOpen, Download, ExternalLink, Calendar, Heart, Moon, Dumbbell, Apple, Baby, Zap, Utensils, Shield, ChevronDown, ChevronUp, ChefHat } from 'lucide-react';
+import { BookOpen, Download, ExternalLink, Heart, Dumbbell, Apple, Utensils, Shield, ChevronDown, ChevronUp, ChefHat } from 'lucide-react';
 
 const EbooksSection = () => {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
   const toggleCategory = (categoryId: string) => {
-    setExpandedCategories(prev => 
-      prev.includes(categoryId) 
+    setExpandedCategories(prev =>
+      prev.includes(categoryId)
         ? prev.filter(id => id !== categoryId)
         : [...prev, categoryId]
     );
@@ -142,144 +140,127 @@ const EbooksSection = () => {
   ];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-indigo-50 via-white to-purple-100/50 border border-indigo-200/50 shadow-lg">
-        <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <span className="text-5xl md:text-6xl">📚</span>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
-              E-BOOKS EXCLUSIVOS
-            </h1>
-          </div>
-          <p className="text-indigo-700/80 text-xl font-medium">
+    <div className="mx-auto max-w-4xl space-y-6 text-zinc-200">
+      {/* Hero */}
+      <div className="relative overflow-hidden rounded-3xl border border-amber-500/15 bg-gradient-to-br from-[#16161c] to-[#0e0e13] px-7 py-10 text-center">
+        <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
+        <div className="relative">
+          <span className="mb-3 block text-5xl">📚</span>
+          <h1 className="font-heading text-3xl font-extrabold uppercase text-gold sm:text-4xl">E-BOOKS EXCLUSIVOS</h1>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Materiais completos para potencializar seus resultados
           </p>
         </div>
       </div>
 
       {/* Introdução */}
-      <Card className="floating-card gradient-card border-indigo-200/50">
-        <CardContent className="py-8">
-          <div className="text-center space-y-4">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Download className="h-6 w-6 text-indigo-500" />
-              <h2 className="text-2xl font-bold text-indigo-800">📚 Biblioteca Completa de Conhecimento</h2>
-            </div>
-            <p className="text-indigo-700/80 text-lg leading-relaxed max-w-4xl mx-auto">
-              Acesse nossa coleção exclusiva de e-books com estratégias comprovadas, 
-              guias práticos e protocolos especializados para acelerar seus resultados 
-              e resolver desafios específicos do seu dia a dia.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6 text-center">
+        <div className="mb-3 flex items-center justify-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Download className="h-5 w-5 text-amber-300" />
+          </span>
+          <h2 className="font-heading text-xl text-amber-50">📚 Biblioteca Completa de Conhecimento</h2>
+        </div>
+        <p className="mx-auto max-w-3xl text-sm leading-relaxed text-zinc-300">
+          Acesse nossa coleção exclusiva de e-books com estratégias comprovadas,
+          guias práticos e protocolos especializados para acelerar seus resultados
+          e resolver desafios específicos do seu dia a dia.
+        </p>
+      </section>
 
       {/* Categorias de E-books */}
       {ebooks.map((category) => {
         const isExpanded = expandedCategories.includes(category.id);
-        
+
         return (
-          <Card key={category.id} className={`floating-card gradient-card border-${category.color}-200/50`}>
-            <CardHeader 
-              className={`pb-6 bg-gradient-to-r from-${category.color}-50 to-${category.color}-100/50 cursor-pointer hover:from-${category.color}-100 hover:to-${category.color}-200/50 transition-all duration-300`}
+          <section key={category.id} className="overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.035]">
+            <header
+              className="flex cursor-pointer items-center justify-between gap-3 p-6 transition-colors hover:bg-white/[0.02]"
               onClick={() => toggleCategory(category.id)}
             >
-              <CardTitle className={`flex items-center justify-between text-${category.color}-800`}>
-                <div className="flex items-center gap-3">
-                  <div className={`p-3 bg-gradient-to-r from-${category.color}-500 to-${category.color}-600 rounded-xl shadow-lg`}>
-                    <category.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{category.category}</div>
-                    <div className={`text-sm text-${category.color}-600/70 font-normal`}>
-                      {category.books.length} e-book{category.books.length > 1 ? 's' : ''} disponível{category.books.length > 1 ? 'is' : ''}
-                    </div>
+              <div className="flex items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                  <category.icon className="h-6 w-6 text-amber-300" />
+                </span>
+                <div>
+                  <div className="font-heading text-xl text-amber-50">{category.category}</div>
+                  <div className="text-sm text-zinc-400">
+                    {category.books.length} e-book{category.books.length > 1 ? 's' : ''} disponível{category.books.length > 1 ? 'is' : ''}
                   </div>
                 </div>
-                <div className={`p-2 rounded-lg bg-${category.color}-100 hover:bg-${category.color}-200 transition-colors duration-200`}>
-                  {isExpanded ? (
-                    <ChevronUp className={`h-5 w-5 text-${category.color}-600`} />
-                  ) : (
-                    <ChevronDown className={`h-5 w-5 text-${category.color}-600`} />
-                  )}
-                </div>
-              </CardTitle>
-            </CardHeader>
-            
+              </div>
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.02] text-zinc-300 transition-colors hover:text-amber-100">
+                {isExpanded ? (
+                  <ChevronUp className="h-5 w-5" />
+                ) : (
+                  <ChevronDown className="h-5 w-5" />
+                )}
+              </span>
+            </header>
+
             {isExpanded && (
-              <CardContent className="animate-in slide-in-from-top-2 duration-300">
-            <div className="grid md:grid-cols-2 gap-6">
-              {category.books.map((book, index) => (
-                <div
-                  key={index}
-                  className={`gradient-card p-6 rounded-xl border border-${category.color}-200/50 hover:shadow-lg transition-all duration-300 group`}
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className={`w-12 h-12 bg-gradient-to-r from-${category.color}-400 to-${category.color}-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                        <BookOpen className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className={`font-bold text-${category.color}-800 text-lg leading-tight`}>
-                          {book.title}
-                        </h4>
-                        <p className={`text-${category.color}-600/70 text-sm mt-2 leading-relaxed`}>
-                          {book.description}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <Button
-                      className={`w-full bg-gradient-to-r from-${category.color}-500 to-${category.color}-600 hover:from-${category.color}-600 hover:to-${category.color}-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl`}
-                      onClick={() => window.open(book.url, '_blank')}
+              <div className="animate-in slide-in-from-top-2 px-6 pb-6 duration-300">
+                <div className="grid gap-4 md:grid-cols-2">
+                  {category.books.map((book, index) => (
+                    <div
+                      key={index}
+                      className="group flex flex-col gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/10"
                     >
-                      {'buttonText' in book ? (
-                        <>
-                          Acesse aqui
-                          <ExternalLink className="h-4 w-4 ml-2" />
-                        </>
-                      ) : (
-                        <>
-                          <Download className="h-4 w-4 mr-2" />
-                          Baixar E-book
-                          <ExternalLink className="h-4 w-4 ml-2" />
-                        </>
-                      )}
-                    </Button>
-                  </div>
+                      <div className="flex items-start gap-3">
+                        <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30 transition-transform duration-300 group-hover:scale-110">
+                          <BookOpen className="h-6 w-6 text-amber-300" />
+                        </span>
+                        <div className="flex-1">
+                          <h4 className="font-semibold leading-tight text-amber-50">
+                            {book.title}
+                          </h4>
+                          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                            {book.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3.5 text-sm font-bold text-black shadow-lg transition-all hover:brightness-110"
+                        onClick={() => window.open(book.url, '_blank')}
+                      >
+                        {'buttonText' in book ? (
+                          <>
+                            Acesse aqui
+                            <ExternalLink className="h-4 w-4" />
+                          </>
+                        ) : (
+                          <>
+                            <Download className="h-4 w-4" />
+                            Baixar E-book
+                            <ExternalLink className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-              </CardContent>
+              </div>
             )}
-          </Card>
+          </section>
         );
       })}
 
       {/* Dica Importante */}
-      <Card className="floating-card gradient-card border-amber-200/50">
-        <CardContent className="py-8">
-          <div className="text-center space-y-4">
-            <div className="mb-6">
-              <BookOpen className="h-16 w-16 text-amber-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-amber-800 mb-2">💡 Dica Importante!</h3>
-              <p className="text-amber-700/80 text-lg max-w-3xl mx-auto leading-relaxed">
-                Baixe os e-books para ter acesso offline. Leia com calma e aplique as estratégias 
-                no seu dia a dia. O conhecimento só funciona quando colocado em prática!
-              </p>
-            </div>
-            
-            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-200/50 p-6 rounded-2xl">
-              <p className="text-amber-700 font-semibold text-lg">
-                📖 Sugestão: Comece pelos e-books de "Flexibilidade Alimentar" se você tem dificuldade com eventos sociais!
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] px-6 py-8 text-center">
+        <BookOpen className="mx-auto mb-4 h-16 w-16 text-amber-300" />
+        <h3 className="font-heading text-xl text-amber-100">💡 Dica Importante!</h3>
+        <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-zinc-300">
+          Baixe os e-books para ter acesso offline. Leia com calma e aplique as estratégias
+          no seu dia a dia. O conhecimento só funciona quando colocado em prática!
+        </p>
+        <div className="mx-auto mt-5 max-w-xl rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4 text-sm font-semibold text-amber-100">
+          📖 Sugestão: Comece pelos e-books de "Flexibilidade Alimentar" se você tem dificuldade com eventos sociais!
+        </div>
+      </section>
     </div>
   );
 };
 
-export default EbooksSection; 
+export default EbooksSection;

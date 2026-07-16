@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { Camera, Upload, Loader2, AlertCircle, CheckCircle, Edit2, Save, X } from 'lucide-react';
+import { Camera, Upload, Loader2, AlertCircle, CheckCircle, Edit2, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Ingredient {
@@ -72,11 +70,11 @@ const MealCalculatorSection = () => {
 
     try {
       const formData = new FormData();
-      
+
       if (selectedImage) {
         formData.append('image', selectedImage);
       }
-      
+
       if (description) {
         formData.append('description', description);
       }
@@ -91,13 +89,13 @@ const MealCalculatorSection = () => {
       }
 
       const data = await response.json();
-      
+
       // Extrair o output do array retornado
       const nutritionalData = data[0]?.output || data.output;
-      
+
       setResult(nutritionalData);
       setEditedResult(nutritionalData);
-      
+
       toast({
         title: "Sucesso!",
         description: "Refeição analisada com sucesso!",
@@ -138,11 +136,11 @@ const MealCalculatorSection = () => {
 
     try {
       const formData = new FormData();
-      
+
       // Enviar a descrição original + itens adicionais
       const fullDescription = `${result?.descricao || description}. Itens adicionais não identificados: ${additionalItems}`;
       formData.append('description', fullDescription);
-      
+
       if (selectedImage) {
         formData.append('image', selectedImage);
       }
@@ -158,11 +156,11 @@ const MealCalculatorSection = () => {
 
       const data = await response.json();
       const nutritionalData = data[0]?.output || data.output;
-      
+
       setResult(nutritionalData);
       setEditedResult(nutritionalData);
       setAdditionalItems('');
-      
+
       toast({
         title: "Recalculado!",
         description: "Refeição recalculada com os itens adicionais!",
@@ -191,7 +189,7 @@ const MealCalculatorSection = () => {
   const getCalorieInsight = (calories: number) => {
     // Garantir que calories é um número válido
     const validCalories = isNaN(calories) ? 0 : calories;
-    
+
     if (validCalories > 1000) {
       return {
         type: 'warning',
@@ -214,51 +212,48 @@ const MealCalculatorSection = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-green-50 via-white to-emerald-100/50 border border-green-200/50 shadow-lg">
-        <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <span className="text-5xl md:text-6xl">🍽️</span>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 via-emerald-500 to-green-600 bg-clip-text text-transparent">
-              CALCULADORA DE REFEIÇÃO LIVRE
-            </h1>
-          </div>
-          <p className="text-green-700/80 text-xl font-medium">
+    <div className="mx-auto max-w-4xl space-y-6 text-zinc-200">
+      {/* Hero */}
+      <div className="relative overflow-hidden rounded-3xl border border-amber-500/15 bg-gradient-to-br from-[#16161c] to-[#0e0e13] px-7 py-10 text-center">
+        <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
+        <div className="relative">
+          <span className="mb-3 block text-5xl">🍽️</span>
+          <h1 className="font-heading text-3xl font-extrabold uppercase text-gold sm:text-4xl">
+            Calculadora de Refeição Livre
+          </h1>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Analise as calorias e nutrientes da sua Refeição Livre
           </p>
         </div>
       </div>
 
       {/* Formulário de Input */}
-      <Card className="floating-card gradient-card border-green-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-green-50 to-emerald-50">
-          <CardTitle className="flex items-center gap-3 text-green-800">
-            <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
-              <Camera className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">Envie sua Refeição</div>
-              <div className="text-sm text-green-600/70 font-normal">
-                Tire uma foto ou descreva o que você vai comer (escolha apenas uma opção, foto ou texto)
-              </div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
+      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
+        <header className="mb-5 flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+            <Camera className="h-5 w-5 text-amber-300" />
+          </span>
+          <div>
+            <h2 className="font-heading text-xl text-amber-50">Envie sua Refeição</h2>
+            <p className="text-sm text-zinc-400">
+              Tire uma foto ou descreva o que você vai comer (escolha apenas uma opção, foto ou texto)
+            </p>
+          </div>
+        </header>
+        <div className="space-y-6">
           {/* Upload de Imagem */}
           <div>
-            <label className="block text-lg font-bold text-green-800 mb-4">
+            <label className="mb-4 block text-base font-semibold text-amber-50">
               📸 Opção 1 - Envie a Foto da sua Refeição
             </label>
 
-            <div className="flex flex-col items-center gap-4 mb-4">
+            <div className="mb-4 flex flex-col items-center gap-4">
               {imagePreview && (
                 <div className="relative w-full max-w-md">
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    className="w-full h-64 object-cover rounded-xl border-2 border-green-200"
+                    className="h-64 w-full rounded-xl border border-white/10 object-cover"
                   />
                   <Button
                     variant="destructive"
@@ -273,9 +268,9 @@ const MealCalculatorSection = () => {
                   </Button>
                 </div>
               )}
-              
+
               <label className="cursor-pointer">
-                <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-6 py-3 text-sm font-bold text-black shadow-lg transition-all hover:brightness-110">
                   <Upload className="h-5 w-5" />
                   {imagePreview ? 'Trocar Foto' : 'Escolher Foto'}
                 </div>
@@ -287,40 +282,32 @@ const MealCalculatorSection = () => {
                 />
               </label>
             </div>
-            
+
             {/* Orientações para Foto Ideal */}
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-              <h4 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
-                <Camera className="h-5 w-5" />
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+              <h4 className="mb-3 flex items-center gap-2 font-semibold text-amber-50">
+                <Camera className="h-5 w-5 text-amber-300" />
                 Orientações para a Foto Ideal
               </h4>
-              <p className="text-blue-700 text-sm mb-3">
+              <p className="mb-3 text-sm text-zinc-300">
                 Para seja feita uma análise precisa da sua refeição:
               </p>
-              <ul className="space-y-2 text-blue-700 text-sm">
+              <ul className="space-y-2 text-sm text-zinc-300">
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold mt-0.5">•</span>
-                  <span>Tire a foto de cima (visão aérea), mostrando todo o prato.</span>
+                  <span className="mt-0.5 font-bold text-amber-300">•</span>
+                  <span>Foto de cima (visão aérea) mostrando o prato todo, com boa iluminação natural.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold mt-0.5">•</span>
-                  <span>Mantenha uma boa iluminação natural — evite sombras fortes ou luz amarelada.</span>
+                  <span className="mt-0.5 font-bold text-amber-300">•</span>
+                  <span>Alimentos separados, sem sobreposição (arroz, carne e salada bem visíveis).</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold mt-0.5">•</span>
-                  <span>Deixe os alimentos bem separados, sem sobreposição (ex: arroz, carne e salada visíveis).</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold mt-0.5">•</span>
-                  <span>Mantenha uma distância de cerca de 30 cm do prato.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold mt-0.5">•</span>
-                  <span>Use fundo neutro (mesa clara ou toalha lisa) para destacar os alimentos.</span>
+                  <span className="mt-0.5 font-bold text-amber-300">•</span>
+                  <span>Fundo neutro e a ~30 cm do prato, pra destacar a comida.</span>
                 </li>
               </ul>
-              <div className="mt-3 pt-3 border-t border-blue-200">
-                <p className="text-blue-800 text-sm font-semibold">
+              <div className="mt-3 border-t border-white/[0.06] pt-3">
+                <p className="text-sm font-semibold text-amber-100">
                   💡 Quanto mais nítida e organizada a foto, mais precisa será sua análise nutricional!
                 </p>
               </div>
@@ -328,24 +315,24 @@ const MealCalculatorSection = () => {
           </div>
 
           {/* Separador OU */}
-          <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
-            <span className="text-green-700 font-bold text-lg px-4 py-2 bg-green-50 rounded-full border-2 border-green-300">
+          <div className="my-6 flex items-center gap-4">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent"></div>
+            <span className="rounded-full border border-amber-500/25 bg-amber-500/[0.06] px-4 py-2 text-lg font-bold text-amber-100">
               OU
             </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent"></div>
           </div>
 
           {/* Descrição de Texto */}
           <div>
-            <label className="block text-lg font-bold text-green-800 mb-2">
+            <label className="mb-2 block text-base font-semibold text-amber-50">
               ✍️ Opção 2 - Caso não tenha foto, descreva a sua Refeição
             </label>
             <Textarea
               placeholder="Ex: Uma fatia de pizza de calabresa com azeitonas pretas..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="min-h-[120px] border-green-200 focus:border-green-500"
+              className="min-h-[120px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:border-amber-400"
             />
           </div>
 
@@ -354,7 +341,7 @@ const MealCalculatorSection = () => {
             <Button
               onClick={handleSubmit}
               disabled={loading || (!description && !selectedImage)}
-              className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg py-6"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3.5 text-sm font-bold text-black shadow-lg transition-all hover:brightness-110"
             >
               {loading ? (
                 <>
@@ -368,71 +355,69 @@ const MealCalculatorSection = () => {
                 </>
               )}
             </Button>
-            
+
             {(description || selectedImage || result) && (
               <Button
                 onClick={handleReset}
                 variant="outline"
-                className="border-green-300 text-green-700 hover:bg-green-50"
+                className="rounded-xl border border-white/10 bg-white/[0.02] text-zinc-300 hover:bg-white/[0.05] hover:text-amber-50"
               >
                 <X className="h-5 w-5 mr-2" />
                 Limpar
               </Button>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
       {/* Resultados */}
       {result && editedResult && (
         <>
           {/* Informações Nutricionais */}
-          <Card className="floating-card gradient-card border-green-200/50">
-            <CardHeader className="pb-6 bg-gradient-to-r from-green-50 to-emerald-50">
-              <CardTitle className="flex items-center gap-3 text-green-800">
-                <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
-                  <CheckCircle className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">Análise Nutricional</div>
-                  <div className="text-sm text-green-600/70 font-normal">
-                    {editedResult.descricao}
-                  </div>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
+            <header className="mb-5 flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                <CheckCircle className="h-5 w-5 text-amber-300" />
+              </span>
+              <div>
+                <h2 className="font-heading text-xl text-amber-50">Análise Nutricional</h2>
+                <p className="text-sm text-zinc-400">
+                  {editedResult.descricao}
+                </p>
+              </div>
+            </header>
+            <div className="space-y-6">
               {/* Calorias Totais */}
-              <div className="bg-gradient-to-r from-green-100 to-emerald-100 p-6 rounded-xl border-2 border-green-200">
+              <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-5">
                 <div className="text-center">
-                  <p className="text-sm text-green-600 font-semibold mb-2">CALORIAS TOTAIS</p>
-                  <p className="text-5xl font-bold text-green-800">
-                    {editedResult.calorias_totais_kcal} <span className="text-2xl">kcal</span>
+                  <p className="mb-2 text-sm font-semibold text-amber-100">CALORIAS TOTAIS</p>
+                  <p className="text-5xl font-bold text-gold">
+                    {editedResult.calorias_totais_kcal} <span className="text-2xl text-amber-100">kcal</span>
                   </p>
                 </div>
               </div>
 
               {/* Macronutrientes */}
               <div>
-                <h4 className="font-bold text-green-800 mb-4 text-lg">📊 Macronutrientes</h4>
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                    <p className="text-sm text-blue-600 font-semibold mb-2">Proteínas</p>
-                    <p className="text-2xl font-bold text-blue-800">
+                <h4 className="mb-4 text-lg font-semibold text-amber-50">📊 Macronutrientes</h4>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Proteínas</p>
+                    <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.proteinas_g}g
                     </p>
                   </div>
 
-                  <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                    <p className="text-sm text-amber-600 font-semibold mb-2">Carboidratos</p>
-                    <p className="text-2xl font-bold text-amber-800">
+                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Carboidratos</p>
+                    <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.carboidratos_g}g
                     </p>
                   </div>
 
-                  <div className="bg-red-50 p-4 rounded-xl border border-red-200">
-                    <p className="text-sm text-red-600 font-semibold mb-2">Gorduras</p>
-                    <p className="text-2xl font-bold text-red-800">
+                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                    <p className="mb-2 text-sm font-semibold text-zinc-300">Gorduras</p>
+                    <p className="text-2xl font-bold text-amber-100">
                       {editedResult.macry_nutrientes.gorduras_totais_g}g
                     </p>
                   </div>
@@ -441,26 +426,26 @@ const MealCalculatorSection = () => {
 
               {/* Detalhes Adicionais */}
               <div>
-                <h4 className="font-bold text-green-800 mb-4 text-lg">🔍 Detalhes Nutricionais</h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
-                    <span className="text-green-700 font-medium">Fibras:</span>
-                    <span className="text-green-800 font-bold">{editedResult.detalhes.fibras_g}g</span>
+                <h4 className="mb-4 text-lg font-semibold text-amber-50">🔍 Detalhes Nutricionais</h4>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                    <span className="font-medium text-zinc-300">Fibras:</span>
+                    <span className="font-bold text-amber-100">{editedResult.detalhes.fibras_g}g</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
-                    <span className="text-green-700 font-medium">Açúcares:</span>
-                    <span className="text-green-800 font-bold">{editedResult.detalhes.acucares_g}g</span>
+                  <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                    <span className="font-medium text-zinc-300">Açúcares:</span>
+                    <span className="font-bold text-amber-100">{editedResult.detalhes.acucares_g}g</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
-                    <span className="text-green-700 font-medium">Sódio:</span>
-                    <span className="text-green-800 font-bold">{editedResult.detalhes.sodio_mg}mg</span>
+                  <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                    <span className="font-medium text-zinc-300">Sódio:</span>
+                    <span className="font-bold text-amber-100">{editedResult.detalhes.sodio_mg}mg</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
-                    <span className="text-green-700 font-medium">Gorduras Saturadas:</span>
-                    <span className="text-green-800 font-bold">{editedResult.detalhes.gorduras_saturadas_g}g</span>
+                  <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                    <span className="font-medium text-zinc-300">Gorduras Saturadas:</span>
+                    <span className="font-bold text-amber-100">{editedResult.detalhes.gorduras_saturadas_g}g</span>
                   </div>
                 </div>
               </div>
@@ -468,30 +453,30 @@ const MealCalculatorSection = () => {
               {/* Ingredientes */}
               {editedResult.ingredientes && editedResult.ingredientes.length > 0 && (
                 <div>
-                  <h4 className="font-bold text-green-800 mb-4 text-lg">🥘 Ingredientes Identificados</h4>
+                  <h4 className="mb-4 text-lg font-semibold text-amber-50">🥘 Ingredientes Identificados</h4>
                   <div className="space-y-3">
                     {editedResult.ingredientes.map((ingredient, index) => (
-                      <div key={index} className="bg-white p-4 rounded-xl border border-green-200 shadow-sm">
-                        <div className="flex justify-between items-start mb-2">
-                          <h5 className="font-semibold text-green-800">{ingredient.name}</h5>
-                          <span className="text-sm text-green-600 font-medium">{ingredient.quantity}</span>
+                      <div key={index} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                        <div className="mb-2 flex items-start justify-between">
+                          <h5 className="font-semibold text-amber-50">{ingredient.name}</h5>
+                          <span className="text-sm font-medium text-zinc-300">{ingredient.quantity}</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2 text-sm">
                           <div>
-                            <p className="text-gray-500">Calorias</p>
-                            <p className="font-semibold text-green-700">{ingredient.calories}</p>
+                            <p className="text-zinc-400">Calorias</p>
+                            <p className="font-semibold text-amber-100">{ingredient.calories}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500">Proteína</p>
-                            <p className="font-semibold text-blue-700">{ingredient.protein}</p>
+                            <p className="text-zinc-400">Proteína</p>
+                            <p className="font-semibold text-amber-100">{ingredient.protein}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500">Carbs</p>
-                            <p className="font-semibold text-amber-700">{ingredient.carbs}</p>
+                            <p className="text-zinc-400">Carbs</p>
+                            <p className="font-semibold text-amber-100">{ingredient.carbs}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500">Gordura</p>
-                            <p className="font-semibold text-red-700">{ingredient.fat}</p>
+                            <p className="text-zinc-400">Gordura</p>
+                            <p className="font-semibold text-amber-100">{ingredient.fat}</p>
                           </div>
                         </div>
                       </div>
@@ -501,38 +486,36 @@ const MealCalculatorSection = () => {
               )}
 
               {/* Aviso de Precisão */}
-              <div className="bg-amber-50 border-2 border-amber-200 p-4 rounded-xl">
-                <p className="text-amber-700 text-sm leading-relaxed">
+              <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-4">
+                <p className="text-sm leading-relaxed text-amber-100">
                   ⚠️ <strong>Aviso:</strong> {editedResult.aviso_precisao}
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </section>
 
           {/* Insight sobre Calorias */}
           {(() => {
             const calories = parseInt(editedResult.calorias_totais_kcal) || 0;
             const insight = getCalorieInsight(calories);
             return (
-              <Card className={`floating-card border-${insight.color}-200/50 bg-gradient-to-r from-${insight.color}-50 to-${insight.color}-100/50`}>
-                <CardContent className="py-6">
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 bg-${insight.color}-500 rounded-xl`}>
-                      {insight.type === 'warning' && <AlertCircle className="h-6 w-6 text-white" />}
-                      {insight.type === 'info' && <AlertCircle className="h-6 w-6 text-white" />}
-                      {insight.type === 'success' && <CheckCircle className="h-6 w-6 text-white" />}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className={`text-lg font-bold text-${insight.color}-800 mb-2`}>
-                        Análise da Refeição Livre
-                      </h3>
-                      <p className={`text-${insight.color}-700 leading-relaxed`}>
-                        {insight.message}
-                      </p>
-                    </div>
+              <section className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b] p-6">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+                    {insight.type === 'warning' && <AlertCircle className="h-5 w-5 text-amber-300" />}
+                    {insight.type === 'info' && <AlertCircle className="h-5 w-5 text-amber-300" />}
+                    {insight.type === 'success' && <CheckCircle className="h-5 w-5 text-amber-300" />}
+                  </span>
+                  <div className="flex-1">
+                    <h3 className="mb-2 font-heading text-lg text-amber-100">
+                      Análise da Refeição Livre
+                    </h3>
+                    <p className="leading-relaxed text-zinc-300">
+                      {insight.message}
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </section>
             );
           })()}
         </>
@@ -540,37 +523,35 @@ const MealCalculatorSection = () => {
 
       {/* Adicionar Itens Não Identificados */}
       {result && (
-        <Card className="floating-card gradient-card border-amber-200/50">
-          <CardHeader className="pb-6 bg-gradient-to-r from-amber-50 to-yellow-50">
-            <CardTitle className="flex items-center gap-3 text-amber-800">
-              <div className="p-3 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-xl shadow-lg">
-                <Edit2 className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">Faltou Algum Item?</div>
-                <div className="text-sm text-amber-600/70 font-normal">
-                  Adicione ingredientes que não foram identificados e recalcule
-                </div>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
+          <header className="mb-5 flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
+              <Edit2 className="h-5 w-5 text-amber-300" />
+            </span>
             <div>
-              <label className="block text-sm font-semibold text-amber-800 mb-2">
+              <h2 className="font-heading text-xl text-amber-50">Faltou Algum Item?</h2>
+              <p className="text-sm text-zinc-400">
+                Adicione ingredientes que não foram identificados e recalcule
+              </p>
+            </div>
+          </header>
+          <div className="space-y-4">
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-amber-50">
                 ➕ Itens Adicionais (Ex: "2 ovos", "queijo", "presunto")
               </label>
               <Textarea
                 placeholder="Ex: Faltaram os ovos que estavam dentro do pão. Adicione aqui: 2 ovos cozidos"
                 value={additionalItems}
                 onChange={(e) => setAdditionalItems(e.target.value)}
-                className="min-h-[100px] border-amber-200 focus:border-amber-500"
+                className="min-h-[100px] rounded-lg border border-white/10 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:border-amber-400"
               />
             </div>
 
             <Button
               onClick={handleRecalculate}
               disabled={recalculating || !additionalItems.trim()}
-              className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg py-6"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 px-7 py-3.5 text-sm font-bold text-black shadow-lg transition-all hover:brightness-110"
             >
               {recalculating ? (
                 <>
@@ -585,14 +566,14 @@ const MealCalculatorSection = () => {
               )}
             </Button>
 
-            <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
-              <p className="text-amber-700 text-sm leading-relaxed">
-                💡 <strong>Dica:</strong> Se faltou algum ingrediente (como ovos dentro do pão, queijo, molhos, etc), 
+            <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-4">
+              <p className="text-sm leading-relaxed text-amber-100">
+                💡 <strong>Dica:</strong> Se faltou algum ingrediente (como ovos dentro do pão, queijo, molhos, etc),
                 adicione aqui e clique em "Recalcular". Irei analisar novamente incluindo esses itens!
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </section>
       )}
     </div>
   );

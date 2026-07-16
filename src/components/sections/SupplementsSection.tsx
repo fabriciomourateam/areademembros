@@ -8,6 +8,16 @@ import { supabase } from '@/lib/supabase';
 
 const ADMIN_PASSWORD = 'admin123'; // mesma senha do painel da mentoria
 
+// Mapeamento de acento (aparência apenas) para o tema dark premium
+const GOLD_ACCENT = {
+  chipBg: 'bg-amber-400/12',
+  ring: 'ring-amber-400/30',
+  icon: 'text-amber-300',
+  chevron: 'text-amber-400',
+};
+// Chips padronizados no dourado premium (independente da cor original)
+const getAccent = (_c: string) => GOLD_ACCENT;
+
 interface CompactItem {
   id: string;
   name: string;
@@ -434,15 +444,22 @@ const SupplementsSection = () => {
   // Componente reutilizável para gerenciar fotos de qualquer suplemento
   const PhotoManagementPanel = ({ supplementId, supplementName, color }: { supplementId: string; supplementName: string; color: string }) => {
     const photos = photosBySupplement[supplementId] || [];
-    
+
     return (
-      <div className="mt-6 pt-6 border-t border-opacity-50" style={{ borderColor: `var(--${color}-200)` }}>
-        <h5 className={`font-bold mb-4 text-${color}-800`}>🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
+      <div className="mt-6 pt-6 border-t border-white/10">
+        <h5 className="font-semibold mb-4 text-amber-100">🏷️ Exemplos de Marcas com Bom Custo-Benefício:</h5>
 
         {isLoadingPhotos ? (
-          <p className={`text-xs text-${color}-600/80`}>Carregando exemplos...</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3" aria-busy="true" aria-label="Carregando exemplos">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
+                <div className="mb-2 aspect-square animate-pulse rounded bg-white/[0.06]" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-white/10" />
+              </div>
+            ))}
+          </div>
         ) : photos.length === 0 ? (
-          <p className={`text-xs text-${color}-600/80`}>
+          <p className="text-xs text-zinc-400">
             {isAdmin ? 'Nenhuma foto cadastrada. Use o painel abaixo para adicionar.' : 'Nenhum exemplo disponível no momento.'}
           </p>
         ) : (
@@ -450,18 +467,18 @@ const SupplementsSection = () => {
             {photos.map(photo => (
               <div
                 key={photo.id}
-                className={`bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 border border-${color}-100 cursor-pointer hover:scale-105`}
+                className="rounded-lg p-3 bg-white/[0.02] border border-white/[0.06] hover:border-amber-400/40 hover:bg-white/[0.04] transition-all duration-300 cursor-pointer hover:scale-105"
                 onClick={() => window.open(photo.link, '_blank')}
               >
                 <img
                   src={photo.image_src}
                   alt={photo.title}
-                  className="w-full h-32 object-contain rounded-md"
+                  className="w-full h-32 object-contain rounded-md border border-white/[0.06]"
                 />
-                <h4 className={`text-xs font-semibold text-${color}-800 text-center mt-3 leading-tight`}>
+                <h4 className="text-xs font-semibold text-amber-50 text-center mt-3 leading-tight">
                   {photo.title}
                 </h4>
-                <p className={`text-xs text-${color}-600 text-center mt-2 font-medium`}>
+                <p className="text-xs text-amber-400 text-center mt-2 font-medium">
                   Ver produto
                 </p>
               </div>
@@ -470,8 +487,8 @@ const SupplementsSection = () => {
         )}
 
         {isAdmin && (
-          <div className={`mt-4 border-t border-${color}-200/60 pt-4 space-y-3`}>
-            <h6 className={`text-xs font-semibold text-${color}-700 flex items-center gap-2`}>
+          <div className="mt-4 border-t border-white/10 pt-4 space-y-3">
+            <h6 className="text-xs font-semibold text-amber-100 flex items-center gap-2">
               <Edit className="h-3 w-3" />
               Gerenciar fotos de {supplementName} (apenas você vê isso)
             </h6>
@@ -480,13 +497,13 @@ const SupplementsSection = () => {
               {photos.map(photo => (
                 <div
                   key={photo.id}
-                  className={`flex items-center gap-2 text-xs bg-white/80 border border-${color}-100 rounded-lg px-3 py-2`}
+                  className="flex items-center gap-2 text-xs bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2 text-zinc-300"
                 >
                   <span className="flex-1 truncate">{photo.title}</span>
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-7 w-7 text-red-500"
+                    className="h-7 w-7 text-red-400 hover:bg-red-500/10"
                     onClick={() => handleRemovePhoto(supplementId, photo.id)}
                   >
                     <Trash2 className="h-3 w-3" />
@@ -499,7 +516,7 @@ const SupplementsSection = () => {
               <input
                 type="text"
                 placeholder="Título (ex: Whey 100% Pure 900g - Integralmédica)"
-                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-${color}-300`}
+                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                 value={currentSupplementId === supplementId ? photoTitle : ''}
                 onChange={e => {
                   setCurrentSupplementId(supplementId);
@@ -510,7 +527,7 @@ const SupplementsSection = () => {
               <input
                 type="text"
                 placeholder="Link de compra (ex: https://mercadolivre.com/...)"
-                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-${color}-300`}
+                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                 value={currentSupplementId === supplementId ? photoLink : ''}
                 onChange={e => {
                   setCurrentSupplementId(supplementId);
@@ -521,7 +538,7 @@ const SupplementsSection = () => {
               <input
                 type="file"
                 accept="image/*"
-                className={`border border-${color}-200 rounded-md px-2 py-1 text-xs bg-white text-black`}
+                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 file:mr-2 file:rounded file:border-0 file:bg-white/10 file:px-2 file:py-1 file:text-zinc-200"
                 onChange={e => {
                   const file = e.target.files?.[0] || null;
                   setCurrentSupplementId(supplementId);
@@ -533,7 +550,7 @@ const SupplementsSection = () => {
                 <Button
                   type="button"
                   size="sm"
-                  className={`h-7 px-3 text-xs bg-${color}-600 hover:bg-${color}-700 text-white flex items-center gap-1`}
+                  className="h-7 px-3 text-xs bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-black font-bold hover:brightness-110 flex items-center gap-1"
                   onClick={() => handleAddPhoto(supplementId)}
                 >
                   <Plus className="h-3 w-3" /> Adicionar foto
@@ -547,13 +564,14 @@ const SupplementsSection = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="mx-auto max-w-4xl space-y-6 text-zinc-200">
       {/* Header */}
-      <div className="text-center py-12 px-6 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-pink-100/50 border border-purple-200/50 shadow-lg">
-        <div className="fade-in-up">
-          <div className="flex items-center justify-center gap-4 mb-6">
+      <div className="relative overflow-hidden rounded-3xl border border-amber-500/15 bg-gradient-to-br from-[#16161c] to-[#0e0e13] px-7 py-10 text-center">
+        <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
+        <div className="relative">
+          <div className="flex items-center justify-center gap-4 mb-2">
             <span className="text-5xl md:text-6xl">💊</span>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="font-heading text-3xl font-extrabold uppercase text-gold sm:text-4xl">
               SUPLEMENTOS COM BOM CUSTO-BENEFÍCIO
             </h1>
           </div>
@@ -561,22 +579,22 @@ const SupplementsSection = () => {
       </div>
 
       {/* Sugestões */}
-      <Card className="floating-card gradient-card border-purple-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-purple-50 to-pink-50">
-          <CardTitle className="flex items-center justify-between gap-3 text-purple-800">
+      <Card className="rounded-2xl border border-white/[0.07] bg-white/[0.035]">
+        <CardHeader className="pb-6">
+          <CardTitle className="flex items-center justify-between gap-3 text-amber-50">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
-                <Pill className="h-6 w-6 text-white" />
+              <div className="p-3 bg-amber-500/15 ring-1 ring-amber-400/25 rounded-xl">
+                <Pill className="h-6 w-6 text-amber-300" />
               </div>
               <div>
-                <div className="text-2xl font-bold">Suplementos</div>
-                <div className="text-sm text-purple-600/70 font-normal">Clique em cada um para entender suas funções</div>
+                <div className="font-heading text-2xl font-bold text-amber-50">Suplementos</div>
+                <div className="text-sm text-zinc-400 font-normal">Clique em cada um para entender suas funções</div>
               </div>
             </div>
             <Button
               variant="outline"
               size="sm"
-              className="border-purple-300 text-purple-600 hover:bg-purple-50 flex items-center gap-2"
+              className="rounded-full border border-amber-500/20 bg-amber-500/[0.06] text-amber-100 hover:bg-amber-500/10 px-3 py-1 flex items-center gap-2"
               onClick={() => {
                 setShowAdminDialog(true);
                 setAdminPassword('');
@@ -590,15 +608,17 @@ const SupplementsSection = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {supplements.map((supplement) => (
+            {supplements.map((supplement) => {
+              const accent = getAccent(supplement.color);
+              return (
               <>
                 {/* Divisor após Lista Compacta */}
                 {supplement.id === 'whey-concentrado' && (
                   <div className="relative py-6">
-                    <div className="w-full border-t-2 border-purple-200"></div>
+                    <div className="w-full border-t border-white/10"></div>
                   </div>
                 )}
-                
+
                 <Collapsible
                 key={supplement.id}
                 open={openSupplement === supplement.id}
@@ -607,90 +627,45 @@ const SupplementsSection = () => {
                 <CollapsibleTrigger asChild>
                   <Button
                     variant="outline"
-                    className={`w-full justify-between p-4 h-auto transition-all duration-300 ${supplement.color === 'blue' ? 'bg-gradient-to-r from-blue-50 to-blue-100/50 border-blue-200/50 hover:from-blue-100 hover:to-blue-200/50' :
-                      supplement.color === 'green' ? 'bg-gradient-to-r from-green-50 to-green-100/50 border-green-200/50 hover:from-green-100 hover:to-green-200/50' :
-                        supplement.color === 'purple' ? 'bg-gradient-to-r from-purple-50 to-purple-100/50 border-purple-200/50 hover:from-purple-100 hover:to-purple-200/50' :
-                          supplement.color === 'orange' ? 'bg-gradient-to-r from-orange-50 to-orange-100/50 border-orange-200/50 hover:from-orange-100 hover:to-orange-200/50' :
-                            supplement.color === 'red' ? 'bg-gradient-to-r from-red-50 to-red-100/50 border-red-200/50 hover:from-red-100 hover:to-red-200/50' :
-                              supplement.color === 'yellow' ? 'bg-gradient-to-r from-yellow-50 to-yellow-100/50 border-yellow-200/50 hover:from-yellow-100 hover:to-yellow-200/50' :
-                                supplement.color === 'pink' ? 'bg-gradient-to-r from-pink-50 to-pink-100/50 border-pink-200/50 hover:from-pink-100 hover:to-pink-200/50' :
-                                  supplement.color === 'cyan' ? 'bg-gradient-to-r from-cyan-50 to-cyan-100/50 border-cyan-200/50 hover:from-cyan-100 hover:to-cyan-200/50' :
-                                    'bg-gradient-to-r from-gray-50 to-gray-100/50 border-gray-200/50 hover:from-gray-100 hover:to-gray-200/50'
-                      }`}
+                    className="w-full justify-between p-4 h-auto rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-amber-400/40 hover:bg-white/[0.04] transition"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${supplement.color === 'blue' ? 'bg-gradient-to-r from-blue-400 to-blue-500' :
-                        supplement.color === 'green' ? 'bg-gradient-to-r from-green-400 to-green-500' :
-                          supplement.color === 'purple' ? 'bg-gradient-to-r from-purple-400 to-purple-500' :
-                            supplement.color === 'orange' ? 'bg-gradient-to-r from-orange-400 to-orange-500' :
-                              supplement.color === 'red' ? 'bg-gradient-to-r from-red-400 to-red-500' :
-                                supplement.color === 'yellow' ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' :
-                                  supplement.color === 'pink' ? 'bg-gradient-to-r from-pink-400 to-pink-500' :
-                                    supplement.color === 'cyan' ? 'bg-gradient-to-r from-cyan-400 to-cyan-500' :
-                                      'bg-gradient-to-r from-gray-400 to-gray-500'
-                        }`}>
-                        <supplement.icon className="h-5 w-5 text-white" />
+                      <div className={`flex h-11 w-11 items-center justify-center rounded-full ring-1 ${accent.chipBg} ${accent.ring}`}>
+                        <supplement.icon className={`h-5 w-5 ${accent.icon}`} />
                       </div>
                       <div className="text-left">
-                        <h4 className={`font-bold ${supplement.color === 'blue' ? 'text-blue-800' :
-                          supplement.color === 'green' ? 'text-green-800' :
-                            supplement.color === 'purple' ? 'text-purple-800' :
-                              supplement.color === 'orange' ? 'text-orange-800' :
-                                supplement.color === 'red' ? 'text-red-800' :
-                                  supplement.color === 'yellow' ? 'text-yellow-800' :
-                                    supplement.color === 'pink' ? 'text-pink-800' :
-                                      supplement.color === 'cyan' ? 'text-cyan-800' :
-                                        'text-gray-800'
-                          }`}>{supplement.name}</h4>
-                        <p className={`text-sm ${supplement.color === 'blue' ? 'text-blue-600/70' :
-                          supplement.color === 'green' ? 'text-green-600/70' :
-                            supplement.color === 'purple' ? 'text-purple-600/70' :
-                              supplement.color === 'orange' ? 'text-orange-600/70' :
-                                supplement.color === 'red' ? 'text-red-600/70' :
-                                  supplement.color === 'yellow' ? 'text-yellow-600/70' :
-                                    supplement.color === 'pink' ? 'text-pink-600/70' :
-                                      supplement.color === 'cyan' ? 'text-cyan-600/70' :
-                                        'text-gray-600/70'
-                          }`}>{supplement.description}</p>
+                        <h4 className="font-semibold text-amber-50">{supplement.name}</h4>
+                        <p className="text-sm text-zinc-300">{supplement.description}</p>
                       </div>
                     </div>
                     <ChevronRight
-                      className={`h-5 w-5 transition-transform duration-300 ${openSupplement === supplement.id ? 'rotate-90' : ''
-                        } ${supplement.color === 'blue' ? 'text-blue-600' :
-                          supplement.color === 'green' ? 'text-green-600' :
-                            supplement.color === 'purple' ? 'text-purple-600' :
-                              supplement.color === 'orange' ? 'text-orange-600' :
-                                supplement.color === 'red' ? 'text-red-600' :
-                                  supplement.color === 'yellow' ? 'text-yellow-600' :
-                                    supplement.color === 'pink' ? 'text-pink-600' :
-                                      supplement.color === 'cyan' ? 'text-cyan-600' :
-                                        'text-gray-600'
-                        }`}
+                      className={`h-5 w-5 transition-transform duration-300 ${openSupplement === supplement.id ? 'rotate-90' : ''} ${accent.chevron}`}
                     />
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="mt-3">
-                  <div className={`gradient-card p-6 rounded-xl border ${supplement.color === 'blue' ? 'border-blue-200/50' :
-                    supplement.color === 'green' ? 'border-green-200/50' :
-                      supplement.color === 'purple' ? 'border-purple-200/50' :
-                        supplement.color === 'orange' ? 'border-orange-200/50' :
-                          supplement.color === 'red' ? 'border-red-200/50' :
-                            supplement.color === 'yellow' ? 'border-yellow-200/50' :
-                              supplement.color === 'pink' ? 'border-pink-200/50' :
-                                supplement.color === 'cyan' ? 'border-cyan-200/50' :
-                                  'border-gray-200/50'
-                    }`}>
+                  <div className="p-6 rounded-xl border border-white/[0.06] bg-white/[0.02]">
                     {/* Caso especial: conteúdo da Lista Compacta */}
                     {supplement.id === 'lista-compacta' ? (
                       <div className="space-y-4">
-                        <p className="text-sm text-purple-700/80">
+                        <p className="text-sm text-zinc-300">
                           Pesquisei no mercado livre os que tem melhor custo x benefício e inclui aqui um link com sugestão de compra pra facilitar:
                         </p>
 
                         {isLoadingCompact ? (
-                          <p className="text-xs text-purple-500">Carregando lista compacta...</p>
+                          <div className="grid gap-2" aria-busy="true" aria-label="Carregando lista compacta">
+                            {[...Array(5)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-2.5"
+                              >
+                                <span className="h-3 w-2/3 animate-pulse rounded bg-white/10" />
+                                <span className="h-4 w-4 animate-pulse rounded bg-amber-400/20" />
+                              </div>
+                            ))}
+                          </div>
                         ) : compactItems.length === 0 ? (
-                          <p className="text-xs text-purple-500">
+                          <p className="text-xs text-zinc-400">
                             Nenhum item cadastrado ainda. Utilize o painel admin para adicionar os primeiros suplementos.
                           </p>
                         ) : (
@@ -700,18 +675,18 @@ const SupplementsSection = () => {
                                 key={item.id}
                                 type="button"
                                 onClick={() => window.open(item.link, '_blank')}
-                                className="w-full flex items-center justify-between rounded-lg px-4 py-2 text-left text-sm bg-white/80 hover:bg-purple-50 border border-purple-100 transition-colors group"
+                                className="w-full flex items-center justify-between rounded-lg px-4 py-2 text-left text-sm bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-amber-400/40 transition-colors group"
                               >
-                                <span className="text-purple-800 group-hover:underline">{item.name}</span>
-                                <ExternalLink className="h-4 w-4 text-purple-500 group-hover:text-purple-700" />
+                                <span className="text-zinc-200 group-hover:underline">{item.name}</span>
+                                <ExternalLink className="h-4 w-4 text-amber-400 group-hover:text-amber-300" />
                               </button>
                             ))}
                           </div>
                         )}
 
                         {isAdmin && (
-                          <div className="mt-4 border-t border-purple-200/60 pt-4 space-y-3">
-                            <h6 className="text-xs font-semibold text-purple-700 flex items-center gap-2">
+                          <div className="mt-4 border-t border-white/10 pt-4 space-y-3">
+                            <h6 className="text-xs font-semibold text-amber-100 flex items-center gap-2">
                               <Edit className="h-3 w-3" />
                               Gerenciar Lista Compacta (apenas você vê isso)
                             </h6>
@@ -719,13 +694,13 @@ const SupplementsSection = () => {
                               {compactItems.map(item => (
                                 <div
                                   key={item.id}
-                                  className="flex items-center gap-2 text-xs bg-white/80 border border-purple-100 rounded-lg px-3 py-2"
+                                  className="flex items-center gap-2 text-xs bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2 text-zinc-300"
                                 >
                                   <span className="flex-1 truncate">{item.name}</span>
                                   <Button
                                     size="icon"
                                     variant="ghost"
-                                    className="h-7 w-7 text-purple-600"
+                                    className="h-7 w-7 text-amber-400 hover:bg-amber-500/10"
                                     onClick={() => {
                                       setEditingItemId(item.id);
                                       setNewItemName(item.name);
@@ -737,7 +712,7 @@ const SupplementsSection = () => {
                                   <Button
                                     size="icon"
                                     variant="ghost"
-                                    className="h-7 w-7 text-red-500"
+                                    className="h-7 w-7 text-red-400 hover:bg-red-500/10"
                                     onClick={async () => {
                                       if (!window.confirm('Tem certeza que deseja remover este item da Lista Compacta?')) return;
                                       try {
@@ -764,14 +739,14 @@ const SupplementsSection = () => {
                               <input
                                 type="text"
                                 placeholder="Nome do suplemento (ex: Whey 100% Pure 900g - Integralmédica)"
-                                className="border border-purple-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-purple-300"
+                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                                 value={newItemName}
                                 onChange={e => setNewItemName(e.target.value)}
                               />
                               <input
                                 type="text"
                                 placeholder="Link de compra (ex: https://mercadolivre.com/...)"
-                                className="border border-purple-200 rounded-md px-2 py-1 text-xs bg-white text-black placeholder:text-purple-300"
+                                className="border border-white/10 rounded-lg px-2 py-1 text-xs bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-amber-400"
                                 value={newItemLink}
                                 onChange={e => setNewItemLink(e.target.value)}
                               />
@@ -781,7 +756,7 @@ const SupplementsSection = () => {
                                     type="button"
                                     variant="outline"
                                     size="sm"
-                                    className="h-7 px-3 text-xs"
+                                    className="h-7 px-3 text-xs bg-white/5 border border-white/10 text-zinc-200 hover:bg-white/10"
                                     onClick={() => {
                                       setEditingItemId(null);
                                       setNewItemName('');
@@ -794,7 +769,7 @@ const SupplementsSection = () => {
                                 <Button
                                   type="button"
                                   size="sm"
-                                  className="h-7 px-3 text-xs bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-1"
+                                  className="h-7 px-3 text-xs bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-black font-bold hover:brightness-110 flex items-center gap-1"
                                   onClick={async () => {
                                     if (!newItemName.trim() || !newItemLink.trim()) {
                                       alert('Preencha nome e link antes de salvar.');
@@ -864,64 +839,19 @@ const SupplementsSection = () => {
                     ) : (
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <h5 className={`font-bold mb-3 ${supplement.color === 'blue' ? 'text-blue-800' :
-                          supplement.color === 'green' ? 'text-green-800' :
-                            supplement.color === 'purple' ? 'text-purple-800' :
-                              supplement.color === 'orange' ? 'text-orange-800' :
-                                supplement.color === 'red' ? 'text-red-800' :
-                                  supplement.color === 'yellow' ? 'text-yellow-800' :
-                                    supplement.color === 'pink' ? 'text-pink-800' :
-                                      supplement.color === 'cyan' ? 'text-cyan-800' :
-                                        'text-gray-800'
-                          }`}>✅ Benefícios:</h5>
+                        <h5 className="font-semibold mb-3 text-amber-100">✅ Benefícios:</h5>
                         <ul className="space-y-2">
                           {supplement.benefits.map((benefit, index) => (
-                            <li key={index} className={`flex items-start gap-2 text-sm ${supplement.color === 'blue' ? 'text-blue-700/80' :
-                              supplement.color === 'green' ? 'text-green-700/80' :
-                                supplement.color === 'purple' ? 'text-purple-700/80' :
-                                  supplement.color === 'orange' ? 'text-orange-700/80' :
-                                    supplement.color === 'red' ? 'text-red-700/80' :
-                                      supplement.color === 'yellow' ? 'text-yellow-700/80' :
-                                        supplement.color === 'pink' ? 'text-pink-700/80' :
-                                          supplement.color === 'cyan' ? 'text-cyan-700/80' :
-                                            'text-gray-700/80'
-                              }`}>
-                              <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${supplement.color === 'blue' ? 'bg-blue-500' :
-                                supplement.color === 'green' ? 'bg-green-500' :
-                                  supplement.color === 'purple' ? 'bg-purple-500' :
-                                    supplement.color === 'orange' ? 'bg-orange-500' :
-                                      supplement.color === 'red' ? 'bg-red-500' :
-                                        supplement.color === 'yellow' ? 'bg-yellow-500' :
-                                          supplement.color === 'pink' ? 'bg-pink-500' :
-                                            supplement.color === 'cyan' ? 'bg-cyan-500' :
-                                              'bg-gray-500'
-                                }`} />
+                            <li key={index} className="flex items-start gap-2 text-sm text-zinc-300">
+                              <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0 bg-amber-400" />
                               {benefit}
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h5 className={`font-bold mb-3 ${supplement.color === 'blue' ? 'text-blue-800' :
-                          supplement.color === 'green' ? 'text-green-800' :
-                            supplement.color === 'purple' ? 'text-purple-800' :
-                              supplement.color === 'orange' ? 'text-orange-800' :
-                                supplement.color === 'red' ? 'text-red-800' :
-                                  supplement.color === 'yellow' ? 'text-yellow-800' :
-                                    supplement.color === 'pink' ? 'text-pink-800' :
-                                      supplement.color === 'cyan' ? 'text-cyan-800' :
-                                        'text-gray-800'
-                          }`}>📋 Como usar:</h5>
-                        <p className={`text-sm leading-relaxed ${supplement.color === 'blue' ? 'text-blue-700/80' :
-                          supplement.color === 'green' ? 'text-green-700/80' :
-                            supplement.color === 'purple' ? 'text-purple-700/80' :
-                              supplement.color === 'orange' ? 'text-orange-700/80' :
-                                supplement.color === 'red' ? 'text-red-700/80' :
-                                  supplement.color === 'yellow' ? 'text-yellow-700/80' :
-                                    supplement.color === 'pink' ? 'text-pink-700/80' :
-                                      supplement.color === 'cyan' ? 'text-cyan-700/80' :
-                                        'text-gray-700/80'
-                          }`}>
+                        <h5 className="font-semibold mb-3 text-amber-100">📋 Como usar:</h5>
+                        <p className="text-sm leading-relaxed text-zinc-300">
                           {supplement.usage}
                         </p>
                       </div>
@@ -931,13 +861,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Whey Protein Concentrado */}
                     {supplement.id === 'whey-concentrado' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="whey-concentrado" 
+                        <PhotoManagementPanel
+                          supplementId="whey-concentrado"
                           supplementName="Whey Concentrado"
                           color="blue"
                         />
 
-                        <p className="text-blue-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Whey concentrado com excelente relação custo-benefício para ganho de massa muscular
                         </p>
                       </>
@@ -946,13 +876,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Whey Zero Lactose */}
                     {supplement.id === 'whey-zero-lactose' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="whey-zero-lactose" 
+                        <PhotoManagementPanel
+                          supplementId="whey-zero-lactose"
                           supplementName="Whey Zero Lactose"
                           color="blue"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-3 rounded-xl">
-                          <p className="text-blue-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>💡 Ideal para:</strong> Pessoas com intolerância à lactose que querem os benefícios do whey concentrado
                           </p>
                         </div>
@@ -962,13 +892,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Whey Blend */}
                     {supplement.id === 'whey-blend' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="whey-blend" 
+                        <PhotoManagementPanel
+                          supplementId="whey-blend"
                           supplementName="Whey Blend"
                           color="blue"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 p-4 rounded-xl">
-                          <p className="text-blue-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>💡 Dica:</strong> Whey Blend combina diferentes tipos de proteína, tem melhor custo x benefício, apesar do sabor não ser o melhor.
                           </p>
                         </div>
@@ -978,13 +908,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Whey Vegano */}
                     {supplement.id === 'whey-soja' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="whey-soja" 
+                        <PhotoManagementPanel
+                          supplementId="whey-soja"
                           supplementName="Whey Vegano"
                           color="green"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
-                          <p className="text-green-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>💡 Ideal para:</strong> Veganos, vegetarianos ou pessoas com intolerância à lactose.
                           </p>
                         </div>
@@ -994,13 +924,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Hipercalórico */}
                     {supplement.id === 'hipercalorico' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="hipercalorico" 
+                        <PhotoManagementPanel
+                          supplementId="hipercalorico"
                           supplementName="Hipercalórico"
                           color="green"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 p-4 rounded-xl">
-                          <p className="text-green-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>💪 Ideal para:</strong> Quem tem dificuldade em ganhar peso e massa muscular.
                             Rico em calorias, carboidratos e proteínas para facilitar o ganho de massa.
                           </p>
@@ -1011,12 +941,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Multivitamínicos */}
                     {supplement.id === 'multivitaminico' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="multivitaminico" 
+                        <PhotoManagementPanel
+                          supplementId="multivitaminico"
                           supplementName="Multivitamínico"
                           color="purple"
                         />
-                        <p className="text-purple-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -1025,12 +955,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Creatina */}
                     {supplement.id === 'creatina' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="creatina" 
+                        <PhotoManagementPanel
+                          supplementId="creatina"
                           supplementName="Creatina"
                           color="orange"
                         />
-                        <p className="text-orange-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -1039,12 +969,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Ômega 3 */}
                     {supplement.id === 'omega-3' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="omega-3" 
+                        <PhotoManagementPanel
+                          supplementId="omega-3"
                           supplementName="Ômega 3"
                           color="cyan"
                         />
-                        <p className="text-cyan-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Estas são algumas opções com boa relação custo-benefício disponíveis no mercado
                         </p>
                       </>
@@ -1053,12 +983,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Barras de Proteínas */}
                     {supplement.id === 'barras-proteina' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="barras-proteina" 
+                        <PhotoManagementPanel
+                          supplementId="barras-proteina"
                           supplementName="Barras de Proteínas"
                           color="blue"
                         />
-                        <p className="text-blue-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Praticidade para consumir proteína em qualquer lugar
                         </p>
                       </>
@@ -1067,12 +997,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Pastas de Amendoim */}
                     {supplement.id === 'pasta-amendoim' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="pasta-amendoim" 
+                        <PhotoManagementPanel
+                          supplementId="pasta-amendoim"
                           supplementName="Pastas de Amendoim"
                           color="orange"
                         />
-                        <p className="text-orange-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Fonte de gorduras saudáveis e proteínas, perfeita para lanches e receitas
                         </p>
                       </>
@@ -1081,13 +1011,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Pré-treino */}
                     {supplement.id === 'pre-treino' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="pre-treino" 
+                        <PhotoManagementPanel
+                          supplementId="pre-treino"
                           supplementName="Pré-treino"
                           color="blue"
                         />
-                        <div className="mt-6 bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200/50 p-4 rounded-xl">
-                          <p className="text-blue-700/80 text-sm text-center">
+                        <div className="mt-6 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>💡 Dica:</strong> Pré-treinos com cafeína são ideais para treinos matutinos ou vespertinos.
                             Para treinos noturnos, prefira as opções sem cafeína para não afetar o sono.
                           </p>
@@ -1098,12 +1028,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Vitamina C */}
                     {supplement.id === 'vitamina-c' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="vitamina-c" 
+                        <PhotoManagementPanel
+                          supplementId="vitamina-c"
                           supplementName="Vitamina C"
                           color="orange"
                         />
-                        <p className="text-orange-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Poderoso antioxidante que fortalece a imunidade e auxilia na produção de colágeno
                         </p>
                       </>
@@ -1112,12 +1042,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Vitamina D */}
                     {supplement.id === 'vitamina-d' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="vitamina-d" 
+                        <PhotoManagementPanel
+                          supplementId="vitamina-d"
                           supplementName="Vitamina D"
                           color="yellow"
                         />
-                        <p className="text-yellow-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Essencial para saúde óssea, imunidade e regulação do humor
                         </p>
                       </>
@@ -1126,12 +1056,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Vitamina B12 */}
                     {supplement.id === 'vitamina-b12' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="vitamina-b12" 
+                        <PhotoManagementPanel
+                          supplementId="vitamina-b12"
                           supplementName="Vitamina B12"
                           color="pink"
                         />
-                        <p className="text-pink-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Vital para energia, sistema nervoso e formação de células sanguíneas
                         </p>
                       </>
@@ -1140,12 +1070,12 @@ const SupplementsSection = () => {
                     {/* Exemplos de Outras Vitaminas */}
                     {supplement.id === 'outras-vitaminas' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="outras-vitaminas" 
+                        <PhotoManagementPanel
+                          supplementId="outras-vitaminas"
                           supplementName="Outras Vitaminas"
                           color="purple"
                         />
-                        <p className="text-purple-600/70 text-sm mt-3 text-center">
+                        <p className="text-zinc-400 text-sm mt-3 text-center">
                           Suplementos especializados para funções específicas do organismo
                         </p>
                       </>
@@ -1154,13 +1084,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Termogênicos */}
                     {supplement.id === 'termogenico' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="termogenico" 
+                        <PhotoManagementPanel
+                          supplementId="termogenico"
                           supplementName="Termogênico"
                           color="red"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50 p-4 rounded-xl">
-                          <p className="text-red-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>⚠️ Importante:</strong> Termogênicos devem ser usados com moderação e preferencialmente
                             pela manhã ou antes do treino. Evite no final do dia para não afetar o sono.
                           </p>
@@ -1171,13 +1101,13 @@ const SupplementsSection = () => {
                     {/* Exemplos de Cafeína */}
                     {supplement.id === 'cafeina' && supplement.hasPhotos && (
                       <>
-                        <PhotoManagementPanel 
-                          supplementId="cafeina" 
+                        <PhotoManagementPanel
+                          supplementId="cafeina"
                           supplementName="Cafeína"
                           color="red"
                         />
-                        <div className="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50 p-4 rounded-xl">
-                          <p className="text-red-700/80 text-sm text-center">
+                        <div className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+                          <p className="text-amber-100 text-sm text-center">
                             <strong>⚡ Dica:</strong> Ideal para energia e foco. Tome pela manhã ou antes do treino.
                             Evite após 16h para não afetar o sono. Dose recomendada: 200-400mg por dia.
                           </p>
@@ -1188,19 +1118,20 @@ const SupplementsSection = () => {
                 </CollapsibleContent>
               </Collapsible>
               </>
-            ))}
+              );
+            })}
           </div>
         </CardContent>
       </Card>
 
       {/* Modal de Login Admin da Lista Compacta */}
       <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md bg-[#0f0f14] border border-amber-500/20 text-zinc-100">
           <DialogHeader>
             <div className="flex flex-col items-center gap-2">
-              <Lock className="h-10 w-10 text-purple-500 mb-2" />
-              <DialogTitle className="text-center text-purple-800">Painel Admin - Suplementos</DialogTitle>
-              <DialogDescription className="text-sm text-purple-600/70 text-center">
+              <Lock className="h-10 w-10 text-amber-400 mb-2" />
+              <DialogTitle className="text-center text-amber-50">Painel Admin - Suplementos</DialogTitle>
+              <DialogDescription className="text-sm text-zinc-300 text-center">
                 Digite a senha de administrador para editar a Lista Compacta de suplementos.
               </DialogDescription>
             </div>
@@ -1222,16 +1153,16 @@ const SupplementsSection = () => {
           >
             <input
               type="password"
-              className="border-2 border-purple-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-black placeholder:text-purple-400"
+              className="border border-white/10 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 bg-[#1c1c22] text-zinc-100 placeholder:text-zinc-400"
               placeholder="Senha de administrador"
               value={adminPassword}
               onChange={e => setAdminPassword(e.target.value)}
               autoFocus
             />
-            {adminError && <span className="text-red-600 text-sm">{adminError}</span>}
+            {adminError && <span className="text-red-400 text-sm">{adminError}</span>}
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all shadow-lg hover:shadow-xl w-full"
+              className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-black font-bold px-8 py-3 rounded-xl transition-all shadow-lg hover:brightness-110 w-full"
             >
               Entrar
             </button>
@@ -1239,152 +1170,20 @@ const SupplementsSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Divisor */}
-      <div className="py-6">
-        <div className="w-full border-t-2 border-purple-200"></div>
-      </div>
-
-      {/* Distribuidora de Suplementos */}
-      <Card className="floating-card gradient-card border-blue-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-blue-50 to-cyan-50">
-          <CardTitle className="flex items-center gap-3 text-blue-800">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
-              <Pill className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">🏪 Distribuidora de Suplementos</div>
-              <div className="text-sm text-blue-600/70 font-normal">Outra opção de suplementos com bom custo x benefício</div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-6">
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200/50 p-6 rounded-2xl">
-              <div className="mb-4">
-                <p className="text-blue-800 font-bold text-xl mb-2">
-                  🎟️ Use o cupom: <span className="text-cyan-600">NUTRIFABRICIO</span>
-                </p>
-                <p className="text-blue-700 text-lg">
-                  Consiga <strong>5% de desconto</strong> nos pedidos
-                </p>
-              </div>
-              
-              <div className="grid gap-2 text-left max-w-md mx-auto">
-                <div className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg">✔</span>
-                  <span className="text-blue-700">Pedido mínimo: <strong>R$ 100,00</strong></span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold text-lg">✔</span>
-                  <span className="text-blue-700">Válido para <strong>todos os produtos</strong></span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-red-600 font-bold text-lg">❌</span>
-                  <span className="text-blue-700">Exceto <strong>itens em promoção</strong></span>
-                </div>
-              </div>
-            </div>
-
-            <Button
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open('https://glcdistribuidora.meucatalogodigital.com/', '_blank')}
-            >
-              <ExternalLink className="h-5 w-5 mr-3" />
-              Acessar Catálogo da Distribuidora
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Manipulados */}
-      <Card className="floating-card gradient-card border-orange-200/50">
-        <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 to-yellow-50">
-          <CardTitle className="flex items-center gap-3 text-orange-800">
-            <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl shadow-lg">
-              <Pill className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold">🧪 Manipulados com bom custo-benefício</div>
-              <div className="text-sm text-orange-600/70 font-normal">Farmácia especializada</div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-6">
-            <p className="text-orange-700/80 leading-relaxed text-lg">
-              Acesse o link abaixo para pedir manipulados com qualidade farmacêutica e preços acessíveis.
-            </p>
-
-            <Button
-              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 rounded-xl text-lg px-8 py-4"
-              onClick={() => window.open(`https://api.whatsapp.com/send?phone=${pharmacyWhatsapp}&text=${encodeURIComponent(pharmacyMessage)}`, '_blank')}
-            >
-              <ExternalLink className="h-5 w-5 mr-3" />
-              Contatar Farmácia via WhatsApp
-            </Button>
-
-            {isAdmin && (
-              <div className="mt-6 pt-6 border-t border-orange-200/60 space-y-3">
-                <h6 className="text-xs font-semibold text-orange-700 flex items-center gap-2">
-                  <Edit className="h-3 w-3" />
-                  Editar contato da farmácia (apenas você vê isso)
-                </h6>
-                <div className="grid gap-2">
-                  <div>
-                    <label className="text-xs text-orange-700 font-medium block mb-1">
-                      Número do WhatsApp (com DDI e DDD, ex: 5511984955667)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="5511984955667"
-                      className="border border-orange-200 rounded-md px-3 py-2 text-sm bg-white text-black placeholder:text-orange-300 w-full"
-                      value={editPharmacyWhatsapp}
-                      onChange={e => setEditPharmacyWhatsapp(e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-orange-700 font-medium block mb-1">
-                      Mensagem padrão
-                    </label>
-                    <textarea
-                      placeholder="Oi, o Fabricio me passou seu contato..."
-                      className="border border-orange-200 rounded-md px-3 py-2 text-sm bg-white text-black placeholder:text-orange-300 w-full"
-                      rows={3}
-                      value={editPharmacyMessage}
-                      onChange={e => setEditPharmacyMessage(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <Button
-                      type="button"
-                      size="sm"
-                      className="h-8 px-4 text-xs bg-orange-600 hover:bg-orange-700 text-white flex items-center gap-1"
-                      onClick={handleSavePharmacySettings}
-                    >
-                      <Save className="h-3 w-3" /> Salvar configurações
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Aviso Importante */}
-      <Card className="floating-card gradient-card border-red-200/50">
+      <Card className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#16130f] to-[#120f0b]">
         <CardContent className="py-8">
           <div className="text-center">
             <div className="mb-6">
               <span className="text-6xl mb-4 block">💊</span>
-              <h3 className="text-2xl font-bold text-red-800 mb-2">⚠️ Importante!</h3>
-              <p className="text-red-700/80 text-lg max-w-2xl mx-auto">
+              <h3 className="font-heading text-2xl font-bold text-amber-100 mb-2">⚠️ Importante!</h3>
+              <p className="text-zinc-300 text-lg max-w-2xl mx-auto">
                 Estas são sugestões baseadas em custo-benefício. Sempre fale comigo antes de iniciar qualquer suplementação que não esteja prescrita no seu Planejamento.
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200/50 p-6 rounded-2xl">
-              <p className="text-red-700 font-semibold text-lg">
+            <div className="mx-auto max-w-xl rounded-xl border border-amber-500/15 bg-amber-500/[0.06] px-5 py-4">
+              <p className="text-amber-100 font-semibold text-lg">
                 💡 Lembre-se: Suplementos complementam uma dieta equilibrada, não a substituem!
               </p>
             </div>
@@ -1398,7 +1197,7 @@ const SupplementsSection = () => {
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
           onClick={() => setZoomedImage(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] bg-white rounded-2xl p-4 shadow-2xl">
+          <div className="relative max-w-4xl max-h-[90vh] bg-[#0f0f14] border border-amber-500/20 rounded-2xl p-4 shadow-2xl">
             <button
               onClick={() => setZoomedImage(null)}
               className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition-colors duration-200 z-10"
@@ -1408,7 +1207,7 @@ const SupplementsSection = () => {
             <img
               src={zoomedImage.src}
               alt={zoomedImage.alt}
-              className="max-w-full max-h-full object-contain rounded-lg"
+              className="max-w-full max-h-full object-contain rounded-lg border border-white/[0.06]"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
@@ -1418,4 +1217,4 @@ const SupplementsSection = () => {
   );
 };
 
-export default SupplementsSection; 
+export default SupplementsSection;

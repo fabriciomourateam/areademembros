@@ -1,61 +1,61 @@
-const CACHE_NAME = 'fm-team-v1';
-const urlsToCache = [
-  '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/logo.png',
-  '/manifest.json'
-];
+// Service Worker — FM Team (Área de Membros)
+// Estratégia: network-first para navegação (HTML) para NUNCA servir uma
+// versão antiga em cache após um novo deploy (causa da "tela branca").
+// Bump a versão para invalidar caches antigos automaticamente.
+const CACHE_NAME = 'fm-team-v3';
 
-// Instalar Service Worker
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(urlsToCache);
-      })
-  );
+// Instala já assumindo o controle (sem esperar abas antigas fecharem).
+self.addEventListener('install', () => {
+  self.skipWaiting();
 });
 
-// Interceptar requisições
-self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
-  
-  // NÃO interceptar requisições do Supabase (sempre buscar na rede)
-  if (url.hostname.includes('supabase.co')) {
-    return fetch(event.request);
-  }
-  
-  // NÃO interceptar requisições de API externas
-  if (url.hostname.includes('n8n.') || url.hostname.includes('webhook')) {
-    return fetch(event.request);
-  }
-  
-  // Para outros recursos, usar cache
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Retorna do cache se disponível, senão busca na rede
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
-
-// Atualizar Service Worker
+// Ao ativar, apaga QUALQUER cache antigo (inclusive os quebrados de versões
+// anteriores que apontavam para /static/js/bundle.js) e assume o controle.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+    caches
+      .keys()
+      .then((names) => Promise.all(names.map((name) => caches.delete(name))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+
+  // Só tratamos GET; POST/PUT etc. seguem direto para a rede.
+  if (request.method !== 'GET') return;
+
+  // Navegação (documentos HTML): sempre buscar na rede primeiro.
+  // Assim, um novo deploy é carregado imediatamente. Só cai no cache
+  // se estiver offline.
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put('/', copy));
+          return response;
         })
-      );
+        .catch(() => caches.match('/'))
+    );
+    return;
+  }
+
+  // Demais requisições (assets com hash no nome, imagens): stale-while-revalidate.
+  // Como os nomes têm hash, o cache nunca fica "velho" de forma perigosa.
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const network = fetch(request)
+        .then((response) => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => cached);
+      return cached || network;
     })
   );
 });
