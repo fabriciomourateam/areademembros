@@ -146,7 +146,7 @@ const EbooksSection = () => {
         <div className="warm-glow pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative">
           <span className="mb-3 block text-5xl">📚</span>
-          <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">E-BOOKS EXCLUSIVOS</h1>
+          <h1 className="font-heading text-3xl font-extrabold uppercase text-gold sm:text-4xl">E-BOOKS EXCLUSIVOS</h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
             Materiais completos para potencializar seus resultados
           </p>

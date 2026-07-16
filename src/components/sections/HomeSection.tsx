@@ -11,7 +11,7 @@ const HomeSection = () => {
         <div className="relative">
           <div className="mb-4 flex items-center justify-center gap-3">
             <CheckCircle className="h-6 w-6 text-amber-300 sm:h-7 sm:w-7" />
-            <h1 className="font-heading text-3xl font-bold text-gold sm:text-4xl">COMECE POR AQUI</h1>
+            <h1 className="font-heading text-3xl font-extrabold uppercase text-gold sm:text-4xl">COMECE POR AQUI</h1>
             <CheckCircle className="h-6 w-6 text-amber-300 sm:h-7 sm:w-7" />
           </div>
           <div className="mb-8 text-center">
