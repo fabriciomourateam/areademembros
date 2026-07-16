@@ -1,9 +1,9 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BookOpen, Check } from 'lucide-react';
+import { BookOpen, Check, ArrowLeft } from 'lucide-react';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import NetflixNavbar from './NetflixNavbar';
 import ContentCard from './ContentCard';
+import CardRow from './CardRow';
 import VideoModal from './VideoModal';
 import SectionModal from './SectionModal';
 import SectionLoader from './SectionLoader';
@@ -47,7 +47,6 @@ const CategoryView = () => {
   if (category.lockKey && !granted) {
     return (
       <div className="min-h-screen bg-[#0b0b0b]">
-        <NetflixNavbar showBack />
         <PasswordDialog
           lockKey={category.lockKey}
           onClose={() => navigate('/')}
@@ -126,11 +125,9 @@ const CategoryView = () => {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full animate-in fade-in duration-500 flex-col bg-[#0b0b0b]">
-        <NetflixNavbar showBack />
-
         {/* Faixa de destaque da categoria (imagem/tom + título + descrição) */}
         <header
-          className={`relative overflow-hidden bg-gradient-to-br ${category.gradient} px-4 pb-10 pt-20 sm:px-8 sm:pt-28`}
+          className={`relative overflow-hidden bg-gradient-to-br ${category.gradient} px-4 pb-10 pt-6 sm:px-8 sm:pt-8`}
         >
           {category.image && (
             <>
@@ -145,6 +142,15 @@ const CategoryView = () => {
             </>
           )}
           <div className="relative mx-auto max-w-[1600px]">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-sm font-medium text-white ring-1 ring-white/15 backdrop-blur transition-colors hover:bg-black/60"
+              aria-label="Voltar para o início"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Início
+            </button>
             {category.badge && (
               <span className="rounded bg-black/40 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-amber-300 ring-1 ring-amber-300/40">
                 {category.badge}
@@ -166,7 +172,7 @@ const CategoryView = () => {
               {category.groups.map((group) => (
                 <div key={group.title}>
                   <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">{group.title}</h2>
-                  <div className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                  <CardRow count={group.items.length}>
                     {group.items.map((item) => (
                       <ContentCard
                         key={item.id}
@@ -175,7 +181,7 @@ const CategoryView = () => {
                         watched={!!item.videoId && watched.has(item.videoId)}
                       />
                     ))}
-                  </div>
+                  </CardRow>
                 </div>
               ))}
             </div>
@@ -199,7 +205,7 @@ const CategoryView = () => {
                     );
                   })()}
                 </div>
-                <div className="flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                <CardRow count={cards.length}>
                   {cards.map((item) => (
                     <ContentCard
                       key={item.id}
@@ -208,7 +214,7 @@ const CategoryView = () => {
                       watched={!!item.videoId && watched.has(item.videoId)}
                     />
                   ))}
-                </div>
+                </CardRow>
               </div>
             </section>
           )

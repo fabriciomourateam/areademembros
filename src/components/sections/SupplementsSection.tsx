@@ -635,7 +635,7 @@ const SupplementsSection = () => {
                       </div>
                       <div className="min-w-0 text-left">
                         <h4 className="font-semibold text-amber-50">{supplement.name}</h4>
-                        <p className="whitespace-normal break-words text-sm text-zinc-300">{supplement.description}</p>
+                        <p className="whitespace-normal break-words text-sm font-light text-zinc-300">{supplement.description}</p>
                       </div>
                     </div>
                     <ChevronRight
