@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Play, Users, MessageCircle, Phone, Clock, Crown, Star, CheckCircle, AlertCircle, DollarSign, FileText, Award, Gift } from 'lucide-react';
+import { Play, Users, MessageCircle, Clock, Crown, Star, CheckCircle, DollarSign, FileText, Award, Gift } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 const HomeSection = () => {
@@ -39,90 +39,48 @@ const HomeSection = () => {
         </div>
       </div>
 
-      {/* Comunicação */}
+      {/* Comunicação & Suporte (unificado) */}
       <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
         <header className="mb-5 flex items-center gap-3">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
             <MessageCircle className="h-6 w-6 text-amber-300" />
           </span>
           <div>
-            <h2 className="font-heading text-xl text-amber-50">COMUNICAÇÃO</h2>
-            <p className="text-sm text-zinc-500">Nossa principal ferramenta</p>
+            <h2 className="font-heading text-xl text-amber-50">COMUNICAÇÃO & SUPORTE</h2>
+            <p className="text-sm text-zinc-500">Canal oficial — WhatsApp</p>
           </div>
         </header>
-        <div className="space-y-6">
+        <div className="space-y-5">
           <p className="leading-relaxed text-zinc-400">
-            Nossa principal ferramenta é a comunicação direta e constante. Meu trabalho depende da
-            coleta de dados, e essa coleta depende de você sempre me relatar todas as dificuldades que
-            tiver.
+            A comunicação direta e constante é a nossa principal ferramenta. Me avise sempre — se a
+            semana foi boa ou ruim — pelo <strong className="text-amber-100">WhatsApp oficial</strong>.
+            É por ele que você tira <strong className="text-amber-100">todas as suas dúvidas</strong>{' '}
+            sobre dieta, treino e acompanhamento, com eu e a equipe no seu suporte.
           </p>
 
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="mt-1 h-6 w-6 flex-shrink-0 text-amber-300" />
-              <div>
-                <h4 className="mb-2 font-semibold text-amber-50">Importante:</h4>
-                <p className="text-zinc-400">
-                  Se a semana foi boa ou ruim, me avise mesmo assim! <br />
-                  Não precisa esperar eu te chamar. Me mande mensagem sempre que precisar pelo WhatsApp
-                  Oficial da consultoria.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WhatsApp Suporte */}
-      <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-6">
-        <header className="mb-5 flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/12 ring-1 ring-amber-400/30">
-            <Phone className="h-6 w-6 text-amber-300" />
-          </span>
-          <div>
-            <h2 className="font-heading text-xl text-amber-50">SUPORTE - WHATSAPP</h2>
-            <p className="text-sm text-zinc-500">Canal oficial para dúvidas</p>
-          </div>
-        </header>
-        <div className="space-y-6">
-          <p className="leading-relaxed text-zinc-400">
-            Esse é o canal oficial onde você pode tirar{' '}
-            <strong className="text-amber-100">todas as suas dúvidas</strong> sobre a dieta, treino e
-            tudo que esteja relacionado ao seu acompanhamento.
-          </p>
-
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-            <p className="mb-4 text-zinc-400">
-              Nesse número estaremos eu e minha equipe, treinados e especializados com meu método, para
-              garantir que você tenha a{' '}
-              <strong className="text-amber-100">MELHOR EXPERIÊNCIA POSSÍVEL</strong> com o meu
-              acompanhamento, te proporcionando um{' '}
-              <strong className="text-amber-100">SUPORTE 5 ESTRELAS!</strong>
-            </p>
-            <div className="mb-4 flex justify-center gap-1">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 text-center">
+            <div className="mb-3 flex justify-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-8 w-8 fill-current text-amber-400" />
+                <Star key={i} className="h-7 w-7 fill-current text-amber-400" />
               ))}
             </div>
-            <p className="text-center text-lg font-semibold text-amber-100">
-              Você não está sozinho nessa jornada!
+            <p className="text-lg font-semibold text-amber-100">
+              Suporte 5 estrelas — você não está sozinho nessa jornada!
             </p>
           </div>
 
-          <div className="space-y-4 text-center">
-            <Button
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-green-500 to-green-600 px-4 py-3 font-semibold text-white shadow-lg transition-all hover:brightness-110 sm:px-8 sm:py-4"
-              onClick={() =>
-                window.open(
-                  'https://api.whatsapp.com/send/?phone=%2B5511914880872&text=Bom+dia%21+Quero+falar+com+a+Equipe+FMTeam&type=phone_number&app_absent=0',
-                  '_blank'
-                )
-              }
-            >
-              <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span className="text-sm sm:text-base">Falar com a Equipe FMTeam no WhatsApp</span>
-            </Button>
-          </div>
+          <Button
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-green-500 to-green-600 px-4 py-3 font-semibold text-white shadow-lg transition-all hover:brightness-110 sm:px-8 sm:py-4"
+            onClick={() =>
+              window.open(
+                'https://api.whatsapp.com/send/?phone=%2B5511914880872&text=Bom+dia%21+Quero+falar+com+a+Equipe+FMTeam&type=phone_number&app_absent=0',
+                '_blank'
+              )
+            }
+          >
+            <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-sm sm:text-base">Falar com a Equipe FMTeam no WhatsApp</span>
+          </Button>
         </div>
       </section>
 
