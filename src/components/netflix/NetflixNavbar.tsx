@@ -59,9 +59,6 @@ const NetflixNavbar = ({ showBack = false }: NetflixNavbarProps) => {
 
         <div className="ml-auto flex items-center gap-2">
           <span className="hidden text-xs font-medium text-zinc-300 sm:inline">Área de Membros</span>
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-amber-400 to-amber-600 text-sm font-bold text-black">
-            FM
-          </div>
         </div>
       </div>
     </header>
