@@ -37,7 +37,7 @@ const NetflixHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-white">
+    <div className="min-h-screen animate-in fade-in duration-500 bg-[#0a0a0b] text-white">
       <NetflixNavbar />
 
       <main>

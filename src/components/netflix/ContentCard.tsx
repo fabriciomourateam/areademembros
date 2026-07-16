@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Lock, Play } from 'lucide-react';
+import { Lock, Play, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { youtubeThumb, type CatalogItem } from '@/lib/catalog';
 
 interface ContentCardProps {
   item: CatalogItem;
   onSelect: (item: CatalogItem) => void;
+  /** vídeo já assistido — mostra o selo dourado de concluído */
+  watched?: boolean;
 }
 
-const ContentCard = ({ item, onSelect }: ContentCardProps) => {
+const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
   const [imgFailed, setImgFailed] = useState(false);
   const Icon = item.icon;
   const thumb = item.image ?? (item.videoId ? youtubeThumb(item.videoId) : null);
@@ -64,6 +66,16 @@ const ContentCard = ({ item, onSelect }: ContentCardProps) => {
         {item.locked && (
           <span className="absolute right-2 top-2 rounded-full bg-black/70 p-1.5 ring-1 ring-amber-400/50">
             <Lock className="h-3.5 w-3.5 text-amber-400" />
+          </span>
+        )}
+
+        {/* Selo de vídeo já assistido */}
+        {!item.locked && watched && (
+          <span
+            className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-amber-600 shadow ring-1 ring-amber-200/60"
+            title="Você já assistiu"
+          >
+            <Check className="h-3.5 w-3.5 text-black" strokeWidth={3} />
           </span>
         )}
 

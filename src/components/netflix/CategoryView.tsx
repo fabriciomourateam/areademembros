@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Check } from 'lucide-react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import NetflixNavbar from './NetflixNavbar';
 import ContentCard from './ContentCard';
@@ -12,7 +12,7 @@ import PasswordDialog from './PasswordDialog';
 import { SECTIONS, type SectionKey } from './sectionRegistry';
 import { getCategory, type CatalogItem } from '@/lib/catalog';
 import { isUnlocked, type LockKey } from '@/lib/access';
-import { markVisited, setLastCategory } from '@/lib/progress';
+import { markVisited, setLastCategory, getWatchedVideos, markVideoWatched } from '@/lib/progress';
 
 const CategoryView = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const CategoryView = () => {
   const [videoModal, setVideoModal] = useState<{ id: string; title: string } | null>(null);
   const [sectionModal, setSectionModal] = useState<{ key: SectionKey; title: string } | null>(null);
   const [dietOpen, setDietOpen] = useState(false);
+  const [watched, setWatched] = useState<Set<string>>(() => getWatchedVideos());
   const [lockPrompt, setLockPrompt] = useState<{ key: LockKey; route: string } | null>(null);
   const [granted, setGranted] = useState(
     () => !category?.lockKey || isUnlocked(category.lockKey)
@@ -59,7 +60,15 @@ const CategoryView = () => {
   const handleSelect = (item: CatalogItem) => {
     switch (item.type) {
       case 'video':
-        if (item.videoId) setVideoModal({ id: item.videoId, title: item.title });
+        if (item.videoId) {
+          setVideoModal({ id: item.videoId, title: item.title });
+          markVideoWatched(item.videoId);
+          setWatched((prev) => {
+            const next = new Set(prev);
+            next.add(item.videoId!);
+            return next;
+          });
+        }
         break;
       case 'link':
         if (item.href) window.open(item.href, '_blank');
@@ -116,7 +125,7 @@ const CategoryView = () => {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full flex-col bg-[#0b0b0b]">
+      <div className="flex min-h-screen w-full animate-in fade-in duration-500 flex-col bg-[#0b0b0b]">
         <NetflixNavbar showBack />
 
         {/* Faixa de destaque da categoria (imagem/tom + título + descrição) */}
@@ -159,7 +168,12 @@ const CategoryView = () => {
                   <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">{group.title}</h2>
                   <div className="flex flex-wrap gap-4">
                     {group.items.map((item) => (
-                      <ContentCard key={item.id} item={item} onSelect={handleSelect} />
+                      <ContentCard
+                        key={item.id}
+                        item={item}
+                        onSelect={handleSelect}
+                        watched={!!item.videoId && watched.has(item.videoId)}
+                      />
                     ))}
                   </div>
                 </div>
@@ -171,10 +185,28 @@ const CategoryView = () => {
           cards.length > 0 && (
             <section className="flex-1 bg-[#0b0b0b] px-4 py-8 sm:px-8">
               <div className="mx-auto max-w-[1600px]">
-                <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <h2 className="text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
+                  {(() => {
+                    const vids = cards.filter((c) => c.type === 'video' && c.videoId);
+                    if (vids.length < 2) return null;
+                    const done = vids.filter((c) => watched.has(c.videoId!)).length;
+                    return (
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-3 py-1 text-xs font-medium text-amber-200">
+                        {done === vids.length && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
+                        {done} de {vids.length} assistidos
+                      </span>
+                    );
+                  })()}
+                </div>
                 <div className="flex flex-wrap gap-4">
                   {cards.map((item) => (
-                    <ContentCard key={item.id} item={item} onSelect={handleSelect} />
+                    <ContentCard
+                      key={item.id}
+                      item={item}
+                      onSelect={handleSelect}
+                      watched={!!item.videoId && watched.has(item.videoId)}
+                    />
                   ))}
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Download, Upload, MessageSquare, ExternalLink, Copy, Check } from 'lucide-react';
 
@@ -21,6 +22,7 @@ const DietModal = ({ open, onClose }: DietModalProps) => {
   const copy = (text: string, idx: number) => {
     navigator.clipboard?.writeText(text).then(() => {
       setCopied(idx);
+      toast.success('Frase copiada!', { description: 'Cole no Personal Shopper do Nutri.' });
       window.setTimeout(() => setCopied((c) => (c === idx ? null : c)), 1800);
     });
   };
