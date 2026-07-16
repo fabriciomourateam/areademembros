@@ -21,7 +21,12 @@ const CategoryView = () => {
   const category = id ? getCategory(id) : undefined;
 
   const [videoModal, setVideoModal] = useState<{ id: string; title: string } | null>(null);
-  const [sectionModal, setSectionModal] = useState<{ key: SectionKey; title: string } | null>(null);
+  const [sectionModal, setSectionModal] = useState<{
+    key: SectionKey;
+    title: string;
+    icon?: CatalogItem['icon'];
+    subtitle?: string;
+  } | null>(null);
   const [dietOpen, setDietOpen] = useState(false);
   const [watched, setWatched] = useState<Set<string>>(() => getWatchedVideos());
   const [lockPrompt, setLockPrompt] = useState<{ key: LockKey; route: string } | null>(null);
@@ -75,7 +80,13 @@ const CategoryView = () => {
         if (item.href) window.open(item.href, '_blank');
         break;
       case 'guide':
-        if (category.embedSection) setSectionModal({ key: category.embedSection, title: category.title });
+        if (category.embedSection)
+          setSectionModal({
+            key: category.embedSection,
+            title: category.title,
+            icon: category.icon,
+            subtitle: 'Guia completo',
+          });
         break;
       case 'info':
         if (item.id === 'diet-month') setDietOpen(true);
@@ -84,7 +95,7 @@ const CategoryView = () => {
         if (item.locked && item.lockKey && !isUnlocked(item.lockKey)) {
           setLockPrompt({ key: item.lockKey, route: item.route! });
         } else if (item.modalSection) {
-          setSectionModal({ key: item.modalSection, title: item.title });
+          setSectionModal({ key: item.modalSection, title: item.title, icon: item.icon, subtitle: item.subtitle });
         } else if (item.route) {
           navigate(item.route);
         }
@@ -186,20 +197,33 @@ const CategoryView = () => {
           cards.length > 0 && (
             <section className="flex-1 bg-[#0b0b0b] px-4 py-8 sm:px-8">
               <div className="mx-auto max-w-[1600px]">
-                <div className="mb-4 flex flex-wrap items-center gap-3">
-                  <h2 className="text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
-                  {(() => {
-                    const vids = cards.filter((c) => c.type === 'video' && c.videoId);
-                    if (vids.length < 2) return null;
-                    const done = vids.filter((c) => watched.has(c.videoId!)).length;
-                    return (
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-3 py-1 text-xs font-medium text-amber-200">
-                        {done === vids.length && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
-                        {done} de {vids.length} assistidos
-                      </span>
-                    );
-                  })()}
-                </div>
+                {(() => {
+                  const vids = cards.filter((c) => c.type === 'video' && c.videoId);
+                  const done = vids.filter((c) => watched.has(c.videoId!)).length;
+                  const pct = vids.length ? Math.round((done / vids.length) * 100) : 0;
+                  const complete = vids.length > 0 && done === vids.length;
+                  return (
+                    <div className="mb-5">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h2 className="text-lg font-bold text-white sm:text-xl">Conteúdos</h2>
+                        {vids.length >= 2 && (
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-3 py-1 text-xs font-medium text-amber-200">
+                            {complete && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
+                            {done} de {vids.length} assistidos
+                          </span>
+                        )}
+                      </div>
+                      {vids.length >= 2 && (
+                        <div className="mt-3 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-white/10">
+                          <div
+                            className="h-full rounded-full bg-gradient-to-r from-amber-300 to-amber-500 transition-all duration-700 ease-out"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
                 <CardRow count={cards.length}>
                   {cards.map((item) => (
                     <ContentCard
@@ -230,6 +254,8 @@ const CategoryView = () => {
         <SectionModal
           open
           title={sectionModal.title}
+          icon={sectionModal.icon}
+          subtitle={sectionModal.subtitle}
           onClose={() => setSectionModal(null)}
           dark={DARK_SECTIONS.has(sectionModal.key)}
         >

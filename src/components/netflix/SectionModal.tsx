@@ -1,3 +1,5 @@
+import { useRef, useState, type ComponentType } from 'react';
+import { ArrowUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
@@ -9,6 +11,10 @@ interface SectionModalProps {
   children: React.ReactNode;
   /** quando true, aplica o "skin escuro" ao conteúdo (tema black premium) */
   dark?: boolean;
+  /** ícone opcional exibido no cabeçalho */
+  icon?: ComponentType<{ className?: string }>;
+  /** subtítulo opcional exibido abaixo do título */
+  subtitle?: string;
 }
 
 /**
@@ -20,7 +26,25 @@ interface SectionModalProps {
  * Com `dark`, o painel usa a classe `.section-dark` (definida em index.css)
  * que remapeia as cores claras chumbadas para o tema black.
  */
-const SectionModal = ({ open, title, onClose, children, dark = false }: SectionModalProps) => {
+const SectionModal = ({
+  open,
+  title,
+  onClose,
+  children,
+  dark = false,
+  icon: Icon,
+  subtitle,
+}: SectionModalProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showTop, setShowTop] = useState(false);
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (el) setShowTop(el.scrollTop > 320);
+  };
+
+  const scrollToTop = () => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent
@@ -41,13 +65,37 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
               : 'border-b border-amber-100 bg-gradient-to-r from-amber-50 to-white'
           )}
         >
-          <DialogTitle
-            className={cn('font-heading text-base sm:text-lg', dark ? 'text-amber-50' : 'text-zinc-900')}
-          >
-            {title}
-          </DialogTitle>
+          <div className="flex items-center gap-3">
+            {Icon && (
+              <span
+                className={cn(
+                  'flex h-10 w-10 shrink-0 items-center justify-center rounded-full',
+                  dark ? 'bg-amber-400/12 ring-1 ring-amber-400/30' : 'bg-amber-100 ring-1 ring-amber-300/50'
+                )}
+              >
+                <Icon className={cn('h-5 w-5', dark ? 'text-amber-300' : 'text-amber-600')} />
+              </span>
+            )}
+            <div className="min-w-0">
+              <DialogTitle
+                className={cn(
+                  'truncate font-heading text-base sm:text-lg',
+                  dark ? 'text-amber-50' : 'text-zinc-900'
+                )}
+              >
+                {title}
+              </DialogTitle>
+              {subtitle && (
+                <p className={cn('mt-0.5 truncate text-xs sm:text-sm', dark ? 'text-zinc-400' : 'text-zinc-500')}>
+                  {subtitle}
+                </p>
+              )}
+            </div>
+          </div>
         </DialogHeader>
         <div
+          ref={scrollRef}
+          onScroll={handleScroll}
           className={cn(
             'gold-scroll scroll-fade-mask max-h-[76vh] overflow-y-auto overflow-x-hidden',
             dark ? 'bg-[#0a0a0b]' : 'bg-white'
@@ -67,6 +115,19 @@ const SectionModal = ({ open, title, onClose, children, dark = false }: SectionM
             </div>
           </SidebarProvider>
         </div>
+
+        {/* Botão "voltar ao topo" — aparece depois de rolar um pouco */}
+        <button
+          type="button"
+          onClick={scrollToTop}
+          aria-label="Voltar ao topo"
+          className={cn(
+            'absolute bottom-4 right-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-amber-400/40 bg-black/70 text-amber-200 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-amber-300/70 hover:bg-black/90',
+            showTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
+          )}
+        >
+          <ArrowUp className="h-5 w-5" />
+        </button>
       </DialogContent>
     </Dialog>
   );

@@ -15,6 +15,8 @@ const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
   const Icon = item.icon;
   const thumb = item.image ?? (item.videoId ? youtubeThumb(item.videoId) : null);
   const showImage = thumb && !imgFailed;
+  // Card em destaque ("Comece por aqui") — o conteúdo principal da seção.
+  const isPrincipal = item.badge?.toLowerCase() === 'principal';
 
   return (
     <button
@@ -24,7 +26,12 @@ const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
       aria-label={item.title}
     >
       {/* Mesmo formato dos cards da home: pôster em cima + faixa de título embaixo */}
-      <div className="overflow-hidden rounded-xl border border-amber-500/20 bg-[#0e0e0f] shadow-[0_12px_45px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-amber-400/70 group-hover:gold-glow group-focus-visible:border-amber-400">
+      <div
+        className={cn(
+          'overflow-hidden rounded-xl border bg-[#0e0e0f] shadow-[0_12px_45px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-amber-400/70 group-hover:gold-glow group-focus-visible:border-amber-400',
+          isPrincipal ? 'gold-glow border-amber-400/70 ring-1 ring-amber-400/30' : 'border-amber-500/20'
+        )}
+      >
         {/* Pôster */}
         <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0b]">
           {/* Thumbnail (YouTube/imagem) · guia com logo · ou fallback gradiente + ícone */}
@@ -58,10 +65,17 @@ const ContentCard = ({ item, onSelect, watched = false }: ContentCardProps) => {
           {/* leve profundidade no rodapé do pôster */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-          {/* Badge de destaque / premium */}
+          {/* Badge de destaque / premium — o principal ganha selo dourado "Comece por aqui" */}
           {item.badge && (
-            <span className="absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-300 ring-1 ring-amber-400/40 backdrop-blur">
-              {item.badge}
+            <span
+              className={cn(
+                'absolute left-2 top-2 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide backdrop-blur',
+                isPrincipal
+                  ? 'bg-gradient-to-r from-amber-300 to-amber-500 text-black shadow-md shadow-amber-500/30'
+                  : 'bg-black/60 text-amber-300 ring-1 ring-amber-400/40'
+              )}
+            >
+              {isPrincipal ? '▶ Comece por aqui' : item.badge}
             </span>
           )}
 
