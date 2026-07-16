@@ -7,7 +7,7 @@ interface HeroBannerProps {
 
 const HeroBanner = ({ onPlay }: HeroBannerProps) => {
   return (
-    <div className="relative flex min-h-[58vh] w-full items-center overflow-hidden bg-[#0a0a0b] pb-10 pt-24 sm:pt-20">
+    <div className="relative flex min-h-[58vh] w-full items-center overflow-hidden bg-[#0a0a0b] pb-10 pt-10 sm:pt-14">
       {/* Brilho dourado radial (lado direito) — deriva lenta e ambiente */}
       <div className="warm-glow hero-glow-drift pointer-events-none absolute inset-0" />
       {/* Logo gigante em marca d'água (bleed pra fora da tela) — branding premium */}

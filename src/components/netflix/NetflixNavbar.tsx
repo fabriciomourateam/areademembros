@@ -1,65 +1,32 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 interface NetflixNavbarProps {
-  /** Exibe o botão "voltar" (usado nas páginas de seção) */
+  /** Exibe o botão "voltar" (usado nas páginas de seção/categoria) */
   showBack?: boolean;
 }
 
+/**
+ * Barra fixa mínima — sem logo. Nas páginas internas mostra apenas um botão
+ * "Voltar" premium (pílula dourada com blur), que flutua sobre o conteúdo.
+ */
 const NetflixNavbar = ({ showBack = false }: NetflixNavbarProps) => {
   const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  if (!showBack) return null;
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-300',
-        scrolled ? 'bg-black shadow-lg' : 'bg-gradient-to-b from-black/90 to-transparent'
-      )}
-    >
-      <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 sm:h-16 sm:px-8">
-        {showBack && (
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/20"
-            aria-label="Voltar para o início"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">Início</span>
-          </button>
-        )}
-
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <div className="mx-auto flex h-14 max-w-[1600px] items-center px-4 sm:h-16 sm:px-8">
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="flex items-center gap-2"
-          aria-label="FM Team - Início"
+          aria-label="Voltar para o início"
+          className="group pointer-events-auto inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-black/45 px-4 py-2 text-sm font-semibold text-amber-50 shadow-lg ring-1 ring-white/5 backdrop-blur-md transition-all hover:border-amber-300/60 hover:bg-black/65 hover:shadow-amber-500/10"
         >
-          <img
-            src="/topo.png"
-            alt="FM Team"
-            className="h-6 w-auto max-w-[92px] object-contain sm:h-8 sm:max-w-[110px]"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = 'none';
-            }}
-          />
-          {/* Wordmark redundante ao lado do logo — só no desktop, pra não sobrepor no mobile */}
-          <span className="hidden font-wordmark text-base text-gold sm:inline sm:text-lg">FMTeam</span>
+          <ArrowLeft className="h-4 w-4 text-amber-300 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          Voltar
         </button>
-
-        <div className="ml-auto flex items-center gap-2">
-          <span className="hidden text-xs font-medium text-zinc-300 sm:inline">Área de Membros</span>
-        </div>
       </div>
     </header>
   );
